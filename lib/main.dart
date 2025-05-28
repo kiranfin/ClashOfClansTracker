@@ -1,6 +1,6 @@
 import 'package:clashofclanstracker/pages/home.dart';
 import 'package:clashofclanstracker/pages/settings.dart';
-import 'package:clashofclanstracker/provider/DataProvider.dart' as DataProvider;
+import 'package:clashofclanstracker/provider/DataProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
