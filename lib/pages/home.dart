@@ -2,8 +2,8 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
-import '../provider/DataProvider.dart' as DataProvider;
 import 'package:percent_indicator/percent_indicator.dart';
+import '../provider/DataProvider.dart' as DataProvider;
 import '../utils/img/ShortAsset.dart';
 
 class HomePage extends StatefulWidget {
@@ -15,23 +15,28 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
 
-  late List<Widget> asyncData;
+  late List<dynamic> asyncData;
 
   @override
   void initState() {
     super.initState();
-    fetchData();
+    WidgetsBinding.instance.addPostFrameCallback((_){
+      fetchData();
+    });
   }
 
   void fetchData() async {
-    /*try {
-      asyncData = await DataProvider.awaitPlayerData("P9V29R8RJ");
-    } catch(e) {
-      print(e);
-    }*/
-   try {
-      asyncData = await Future.wait([
-        DataProvider.awaitClanTroopsOut("P9V29R8RJ"), DataProvider.awaitClanTroopsIn("P9V29R8RJ")]);
+    try {
+      print("lol");
+      asyncData = await Future.wait([DataProvider.awaitLeagueIcon("P9V29R8RJ"), DataProvider.awaitPlayerName("P9V29R8RJ"),
+        DataProvider.awaitPlayerTrophies("P9V29R8RJ"), DataProvider.awaitPlayerLegendTrophies("P9V29R8RJ"),
+        DataProvider.awaitBuilderLeagueIcon("P9V29R8RJ"), DataProvider.awaitPlayerBuilderTrophies("P9V29R8RJ"),
+        DataProvider.awaitClanIcon("P9V29R8RJ"), DataProvider.awaitClanTroopsOut("P9V29R8RJ"),
+        DataProvider.awaitClanTroopsIn("P9V29R8RJ"), DataProvider.awaitOverallPercent("P9V29R8RJ"),
+        DataProvider.awaitBuildingsPercent("P9V29R8RJ"), DataProvider.awaitTroopsPercent("P9V29R8RJ"),
+        DataProvider.awaitSpellsPercent("P9V29R8RJ"), DataProvider.awaitHeroesPercent("P9V29R8RJ"),
+        DataProvider.awaitEquipmentPercent("P9V29R8RJ"), DataProvider.awaitQuestsPercent("P9V29R8RJ")]);
+      print(asyncData.length);
     } catch(error) {
       print(error);
     }
@@ -72,7 +77,7 @@ class _HomePageState extends State<HomePage> {
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
                                 FutureBuilder<Image>(
-                                  future: DataProvider.awaitLeagueIcon("P9V29R8RJ"),
+                                  future: asyncData[0],
                                   builder: (BuildContext context, AsyncSnapshot snapshot) {
                                     if (snapshot.hasData) {
                                       return snapshot.data;
@@ -83,7 +88,7 @@ class _HomePageState extends State<HomePage> {
                                 ),
                                 SizedBox(width: 5),
                                 FutureBuilder<Text>(
-                                    future: DataProvider.awaitPlayerName("P9V29R8RJ"),
+                                    future: asyncData[1],
                                     builder: (BuildContext context, AsyncSnapshot snapshot) {
                                       if (snapshot.hasData) {
                                         return snapshot.data;
@@ -101,7 +106,7 @@ class _HomePageState extends State<HomePage> {
                                 Image.asset('lib/utils/img/Trophy.png', fit: BoxFit.cover, scale: 1.5),
                                 SizedBox(width: 7),
                                 FutureBuilder<Text>(
-                                    future: DataProvider.awaitPlayerTrophies("P9V29R8RJ"),
+                                    future: asyncData[2],
                                     builder: (BuildContext context, AsyncSnapshot snapshot) {
                                       if (snapshot.hasData) {
                                         return snapshot.data;
@@ -114,7 +119,7 @@ class _HomePageState extends State<HomePage> {
                                 Image.asset(legendTrophy, scale: 14),
                                 SizedBox(width: 7),
                                 FutureBuilder<Text>(
-                                    future: DataProvider.awaitPlayerLegendTrophies("P9V29R8RJ"),
+                                    future: asyncData[3],
                                     builder: (BuildContext context, AsyncSnapshot snapshot) {
                                       if (snapshot.hasData) {
                                         return snapshot.data;
@@ -130,7 +135,7 @@ class _HomePageState extends State<HomePage> {
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
                                 FutureBuilder<Image>(
-                                    future: DataProvider.awaitBuilderLeagueIcon("P9V29R8RJ"),
+                                    future: asyncData[4],
                                     builder: (BuildContext context, AsyncSnapshot snapshot) {
                                       if (snapshot.hasData) {
                                         return snapshot.data;
@@ -141,7 +146,7 @@ class _HomePageState extends State<HomePage> {
                                 ),
                                 SizedBox(width: 7),
                                 FutureBuilder<Text>(
-                                    future: DataProvider.awaitPlayerBuilderTrophies("P9V29R8RJ"),
+                                    future: asyncData[5],
                                     builder: (BuildContext context, AsyncSnapshot snapshot) {
                                       if (snapshot.hasData) {
                                         return snapshot.data;
@@ -159,7 +164,7 @@ class _HomePageState extends State<HomePage> {
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
                             FutureBuilder<Image>(
-                                future: DataProvider.awaitClanIcon("P9V29R8RJ"),
+                                future: asyncData[6],
                                 builder: (BuildContext context, AsyncSnapshot snapshot) {
                                   if (snapshot.hasData) {
                                     return snapshot.data;
@@ -178,7 +183,7 @@ class _HomePageState extends State<HomePage> {
                                       children: [
                                         Text("Out", style: TextStyle(color: Colors.white, fontSize: 8)),
                                         FutureBuilder<Text>(
-                                            future: DataProvider.awaitClanTroopsOut("P9V29R8RJ"),
+                                            future: asyncData[7],
                                             builder: (BuildContext context, AsyncSnapshot snapshot) {
                                               if (snapshot.hasData) {
                                                 return snapshot.data;
@@ -194,7 +199,7 @@ class _HomePageState extends State<HomePage> {
                                       children: [
                                         Text("In", style: TextStyle(color: Colors.white, fontSize: 8)),
                                         FutureBuilder<Text>(
-                                            future: DataProvider.awaitClanTroopsIn("P9V29R8RJ"),
+                                            future: asyncData[8],
                                             builder: (BuildContext context, AsyncSnapshot snapshot) {
                                               if (snapshot.hasData) {
                                                 return snapshot.data;
@@ -220,7 +225,7 @@ class _HomePageState extends State<HomePage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     FutureBuilder<double>(
-                      future: DataProvider.awaitOverallPercent("P9V29R8RJ"),
+                      future: asyncData[9],
                       builder: (context, AsyncSnapshot snapshot) {
                         if (snapshot.hasData) {
                           return CircularPercentIndicator(
@@ -284,7 +289,7 @@ class _HomePageState extends State<HomePage> {
                             ),
                             SizedBox(height: 5),
                             FutureBuilder<double>(
-                              future: DataProvider.awaitBuildingsPercent("P9V29R8RJ"),
+                              future: asyncData[10],
                               builder: (context, AsyncSnapshot snapshot) {
                                 if(snapshot.hasData) {
                                   return CircularPercentIndicator(
@@ -345,7 +350,7 @@ class _HomePageState extends State<HomePage> {
                             ),
                             SizedBox(height: 5),
                             FutureBuilder<double>(
-                              future: DataProvider.awaitTroopsPercent("P9V29R8RJ"),
+                              future: asyncData[11],
                               builder: (context, AsyncSnapshot snapshot) {
                                   if(snapshot.hasData) {
                                     return CircularPercentIndicator(
@@ -398,7 +403,7 @@ class _HomePageState extends State<HomePage> {
                             ),
                             SizedBox(height: 5),
                             FutureBuilder<double>(
-                              future: DataProvider.awaitSpellsPercent("P9V29R8RJ"),
+                              future: asyncData[12],
                               builder: (context, AsyncSnapshot snapshot) {
                                 if(snapshot.hasData) {
                                   return CircularPercentIndicator(
@@ -458,7 +463,7 @@ class _HomePageState extends State<HomePage> {
                             ),
                             SizedBox(height: 5),
                             FutureBuilder<double>(
-                              future: DataProvider.awaitHeroesPercent("P9V29R8RJ"),
+                              future: asyncData[13],
                               builder: (context, AsyncSnapshot snapshot) {
                                 if(snapshot.hasData) {
                                   return CircularPercentIndicator(
@@ -511,7 +516,7 @@ class _HomePageState extends State<HomePage> {
                             ),
                             SizedBox(height: 5),
                             FutureBuilder<double>(
-                              future: DataProvider.awaitEquipmentPercent("P9V29R8RJ"),
+                              future: asyncData[14],
                               builder: (context, AsyncSnapshot snapshot) {
                                 if(snapshot.hasData) {
                                   return CircularPercentIndicator(
@@ -564,7 +569,7 @@ class _HomePageState extends State<HomePage> {
                             ),
                             SizedBox(height: 5),
                             FutureBuilder<double>(
-                              future: DataProvider.awaitQuestsPercent("P9V29R8RJ"),
+                              future: asyncData[15],
                               builder: (context, AsyncSnapshot snapshot) {
                                 if(snapshot.hasData) {
                                   return CircularPercentIndicator(
