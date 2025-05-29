@@ -40,6 +40,7 @@ dependencies:
   percent_indicator: ^4.2.5
   auto_size_text: ^3.0.0
   shimmer_animation: ^2.2.2
+  page_transition: ^2.2.1
 
 dev_dependencies:
   flutter_test:

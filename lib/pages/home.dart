@@ -1,6 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import '../provider/DataProvider.dart' as DataProvider;
@@ -146,44 +145,29 @@ class _HomePageState extends State<HomePage> {
                                     }
                                   }
                               ),
-                              Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
-                                  Text("Troops", style: TextStyle(color: Colors.white, fontSize: 15)),
-                                  Row(
-                                    children: [
-                                      Column(
-                                        children: [
-                                          Text("Out", style: TextStyle(color: Colors.white, fontSize: 8)),
-                                          FutureBuilder<Text>(
-                                              future: DataProvider.awaitClanTroopsOut("P9V29R8RJ"),
-                                              builder: (BuildContext context, AsyncSnapshot snapshot) {
-                                                if (snapshot.hasData) {
-                                                  return snapshot.data;
-                                                } else {
-                                                  return ClipRRect(borderRadius: BorderRadius.circular(10), child: Shimmer(child: Container(width: 40, height: 15, color: Colors.black45)));
-                                                }
-                                              }
-                                          ),
-                                        ],
-                                      ),
-                                      SizedBox(width: 5),
-                                      Column(
-                                        children: [
-                                          Text("In", style: TextStyle(color: Colors.white, fontSize: 8)),
-                                          FutureBuilder<Text>(
-                                              future: DataProvider.awaitClanTroopsIn("P9V29R8RJ"),
-                                              builder: (BuildContext context, AsyncSnapshot snapshot) {
-                                                if (snapshot.hasData) {
-                                                  return snapshot.data;
-                                                } else {
-                                                  return ClipRRect(borderRadius: BorderRadius.circular(10), child: Shimmer(child: Container(width: 40, height: 15, color: Colors.black45)));
-                                                }
-                                              }
-                                          ),
-                                        ],
-                                      ),
-                                    ],
+                                  FutureBuilder<Image>(
+                                      future: DataProvider.awaitTownHallIcon("P9V29R8RJ"),
+                                      builder: (BuildContext context, AsyncSnapshot snapshot) {
+                                        if (snapshot.hasData) {
+                                          return snapshot.data;
+                                        } else {
+                                          return ClipRRect(borderRadius: BorderRadius.circular(10), child: Shimmer(child: Container(width: 45, height: 45, color: Colors.black45)));
+                                        }
+                                      }
+                                  ),
+                                  SizedBox(width: 10),
+                                  FutureBuilder<Image>(
+                                      future: DataProvider.awaitBuilderHallIcon("P9V29R8RJ"),
+                                      builder: (BuildContext context, AsyncSnapshot snapshot) {
+                                        if (snapshot.hasData) {
+                                          return snapshot.data;
+                                        } else {
+                                          return ClipRRect(borderRadius: BorderRadius.circular(10), child: Shimmer(child: Container(width: 45, height: 45, color: Colors.black45)));
+                                        }
+                                      }
                                   ),
                                 ],
                               )
@@ -251,7 +235,9 @@ class _HomePageState extends State<HomePage> {
                                   )
                               )
                           ),
-                          onPressed: () {},
+                          onPressed: () {
+
+                          },
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -312,7 +298,9 @@ class _HomePageState extends State<HomePage> {
                                   )
                               )
                           ),
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.pushNamed(context, "/detail", arguments: "troops");
+                          },
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [

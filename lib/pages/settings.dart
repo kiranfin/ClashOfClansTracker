@@ -13,6 +13,22 @@ class _SettingsPageState extends State<SettingsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBodyBehindAppBar: true,
+      appBar: AppBar(
+        actions: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              IconButton(
+                onPressed: () {
+
+                },
+                icon: Icon(Icons.close, color: Colors.white)
+              ),
+            ],
+          )
+        ],
+      ),
       body: SingleChildScrollView(
           child: Center(
             child: Padding(

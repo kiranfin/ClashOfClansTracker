@@ -8,7 +8,7 @@ import '../utils/Utils.dart' as Utils;
 Future<Map<String, dynamic>> awaitPlayerData(String tag) async {
   final headers = {
     "Accept": "application/json",
-    'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6ImEyNmE4ZTk4LWM5ZmItNDA1My1hZTMxLWFjNzZiNGI5OGVjZSIsImlhdCI6MTc0ODQyOTk5OSwic3ViIjoiZGV2ZWxvcGVyLzA3NzdmM2RmLTUzYWMtMjI1Zi1kNTdjLWMwNGIxZjA4NjY5MyIsInNjb3BlcyI6WyJjbGFzaCJdLCJsaW1pdHMiOlt7InRpZXIiOiJkZXZlbG9wZXIvc2lsdmVyIiwidHlwZSI6InRocm90dGxpbmcifSx7ImNpZHJzIjpbIjg5LjI0Ni4xMDMuMTE0Il0sInR5cGUiOiJjbGllbnQifV19.wiOBGB9rEqQGrYrDcwrVorEay2wpjIoxLDdcn8qc7QfIxSmv9ceO2xHavIjPn192rSDI-aKb_FA9uHXGa6hIJA',
+    'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6IjdmNTE5ODZjLTA3NjQtNGY1NC04ZGQyLTAzMDI4ODM2ZTRhOCIsImlhdCI6MTc0ODUyMTg1MSwic3ViIjoiZGV2ZWxvcGVyLzA3NzdmM2RmLTUzYWMtMjI1Zi1kNTdjLWMwNGIxZjA4NjY5MyIsInNjb3BlcyI6WyJjbGFzaCJdLCJsaW1pdHMiOlt7InRpZXIiOiJkZXZlbG9wZXIvc2lsdmVyIiwidHlwZSI6InRocm90dGxpbmcifSx7ImNpZHJzIjpbIjg5LjI0Ni45Ni4xMTYiXSwidHlwZSI6ImNsaWVudCJ9XX0.adUEU5AN1KpWxDIcxDoMqxt8QP62IRhUQ2G2wP9tb4gxxSTnOi5Alsy2dTup-CAPgj4TpgX3fb-_SZzEOlGI2A',
   };
 
   final url = Uri.parse('${Utils.getBaseUrl()}v1/players/%23$tag');
@@ -16,6 +16,45 @@ Future<Map<String, dynamic>> awaitPlayerData(String tag) async {
   final status = res.statusCode;
   if (status != 200) throw Exception('http.get error: statusCode= $status');
   return jsonDecode(res.body) as Map<String, dynamic>;
+}
+
+Future<Image> awaitTownHallIcon(String tag) async {
+  final data = awaitPlayerData(tag);
+  final userdata = await data;
+  if(userdata["townHallLevel"] == 1) return Image.asset(th1, scale: 3);
+  if(userdata["townHallLevel"] == 2) return Image.asset(th2, scale: 3);
+  if(userdata["townHallLevel"] == 3) return Image.asset(th3, scale: 3);
+  if(userdata["townHallLevel"] == 4) return Image.asset(th4, scale: 3);
+  if(userdata["townHallLevel"] == 5) return Image.asset(th5, scale: 3);
+  if(userdata["townHallLevel"] == 6) return Image.asset(th6, scale: 3);
+  if(userdata["townHallLevel"] == 7) return Image.asset(th7, scale: 3);
+  if(userdata["townHallLevel"] == 8) return Image.asset(th8, scale: 3);
+  if(userdata["townHallLevel"] == 9) return Image.asset(th9, scale: 3);
+  if(userdata["townHallLevel"] == 10) return Image.asset(th10, scale: 3);
+  if(userdata["townHallLevel"] == 11) return Image.asset(th11, scale: 3);
+  if(userdata["townHallLevel"] == 12) return Image.asset(th12, scale: 3);
+  if(userdata["townHallLevel"] == 13) return Image.asset(th13, scale: 3);
+  if(userdata["townHallLevel"] == 14) return Image.asset(th14, scale: 3);
+  if(userdata["townHallLevel"] == 15) return Image.asset(th15, scale: 3);
+  if(userdata["townHallLevel"] == 16) return Image.asset(th16, scale: 3);
+  if(userdata["townHallLevel"] == 17) return Image.asset(th17, scale: 3);
+  return Image.asset(th1, scale: 2.5);
+}
+
+Future<Image> awaitBuilderHallIcon(String tag) async {
+  final data = awaitPlayerData(tag);
+  final userdata = await data;
+  if(userdata["builderHallLevel"] == 1) return Image.asset(bh1, scale: 2.5);
+  if(userdata["builderHallLevel"] == 2) return Image.asset(bh2, scale: 2.5);
+  if(userdata["builderHallLevel"] == 3) return Image.asset(bh3, scale: 2.5);
+  if(userdata["builderHallLevel"] == 4) return Image.asset(bh4, scale: 2.5);
+  if(userdata["builderHallLevel"] == 5) return Image.asset(bh5, scale: 2.5);
+  if(userdata["builderHallLevel"] == 6) return Image.asset(bh6, scale: 2.5);
+  if(userdata["builderHallLevel"] == 7) return Image.asset(bh7, scale: 2.5);
+  if(userdata["builderHallLevel"] == 8) return Image.asset(bh8, scale: 2.5);
+  if(userdata["builderHallLevel"] == 9) return Image.asset(bh9, scale: 2.5);
+  if(userdata["builderHallLevel"] == 10) return Image.asset(bh10, scale: 2.5);
+  return Image.asset(bh1, scale: 2.5);
 }
 
 Future<Image> awaitLeagueIcon(String tag) async {
@@ -135,8 +174,10 @@ Future<double> awaitTroopsPercent(String tag) async {
   num max = 0;
   num sum = 0;
   for (var troop in troops) {
-    max += troop["maxLevel"];
-    sum += troop["level"];
+    if(!Utils.isPet(troop["name"]) && !Utils.isSuperTroop(troop["name"])) {
+      max += troop["maxLevel"];
+      sum += troop["level"];
+    }
   }
   double res = sum / max;
   return res;
@@ -174,11 +215,18 @@ Future<double> awaitEquipmentPercent(String tag) async {
   final data = awaitPlayerData(tag);
   final userdata = await data;
   final equi = userdata["heroEquipment"];
+  final troops = userdata["troops"];
   num max = 0;
   num sum = 0;
   for (var equ in equi) {
     max += equ["maxLevel"];
     sum += equ["level"];
+  }
+  for(var troop in troops) {
+    if(Utils.isPet(troop["name"])) {
+      max += troop["maxLevel"];
+      sum += troop["level"];
+    }
   }
   double res = sum / max;
   return res;
@@ -196,4 +244,12 @@ Future<double> awaitQuestsPercent(String tag) async {
   }
   double res = sum / max;
   return res;
+}
+
+Future<List<dynamic>> awaitTroops(String tag) async {
+  final data = awaitPlayerData(tag);
+  final userdata = await data;
+  final troops = userdata["troops"];
+  print(troops.runtimeType);
+  return troops;
 }

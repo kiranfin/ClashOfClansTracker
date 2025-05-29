@@ -1,3 +1,4 @@
+import 'package:clashofclanstracker/pages/detail.dart';
 import 'package:clashofclanstracker/pages/home.dart';
 import 'package:clashofclanstracker/pages/settings.dart';
 import 'package:clashofclanstracker/provider/DataProvider.dart';
@@ -5,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:page_transition/page_transition.dart';
 
 void main() async {
   await dotenv.load(fileName: "config.env");
@@ -23,6 +25,15 @@ class MyApp extends StatelessWidget {
       ),
       home: DefaultPage(),
       debugShowCheckedModeBanner: false,
+      onGenerateRoute: (settings) {
+        switch (settings.name) {
+          case '/home':
+            return PageTransition(child: const HomePage(), type: PageTransitionType.fade);
+          case '/detail':
+            return PageTransition(child: const DetailPage(), type: PageTransitionType.fade, settings: settings);
+        }
+        return null;
+      }
     );
   }
 }
