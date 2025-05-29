@@ -96,6 +96,61 @@ Image getTroopImage(String name, String village) {
   if(name == "Spirit Fox") return Image.asset(spirit_fox, scale: 1);
   if(name == "Angry Jelly") return Image.asset(angry_jelly, scale: 1);
   if(name == "Sneezy") return Image.asset(sneezy, scale: 1);
+
+  if(name == "Lightning Spell") return Image.asset(lightning_spell, scale: 3.5);
+  if(name == "Healing Spell") return Image.asset(healing_spell, scale: 3.5);
+  if(name == "Rage Spell") return Image.asset(rage_spell, scale: 3.5);
+  if(name == "Jump Spell") return Image.asset(jump_spell, scale: 3.5);
+  if(name == "Freeze Spell") return Image.asset(freeze_spell, scale: 3.5);
+  if(name == "Poison Spell") return Image.asset(poison_spell, scale: 3.5);
+  if(name == "Earthquake Spell") return Image.asset(earthquake_spell, scale: 3.5);
+  if(name == "Haste Spell") return Image.asset(haste_spell, scale: 3.5);
+  if(name == "Clone Spell") return Image.asset(clone_spell, scale: 3.5);
+  if(name == "Skeleton Spell") return Image.asset(skeleton_spell, scale: 3.5);
+  if(name == "Bat Spell") return Image.asset(bat_spell, scale: 3.5);
+  if(name == "Invisibility Spell") return Image.asset(invisibility_spell, scale: 3.5);
+  if(name == "Recall Spell") return Image.asset(recall_spell, scale: 2.5);
+  if(name == "Overgrowth Spell") return Image.asset(overgrowth_spell, scale: 2.5);
+  if(name == "Revive Spell") return Image.asset(revive_spell, scale: 2.5);
+
+  if(name == "Barbarian King") return Image.asset(barbarianKing, scale: 1.5);
+  if(name == "Archer Queen") return Image.asset(archerQueen, scale: 1.5);
+  if(name == "Grand Warden") return Image.asset(grandWarden, scale: 1.5);
+  if(name == "Battle Machine") return Image.asset(battleMachine, scale: 1.5);
+  if(name == "Royal Champion") return Image.asset(royalChampion, scale: 1.5);
+  if(name == "Battle Copter") return Image.asset(battleCopter, scale: 1.5);
+  if(name == "Minion Prince") return Image.asset(minionPrince, scale: 1.5);
+
+  if(name == "Barbarian Puppet") return Image.asset(frozen_arrow, scale: 3.5);
+  if(name == "Rage Vial") return Image.asset(frozen_arrow, scale: 3.5);
+  if(name == "Earthquake Boots") return Image.asset(earthquake_boots, scale: 3.5);
+  if(name == "Vampstache") return Image.asset(vampstache, scale: 3.5);
+  if(name == "Giant Gauntlet") return Image.asset(giant_gauntlet, scale: 3.5);
+  if(name == "Spiky Ball") return Image.asset(spiky_ball, scale: 3.5);
+  if(name == "Snake Bracelet") return Image.asset(snake_bracelet, scale: 3.5);
+  if(name == "Archer Puppet") return Image.asset(archer_puppet, scale: 3.5);
+  if(name == "Invisibility Vial") return Image.asset(invisibility_vial, scale: 3.5);
+  if(name == "Giant Arrow") return Image.asset(giant_arrow, scale: 3.5);
+  if(name == "Healer Puppet") return Image.asset(healer_puppet, scale: 3.5);
+  if(name == "Frozen Arrow") return Image.asset(frozen_arrow, scale: 3.5);
+  if(name == "Magic Mirror") return Image.asset(magic_mirror, scale: 3.5);
+  if(name == "Action Figure") return Image.asset(action_figure, scale: 3.5);
+  if(name == "Henchmen Puppet") return Image.asset(henchmen_puppet, scale: 3.5);
+  if(name == "Dark Orb") return Image.asset(dark_orb, scale: 3.5);
+  if(name == "Metal Pants") return Image.asset(metal_pants, scale: 3.5);
+  if(name == "Noble Iron") return Image.asset(noble_iron, scale: 3.5);
+  if(name == "Eternal Tome") return Image.asset(eternal_tome, scale: 3.5);
+  if(name == "Life Gem") return Image.asset(life_gem, scale: 3.5);
+  if(name == "Rage Gem") return Image.asset(rage_gem, scale: 3.5);
+  if(name == "Healing Tome") return Image.asset(healing_tome, scale: 3.5);
+  if(name == "Fireball") return Image.asset(fireball, scale: 3.5);
+  if(name == "Lavaloon Puppet") return Image.asset(lavaloon_puppet, scale: 3.5);
+  if(name == "Royal Gem") return Image.asset(royal_gem, scale: 3.5);
+  if(name == "Seeking Shield") return Image.asset(seeking_shield, scale: 3.5);
+  if(name == "Hog Rider Puppet") return Image.asset(hog_rider_puppet, scale: 3.5);
+  if(name == "Haste Vial") return Image.asset(haste_vial, scale: 3.5);
+  if(name == "Rocket Spear") return Image.asset(rocket_spear, scale: 3.5);
+  if(name == "Electro Boots") return Image.asset(electro_boots, scale: 3.5);
   return Image.asset(defenseShield, scale: 3.5);
 }
 
@@ -139,6 +194,30 @@ List<dynamic> getSiegeMachines(List<dynamic> list) {
   return result;
 }
 
+List<dynamic> getSpells(List<dynamic> list) {
+  List<dynamic> result = [];
+  for(var element in list) {
+     result.add(element);
+  }
+  return result;
+}
+
+List<dynamic> getNormalHeroes(List<dynamic> list) {
+  List<dynamic> result = [];
+  for(var element in list) {
+    if(isNormalHero(element["name"])) result.add(element);
+  }
+  return result;
+}
+
+List<dynamic> getBuilderHeroes(List<dynamic> list) {
+  List<dynamic> result = [];
+  for(var element in list) {
+    if(isBuilderHero(element["name"]))result.add(element);
+  }
+  return result;
+}
+
 bool isNormalTroop(String name) {
   return name == "Barbarian" || name == "Archer" || name == "Giant" || name == "Goblin"
       || name == "Wall Breaker" || name == "Balloon" || name == "Wizard" || name == "Healer"
@@ -176,7 +255,11 @@ bool isSiegeMachine(String name) {
       || name == "Troop Launcher";
 }
 
-bool isDifferent(String name1, String name2) {
-  return isNormalTroop(name1) != isSuperTroop(name2) || isSuperTroop(name1) != isBuilderTroop(name2) ||
-      isBuilderTroop(name1) != isSiegeMachine(name2);
+bool isNormalHero(String name) {
+  return name == "Barbarian King" || name == "Archer Queen" || name == "Grand Warden" || name == "Royal Champion"
+      || name == "Minion Prince";
+}
+
+bool isBuilderHero(String name) {
+  return name == "Battle Machine" || name == "Battle Copter";
 }

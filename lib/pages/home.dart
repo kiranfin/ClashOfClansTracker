@@ -353,7 +353,9 @@ class _HomePageState extends State<HomePage> {
                                   )
                               )
                           ),
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.pushNamed(context, "/detail", arguments: "spells");
+                          },
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -413,7 +415,9 @@ class _HomePageState extends State<HomePage> {
                                   )
                               )
                           ),
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.pushNamed(context, "/detail", arguments: "heroes");
+                          },
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [

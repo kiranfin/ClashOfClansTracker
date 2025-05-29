@@ -250,6 +250,19 @@ Future<List<dynamic>> awaitTroops(String tag) async {
   final data = awaitPlayerData(tag);
   final userdata = await data;
   final troops = userdata["troops"];
-  print(troops.runtimeType);
+  return troops;
+}
+
+Future<List<dynamic>> awaitSpells(String tag) async {
+  final data = awaitPlayerData(tag);
+  final userdata = await data;
+  final troops = userdata["spells"];
+  return troops;
+}
+
+Future<List<dynamic>> awaitHeroes(String tag) async {
+  final data = awaitPlayerData(tag);
+  final userdata = await data;
+  final troops = userdata["heroes"];
   return troops;
 }

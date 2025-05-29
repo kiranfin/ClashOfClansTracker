@@ -5,11 +5,13 @@ const defenseShield = 'lib/utils/img/defense_shield.png';
 const legendTrophy = 'lib/utils/img/legend_league_trophy.webp';
 
 // Heroes
-const barbarianKing = 'lib/utils/img/heroes/barbarian_king.jpg';
-const archerQueen = 'lib/utils/img/heroes/archer_queen.jpeg';
-const battleMachine = 'lib/utils/img/heroes/battle_machine.webp';
-const grandWarden = 'lib/utils/img/heroes/grand_warden.jpeg';
-const royalChampion = 'lib/utils/img/heroes/royal_champions.png';
+const barbarianKing = 'lib/utils/img/heroes/Barbarian_King.webp';
+const archerQueen = 'lib/utils/img/heroes/Archer_Queen.webp';
+const battleMachine = 'lib/utils/img/heroes/Battle_Machine.webp';
+const grandWarden = 'lib/utils/img/heroes/Grand_Warden.webp';
+const royalChampion = 'lib/utils/img/heroes/Royal_Champion.webp';
+const minionPrince = 'lib/utils/img/heroes/Minion_Prince.webp';
+const battleCopter = 'lib/utils/img/heroes/Battle_Copter.webp';
 
 // Elixir Troops
 const barbarian = 'lib/utils/img/troops/Barbarian.webp';
@@ -100,6 +102,9 @@ const earthquake_spell = 'lib/utils/img/spells/Earthquake_Spell.webp';
 const invisibility_spell = 'lib/utils/img/spells/Invisibility_Spell.webp';
 const jump_spell = 'lib/utils/img/spells/Jump_Spell.webp';
 const rage_spell = 'lib/utils/img/spells/Rage_Spell.webp';
+const recall_spell = 'lib/utils/img/spells/Recall_Spell.webp';
+const overgrowth_spell = 'lib/utils/img/spells/Overgrowth_Spell.webp';
+const revive_spell = 'lib/utils/img/spells/Revive_Spell.webp';
 
 //Pets
 const lassi = 'lib/utils/img/troops/L.A.S.S.I.webp';
@@ -160,3 +165,35 @@ const bh7 = 'lib/utils/img/town_halls/Builder_Hall_7.webp';
 const bh8 = 'lib/utils/img/town_halls/Builder_Hall_8.webp';
 const bh9 = 'lib/utils/img/town_halls/Builder_Hall_9.webp';
 const bh10 = 'lib/utils/img/town_halls/Builder_Hall_10.webp';
+
+//Equipment
+const babarian_puppet = 'lib/utils/img/equipment/Babarian_Puppet.webp';
+const rage_vial = 'lib/utils/img/equipment/Rage_Vial.webp';
+const earthquake_boots = 'lib/utils/img/equipment/Earthquake_Boots.webp';
+const vampstache = 'lib/utils/img/equipment/Vampstache.webp';
+const giant_gauntlet = 'lib/utils/img/equipment/Giant_Gauntlet.webp';
+const spiky_ball = 'lib/utils/img/equipment/Spiky_Ball.webp';
+const snake_bracelet = 'lib/utils/img/equipment/Snake_Bracelet.webp';
+const archer_puppet = 'lib/utils/img/equipment/Archer_Puppet.webp';
+const invisibility_vial = 'lib/utils/img/equipment/Invisibility_Vial.webp';
+const giant_arrow = 'lib/utils/img/equipment/Giant_Arrow.webp';
+const healer_puppet = 'lib/utils/img/equipment/Healer_Puppet.webp';
+const frozen_arrow = 'lib/utils/img/equipment/Frozen_Arrow.webp';
+const magic_mirror = 'lib/utils/img/equipment/Magic_Mirror.webp';
+const action_figure = 'lib/utils/img/equipment/Action_Figure.webp';
+const henchmen_puppet = 'lib/utils/img/equipment/Henchmen_Puppet.webp';
+const dark_orb = 'lib/utils/img/equipment/Dark_Orb.webp';
+const metal_pants = 'lib/utils/img/equipment/Metal_Pants.webp';
+const noble_iron = 'lib/utils/img/equipment/Noble_Iron.webp';
+const eternal_tome = 'lib/utils/img/equipment/Eternal_Tome.webp';
+const life_gem = 'lib/utils/img/equipment/Life_Gem.webp';
+const rage_gem = 'lib/utils/img/equipment/Rage_Gem.webp';
+const healing_tome = 'lib/utils/img/equipment/Healing_Tome.webp';
+const fireball = 'lib/utils/img/equipment/Fireball.webp';
+const lavaloon_puppet = 'lib/utils/img/equipment/Lavaloon_Puppet.webp';
+const royal_gem = 'lib/utils/img/equipment/Royal_Gem.webp';
+const seeking_shield = 'lib/utils/img/equipment/Seeking_Shield.webp';
+const hog_rider_puppet = 'lib/utils/img/equipment/Hog_Rider_Puppet.webp';
+const haste_vial = 'lib/utils/img/equipment/Haste_Vial.webp';
+const rocket_spear = 'lib/utils/img/equipment/Rocket_Spear.webp';
+const electro_boots = 'lib/utils/img/equipment/Electro_Boots.webp';

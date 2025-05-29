@@ -74,6 +74,7 @@ flutter:
     - lib/utils/img/town_halls/
     - lib/utils/img/spells/
     - lib/utils/img/builderhall_leagues/
+    - lib/utils/img/equipment/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
