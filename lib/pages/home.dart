@@ -470,7 +470,9 @@ class _HomePageState extends State<HomePage> {
                                   )
                               )
                           ),
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.pushNamed(context, "/detail", arguments: "equipment");
+                          },
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [

@@ -8,7 +8,7 @@ import '../utils/Utils.dart' as Utils;
 Future<Map<String, dynamic>> awaitPlayerData(String tag) async {
   final headers = {
     "Accept": "application/json",
-    'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6IjdmNTE5ODZjLTA3NjQtNGY1NC04ZGQyLTAzMDI4ODM2ZTRhOCIsImlhdCI6MTc0ODUyMTg1MSwic3ViIjoiZGV2ZWxvcGVyLzA3NzdmM2RmLTUzYWMtMjI1Zi1kNTdjLWMwNGIxZjA4NjY5MyIsInNjb3BlcyI6WyJjbGFzaCJdLCJsaW1pdHMiOlt7InRpZXIiOiJkZXZlbG9wZXIvc2lsdmVyIiwidHlwZSI6InRocm90dGxpbmcifSx7ImNpZHJzIjpbIjg5LjI0Ni45Ni4xMTYiXSwidHlwZSI6ImNsaWVudCJ9XX0.adUEU5AN1KpWxDIcxDoMqxt8QP62IRhUQ2G2wP9tb4gxxSTnOi5Alsy2dTup-CAPgj4TpgX3fb-_SZzEOlGI2A',
+    'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6IjVjYjhhYmVkLWU0MDQtNDNhYi05OWE2LWFmYjIzNjE3MTAzNCIsImlhdCI6MTc0ODYwMTI5Nywic3ViIjoiZGV2ZWxvcGVyLzA3NzdmM2RmLTUzYWMtMjI1Zi1kNTdjLWMwNGIxZjA4NjY5MyIsInNjb3BlcyI6WyJjbGFzaCJdLCJsaW1pdHMiOlt7InRpZXIiOiJkZXZlbG9wZXIvc2lsdmVyIiwidHlwZSI6InRocm90dGxpbmcifSx7ImNpZHJzIjpbIjg3LjEyMy4yNDYuMjgiXSwidHlwZSI6ImNsaWVudCJ9XX0.K_VIfCcK1MfdD1H-5O1_zEi1vKFaa6w2s0EmcxX0NWPwG1JdmdR6xEzZoLypoB2Kwaq-2km-FgF8S4es3Fsylg',
   };
 
   final url = Uri.parse('${Utils.getBaseUrl()}v1/players/%23$tag');
@@ -264,5 +264,12 @@ Future<List<dynamic>> awaitHeroes(String tag) async {
   final data = awaitPlayerData(tag);
   final userdata = await data;
   final troops = userdata["heroes"];
+  return troops;
+}
+
+Future<List<dynamic>> awaitEquipment(String tag) async {
+  final data = awaitPlayerData(tag);
+  final userdata = await data;
+  final troops = userdata["heroEquipment"];
   return troops;
 }

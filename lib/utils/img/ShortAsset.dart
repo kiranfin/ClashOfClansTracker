@@ -167,7 +167,7 @@ const bh9 = 'lib/utils/img/town_halls/Builder_Hall_9.webp';
 const bh10 = 'lib/utils/img/town_halls/Builder_Hall_10.webp';
 
 //Equipment
-const babarian_puppet = 'lib/utils/img/equipment/Babarian_Puppet.webp';
+const babarian_puppet = 'lib/utils/img/equipment/Barbarian_Puppet.webp';
 const rage_vial = 'lib/utils/img/equipment/Rage_Vial.webp';
 const earthquake_boots = 'lib/utils/img/equipment/Earthquake_Boots.webp';
 const vampstache = 'lib/utils/img/equipment/Vampstache.webp';
@@ -197,3 +197,7 @@ const hog_rider_puppet = 'lib/utils/img/equipment/Hog_Rider_Puppet.webp';
 const haste_vial = 'lib/utils/img/equipment/Haste_Vial.webp';
 const rocket_spear = 'lib/utils/img/equipment/Rocket_Spear.webp';
 const electro_boots = 'lib/utils/img/equipment/Electro_Boots.webp';
+
+const shiny_ore = 'lib/utils/img/equipment/Shiny_Ore.webp';
+const glowy_ore = 'lib/utils/img/equipment/Glowy_Ore.webp';
+const starry_ore = 'lib/utils/img/equipment/Starry_Ore.webp';

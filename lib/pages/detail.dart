@@ -1,4 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:clashofclanstracker/utils/img/ShortAsset.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
 import '../provider/DataProvider.dart' as DataProvider;
@@ -28,7 +29,8 @@ class _DetailPageState extends State<DetailPage> {
         child: Center(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 15.0),
-            child: category == "troops" ? getTroopDetail() : category == "spells"? getSpellDetail() : getHeroesDetail(),
+            child: category == "troops" ? getTroopDetail() : category == "spells"?
+            getSpellDetail() : category == "heroes"? getHeroesDetail() : getEquipmentDetail(),
           ),
         ),
       ),
@@ -43,6 +45,7 @@ class _DetailPageState extends State<DetailPage> {
         if(snapshot.hasData) {
           List finallist = [];
           finallist.addAll(Utils.getNormalTroops(snapshot.data));
+          finallist.addAll(Utils.getPets(snapshot.data));
           finallist.addAll(Utils.getSuperTroops(snapshot.data));
           finallist.addAll(Utils.getBuilderTroops(snapshot.data));
           finallist.addAll(Utils.getSiegeMachines(snapshot.data));
@@ -289,6 +292,104 @@ class _DetailPageState extends State<DetailPage> {
                                               Utils.isNormalHero(finallist[index]["name"])? Utils.getTroopImage(finallist[index]["equipment"][1]["name"], finallist[index]["equipment"][1]["village"]) : Container(),
                                             ],
                                           ),
+                                        ],
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  );
+                }
+            );
+          } else {
+            return ListView.builder(
+                itemCount: 12,
+                itemBuilder: (BuildContext context, int index) {
+                  return ListTile(
+                    title: Shimmer(child: Container(width: 50, height: 15, color: Colors.black45)),
+                  );
+                }
+            );
+          }
+        }
+    );
+  }
+
+  Widget getEquipmentDetail() {
+    return FutureBuilder(
+        future: DataProvider.awaitEquipment("P9V29R8RJ"),
+        builder: (context, AsyncSnapshot snapshot) {
+          if(snapshot.hasData) {
+            List finallist = Utils.getEquipment(snapshot.data);
+            return GridView.builder(
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 3,
+                  crossAxisSpacing: 5.0,
+                  mainAxisSpacing: 5.0,
+                ),
+                itemCount: finallist.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return Padding(
+                    padding: const EdgeInsets.all(3.0),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(20),
+                      child: Container(
+                        color: finallist[index]["level"] == finallist[index]["maxLevel"]? Color(
+                            0xFF532D1F): Colors.black,
+                        child: GridTile(
+                          child: Padding(
+                            padding: const EdgeInsets.all(5.0),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                AutoSizeText(
+                                    finallist[index]["name"],
+                                    style: const TextStyle(color: Colors.white, fontFamily: "Poppins", fontSize: 15),
+                                    maxLines: 1
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    Utils.getTroopImage(finallist[index]["name"], finallist[index]["village"]),
+                                    Text((finallist[index]["level"]).toString(), style: const TextStyle(color: Colors.white,
+                                        fontFamily: "Poppins",
+                                        fontSize: 35)),
+                                  ],
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 5.0),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text("Max: ${finallist[index]["maxLevel"]}", style: const TextStyle(color: Colors.white,
+                                          fontFamily: "Poppins",
+                                          fontSize: 10)),
+                                      Row(
+                                        children: [
+                                          Image.asset(shiny_ore, scale: 10),
+                                          SizedBox(width: 2),
+                                          Text(Utils.getNextShiny(finallist[index]).toString(), style: const TextStyle(color: Colors.white,
+                                              fontFamily: "Poppins",
+                                              fontSize: 10)),
+                                          SizedBox(width: 3),
+                                          Image.asset(glowy_ore, scale: 10),
+                                          SizedBox(width: 2),
+                                          Text(Utils.getNextGlowy(finallist[index]).toString(), style: const TextStyle(color: Colors.white,
+                                              fontFamily: "Poppins",
+                                              fontSize: 10)),
+                                          SizedBox(width: 3),
+                                          Image.asset(starry_ore, scale: 10),
+                                          SizedBox(width: 2),
+                                          Text(Utils.getNextStarry(finallist[index]).toString(), style: const TextStyle(color: Colors.white,
+                                              fontFamily: "Poppins",
+                                              fontSize: 10)),
+                                          SizedBox(width: 3),
                                         ],
                                       )
                                     ],

@@ -85,17 +85,17 @@ Image getTroopImage(String name, String village) {
   if(name == "Battle Drill") return Image.asset(battle_drill, scale: 2.5);
   if(name == "Troop Launcher") return Image.asset(troop_launcher, scale: 2.5);
 
-  if(name == "L.A.S.S.I") return Image.asset(lassi, scale: 1);
-  if(name == "Electro Owl") return Image.asset(electro_owl, scale: 1);
-  if(name == "Mighty Yak") return Image.asset(mighty_yak, scale: 1);
-  if(name == "Unicorn") return Image.asset(unicorn, scale: 1);
-  if(name == "Frosty") return Image.asset(frosty, scale: 1);
-  if(name == "Diggy") return Image.asset(diggy, scale: 1);
-  if(name == "Poison Lizard") return Image.asset(poison_lizard, scale: 1);
-  if(name == "Phoenix") return Image.asset(phoenix, scale: 1);
-  if(name == "Spirit Fox") return Image.asset(spirit_fox, scale: 1);
-  if(name == "Angry Jelly") return Image.asset(angry_jelly, scale: 1);
-  if(name == "Sneezy") return Image.asset(sneezy, scale: 1);
+  if(name == "L.A.S.S.I") return Image.asset(lassi, scale: 2.5);
+  if(name == "Electro Owl") return Image.asset(electro_owl, scale: 2.5);
+  if(name == "Mighty Yak") return Image.asset(mighty_yak, scale: 2.5);
+  if(name == "Unicorn") return Image.asset(unicorn, scale: 2.5);
+  if(name == "Frosty") return Image.asset(frosty, scale: 2.5);
+  if(name == "Diggy") return Image.asset(diggy, scale: 2.5);
+  if(name == "Poison Lizard") return Image.asset(poison_lizard, scale: 2.5);
+  if(name == "Phoenix") return Image.asset(phoenix, scale: 2.5);
+  if(name == "Spirit Fox") return Image.asset(spirit_fox, scale: 2.5);
+  if(name == "Angry Jelly") return Image.asset(angry_jelly, scale: 2.5);
+  if(name == "Sneezy") return Image.asset(sneezy, scale: 2.5);
 
   if(name == "Lightning Spell") return Image.asset(lightning_spell, scale: 3.5);
   if(name == "Healing Spell") return Image.asset(healing_spell, scale: 3.5);
@@ -121,8 +121,8 @@ Image getTroopImage(String name, String village) {
   if(name == "Battle Copter") return Image.asset(battleCopter, scale: 1.5);
   if(name == "Minion Prince") return Image.asset(minionPrince, scale: 1.5);
 
-  if(name == "Barbarian Puppet") return Image.asset(frozen_arrow, scale: 3.5);
-  if(name == "Rage Vial") return Image.asset(frozen_arrow, scale: 3.5);
+  if(name == "Barbarian Puppet") return Image.asset(babarian_puppet, scale: 3.5);
+  if(name == "Rage Vial") return Image.asset(rage_vial, scale: 3.5);
   if(name == "Earthquake Boots") return Image.asset(earthquake_boots, scale: 3.5);
   if(name == "Vampstache") return Image.asset(vampstache, scale: 3.5);
   if(name == "Giant Gauntlet") return Image.asset(giant_gauntlet, scale: 3.5);
@@ -202,6 +202,14 @@ List<dynamic> getSpells(List<dynamic> list) {
   return result;
 }
 
+List<dynamic> getEquipment(List<dynamic> list) {
+  List<dynamic> result = [];
+  for(var element in list) {
+    result.add(element);
+  }
+  return result;
+}
+
 List<dynamic> getNormalHeroes(List<dynamic> list) {
   List<dynamic> result = [];
   for(var element in list) {
@@ -216,6 +224,66 @@ List<dynamic> getBuilderHeroes(List<dynamic> list) {
     if(isBuilderHero(element["name"]))result.add(element);
   }
   return result;
+}
+
+int getNextShiny(var list) {
+  if(list["level"] == 1) return 120;
+  if(list["level"] == 2) return 240;
+  if(list["level"] == 3) return 400;
+  if(list["level"] == 4) return 600;
+  if(list["level"] == 5) return 840;
+  if(list["level"] == 6) return 1120;
+  if(list["level"] == 7) return 1440;
+  if(list["level"] == 8) return 1800;
+  if(list["level"] == 9) return 1900;
+  if(list["level"] == 10) return 2000;
+  if(list["level"] == 11) return 2100;
+  if(list["level"] == 12) return 2200;
+  if(list["level"] == 13) return 2300;
+  if(list["level"] == 14) return 2400;
+  if(list["level"] == 15) return 2500;
+  if(list["level"] == 16) return 2600;
+  if(list["level"] == 17) return 2700;
+  if(list["maxLevel"] == 27) {
+    if (list["level"] == 18) return 2800;
+    if (list["level"] == 19) return 2900;
+    if (list["level"] == 20) return 3000;
+    if (list["level"] == 21) return 3100;
+    if (list["level"] == 22) return 3200;
+    if (list["level"] == 23) return 3300;
+    if (list["level"] == 24) return 3400;
+    if (list["level"] == 25) return 3500;
+    if (list["level"] == 26) return 3600;
+  }
+  return 0;
+}
+
+int getNextGlowy(var list) {
+  if(list["level"] == 2) return 20;
+  if(list["level"] == 5) return 100;
+  if(list["level"] == 8) return 200;
+  if(list["level"] == 11) return 400;
+  if(list["level"] == 14) return 600;
+  if(list["level"] == 17) return 600;
+  if(list["maxLevel"] == 27) {
+    if (list["level"] == 20) return 600;
+    if (list["level"] == 23) return 600;
+    if (list["level"] == 26) return 600;
+  }
+  return 0;
+}
+
+int getNextStarry(var list) {
+  if (list["maxLevel"] == 27) {
+    if (list["level"] == 8) return 10;
+    if (list["level"] == 11) return 20;
+    if (list["level"] == 14) return 30;
+    if (list["level"] == 17) return 50;
+    if (list["level"] == 20) return 100;
+    if (list["level"] == 23) return 120;
+    if (list["level"] == 26) return 150;
+  }
+  return 0;
 }
 
 bool isNormalTroop(String name) {
