@@ -3,6 +3,7 @@ import 'package:clashofclanstracker/utils/img/ShortAsset.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
 import '../provider/DataProvider.dart' as DataProvider;
+import '../utils/UserSP.dart';
 import '../utils/Utils.dart' as Utils;
 
 class DetailPage extends StatefulWidget {
@@ -14,6 +15,7 @@ class DetailPage extends StatefulWidget {
 
 class _DetailPageState extends State<DetailPage> {
 
+  String userTag = UserSP.getCurrentUser();
   late String category = ModalRoute.of(context)!.settings.arguments as String;
 
   @override
@@ -40,7 +42,7 @@ class _DetailPageState extends State<DetailPage> {
 
   Widget getTroopDetail() {
     return FutureBuilder(
-      future: DataProvider.awaitTroops("P9V29R8RJ"),
+      future: DataProvider.awaitTroops(userTag),
       builder: (context, AsyncSnapshot snapshot) {
         if(snapshot.hasData) {
           List finallist = [];
@@ -131,7 +133,7 @@ class _DetailPageState extends State<DetailPage> {
 
   Widget getSpellDetail() {
     return FutureBuilder(
-        future: DataProvider.awaitSpells("P9V29R8RJ"),
+        future: DataProvider.awaitSpells(userTag),
         builder: (context, AsyncSnapshot snapshot) {
           if(snapshot.hasData) {
             List finallist = Utils.getSpells(snapshot.data);
@@ -217,7 +219,7 @@ class _DetailPageState extends State<DetailPage> {
 
   Widget getHeroesDetail() {
     return FutureBuilder(
-        future: DataProvider.awaitHeroes("P9V29R8RJ"),
+        future: DataProvider.awaitHeroes(userTag),
         builder: (context, AsyncSnapshot snapshot) {
           if(snapshot.hasData) {
             List finallist = [];
@@ -322,7 +324,7 @@ class _DetailPageState extends State<DetailPage> {
 
   Widget getEquipmentDetail() {
     return FutureBuilder(
-        future: DataProvider.awaitEquipment("P9V29R8RJ"),
+        future: DataProvider.awaitEquipment(userTag),
         builder: (context, AsyncSnapshot snapshot) {
           if(snapshot.hasData) {
             List finallist = Utils.getEquipment(snapshot.data);

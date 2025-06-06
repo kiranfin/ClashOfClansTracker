@@ -4,11 +4,12 @@ import 'package:clashofclanstracker/utils/img/ShortAsset.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import '../utils/Utils.dart' as Utils;
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 Future<Map<String, dynamic>> awaitPlayerData(String tag) async {
   final headers = {
     "Accept": "application/json",
-    'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6IjFhNWQ0NThjLTVjODgtNDhlZC04MGM1LWYxOTg5YjY2NTY5YSIsImlhdCI6MTc0OTA3MjY1MSwic3ViIjoiZGV2ZWxvcGVyLzA3NzdmM2RmLTUzYWMtMjI1Zi1kNTdjLWMwNGIxZjA4NjY5MyIsInNjb3BlcyI6WyJjbGFzaCJdLCJsaW1pdHMiOlt7InRpZXIiOiJkZXZlbG9wZXIvc2lsdmVyIiwidHlwZSI6InRocm90dGxpbmcifSx7ImNpZHJzIjpbIjE4NS4yMzkuMjM4LjIyNCJdLCJ0eXBlIjoiY2xpZW50In1dfQ.Dz1MbIE2jKWI-fKZ6vVLpQ7HcXHeVPkQUugl5XT3ICBmisob0l33qDHlweDBpZm4lHacnikYICr1wbez633wjg',
+    'Authorization': 'Bearer ${dotenv.get("API_KEY")}',
   };
 
   final url = Uri.parse('${Utils.getBaseUrl()}v1/players/%23$tag');
@@ -127,7 +128,7 @@ Future<Text> awaitPlayerTrophies(String tag) async {
 Future<Text> awaitPlayerLegendTrophies(String tag) async {
   final data = awaitPlayerData(tag);
   final userdata = await data;
-  return Text((userdata["legendStatistics"]["legendTrophies"]).toString(), style: TextStyle(color: Colors.white, fontSize: 15));
+  return Text((userdata["legendStatistics"] != null? userdata["legendStatistics"]["legendTrophies"] : 0).toString(), style: TextStyle(color: Colors.white, fontSize: 15));
 }
 
 Future<Text> awaitPlayerBuilderTrophies(String tag) async {

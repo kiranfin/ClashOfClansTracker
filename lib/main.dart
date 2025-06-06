@@ -1,9 +1,10 @@
 import 'dart:io';
-
 import 'package:clashofclanstracker/pages/detail.dart';
 import 'package:clashofclanstracker/pages/home.dart';
 import 'package:clashofclanstracker/pages/settings.dart';
+import 'package:clashofclanstracker/pages/startscreen.dart';
 import 'package:clashofclanstracker/provider/DataProvider.dart';
+import 'package:clashofclanstracker/utils/UserSP.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -13,6 +14,9 @@ import 'package:system_proxy/system_proxy.dart';
 
 void main() async {
   await dotenv.load(fileName: "config.env");
+  await UserSP.init();
+  UserSP.setCurrentUser("GLQCVY0QG");
+  UserSP.setUsers(["P9V29R8RJ", "GLQCVY0QG", "QG9Y20292", "PQV808YLG"]);
   Map<String, String>? proxy = await SystemProxy.getProxySettings();
   proxy ??= {
     'host': "185.239.238.224",
@@ -56,6 +60,8 @@ class MyApp extends StatelessWidget {
             return PageTransition(child: const HomePage(), type: PageTransitionType.fade);
           case '/detail':
             return PageTransition(child: const DetailPage(), type: PageTransitionType.fade, settings: settings);
+          case '/start':
+            return PageTransition(child: const StartScreenPage(), type: PageTransitionType.fade);
         }
         return null;
       }

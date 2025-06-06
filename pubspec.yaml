@@ -42,6 +42,9 @@ dependencies:
   shimmer_animation: ^2.2.2
   page_transition: ^2.2.1
   system_proxy: ^0.1.0
+  shared_preferences: ^2.5.3
+  flutter_launcher_icons: ^0.14.3
+  dropdown_button2: ^2.3.9
 
 dev_dependencies:
   flutter_test:
@@ -53,6 +56,12 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^6.0.0
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "lib/utils/img/logo.png"
+  adaptive_icon_background: "lib/utils/img/logo.png"
+  adaptive_icon_foreground: "lib/utils/img/logo.png"
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
