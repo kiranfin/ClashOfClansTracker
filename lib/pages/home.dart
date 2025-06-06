@@ -533,13 +533,13 @@ class _HomePageState extends State<HomePage> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               AutoSizeText(
-                                  'Quests',
+                                  'Achievem.',
                                   style: const TextStyle(color: Colors.white, fontFamily: "Poppins"),
                                   maxLines: 1
                               ),
                               SizedBox(height: 5),
                               FutureBuilder<double>(
-                                  future: DataProvider.awaitQuestsPercent(userTag),
+                                  future: DataProvider.awaitAchievementsPercent(userTag),
                                   builder: (context, AsyncSnapshot snapshot) {
                                     if(snapshot.hasData) {
                                       return CircularPercentIndicator(

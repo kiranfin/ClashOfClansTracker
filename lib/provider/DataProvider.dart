@@ -202,26 +202,12 @@ Future<double> awaitHeroesPercent(String tag) async {
   final data = awaitPlayerData(tag);
   final userdata = await data;
   final heroes = userdata["heroes"];
+  final troops = userdata["troops"];
   num max = 0;
   num sum = 0;
   for (var hero in heroes) {
     max += hero["maxLevel"];
     sum += hero["level"];
-  }
-  double res = sum / max;
-  return res;
-}
-
-Future<double> awaitEquipmentPercent(String tag) async {
-  final data = awaitPlayerData(tag);
-  final userdata = await data;
-  final equi = userdata["heroEquipment"];
-  final troops = userdata["troops"];
-  num max = 0;
-  num sum = 0;
-  for (var equ in equi) {
-    max += equ["maxLevel"];
-    sum += equ["level"];
   }
   for(var troop in troops) {
     if(Utils.isPet(troop["name"])) {
@@ -233,7 +219,21 @@ Future<double> awaitEquipmentPercent(String tag) async {
   return res;
 }
 
-Future<double> awaitQuestsPercent(String tag) async {
+Future<double> awaitEquipmentPercent(String tag) async {
+  final data = awaitPlayerData(tag);
+  final userdata = await data;
+  final equi = userdata["heroEquipment"];
+  num max = 0;
+  num sum = 0;
+  for (var equ in equi) {
+    max += equ["maxLevel"];
+    sum += equ["level"];
+  }
+  double res = sum / max;
+  return res;
+}
+
+Future<double> awaitAchievementsPercent(String tag) async {
   final data = awaitPlayerData(tag);
   final userdata = await data;
   final quests = userdata["achievements"];
@@ -272,5 +272,12 @@ Future<List<dynamic>> awaitEquipment(String tag) async {
   final data = awaitPlayerData(tag);
   final userdata = await data;
   final troops = userdata["heroEquipment"];
+  return troops;
+}
+
+Future<List<dynamic>> awaitAchievements(String tag) async {
+  final data = awaitPlayerData(tag);
+  final userdata = await data;
+  final troops = userdata["achievements"];
   return troops;
 }
