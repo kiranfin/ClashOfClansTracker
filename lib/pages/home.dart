@@ -211,8 +211,8 @@ class _HomePageState extends State<HomePage> {
                                       rotateLinearGradient: true,
                                       linearGradient: LinearGradient(
                                           colors: [
-                                            Colors.indigoAccent,
-                                            Colors.purple
+                                            Colors.orange,
+                                            Colors.deepOrangeAccent
                                           ]
                                       ),
                                     ),
@@ -273,8 +273,8 @@ class _HomePageState extends State<HomePage> {
                                       rotateLinearGradient: true,
                                       linearGradient: LinearGradient(
                                           colors: [
-                                            Colors.indigoAccent,
-                                            Colors.purple
+                                            Colors.lightGreen,
+                                            Colors.green
                                           ]
                                       ),
                                     ),
@@ -335,7 +335,7 @@ class _HomePageState extends State<HomePage> {
                                       rotateLinearGradient: true,
                                       linearGradient: LinearGradient(
                                           colors: [
-                                            Colors.indigoAccent,
+                                            Colors.pinkAccent,
                                             Colors.purple
                                           ]
                                       ),
@@ -404,8 +404,8 @@ class _HomePageState extends State<HomePage> {
                                       rotateLinearGradient: true,
                                       linearGradient: LinearGradient(
                                           colors: [
-                                            Colors.indigoAccent,
-                                            Colors.purple
+                                            Colors.cyan,
+                                            Colors.blueAccent
                                           ]
                                       ),
                                     ),
@@ -466,8 +466,8 @@ class _HomePageState extends State<HomePage> {
                                       rotateLinearGradient: true,
                                       linearGradient: LinearGradient(
                                           colors: [
-                                            Colors.indigoAccent,
-                                            Colors.purple
+                                            Colors.blueGrey,
+                                            Colors.teal
                                           ]
                                       ),
                                     ),
@@ -528,8 +528,8 @@ class _HomePageState extends State<HomePage> {
                                       rotateLinearGradient: true,
                                       linearGradient: LinearGradient(
                                           colors: [
-                                            Colors.indigoAccent,
-                                            Colors.purple
+                                            Colors.yellow,
+                                            Colors.orange
                                           ]
                                       ),
                                     ),

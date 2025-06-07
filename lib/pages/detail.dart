@@ -432,7 +432,7 @@ class _DetailPageState extends State<DetailPage> {
                 itemCount: finallist.length,
                 itemBuilder: (BuildContext context, int index) {
                   return Padding(
-                    padding: const EdgeInsets.all(3.0),
+                    padding: const EdgeInsets.symmetric(horizontal: 3, vertical: 8),
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(20),
                       child: Container(
@@ -480,10 +480,10 @@ class _DetailPageState extends State<DetailPage> {
                                         curve: Curves.fastLinearToSlowEaseIn,
                                         borderRadius: BorderRadius.circular(10),
                                         gradientColor: LinearGradient(
-                                            colors: [Colors.pinkAccent, Colors.purple]),
+                                            colors: [Colors.greenAccent, Colors.lightGreen]),
                                         boxShadow: [
                                           BoxShadow(
-                                            color: Colors.purple,
+                                            color: Colors.lightGreen,
                                             blurRadius: 2.5,
                                             spreadRadius: 2.0,
                                           ),
