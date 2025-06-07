@@ -210,6 +210,14 @@ List<dynamic> getEquipment(List<dynamic> list) {
   return result;
 }
 
+List<dynamic> getAchievements(List<dynamic> list) {
+  List<dynamic> result = [];
+  for(var element in list) {
+    result.add(element);
+  }
+  return result;
+}
+
 List<dynamic> getNormalHeroes(List<dynamic> list) {
   List<dynamic> result = [];
   for(var element in list) {

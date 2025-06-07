@@ -528,7 +528,9 @@ class _HomePageState extends State<HomePage> {
                                   )
                               )
                           ),
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.pushNamed(context, "/detail", arguments: "achievements");
+                          },
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [

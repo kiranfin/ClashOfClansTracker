@@ -2,6 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:clashofclanstracker/utils/img/ShortAsset.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
+import 'package:simple_animation_progress_bar/simple_animation_progress_bar.dart';
 import '../provider/DataProvider.dart' as DataProvider;
 import '../utils/UserSP.dart';
 import '../utils/Utils.dart' as Utils;
@@ -32,7 +33,7 @@ class _DetailPageState extends State<DetailPage> {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 15.0),
             child: category == "troops" ? getTroopDetail() : category == "spells"?
-            getSpellDetail() : category == "heroes"? getHeroesDetail() : getEquipmentDetail(),
+            getSpellDetail() : category == "heroes"? getHeroesDetail() : category == "equipment"? getEquipmentDetail() : getAchievementDetails(),
           ),
         ),
       ),
@@ -396,6 +397,108 @@ class _DetailPageState extends State<DetailPage> {
                                       )
                                     ],
                                   ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  );
+                }
+            );
+          } else {
+            return ListView.builder(
+                itemCount: 12,
+                itemBuilder: (BuildContext context, int index) {
+                  return ListTile(
+                    title: Shimmer(child: Container(width: 50, height: 15, color: Colors.black45)),
+                  );
+                }
+            );
+          }
+        }
+    );
+  }
+
+
+  Widget getAchievementDetails() {
+    return FutureBuilder(
+        future: DataProvider.awaitAchievements(userTag),
+        builder: (context, AsyncSnapshot snapshot) {
+          if(snapshot.hasData) {
+            List finallist = Utils.getAchievements(snapshot.data);
+            return ListView.builder(
+                itemCount: finallist.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return Padding(
+                    padding: const EdgeInsets.all(3.0),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(20),
+                      child: Container(
+                        color: finallist[index]["value"] >= finallist[index]["target"]? Color(
+                            0xFF532D1F): Colors.black,
+                        child: GridTile(
+                          child: Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    AutoSizeText(
+                                        finallist[index]["name"],
+                                        style: const TextStyle(color: Colors.white, fontFamily: "Poppins", fontSize: 20),
+                                        maxLines: 1
+                                    ),
+                                    SizedBox(width: 30),
+                                    finallist[index]["stars"] == 3? Image.asset(three_star) : finallist[index]["stars"] == 2? Image.asset(two_star) : Image.asset(one_star)
+                                  ],
+                                ),
+                                SizedBox(height: 5),
+                                Row(
+                                  children: [
+                                    AutoSizeText(
+                                        finallist[index]["info"],
+                                        style: const TextStyle(color: Colors.white, fontFamily: "Poppins", fontSize: 12),
+                                        maxLines: 1
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(height: 10),
+                                Row(
+                                  children: [
+                                    SimpleAnimationProgressBar(
+                                        ratio: finallist[index]["value"] / finallist[index]["target"],
+                                        width: 150,
+                                        height: 10,
+                                        direction: Axis.horizontal,
+                                        backgroundColor: Colors.grey.shade800,
+                                        foregroundColor: Colors.purple,
+                                        duration: const Duration(seconds: 3),
+                                        curve: Curves.fastLinearToSlowEaseIn,
+                                        borderRadius: BorderRadius.circular(10),
+                                        gradientColor: LinearGradient(
+                                            colors: [Colors.pinkAccent, Colors.purple]),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Colors.purple,
+                                            blurRadius: 2.5,
+                                            spreadRadius: 2.0,
+                                          ),
+                                        ],
+                                    ),
+                                    SizedBox(width: 10),
+                                    finallist[index]["value"] >= finallist[index]["target"]? SizedBox() : AutoSizeText(((finallist[index]["value"] / finallist[index]["target"]) * 100).toStringAsFixed(2) + "%",
+                                        style: const TextStyle(color: Colors.white, fontFamily: "Poppins", fontSize: 12),
+                                        maxLines: 1
+                                    ),
+                                  ],
+                                ),
+                                AutoSizeText("${finallist[index]["value"]}/${finallist[index]["target"]}",
+                                    style: const TextStyle(color: Colors.white, fontFamily: "Poppins", fontSize: 12),
+                                    maxLines: 1
                                 ),
                               ],
                             ),

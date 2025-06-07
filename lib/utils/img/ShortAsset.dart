@@ -201,3 +201,7 @@ const electro_boots = 'lib/utils/img/equipment/Electro_Boots.webp';
 const shiny_ore = 'lib/utils/img/equipment/Shiny_Ore.webp';
 const glowy_ore = 'lib/utils/img/equipment/Glowy_Ore.webp';
 const starry_ore = 'lib/utils/img/equipment/Starry_Ore.webp';
+
+const one_star = 'lib/utils/img/1_Star.webp';
+const two_star = 'lib/utils/img/2_Stars.webp';
+const three_star = 'lib/utils/img/3_Stars.webp';
