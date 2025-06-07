@@ -20,7 +20,7 @@ void main() async {
   Map<String, String>? proxy = await SystemProxy.getProxySettings();
   proxy ??= {
     'host': "185.239.238.224",
-    'port': "8080"
+    'port': "3128"
   };
   HttpOverrides.global = ProxiedHttpOverrides(proxy['host']!, proxy['port']!);
   runApp(const MyApp());
