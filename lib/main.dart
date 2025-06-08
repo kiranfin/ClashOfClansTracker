@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:clashofclanstracker/pages/detail.dart';
 import 'package:clashofclanstracker/pages/home.dart';
+import 'package:clashofclanstracker/pages/league.dart';
 import 'package:clashofclanstracker/pages/settings.dart';
 import 'package:clashofclanstracker/pages/startscreen.dart';
 import 'package:clashofclanstracker/utils/UserSP.dart';
@@ -81,7 +82,7 @@ class DefaultPage extends StatefulWidget {
 
 class _DefaultPageState extends State<DefaultPage> {
   final List<Widget> pages = [
-    SettingsPage(),
+    LeaguePage(),
     HomePage(),
     SettingsPage()
   ];
@@ -134,7 +135,7 @@ class _DefaultPageState extends State<DefaultPage> {
             },
             tabs: [
               GButton(
-                icon: Icons.question_mark,
+                icon: Icons.emoji_events,
                 text: "League",
               ),
               GButton(

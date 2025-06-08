@@ -379,7 +379,7 @@ class _HomePageState extends State<HomePage> {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     AutoSizeText(
-                                        'Heros',
+                                        'Heroes',
                                         style: const TextStyle(
                                             color: Colors.white,
                                             fontFamily: "Poppins"),
