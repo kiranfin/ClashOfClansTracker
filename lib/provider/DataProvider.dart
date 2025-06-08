@@ -18,6 +18,21 @@ Future<Map<String, dynamic>> awaitPlayerData(String tag) async {
   return jsonDecode(res.body) as Map<String, dynamic>;
 }
 
+Future<Map<String, dynamic>> awaitPlayerClan(String tag) async {
+  var player = await awaitPlayerData(tag);
+  String clantag = player["clan"]["tag"].substring(1);
+  final headers = {
+    "Accept": "application/json",
+    'Authorization': 'Bearer ${dotenv.get("API_KEY")}',
+  };
+
+  final url = Uri.parse('${Utils.getBaseUrl()}v1/clans/%23$clantag');
+  final res = await http.get(url, headers: headers);
+  final status = res.statusCode;
+  if (status != 200) throw Exception('http.get error: statusCode= $status');
+  return jsonDecode(res.body) as Map<String, dynamic>;
+}
+
 Image awaitTownHallIcon(Map<String, dynamic> userdata) {
   //final data = awaitPlayerData(tag);
   //final userdata = await data;
@@ -110,6 +125,28 @@ Image awaitBuilderLeagueIcon(Map<String, dynamic> userdata) {
   if (league == "Ruby League I") return Image.asset(ruby, scale: 4);
   if (league == "Diamond League I") return Image.asset(diamond, scale: 4);
   return Image.asset(wood, scale: 4);
+}
+
+Image awaitClanWarLeagueIcon(String league) {
+  if(league == "Bronze League I") return Image.asset(war_bronze1, scale: 1.2);
+  if(league == "Bronze League II") return Image.asset(war_bronze2, scale: 1.2);
+  if(league == "Bronze League III") return Image.asset(war_bronze3, scale: 1.2);
+  if(league == "Silver League I") return Image.asset(war_silver1, scale: 1.2);
+  if(league == "Silver League II") return Image.asset(war_silver2, scale: 1.2);
+  if(league == "Silver League III") return Image.asset(war_silver3, scale: 1.2);
+  if(league == "Gold League I") return Image.asset(war_gold1, scale: 1.2);
+  if(league == "Gold League II") return Image.asset(war_gold2, scale: 1.2);
+  if(league == "Gold League III") return Image.asset(war_gold3, scale: 1.2);
+  if(league == "Crystal League I") return Image.asset(war_crystal1, scale: 1.2);
+  if(league == "Crystal League II") return Image.asset(war_crystal2, scale: 1.2);
+  if(league == "Crystal League III") return Image.asset(war_crystal3, scale: 1.2);
+  if(league == "Master League I") return Image.asset(war_master1, scale: 1.2);
+  if(league == "Master League II") return Image.asset(war_master2, scale: 1.2);
+  if(league == "Master League III") return Image.asset(war_master3, scale: 1.2);
+  if(league == "Champion League I") return Image.asset(war_champion1, scale: 1.2);
+  if(league == "Champion League II") return Image.asset(war_champion2, scale: 1.2);
+  if(league == "Champion League III") return Image.asset(war_champion3, scale: 1.2);
+  return Image.asset(war_bronze1, scale: 1);
 }
 
 Text awaitPlayerName(Map<String, dynamic> userdata) {

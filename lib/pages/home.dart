@@ -53,7 +53,10 @@ class _HomePageState extends State<HomePage> {
                                     )
                                 )
                             ),
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.pushNamed(
+                                  context, "/detail", arguments: "profile");
+                            },
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [

@@ -202,18 +202,82 @@ List<dynamic> getSpells(List<dynamic> list) {
   return result;
 }
 
-List<dynamic> getEquipment(List<dynamic> list) {
+List<dynamic> getKingEquipment(List<dynamic> list) {
   List<dynamic> result = [];
   for(var element in list) {
-    result.add(element);
+    if(isKingEquipment(element["name"])) {
+      result.add(element);
+    }
   }
   return result;
 }
 
-List<dynamic> getAchievements(List<dynamic> list) {
+List<dynamic> getQueenEquipment(List<dynamic> list) {
   List<dynamic> result = [];
   for(var element in list) {
-    result.add(element);
+    if(isQueenEquipment(element["name"])) {
+      result.add(element);
+    }
+  }
+  return result;
+}
+
+List<dynamic> getWardenEquipment(List<dynamic> list) {
+  List<dynamic> result = [];
+  for(var element in list) {
+    if(isWardenEquipment(element["name"])) {
+      result.add(element);
+    }
+  }
+  return result;
+}
+
+List<dynamic> getMinionPrinceEquipment(List<dynamic> list) {
+  List<dynamic> result = [];
+  for(var element in list) {
+    if(isMinionPrinceEquipment(element["name"])) {
+      result.add(element);
+    }
+  }
+  return result;
+}
+
+List<dynamic> getRoyalChampEquipment(List<dynamic> list) {
+  List<dynamic> result = [];
+  for(var element in list) {
+    if(isRoyalChampEquipment(element["name"])) {
+      result.add(element);
+    }
+  }
+  return result;
+}
+
+List<dynamic> getHomeAchievements(List<dynamic> list) {
+  List<dynamic> result = [];
+  for(var element in list) {
+    if(element["village"] == "home") {
+      result.add(element);
+    }
+  }
+  return result;
+}
+
+List<dynamic> getBuilderHallAchievements(List<dynamic> list) {
+  List<dynamic> result = [];
+  for(var element in list) {
+    if(element["village"] == "builderBase") {
+      result.add(element);
+    }
+  }
+  return result;
+}
+
+List<dynamic> getCapitalAchievements(List<dynamic> list) {
+  List<dynamic> result = [];
+  for(var element in list) {
+    if(element["village"] == "clanCapital") {
+      result.add(element);
+    }
   }
   return result;
 }
@@ -348,4 +412,51 @@ List<dynamic> filterAchievements(List<dynamic> list) {
     }
   }
   return res;
+}
+
+bool isKingEquipment(String name) {
+  return name == "Barbarian Puppet" || name == "Rage Vial" || name == "Earthquake Boots" || name == "Vampstache" || name == "Giant Gauntlet" || name == "Spiky Ball" || name == "Snake Bracelet";
+}
+
+bool isQueenEquipment(String name) {
+  return name == "Archer Puppet" || name == "Invisibility Vial" || name == "Giant Arrow" || name == "Healer Puppet" || name == "Frozen Arrow" || name == "Magic Mirror" || name == "Action Figure";
+}
+
+bool isMinionPrinceEquipment(String name) {
+  return name == "Henchmen Puppet" || name == "Dark Orb" || name == "Metal Pants" || name == "Noble Iron" || name == "Dark Crown";
+}
+
+bool isWardenEquipment(String name) {
+  return name == "Eternal Tome" || name == "Life Gem" || name == "Rage Gem" || name == "Healing Tome" || name == "Fireball" || name == "Lavaloon Puppet";
+}
+
+bool isRoyalChampEquipment(String name) {
+  return name == "Royal Gem" || name == "Seeking Shield" || name == "Hog Rider Puppet" || name == "Haste Vial" || name == "Rocket Spear" || name == "Electro Boots";
+}
+
+Text getRole(String role) {
+  return Text(role == "coLeader"? "Co-Leader" : role == "leader"? "Leader" : role == "elder"? "Elder" : "Member", style: const TextStyle(
+      color: Colors.white,
+      fontFamily: "Poppins",
+      fontSize: 15));
+}
+
+Image getDistrictHallImage(int level) {
+  if(level == 1) return Image.asset(district_hall1, scale: 3);
+  if(level == 2) return Image.asset(district_hall2, scale: 3);
+  if(level == 3) return Image.asset(district_hall3, scale: 3);
+  if(level == 4) return Image.asset(district_hall4, scale: 3);
+  if(level == 5) return Image.asset(district_hall5, scale: 3);
+  return Image.asset(district_hall1, scale: 3);
+}
+
+Image getCapitalHallImage(int level) {
+  if(level == 1) return Image.asset(capital_hall1, scale: 3);
+  if(level == 2) return Image.asset(capital_hall2, scale: 3);
+  if(level == 3) return Image.asset(capital_hall3, scale: 3);
+  if(level == 4) return Image.asset(capital_hall4, scale: 3);
+  if(level == 5) return Image.asset(capital_hall5, scale: 3);
+  if(level == 6) return Image.asset(capital_hall6, scale: 3);
+  if(level == 7) return Image.asset(capital_hall7, scale: 3);
+  return Image.asset(capital_hall1, scale: 3);
 }
