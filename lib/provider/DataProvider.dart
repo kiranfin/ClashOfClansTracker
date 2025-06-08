@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:convert' as convert;
 import 'package:clashofclanstracker/utils/img/ShortAsset.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;

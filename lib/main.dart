@@ -3,7 +3,6 @@ import 'package:clashofclanstracker/pages/detail.dart';
 import 'package:clashofclanstracker/pages/home.dart';
 import 'package:clashofclanstracker/pages/settings.dart';
 import 'package:clashofclanstracker/pages/startscreen.dart';
-import 'package:clashofclanstracker/provider/DataProvider.dart';
 import 'package:clashofclanstracker/utils/UserSP.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -15,8 +14,8 @@ import 'package:system_proxy/system_proxy.dart';
 void main() async {
   await dotenv.load(fileName: "config.env");
   await UserSP.init();
-  UserSP.setCurrentUser("GLQCVY0QG");
-  UserSP.setUsers(["P9V29R8RJ", "GLQCVY0QG", "QG9Y20292", "PQV808YLG"]);
+  //UserSP.setCurrentUser("GLQCVY0QG");
+  //UserSP.setUsers(["P9V29R8RJ", "GLQCVY0QG", "QG9Y20292", "PQV808YLG"]);
   Map<String, String>? proxy = await SystemProxy.getProxySettings();
   proxy ??= {
     'host': "185.239.238.224",
@@ -52,10 +51,12 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: const Color(0xFF171717),
         useMaterial3: true,
       ),
-      home: DefaultPage(),
+      home: UserSP.getUser().isEmpty? StartScreenPage() : DefaultPage(1),
       debugShowCheckedModeBanner: false,
       onGenerateRoute: (settings) {
         switch (settings.name) {
+          case '/default':
+            return PageTransition(child: const DefaultPage(1), type: PageTransitionType.fade);
           case '/home':
             return PageTransition(child: const HomePage(), type: PageTransitionType.fade);
           case '/detail':
@@ -70,7 +71,9 @@ class MyApp extends StatelessWidget {
 }
 
 class DefaultPage extends StatefulWidget {
-  const DefaultPage({super.key});
+  const DefaultPage(this.pageindex, {super.key});
+
+  final int pageindex;
 
   @override
   State<DefaultPage> createState() => _DefaultPageState();
@@ -84,6 +87,14 @@ class _DefaultPageState extends State<DefaultPage> {
   ];
 
   int selectedindex = 1;
+
+  @override
+  void initState() {
+    super.initState();
+    setState(() {
+      selectedindex = widget.pageindex;
+    });
+  }
 
   void navigateBottomBar(int index) {
     setState(() {

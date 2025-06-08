@@ -339,3 +339,13 @@ bool isNormalHero(String name) {
 bool isBuilderHero(String name) {
   return name == "Battle Machine" || name == "Battle Copter";
 }
+
+List<dynamic> filterAchievements(List<dynamic> list) {
+  List res = [];
+  for(var el in list) {
+    if(el["name"] != "Keep Your Account Safe!") {
+      res.add(el);
+    }
+  }
+  return res;
+}

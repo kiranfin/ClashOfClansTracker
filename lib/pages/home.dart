@@ -1,4 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:clashofclanstracker/pages/startscreen.dart';
 import 'package:clashofclanstracker/utils/UserSP.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
@@ -19,6 +20,9 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    if(UserSP.getUser().isEmpty) {
+      return StartScreenPage();
+    }
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(

@@ -1,6 +1,5 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
-import '../provider/DataProvider.dart' as DataProvider;
 import '../utils/UserSP.dart';
 
 class SettingsPage extends StatefulWidget {
