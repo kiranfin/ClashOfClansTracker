@@ -1,6 +1,7 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import '../utils/UserSP.dart';
+import '../utils/Utils.dart' as Utils;
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});
@@ -11,7 +12,7 @@ class SettingsPage extends StatefulWidget {
 
 class _SettingsPageState extends State<SettingsPage> {
 
-  final List<String> user = UserSP.getUser();
+  final List<String> usermap = UserSP.getUser();
   String currentuser = UserSP.getCurrentUser();
 
   @override
@@ -56,14 +57,31 @@ class _SettingsPageState extends State<SettingsPage> {
                       iconSize: 24,
                       iconEnabledColor: Colors.white,
                     ),
-                    items: user
+                    items: usermap
                         .map<DropdownMenuItem<String>>(
                           (String user) => DropdownMenuItem<String>(
                         value: user,
-                        child: Text(user, style: const TextStyle(
-                            color: Colors.white,
-                            fontFamily: "Poppins",
-                            fontSize: 15)),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(user, style: const TextStyle(
+                                color: Colors.white,
+                                fontFamily: "Poppins",
+                                fontSize: 15)),
+                            IconButton(
+                                onPressed: () {
+                                  setState(() {
+                                    List<String> userlist = UserSP.getUser();
+                                    userlist.remove(user);
+                                    UserSP.setUsers(userlist);
+                                    if(UserSP.getCurrentUser() == user) UserSP.setCurrentUser(userlist[0]);
+                                    Navigator.popAndPushNamed(context, "/default");
+                                  });
+                                },
+                                icon: Icon(Icons.delete, color: Colors.redAccent)
+                            )
+                          ],
+                        ),
                       ),
                     )
                         .toList(),

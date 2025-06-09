@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import '../provider/DataProvider.dart' as DataProvider;
+import '../utils/Utils.dart' as Utils;
 import '../utils/img/ShortAsset.dart';
 
 class HomePage extends StatefulWidget {
@@ -17,6 +18,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
 
   String userTag = UserSP.getCurrentUser();
+  List<String> userlist = UserSP.getUser();
 
   @override
   Widget build(BuildContext context) {
@@ -108,9 +110,9 @@ class _HomePageState extends State<HomePage> {
                                     Row(
                                       mainAxisAlignment: MainAxisAlignment.end,
                                       children: [
-                                        DataProvider.awaitTownHallIcon(ovsnap.data),
+                                        DataProvider.awaitTownHallIcon(ovsnap.data["townHallLevel"], 3),
                                         SizedBox(width: 10),
-                                        DataProvider.awaitBuilderHallIcon(ovsnap.data),
+                                        DataProvider.awaitBuilderHallIcon(ovsnap.data["builderHallLevel"], 2.5),
                                       ],
                                     )
                                   ],

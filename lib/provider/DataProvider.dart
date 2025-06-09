@@ -33,43 +33,39 @@ Future<Map<String, dynamic>> awaitPlayerClan(String tag) async {
   return jsonDecode(res.body) as Map<String, dynamic>;
 }
 
-Image awaitTownHallIcon(Map<String, dynamic> userdata) {
-  //final data = awaitPlayerData(tag);
-  //final userdata = await data;
-  if(userdata["townHallLevel"] == 1) return Image.asset(th1, scale: 3);
-  if(userdata["townHallLevel"] == 2) return Image.asset(th2, scale: 3);
-  if(userdata["townHallLevel"] == 3) return Image.asset(th3, scale: 3);
-  if(userdata["townHallLevel"] == 4) return Image.asset(th4, scale: 3);
-  if(userdata["townHallLevel"] == 5) return Image.asset(th5, scale: 3);
-  if(userdata["townHallLevel"] == 6) return Image.asset(th6, scale: 3);
-  if(userdata["townHallLevel"] == 7) return Image.asset(th7, scale: 3);
-  if(userdata["townHallLevel"] == 8) return Image.asset(th8, scale: 3);
-  if(userdata["townHallLevel"] == 9) return Image.asset(th9, scale: 3);
-  if(userdata["townHallLevel"] == 10) return Image.asset(th10, scale: 3);
-  if(userdata["townHallLevel"] == 11) return Image.asset(th11, scale: 3);
-  if(userdata["townHallLevel"] == 12) return Image.asset(th12, scale: 3);
-  if(userdata["townHallLevel"] == 13) return Image.asset(th13, scale: 3);
-  if(userdata["townHallLevel"] == 14) return Image.asset(th14, scale: 3);
-  if(userdata["townHallLevel"] == 15) return Image.asset(th15, scale: 3);
-  if(userdata["townHallLevel"] == 16) return Image.asset(th16, scale: 3);
-  if(userdata["townHallLevel"] == 17) return Image.asset(th17, scale: 3);
-  return Image.asset(th1, scale: 2.5);
+Image awaitTownHallIcon(int level, double scale) {
+  if(level == 1) return Image.asset(th1, scale: scale);
+  if(level == 2) return Image.asset(th2, scale: scale);
+  if(level == 3) return Image.asset(th3, scale: scale);
+  if(level == 4) return Image.asset(th4, scale: scale);
+  if(level == 5) return Image.asset(th5, scale: scale);
+  if(level == 6) return Image.asset(th6, scale: scale);
+  if(level == 7) return Image.asset(th7, scale: scale);
+  if(level == 8) return Image.asset(th8, scale: scale);
+  if(level == 9) return Image.asset(th9, scale: scale);
+  if(level == 10) return Image.asset(th10, scale: scale);
+  if(level == 11) return Image.asset(th11, scale: scale);
+  if(level == 12) return Image.asset(th12, scale: scale);
+  if(level == 13) return Image.asset(th13, scale: scale);
+  if(level == 14) return Image.asset(th14, scale: scale);
+  if(level == 15) return Image.asset(th15, scale: scale);
+  if(level == 16) return Image.asset(th16, scale: scale);
+  if(level == 17) return Image.asset(th17, scale: scale);
+  return Image.asset(th1, scale: scale);
 }
 
-Image awaitBuilderHallIcon(Map<String, dynamic> userdata) {
-  //final data = awaitPlayerData(tag);
-  //final userdata = await data;
-  if(userdata["builderHallLevel"] == 1) return Image.asset(bh1, scale: 2.5);
-  if(userdata["builderHallLevel"] == 2) return Image.asset(bh2, scale: 2.5);
-  if(userdata["builderHallLevel"] == 3) return Image.asset(bh3, scale: 2.5);
-  if(userdata["builderHallLevel"] == 4) return Image.asset(bh4, scale: 2.5);
-  if(userdata["builderHallLevel"] == 5) return Image.asset(bh5, scale: 2.5);
-  if(userdata["builderHallLevel"] == 6) return Image.asset(bh6, scale: 2.5);
-  if(userdata["builderHallLevel"] == 7) return Image.asset(bh7, scale: 2.5);
-  if(userdata["builderHallLevel"] == 8) return Image.asset(bh8, scale: 2.5);
-  if(userdata["builderHallLevel"] == 9) return Image.asset(bh9, scale: 2.5);
-  if(userdata["builderHallLevel"] == 10) return Image.asset(bh10, scale: 2.5);
-  return Image.asset(bh1, scale: 2.5);
+Image awaitBuilderHallIcon(int level, double scale) {
+  if(level == 1) return Image.asset(bh1, scale: scale);
+  if(level == 2) return Image.asset(bh2, scale: scale);
+  if(level == 3) return Image.asset(bh3, scale: scale);
+  if(level == 4) return Image.asset(bh4, scale: scale);
+  if(level == 5) return Image.asset(bh5, scale: scale);
+  if(level == 6) return Image.asset(bh6, scale: scale);
+  if(level == 7) return Image.asset(bh7, scale: scale);
+  if(level == 8) return Image.asset(bh8, scale: scale);
+  if(level == 9) return Image.asset(bh9, scale: scale);
+  if(level == 10) return Image.asset(bh10, scale: scale);
+  return Image.asset(bh1, scale: scale);
 }
 
 Image awaitLeagueIcon(Map<String, dynamic> userdata) {

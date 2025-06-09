@@ -73,7 +73,13 @@ class _StartScreenPageState extends State<StartScreenPage> {
                                       valid = false;
                                       value = null;
                                     });
-                                  } else if ((val.length == 10 && val[0] == "#") || val.length == 9) {
+                                  } else if (val.length == 10 && val[0] == "#") {
+                                    setState(() {
+                                      errorText = null;
+                                      valid = true;
+                                      value = val.substring(1);
+                                    });
+                                  } else if (val.length == 9) {
                                     setState(() {
                                       errorText = null;
                                       valid = true;

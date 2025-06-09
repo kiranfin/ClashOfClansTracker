@@ -911,9 +911,9 @@ class _DetailPageState extends State<DetailPage> {
                                     Row(
                                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                       children: [
-                                        DataProvider.awaitTownHallIcon(snapshot.data[0]),
+                                        DataProvider.awaitTownHallIcon(snapshot.data[0]["townHallLevel"], 3),
                                         SizedBox(width: 5),
-                                        DataProvider.awaitBuilderHallIcon(snapshot.data[0])
+                                        DataProvider.awaitBuilderHallIcon(snapshot.data[0]["builderHallLevel"], 2.5)
                                       ],
                                     ),
                                     SizedBox(height: 5),
@@ -1163,6 +1163,8 @@ class _DetailPageState extends State<DetailPage> {
                                             ),
                                             SizedBox(width: 5),
                                             Image.network(snapshot.data[1]["memberList"][index]["league"]["iconUrls"]["small"], scale: 3),
+                                            SizedBox(width: 5),
+                                            DataProvider.awaitTownHallIcon(snapshot.data[1]["memberList"][index]["townHallLevel"], 5),
                                             SizedBox(width: 5),
                                             Text("${snapshot.data[1]["memberList"][index]["trophies"]}", style: const TextStyle(
                                                 color: Colors.white,
