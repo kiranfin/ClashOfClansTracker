@@ -88,6 +88,7 @@ flutter:
     - lib/utils/img/equipment/
     - lib/utils/img/clan_leagues/
     - lib/utils/img/clan_capital_buildings/
+    - lib/utils/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

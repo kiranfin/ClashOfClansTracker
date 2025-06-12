@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:clashofclanstracker/utils/img/ShortAsset.dart';
 import 'package:flutter/material.dart';
@@ -26,6 +28,7 @@ class _DetailPageState extends State<DetailPage> {
       appBar: AppBar(
         backgroundColor: const Color(0xFF171717),
         leading: IconButton(onPressed: () {
+
           Navigator.pop(context);
         }, icon: Icon(Icons.arrow_back, color: Colors.white)),
       ),
@@ -33,12 +36,182 @@ class _DetailPageState extends State<DetailPage> {
         child: Center(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 15.0),
-            child: category == "troops" ? getTroopDetail() : category == "spells"?
+            child: category == "buildings"? getBuildingDetail() : category == "troops" ? getTroopDetail() : category == "spells"?
             getSpellDetail() : category == "heroes"? getHeroesDetail() : category == "equipment"?
-            getEquipmentDetail() : category == "achievements"? getAchievementDetails() : getProfileDetails(),
+            getEquipmentDetail() : category == "achievements"? getAchievementDetails() : category == "profile"? getProfileDetails() : null,
           ),
         ),
       ),
+    );
+  }
+
+  Widget getBuildingDetail() {
+    return FutureBuilder(
+        future: Future.wait([DataProvider.awaitPlayerData(userTag), DataProvider.awaitBuildings()]),
+        builder: (context, AsyncSnapshot snapshot) {
+          if(snapshot.hasData) {
+            List titles = ["Defense", "Army", "Resources"];
+            //Defenses
+            Map<String, int> defensemap = {};
+            if(UserSP.getUserDefenses(snapshot.data[0]["tag"]) != "") {
+              defensemap = jsonDecode(UserSP.getUserDefenses(snapshot.data[0]["tag"])) as Map<String, int>;
+            } else {
+              Map<String, dynamic> dcount = Utils.getDefensesAndCount(snapshot.data[0]["townHallLevel"], snapshot.data[1]);
+              Map<String, dynamic> dlevel = Utils.getDefensesAndCount(snapshot.data[0]["townHallLevel"], snapshot.data[1]);
+              dcount.forEach((key, val){
+                for(int i = 0; i < val; i++) {
+                  int max = dlevel[key]!;
+                  defensemap["$key-$i"] = max;
+                }
+              });
+            }
+            List<String> defensenames = defensemap.keys.toList();
+            List<int> defenselevels = defensemap.values.toList();
+            //Army
+            Map<String, int> armymap = {};
+            if(UserSP.getUserArmyBuildings(snapshot.data[0]["tag"]) != "") {
+              armymap = jsonDecode(UserSP.getUserArmyBuildings(snapshot.data[0]["tag"])) as Map<String, int>;
+            } else {
+              Map<String, dynamic> acount = Utils.getArmyAndCount(snapshot.data[0]["townHallLevel"], snapshot.data[1]);
+              Map<String, dynamic> alevel = Utils.getArmyAndMaxLevel(snapshot.data[0]["townHallLevel"], snapshot.data[1]);
+              acount.forEach((key, val){
+                for(int i = 0; i < val; i++) {
+                  int max = alevel[key]!;
+                  armymap["$key-$i"] = max;
+                }
+              });
+            }
+            List<String> armynames = armymap.keys.toList();
+            List<int> armylevels = armymap.values.toList();
+            //Resources
+            Map<String, int> resourcesmap = {};
+            if(UserSP.getUserArmyBuildings(snapshot.data[0]["tag"]) != "") {
+              resourcesmap = jsonDecode(UserSP.getUserResourceBuildings(snapshot.data[0]["tag"])) as Map<String, int>;
+            } else {
+              Map<String, dynamic> rcount = Utils.getResourceAndCount(snapshot.data[0]["townHallLevel"], snapshot.data[1]);
+              Map<String, dynamic> rlevel = Utils.getResourceAndMaxLevel(snapshot.data[0]["townHallLevel"], snapshot.data[1]);
+              rcount.forEach((key, val){
+                for(int i = 0; i < val; i++) {
+                  int max = rlevel[key]!;
+                  resourcesmap["$key-$i"] = max;
+                }
+              });
+            }
+            List<String> resourcesnames = resourcesmap.keys.toList();
+            List<int> resourceslevels = resourcesmap.values.toList();
+
+            List<List<String>> finalnamelist = [];
+            finalnamelist.add(defensenames);
+            finalnamelist.add(armynames);
+            finalnamelist.add(resourcesnames);
+
+            List<List<int>> finallevelslist = [];
+            finallevelslist.add(defenselevels);
+            finallevelslist.add(armylevels);
+            finallevelslist.add(resourceslevels);
+            return ListView.builder(
+              itemCount: titles.length,
+              itemBuilder: (BuildContext context, int ind) {
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(titles[ind], style: const TextStyle(
+                        color: Colors.white,
+                        fontFamily: "Poppins",
+                        fontSize: 30)
+                    ),
+                    Container(
+                      child: ListView.builder(
+                          shrinkWrap: true,
+                          physics: NeverScrollableScrollPhysics(),
+                          itemCount: finalnamelist[ind].length,
+                          itemBuilder: (BuildContext context, index) {
+                            return Padding(
+                              padding: const EdgeInsets.all(3.0),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(20),
+                                child: Container(
+                                  color: Colors.black,
+                                  child: GridTile(
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(5.0),
+                                      child: Row(
+                                        mainAxisAlignment: MainAxisAlignment
+                                            .spaceBetween,
+                                        children: [
+                                          AutoSizeText(
+                                              finalnamelist[ind][index] + " | " + finallevelslist[ind][index].toString(),
+                                              style: const TextStyle(
+                                                  color: Colors.white,
+                                                  fontFamily: "Poppins",
+                                                  fontSize: 15),
+                                              maxLines: 1
+                                          ),
+                                          Row(
+                                            children: [
+                                              IconButton(
+                                                onPressed: (){
+                                                  setState(() {
+                                                    finallevelslist[ind][index] -= 1;
+                                                    if(ind == 0) {
+                                                      final resmap = Map<String, dynamic>.fromIterables(finalnamelist[ind], finallevelslist[ind]);
+                                                      UserSP.setUserDefenses(snapshot.data[0]["tag"], jsonEncode(resmap));
+                                                    } else if(ind == 1) {
+                                                      final resmap = Map<String, dynamic>.fromIterables(finalnamelist[ind], finallevelslist[ind]);
+                                                      UserSP.setUserArmyBuildings(snapshot.data[0]["tag"], jsonEncode(resmap));
+                                                    } else if(ind == 2){
+                                                      final resmap = Map<String, dynamic>.fromIterables(finalnamelist[ind], finallevelslist[ind]);
+                                                      UserSP.setUserResourceBuildings(snapshot.data[0]["tag"], jsonEncode(resmap));
+                                                    }
+                                                  });
+                                                }, icon: Icon(Icons.remove)
+                                              ),
+                                              IconButton(
+                                                onPressed: (){
+                                                  setState(() {
+                                                    finallevelslist[ind][index] += 1;
+                                                    if(ind == 0) {
+                                                      final resmap = Map<String, dynamic>.fromIterables(finalnamelist[ind], finallevelslist[ind]);
+                                                      UserSP.setUserDefenses(snapshot.data[0]["tag"], jsonEncode(resmap));
+                                                    } else if(ind == 1) {
+                                                      final resmap = Map<String, dynamic>.fromIterables(finalnamelist[ind], finallevelslist[ind]);
+                                                      UserSP.setUserArmyBuildings(snapshot.data[0]["tag"], jsonEncode(resmap));
+                                                    } else if(ind == 2){
+                                                      final resmap = Map<String, dynamic>.fromIterables(finalnamelist[ind], finallevelslist[ind]);
+                                                      UserSP.setUserResourceBuildings(snapshot.data[0]["tag"], jsonEncode(resmap));
+                                                    }
+                                                  });
+                                                },
+                                                icon: Icon(Icons.add)
+                                              )
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            );
+                          }
+                      ),
+                    ),
+                    SizedBox(height: 20)
+                  ],
+                );
+              }
+            );
+          } else {
+            return ListView.builder(
+                itemCount: 12,
+                itemBuilder: (BuildContext context, int index) {
+                  return ListTile(
+                    title: Shimmer(child: Container(width: 50, height: 15, color: Colors.black45)),
+                  );
+                }
+            );
+          }
+        }
     );
   }
 
@@ -1098,7 +1271,7 @@ class _DetailPageState extends State<DetailPage> {
                       )
                     )
                   ),
-                  SizedBox(height: 5),
+                  SizedBox(height: 10),
                   Wrap(
                     spacing: 5.0,
                     runSpacing: 5.0,

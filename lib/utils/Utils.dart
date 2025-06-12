@@ -464,3 +464,43 @@ Image getCapitalHallImage(int level) {
   if(level == 7) return Image.asset(capital_hall7, scale: 3);
   return Image.asset(capital_hall1, scale: 3);
 }
+
+Map<String, dynamic> getDefensesAndCount(int thlevel, Map<String, dynamic> map) {
+  return map["defenses"]["counts"]["$thlevel"] ?? {};
+}
+
+Map<String, dynamic> getDefensesAndMaxLevel(int thlevel, Map<String, dynamic> map) {
+  return map["defenses"]["maxLevels"]["$thlevel"] ?? {};
+}
+
+Map<String, dynamic> getTrapsAndCount(int thlevel, Map<String, dynamic> map) {
+  return map["traps"]["counts"]["$thlevel"] ?? {};
+}
+
+Map<String, dynamic> getTrapsAndMaxLevel(int thlevel, Map<String, dynamic> map) {
+  return map["traps"]["maxLevels"]["$thlevel"] ?? {};
+}
+
+Map<String, dynamic> getArmyAndCount(int thlevel, Map<String, dynamic> map) {
+  return map["army"]["counts"]["$thlevel"] ?? {};
+}
+
+Map<String, dynamic> getArmyAndMaxLevel(int thlevel, Map<String, dynamic> map) {
+  return map["army"]["maxLevels"]["$thlevel"] ?? {};
+}
+
+Map<String, dynamic> getResourceAndCount(int thlevel, Map<String, dynamic> map) {
+  return map["resources"]["counts"]["$thlevel"] ?? {};
+}
+
+Map<String, dynamic> getResourceAndMaxLevel(int thlevel, Map<String, dynamic> map) {
+  return map["resources"]["maxLevels"]["$thlevel"] ?? {};
+}
+
+int getWalls(int thlevel, Map<String, dynamic> map) {
+  return map["walls"]["counts"]["$thlevel"] ?? 0;
+}
+
+int getWallsMaxLevel(int thlevel, Map<String, dynamic> map) {
+  return map["walls"]["maxLevels"]["$thlevel"] ?? 0;
+}

@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:clashofclanstracker/utils/img/ShortAsset.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import '../utils/Utils.dart' as Utils;
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -312,4 +313,9 @@ Future<List> awaitAchievements(String tag) async {
   final userdata = await data;
   final troops = userdata["achievements"];
   return troops;
+}
+
+Future<Map<String, dynamic>> awaitBuildings() async {
+  String jsonString = await rootBundle.loadString(buildings);
+  return jsonDecode(jsonString);
 }

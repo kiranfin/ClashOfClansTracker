@@ -1,9 +1,11 @@
+import 'dart:convert';
 import 'dart:io';
 import 'package:clashofclanstracker/pages/detail.dart';
 import 'package:clashofclanstracker/pages/home.dart';
 import 'package:clashofclanstracker/pages/league.dart';
 import 'package:clashofclanstracker/pages/settings.dart';
 import 'package:clashofclanstracker/pages/startscreen.dart';
+import 'package:clashofclanstracker/provider/DataProvider.dart' as DataProvider;
 import 'package:clashofclanstracker/utils/UserSP.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

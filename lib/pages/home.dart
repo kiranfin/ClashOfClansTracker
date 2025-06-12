@@ -184,7 +184,8 @@ class _HomePageState extends State<HomePage> {
                                     )
                                 ),
                                 onPressed: () {
-
+                                  Navigator.pushNamed(
+                                      context, "/detail", arguments: "buildings");
                                 },
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,

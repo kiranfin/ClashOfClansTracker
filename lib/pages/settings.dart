@@ -64,7 +64,7 @@ class _SettingsPageState extends State<SettingsPage> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(user, style: const TextStyle(
+                            Text("#$user", style: const TextStyle(
                                 color: Colors.white,
                                 fontFamily: "Poppins",
                                 fontSize: 15)),

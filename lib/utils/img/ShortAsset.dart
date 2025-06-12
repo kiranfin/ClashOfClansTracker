@@ -240,3 +240,5 @@ const district_hall2 = 'lib/utils/img/clan_capital_buildings/District_Hall2.webp
 const district_hall3 = 'lib/utils/img/clan_capital_buildings/District_Hall3.webp';
 const district_hall4 = 'lib/utils/img/clan_capital_buildings/District_Hall4.webp';
 const district_hall5 = 'lib/utils/img/clan_capital_buildings/District_Hall5.webp';
+
+const buildings = 'lib/utils/buildings.json';
