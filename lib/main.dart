@@ -9,39 +9,13 @@ import 'package:clashofclanstracker/provider/DataProvider.dart' as DataProvider;
 import 'package:clashofclanstracker/utils/UserSP.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:system_proxy/system_proxy.dart';
 
 void main() async {
-  await dotenv.load(fileName: "config.env");
+  WidgetsFlutterBinding.ensureInitialized();
   await UserSP.init();
-  //UserSP.setCurrentUser("GLQCVY0QG");
-  //UserSP.setUsers(["P9V29R8RJ", "GLQCVY0QG", "QG9Y20292", "PQV808YLG"]);
-  Map<String, String>? proxy = await SystemProxy.getProxySettings();
-  proxy ??= {
-    'host': "185.239.238.224",
-    'port': "3128"
-  };
-  HttpOverrides.global = ProxiedHttpOverrides(proxy['host']!, proxy['port']!);
   runApp(const MyApp());
-}
-
-class ProxiedHttpOverrides extends HttpOverrides {
-  ProxiedHttpOverrides(this._host, this._port);
-
-  String _port;
-  String _host;
-
-  @override
-  HttpClient createHttpClient(SecurityContext? context) {
-    return super.createHttpClient(context)
-    // set proxy
-      ..findProxy = (uri) {
-        return _host != null ? "PROXY $_host:$_port;" : 'DIRECT';
-      };
-  }
 }
 
 class MyApp extends StatelessWidget {
