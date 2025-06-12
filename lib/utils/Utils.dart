@@ -1,18 +1,11 @@
 import 'dart:convert';
-
 import 'package:clashofclanstracker/utils/img/ShortAsset.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter/material.dart';
 
 import 'UserSP.dart';
 
-String getToken() {
-  final apiKey = dotenv.get('API_KEY');
-  return apiKey;
-}
-
 String getBaseUrl() {
-  final baseUrl = 'https://api.clashofclans.com/';
+  final baseUrl = 'http://185.239.238.224:3000/';
   return baseUrl;
 }
 

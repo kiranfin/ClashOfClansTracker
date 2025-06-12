@@ -15,7 +15,7 @@ class UserSP {
   static String getCurrentUser() => _preferences.getString("currentuser") ?? (getUser().isEmpty? "" : getUser()[0]);
   static List<String> getUser() => _preferences.getStringList("user") ?? [];
 
-  static String getUserDefenses(String user) => _preferences.getString("userdefenes$user") ?? "";
-  static String getUserArmyBuildings(String user) => _preferences.getString("userarmy$user") ?? "";
-  static String getUserResourceBuildings(String user) => _preferences.getString("userresources$user") ?? "";
+  static String? getUserDefenses(String user) => _preferences.getString("userdefenses$user");
+  static String? getUserArmyBuildings(String user) => _preferences.getString("userarmy$user");
+  static String? getUserResourceBuildings(String user) => _preferences.getString("userresources$user");
 }

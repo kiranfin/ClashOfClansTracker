@@ -4,16 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import '../utils/Utils.dart' as Utils;
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 Future<Map<String, dynamic>> awaitPlayerData(String tag) async {
-  final headers = {
-    "Accept": "application/json",
-    'Authorization': 'Bearer ${dotenv.get("API_KEY")}',
-  };
-
-  final url = Uri.parse('${Utils.getBaseUrl()}v1/players/%23$tag');
-  final res = await http.get(url, headers: headers);
+  final url = Uri.parse('${Utils.getBaseUrl()}players/$tag');
+  final res = await http.get(url);
   final status = res.statusCode;
   if (status != 200) throw Exception('http.get error: statusCode= $status');
   return jsonDecode(res.body) as Map<String, dynamic>;
@@ -22,13 +16,8 @@ Future<Map<String, dynamic>> awaitPlayerData(String tag) async {
 Future<Map<String, dynamic>> awaitPlayerClan(String tag) async {
   var player = await awaitPlayerData(tag);
   String clantag = player["clan"]["tag"].substring(1);
-  final headers = {
-    "Accept": "application/json",
-    'Authorization': 'Bearer ${dotenv.get("API_KEY")}',
-  };
-
-  final url = Uri.parse('${Utils.getBaseUrl()}v1/clans/%23$clantag');
-  final res = await http.get(url, headers: headers);
+  final url = Uri.parse('${Utils.getBaseUrl()}clans/$clantag');
+  final res = await http.get(url);
   final status = res.statusCode;
   if (status != 200) throw Exception('http.get error: statusCode= $status');
   return jsonDecode(res.body) as Map<String, dynamic>;
