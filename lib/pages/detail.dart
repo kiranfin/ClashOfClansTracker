@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:clashofclanstracker/utils/img/ShortAsset.dart';
 import 'package:flutter/material.dart';
@@ -21,6 +20,80 @@ class _DetailPageState extends State<DetailPage> {
 
   String userTag = UserSP.getCurrentUser();
   late String category = ModalRoute.of(context)!.settings.arguments as String;
+
+  late Map<String, dynamic> defenses = {};
+  late Map<String, dynamic> armybuildings = {};
+  late Map<String, dynamic> resources = {};
+
+  void loadData(int thlevel, Map<String, dynamic> buildings) {
+    var defensesString = UserSP.getUserDefenses(userTag);
+    defenses = defensesString != null? Map<String, dynamic>.from(jsonDecode(defensesString)) : getDefaultDefenses(thlevel, buildings);
+    var armyString = UserSP.getUserArmyBuildings(userTag);
+    armybuildings = armyString != null? Map<String, dynamic>.from(jsonDecode(armyString)) : getDefaultArmyBuildings(thlevel, buildings);
+    var resourcesString = UserSP.getUserResourceBuildings(userTag);
+    resources = resourcesString != null? Map<String, dynamic>.from(jsonDecode(resourcesString)) : getDefaultResources(thlevel, buildings);
+  }
+
+  Map<String, dynamic> getDefaultDefenses(int thlevel, Map<String, dynamic> buildings) {
+    Map<String, int> defensemap = {};
+    Map<String, dynamic> dcount = Utils.getDefensesAndCount(thlevel, buildings);
+    Map<String, dynamic> dlevel = Utils.getDefensesAndMaxLevel(thlevel, buildings);
+    dcount.forEach((key, val){
+      for(int i = 0; i < val; i++) {
+        int max = dlevel[key]!;
+        defensemap["$key-$i"] = max;
+      }
+    });
+    return defensemap;
+  }
+
+  Map<String, dynamic> getDefaultArmyBuildings(int thlevel, Map<String, dynamic> buildings) {
+    Map<String, int> armymap = {};
+    Map<String, dynamic> acount = Utils.getArmyAndCount(thlevel, buildings);
+    Map<String, dynamic> alevel = Utils.getArmyAndMaxLevel(thlevel, buildings);
+    acount.forEach((key, val){
+      for(int i = 0; i < val; i++) {
+        int max = alevel[key]!;
+        armymap["$key-$i"] = max;
+      }
+    });
+    return armymap;
+  }
+
+  Map<String, dynamic> getDefaultResources(int thlevel, Map<String, dynamic> buildings) {
+    Map<String, int> resourcesmap = {};
+    Map<String, dynamic> rcount = Utils.getResourceAndCount(thlevel, buildings);
+    Map<String, dynamic> rlevel = Utils.getResourceAndMaxLevel(thlevel, buildings);
+    rcount.forEach((key, val){
+      for(int i = 0; i < val; i++) {
+        int max = rlevel[key]!;
+        resourcesmap["$key-$i"] = max;
+      }
+    });
+    return resourcesmap;
+  }
+
+  void updateDefenses(Map<String, dynamic> newdata) async {
+    setState(() {
+      defenses = newdata;
+    });
+    UserSP.setUserDefenses(userTag, jsonEncode(newdata));
+  }
+
+  void updateArmyBuildings(Map<String, dynamic> newdata) async {
+    setState(() {
+      armybuildings = newdata;
+    });
+    UserSP.setUserArmyBuildings(userTag, jsonEncode(newdata));
+  }
+
+  void updateResources(Map<String, dynamic> newdata) async {
+    setState(() {
+      resources = newdata;
+
+    });
+    UserSP.setUserResourceBuildings(userTag, jsonEncode(newdata));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -51,64 +124,11 @@ class _DetailPageState extends State<DetailPage> {
         builder: (context, AsyncSnapshot snapshot) {
           if(snapshot.hasData) {
             List titles = ["Defense", "Army", "Resources"];
-            //Defenses
-            Map<String, int> defensemap = {};
-            if(UserSP.getUserDefenses(snapshot.data[0]["tag"]) != "") {
-              defensemap = jsonDecode(UserSP.getUserDefenses(snapshot.data[0]["tag"])) as Map<String, int>;
-            } else {
-              Map<String, dynamic> dcount = Utils.getDefensesAndCount(snapshot.data[0]["townHallLevel"], snapshot.data[1]);
-              Map<String, dynamic> dlevel = Utils.getDefensesAndCount(snapshot.data[0]["townHallLevel"], snapshot.data[1]);
-              dcount.forEach((key, val){
-                for(int i = 0; i < val; i++) {
-                  int max = dlevel[key]!;
-                  defensemap["$key-$i"] = max;
-                }
-              });
-            }
-            List<String> defensenames = defensemap.keys.toList();
-            List<int> defenselevels = defensemap.values.toList();
-            //Army
-            Map<String, int> armymap = {};
-            if(UserSP.getUserArmyBuildings(snapshot.data[0]["tag"]) != "") {
-              armymap = jsonDecode(UserSP.getUserArmyBuildings(snapshot.data[0]["tag"])) as Map<String, int>;
-            } else {
-              Map<String, dynamic> acount = Utils.getArmyAndCount(snapshot.data[0]["townHallLevel"], snapshot.data[1]);
-              Map<String, dynamic> alevel = Utils.getArmyAndMaxLevel(snapshot.data[0]["townHallLevel"], snapshot.data[1]);
-              acount.forEach((key, val){
-                for(int i = 0; i < val; i++) {
-                  int max = alevel[key]!;
-                  armymap["$key-$i"] = max;
-                }
-              });
-            }
-            List<String> armynames = armymap.keys.toList();
-            List<int> armylevels = armymap.values.toList();
-            //Resources
-            Map<String, int> resourcesmap = {};
-            if(UserSP.getUserArmyBuildings(snapshot.data[0]["tag"]) != "") {
-              resourcesmap = jsonDecode(UserSP.getUserResourceBuildings(snapshot.data[0]["tag"])) as Map<String, int>;
-            } else {
-              Map<String, dynamic> rcount = Utils.getResourceAndCount(snapshot.data[0]["townHallLevel"], snapshot.data[1]);
-              Map<String, dynamic> rlevel = Utils.getResourceAndMaxLevel(snapshot.data[0]["townHallLevel"], snapshot.data[1]);
-              rcount.forEach((key, val){
-                for(int i = 0; i < val; i++) {
-                  int max = rlevel[key]!;
-                  resourcesmap["$key-$i"] = max;
-                }
-              });
-            }
-            List<String> resourcesnames = resourcesmap.keys.toList();
-            List<int> resourceslevels = resourcesmap.values.toList();
-
-            List<List<String>> finalnamelist = [];
-            finalnamelist.add(defensenames);
-            finalnamelist.add(armynames);
-            finalnamelist.add(resourcesnames);
-
-            List<List<int>> finallevelslist = [];
-            finallevelslist.add(defenselevels);
-            finallevelslist.add(armylevels);
-            finallevelslist.add(resourceslevels);
+            loadData(snapshot.data[0]["townHallLevel"], snapshot.data[1]);
+            List<Map<String, dynamic>> finalmaplist = [];
+            finalmaplist.add(defenses);
+            finalmaplist.add(armybuildings);
+            finalmaplist.add(resources);
             return ListView.builder(
               itemCount: titles.length,
               itemBuilder: (BuildContext context, int ind) {
@@ -124,7 +144,7 @@ class _DetailPageState extends State<DetailPage> {
                       child: ListView.builder(
                           shrinkWrap: true,
                           physics: NeverScrollableScrollPhysics(),
-                          itemCount: finalnamelist[ind].length,
+                          itemCount: finalmaplist[ind].length,
                           itemBuilder: (BuildContext context, index) {
                             return Padding(
                               padding: const EdgeInsets.all(3.0),
@@ -140,7 +160,7 @@ class _DetailPageState extends State<DetailPage> {
                                             .spaceBetween,
                                         children: [
                                           AutoSizeText(
-                                              finalnamelist[ind][index] + " | " + finallevelslist[ind][index].toString(),
+                                              "${finalmaplist[ind].keys.elementAt(index).substring(0, finalmaplist[ind].keys.elementAt(index).length - 2)} | ${finalmaplist[ind].values.elementAt(index)}",
                                               style: const TextStyle(
                                                   color: Colors.white,
                                                   fontFamily: "Poppins",
@@ -150,39 +170,40 @@ class _DetailPageState extends State<DetailPage> {
                                           Row(
                                             children: [
                                               IconButton(
-                                                onPressed: (){
-                                                  setState(() {
-                                                    finallevelslist[ind][index] -= 1;
-                                                    if(ind == 0) {
-                                                      final resmap = Map<String, dynamic>.fromIterables(finalnamelist[ind], finallevelslist[ind]);
-                                                      UserSP.setUserDefenses(snapshot.data[0]["tag"], jsonEncode(resmap));
-                                                    } else if(ind == 1) {
-                                                      final resmap = Map<String, dynamic>.fromIterables(finalnamelist[ind], finallevelslist[ind]);
-                                                      UserSP.setUserArmyBuildings(snapshot.data[0]["tag"], jsonEncode(resmap));
-                                                    } else if(ind == 2){
-                                                      final resmap = Map<String, dynamic>.fromIterables(finalnamelist[ind], finallevelslist[ind]);
-                                                      UserSP.setUserResourceBuildings(snapshot.data[0]["tag"], jsonEncode(resmap));
-                                                    }
-                                                  });
-                                                }, icon: Icon(Icons.remove)
+                                                onPressed: () {
+                                                  if(ind == 0) {
+                                                    Map<String, dynamic> newdata = finalmaplist[ind];
+                                                    newdata[finalmaplist[ind].keys.elementAt(index)] = finalmaplist[ind].values.elementAt(index) - 1;
+                                                    updateDefenses(newdata);
+                                                  } else if(ind == 1) {
+                                                    Map<String, dynamic> newdata = finalmaplist[ind];
+                                                    newdata[finalmaplist[ind].keys.elementAt(index)] = finalmaplist[ind].values.elementAt(index) - 1;
+                                                    updateArmyBuildings(newdata);
+                                                  } else if(ind == 2) {
+                                                    Map<String, dynamic> newdata = finalmaplist[ind];
+                                                    newdata[finalmaplist[ind].keys.elementAt(index)] = finalmaplist[ind].values.elementAt(index) - 1;
+                                                    updateResources(newdata);
+                                                  }
+                                                },
+                                                icon: Icon(Icons.remove, color: Colors.redAccent)
                                               ),
                                               IconButton(
                                                 onPressed: (){
-                                                  setState(() {
-                                                    finallevelslist[ind][index] += 1;
-                                                    if(ind == 0) {
-                                                      final resmap = Map<String, dynamic>.fromIterables(finalnamelist[ind], finallevelslist[ind]);
-                                                      UserSP.setUserDefenses(snapshot.data[0]["tag"], jsonEncode(resmap));
-                                                    } else if(ind == 1) {
-                                                      final resmap = Map<String, dynamic>.fromIterables(finalnamelist[ind], finallevelslist[ind]);
-                                                      UserSP.setUserArmyBuildings(snapshot.data[0]["tag"], jsonEncode(resmap));
-                                                    } else if(ind == 2){
-                                                      final resmap = Map<String, dynamic>.fromIterables(finalnamelist[ind], finallevelslist[ind]);
-                                                      UserSP.setUserResourceBuildings(snapshot.data[0]["tag"], jsonEncode(resmap));
-                                                    }
-                                                  });
+                                                  if(ind == 0) {
+                                                    Map<String, dynamic> newdata = finalmaplist[ind];
+                                                    newdata[finalmaplist[ind].keys.elementAt(index)] = finalmaplist[ind].values.elementAt(index) + 1;
+                                                    updateDefenses(newdata);
+                                                  } else if(ind == 1) {
+                                                    Map<String, dynamic> newdata = finalmaplist[ind];
+                                                    newdata[finalmaplist[ind].keys.elementAt(index)] = finalmaplist[ind].values.elementAt(index) + 1;
+                                                    updateArmyBuildings(newdata);
+                                                  } else if(ind == 2) {
+                                                    Map<String, dynamic> newdata = finalmaplist[ind];
+                                                    newdata[finalmaplist[ind].keys.elementAt(index)] = finalmaplist[ind].values.elementAt(index) + 1;
+                                                    updateResources(newdata);
+                                                  }
                                                 },
-                                                icon: Icon(Icons.add)
+                                                icon: Icon(Icons.add, color: Colors.lightGreen)
                                               )
                                             ],
                                           ),
