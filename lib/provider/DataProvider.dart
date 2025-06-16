@@ -15,6 +15,7 @@ Future<Map<String, dynamic>> awaitPlayerData(String tag) async {
 
 Future<Map<String, dynamic>> awaitPlayerClan(String tag) async {
   var player = await awaitPlayerData(tag);
+  if(player["clan"] == null) return {};
   String clantag = player["clan"]["tag"].substring(1);
   final url = Uri.parse('${Utils.getBaseUrl()}clans/$clantag');
   final res = await http.get(url);
@@ -61,9 +62,11 @@ Image awaitBuilderHallIcon(int level, double scale) {
 Image awaitLeagueIcon(Map<String, dynamic> userdata) {
   //final data = awaitPlayerData(tag);
   //final userdata = await data;
-  return Image.network(userdata["league"]["iconUrls"]["small"], scale: 1.5, errorBuilder: (context, error, stackTrace) {
-    return Image.asset(unranked, scale: 3);
-  });
+  if(userdata["league"] != null) {
+    return Image.network(userdata["league"]["iconUrls"]["small"], scale: 1.5);
+  } else{
+    return Image.asset(unranked, scale: 2.5);
+  }
 }
 
 Image awaitBuilderLeagueIcon(Map<String, dynamic> userdata) {
@@ -164,9 +167,11 @@ Text awaitPlayerBuilderTrophies(Map<String, dynamic> userdata) {
 Image awaitClanIcon(Map<String, dynamic> userdata) {
   //final data = awaitPlayerData(tag);
   //final userdata = await data;
-  return Image.network(userdata["clan"]["badgeUrls"]["small"], scale: 1.2, errorBuilder: (context, error, stackTrace) {
+  if(userdata["clan"] != null) {
+    return Image.network(userdata["clan"]["badgeUrls"]["small"], scale: 1.2);
+  } else {
     return Image.asset(no_clan, scale: 3);
-  });
+  }
 }
 
 Text awaitClanTroopsOut(Map<String, dynamic> userdata)  {
@@ -206,7 +211,7 @@ double awaitTroopsPercent(Map<String, dynamic> userdata) {
       sum += troop["level"];
     }
   }
-  double res = sum / max;
+  double res = max == 0? 0.0 : sum / max;
   return res;
 }
 
@@ -220,7 +225,7 @@ double awaitSpellsPercent(Map<String, dynamic> userdata) {
     max += spell["maxLevel"];
     sum += spell["level"];
   }
-  double res = sum / max;
+  double res = max == 0? 0.0 : sum / max;
   return res;
 }
 
@@ -241,7 +246,7 @@ double awaitHeroesPercent(Map<String, dynamic> userdata) {
       sum += troop["level"];
     }
   }
-  double res = sum / max;
+  double res = max == 0? 0.0 : sum / max;
   return res;
 }
 
@@ -255,7 +260,7 @@ double awaitEquipmentPercent(Map<String, dynamic> userdata) {
     max += equ["maxLevel"];
     sum += equ["level"];
   }
-  double res = sum / max;
+  double res = max == 0? 0.0 : sum / max;
   return res;
 }
 
@@ -269,42 +274,42 @@ double awaitAchievementsPercent(Map<String, dynamic> userdata) {
     max += 3;
     sum += quest["stars"];
   }
-  double res = sum / max;
+  double res = max == 0? 0.0 : sum / max;
   return res;
 }
 
 Future<List> awaitTroops(String tag) async {
   final data = awaitPlayerData(tag);
   final userdata = await data;
-  final troops = userdata["troops"];
+  final troops = userdata["troops"]?? [];
   return troops;
 }
 
 Future<List> awaitSpells(String tag) async {
   final data = awaitPlayerData(tag);
   final userdata = await data;
-  final troops = userdata["spells"];
+  final troops = userdata["spells"]?? [];
   return troops;
 }
 
 Future<List> awaitHeroes(String tag) async {
   final data = awaitPlayerData(tag);
   final userdata = await data;
-  final troops = userdata["heroes"];
+  final troops = userdata["heroes"]?? [];
   return troops;
 }
 
 Future<List> awaitEquipment(String tag) async {
   final data = awaitPlayerData(tag);
   final userdata = await data;
-  final troops = userdata["heroEquipment"];
+  final troops = userdata["heroEquipment"]?? [];
   return troops;
 }
 
 Future<List> awaitAchievements(String tag) async {
   final data = awaitPlayerData(tag);
   final userdata = await data;
-  final troops = userdata["achievements"];
+  final troops = userdata["achievements"]?? [];
   return troops;
 }
 

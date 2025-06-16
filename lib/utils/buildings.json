@@ -34,7 +34,7 @@
       "14": { "Cannon": 7, "Archer Tower": 8, "Mortar": 4, "Air Defense": 4, "Wizard Tower": 5, "Air Sweeper": 2, "Hidden Tesla": 5, "Bomb Tower": 2, "X-Bow": 4, "Inferno Tower": 3, "Eagle Artillery": 1, "Giga Inferno": 1 , "Scattershot": 2 },
       "15": { "Cannon": 7, "Archer Tower": 8, "Mortar": 4, "Air Defense": 4, "Wizard Tower": 5, "Air Sweeper": 2, "Hidden Tesla": 5, "Bomb Tower": 2, "X-Bow": 4, "Inferno Tower": 3, "Eagle Artillery": 1, "Giga Inferno": 1, "Scattershot": 2, "Builder Hut" :  5},
       "16": { "Cannon": 7, "Archer Tower": 8, "Mortar": 4, "Air Defense": 4, "Wizard Tower": 5, "Air Sweeper": 2, "Hidden Tesla": 5, "Bomb Tower": 2, "X-Bow": 4, "Inferno Tower": 3, "Eagle Artillery": 1, "Giga Inferno": 1, "Scattershot": 2, "Builder Hut" :  5, "Spell Tower": 2, "Monolith":  1},
-      "17": { "Cannon": 3, "Archer Tower": 4, "Mortar": 4, "Air Defense": 4, "Wizard Tower": 5, "Air Sweeper": 2, "Hidden Tesla": 5, "Bomb Tower": 2, "X-Bow": 4, "Inferno Tower": 3, "Eagle Artillery": 1, "Giga Inferno": 1, "Scattershot": 2, "Builder Hut" :  5, "Spell Tower": 2, "Monolith":  1, "Ricochet Cannon":  2, "Multi-Archer Tower":  2},
+      "17": { "Cannon": 3, "Archer Tower": 4, "Mortar": 4, "Air Defense": 4, "Wizard Tower": 5, "Air Sweeper": 2, "Hidden Tesla": 5, "Bomb Tower": 2, "X-Bow": 4, "Inferno Tower": 3, "Eagle Artillery": 1, "Giga Inferno": 1, "Scattershot": 2, "Builder Hut" :  5, "Spell Tower": 2, "Monolith":  1, "Ricochet Cannon":  2, "Multi-Archer Tower":  2}
      },
     "maxLevels": {
       "2":  { "Cannon": 3, "Archer Tower": 2 },
@@ -90,7 +90,7 @@
       "14": { "Bomb": 7, "Spring Trap": 9, "Air Bomb": 6, "Giant Bomb": 6, "Seeking Air Mine": 7, "Skeleton Trap": 3, "Tornado Trap": 1},
       "15": { "Bomb": 8, "Spring Trap": 9, "Air Bomb": 7, "Giant Bomb": 7, "Seeking Air Mine": 8, "Skeleton Trap": 4, "Tornado Trap": 1},
       "16": { "Bomb": 8, "Spring Trap": 9, "Air Bomb": 7, "Giant Bomb": 7, "Seeking Air Mine": 8, "Skeleton Trap": 4, "Tornado Trap": 1},
-      "17": { "Bomb": 8, "Spring Trap": 9, "Air Bomb": 7, "Giant Bomb": 7, "Seeking Air Mine": 8, "Skeleton Trap": 4, "Tornado Trap": 1},
+      "17": { "Bomb": 8, "Spring Trap": 9, "Air Bomb": 7, "Giant Bomb": 7, "Seeking Air Mine": 8, "Skeleton Trap": 4, "Tornado Trap": 1}
     },
     "maxLevels": {
       "2":  {},
@@ -146,7 +146,7 @@
       "14": { "Army Camp": 4, "Barracks": 1, "Laboratory": 1, "Spell Factory": 1, "Dark Barracks": 1, "Hero Hall": 1, "Dark Spell Factory": 1, "Blacksmith": 1},
       "15": { "Army Camp": 4, "Barracks": 1, "Laboratory": 1, "Spell Factory": 1, "Dark Barracks": 1, "Hero Hall": 1, "Dark Spell Factory": 1, "Blacksmith": 1, "Workshop": 1, "Pet House": 1 },
       "16": { "Army Camp": 4, "Barracks": 1, "Laboratory": 1, "Spell Factory": 1, "Dark Barracks": 1, "Hero Hall": 1, "Dark Spell Factory": 1, "Blacksmith": 1, "Workshop": 1, "Pet House": 1 },
-      "17": { "Army Camp": 4, "Barracks": 1, "Laboratory": 1, "Spell Factory": 1, "Dark Barracks": 1, "Hero Hall": 1, "Dark Spell Factory": 1, "Blacksmith": 1, "Workshop": 1, "Pet House": 1 },
+      "17": { "Army Camp": 4, "Barracks": 1, "Laboratory": 1, "Spell Factory": 1, "Dark Barracks": 1, "Hero Hall": 1, "Dark Spell Factory": 1, "Blacksmith": 1, "Workshop": 1, "Pet House": 1 }
     },
     "maxLevels": {
       "2":  { "Army Camp": 2, "Barracks": 4 },
@@ -202,7 +202,7 @@
       "14": { "Gold Mine": 7, "Elixir Collector": 7, "Dark Elixir Drill": 3,  "Gold Storage": 4, "Elixir Storage": 4, "Dark Elixir Storage": 1, "Clan Castle": 1, "Helper Hut": 1 },
       "15": { "Gold Mine": 7, "Elixir Collector": 7, "Dark Elixir Drill": 3,  "Gold Storage": 4, "Elixir Storage": 4, "Dark Elixir Storage": 1, "Clan Castle": 1, "Helper Hut": 1 },
       "16": { "Gold Mine": 7, "Elixir Collector": 7, "Dark Elixir Drill": 3,  "Gold Storage": 4, "Elixir Storage": 4, "Dark Elixir Storage": 1, "Clan Castle": 1, "Helper Hut": 1 },
-      "17": { "Gold Mine": 7, "Elixir Collector": 7, "Dark Elixir Drill": 3,  "Gold Storage": 4, "Elixir Storage": 4, "Dark Elixir Storage": 1, "Clan Castle": 1, "Helper Hut": 1 },
+      "17": { "Gold Mine": 7, "Elixir Collector": 7, "Dark Elixir Drill": 3,  "Gold Storage": 4, "Elixir Storage": 4, "Dark Elixir Storage": 1, "Clan Castle": 1, "Helper Hut": 1 }
     },
     "maxLevels": {
       "2": { "Gold Mine": 4, "Elixir Collector": 4, "Gold Storage": 3, "Elixir Storage": 3, "Clan Castle": 1 },

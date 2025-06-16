@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io' as io;
 import 'package:clashofclanstracker/utils/img/ShortAsset.dart';
 import 'package:flutter/material.dart';
 
@@ -496,4 +497,9 @@ int getWalls(int thlevel, Map<String, dynamic> map) {
 
 int getWallsMaxLevel(int thlevel, Map<String, dynamic> map) {
   return map["walls"]["maxLevels"]["$thlevel"] ?? 0;
+}
+
+Image getBuildingImage(String name, int level) {
+  String pathname = 'lib/utils/img/buildings/$name$level.webp';
+  return Image.asset(pathname, scale: 2, errorBuilder: (ctx, error, stackTrace) => Image.asset(defenseShield, scale: 1));
 }

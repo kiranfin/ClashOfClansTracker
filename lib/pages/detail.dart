@@ -106,13 +106,11 @@ class _DetailPageState extends State<DetailPage> {
         }, icon: Icon(Icons.arrow_back, color: Colors.white)),
       ),
       body: SafeArea(
-        child: Center(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 15.0),
-            child: category == "buildings"? getBuildingDetail() : category == "troops" ? getTroopDetail() : category == "spells"?
-            getSpellDetail() : category == "heroes"? getHeroesDetail() : category == "equipment"?
-            getEquipmentDetail() : category == "achievements"? getAchievementDetails() : category == "profile"? getProfileDetails() : null,
-          ),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 15.0),
+          child: category == "buildings"? getBuildingDetail() : category == "troops" ? getTroopDetail() : category == "spells"?
+          getSpellDetail() : category == "heroes"? getHeroesDetail() : category == "equipment"?
+          getEquipmentDetail() : category == "achievements"? getAchievementDetails() : category == "profile"? getProfileDetails() : null,
         ),
       ),
     );
@@ -135,10 +133,50 @@ class _DetailPageState extends State<DetailPage> {
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(titles[ind], style: const TextStyle(
-                        color: Colors.white,
-                        fontFamily: "Poppins",
-                        fontSize: 30)
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(titles[ind], style: const TextStyle(
+                            color: Colors.white,
+                            fontFamily: "Poppins",
+                            fontSize: 30)
+                        ),
+                        ElevatedButton.icon(
+                          style: ButtonStyle(
+                              backgroundColor: WidgetStateProperty.all(Colors.white24),
+                              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                  RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(15.0),
+                                      side: BorderSide(color: Colors.white24)
+                                  )
+                              )
+                          ),
+                          onPressed: () {
+                            Map<String, dynamic> newdata = finalmaplist[ind];
+                            if(ind == 0) {
+                              newdata.forEach((key, val) {
+                                newdata[key] = Utils.getDefensesAndMaxLevel(snapshot.data[0]["townHallLevel"], snapshot.data[1])[key.substring(0, key.length - 2)];
+                              });
+                              updateDefenses(newdata);
+                            } else if(ind == 1) {
+                              newdata.forEach((key, val) {
+                                newdata[key] = Utils.getArmyAndMaxLevel(snapshot.data[0]["townHallLevel"], snapshot.data[1])[key.substring(0, key.length - 2)];
+                              });
+                              updateArmyBuildings(newdata);
+                            } else if(ind == 2) {
+                              newdata.forEach((key, val) {
+                                newdata[key] = Utils.getResourceAndMaxLevel(snapshot.data[0]["townHallLevel"], snapshot.data[1])[key.substring(0, key.length - 2)];
+                              });
+                              updateResources(newdata);
+                            }
+                          },
+                          icon: Icon(Icons.skip_next, color: Colors.orangeAccent),
+                          label: Text("Max", style: const TextStyle(
+                              color: Colors.white,
+                              fontFamily: "Poppins",
+                              fontSize: 18)),
+                        ),
+                      ],
                     ),
                     Container(
                       child: ListView.builder(
@@ -159,51 +197,103 @@ class _DetailPageState extends State<DetailPage> {
                                         mainAxisAlignment: MainAxisAlignment
                                             .spaceBetween,
                                         children: [
-                                          AutoSizeText(
-                                              "${finalmaplist[ind].keys.elementAt(index).substring(0, finalmaplist[ind].keys.elementAt(index).length - 2)} | ${finalmaplist[ind].values.elementAt(index)}",
-                                              style: const TextStyle(
-                                                  color: Colors.white,
-                                                  fontFamily: "Poppins",
-                                                  fontSize: 15),
-                                              maxLines: 1
+                                          Row(
+                                            children: [
+                                              Utils.getBuildingImage(finalmaplist[ind].keys.elementAt(index).substring(0, finalmaplist[ind].keys.elementAt(index).length - 2), finalmaplist[ind].values.elementAt(index)),
+                                              SizedBox(width: 5),
+                                              AutoSizeText(
+                                                  "${finalmaplist[ind].keys.elementAt(index).substring(0, finalmaplist[ind].keys.elementAt(index).length - 2)} | ${finalmaplist[ind].values.elementAt(index)}",
+                                                  style: const TextStyle(
+                                                      color: Colors.white,
+                                                      fontFamily: "Poppins",
+                                                      fontSize: 15),
+                                                  maxLines: 1
+                                              ),
+                                            ],
                                           ),
                                           Row(
                                             children: [
                                               IconButton(
+                                                style: ButtonStyle(
+                                                  backgroundColor: WidgetStateProperty.all(Colors.white24),
+                                                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                                    RoundedRectangleBorder(
+                                                      borderRadius: BorderRadius.circular(15.0),
+                                                      side: BorderSide(color: Colors.white24)
+                                                    )
+                                                  )
+                                                ),
                                                 onPressed: () {
-                                                  if(ind == 0) {
-                                                    Map<String, dynamic> newdata = finalmaplist[ind];
+                                                  Map<String, dynamic> newdata = finalmaplist[ind];
+                                                  if(finalmaplist[ind].values.elementAt(index) - 1 >= 1) {
                                                     newdata[finalmaplist[ind].keys.elementAt(index)] = finalmaplist[ind].values.elementAt(index) - 1;
-                                                    updateDefenses(newdata);
-                                                  } else if(ind == 1) {
-                                                    Map<String, dynamic> newdata = finalmaplist[ind];
-                                                    newdata[finalmaplist[ind].keys.elementAt(index)] = finalmaplist[ind].values.elementAt(index) - 1;
-                                                    updateArmyBuildings(newdata);
-                                                  } else if(ind == 2) {
-                                                    Map<String, dynamic> newdata = finalmaplist[ind];
-                                                    newdata[finalmaplist[ind].keys.elementAt(index)] = finalmaplist[ind].values.elementAt(index) - 1;
-                                                    updateResources(newdata);
+                                                    if (ind == 0) {
+                                                      updateDefenses(newdata);
+                                                    } else if (ind == 1) {
+                                                      updateArmyBuildings(
+                                                          newdata);
+                                                    } else if (ind == 2) {
+                                                      updateResources(newdata);
+                                                    }
                                                   }
                                                 },
                                                 icon: Icon(Icons.remove, color: Colors.redAccent)
                                               ),
                                               IconButton(
+                                                style: ButtonStyle(
+                                                    backgroundColor: WidgetStateProperty.all(Colors.white24),
+                                                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                                        RoundedRectangleBorder(
+                                                            borderRadius: BorderRadius.circular(15.0),
+                                                            side: BorderSide(color: Colors.white24)
+                                                        )
+                                                    )
+                                                ),
                                                 onPressed: (){
-                                                  if(ind == 0) {
-                                                    Map<String, dynamic> newdata = finalmaplist[ind];
-                                                    newdata[finalmaplist[ind].keys.elementAt(index)] = finalmaplist[ind].values.elementAt(index) + 1;
-                                                    updateDefenses(newdata);
-                                                  } else if(ind == 1) {
-                                                    Map<String, dynamic> newdata = finalmaplist[ind];
-                                                    newdata[finalmaplist[ind].keys.elementAt(index)] = finalmaplist[ind].values.elementAt(index) + 1;
-                                                    updateArmyBuildings(newdata);
-                                                  } else if(ind == 2) {
-                                                    Map<String, dynamic> newdata = finalmaplist[ind];
-                                                    newdata[finalmaplist[ind].keys.elementAt(index)] = finalmaplist[ind].values.elementAt(index) + 1;
-                                                    updateResources(newdata);
+                                                  Map<String, dynamic> newdata = finalmaplist[ind];
+                                                  if (ind == 0) {
+                                                    if(finalmaplist[ind].values.elementAt(index) + 1 <= Utils.getDefensesAndMaxLevel(snapshot.data[0]["townHallLevel"], snapshot.data[1])[finalmaplist[ind].keys.elementAt(index).substring(0, finalmaplist[ind].keys.elementAt(index).length - 2)]) {
+                                                      newdata[finalmaplist[ind].keys.elementAt(index)] = finalmaplist[ind].values.elementAt(index) + 1;
+                                                      updateDefenses(newdata);
+                                                    }
+                                                  } else if (ind == 1) {
+                                                    if(finalmaplist[ind].values.elementAt(index) + 1 <= Utils.getArmyAndMaxLevel(snapshot.data[0]["townHallLevel"], snapshot.data[1])[finalmaplist[ind].keys.elementAt(index).substring(0, finalmaplist[ind].keys.elementAt(index).length - 2)]) {
+                                                      newdata[finalmaplist[ind].keys.elementAt(index)] = finalmaplist[ind].values.elementAt(index) + 1;
+                                                      updateArmyBuildings(newdata);
+                                                    }
+                                                  } else if (ind == 2) {
+                                                    if(finalmaplist[ind].values.elementAt(index) + 1 <= Utils.getArmyAndMaxLevel(snapshot.data[0]["townHallLevel"], snapshot.data[1])[finalmaplist[ind].keys.elementAt(index).substring(0, finalmaplist[ind].keys.elementAt(index).length - 2)]) {
+                                                      newdata[finalmaplist[ind].keys.elementAt(index)] = finalmaplist[ind].values.elementAt(index) + 1;
+                                                      updateResources(newdata);
+                                                    }
                                                   }
                                                 },
                                                 icon: Icon(Icons.add, color: Colors.lightGreen)
+                                              ),
+                                              IconButton(
+                                                  style: ButtonStyle(
+                                                      backgroundColor: WidgetStateProperty.all(Colors.white24),
+                                                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                                          RoundedRectangleBorder(
+                                                              borderRadius: BorderRadius.circular(15.0),
+                                                              side: BorderSide(color: Colors.white24)
+                                                          )
+                                                      )
+                                                  ),
+                                                  onPressed: (){
+                                                    Map<String, dynamic> newdata = finalmaplist[ind];
+                                                    if (ind == 0) {
+                                                      newdata[finalmaplist[ind].keys.elementAt(index)] = Utils.getDefensesAndMaxLevel(snapshot.data[0]["townHallLevel"], snapshot.data[1])[finalmaplist[ind].keys.elementAt(index).substring(0, finalmaplist[ind].keys.elementAt(index).length - 2)];
+                                                      updateDefenses(newdata);
+                                                    } else if (ind == 1) {
+                                                      newdata[finalmaplist[ind].keys.elementAt(index)] = Utils.getArmyAndMaxLevel(snapshot.data[0]["townHallLevel"], snapshot.data[1])[finalmaplist[ind].keys.elementAt(index).substring(0, finalmaplist[ind].keys.elementAt(index).length - 2)];
+                                                      updateArmyBuildings(newdata);
+                                                    } else if (ind == 2) {
+                                                      newdata[finalmaplist[ind].keys.elementAt(index)] = Utils.getResourceAndMaxLevel(snapshot.data[0]["townHallLevel"], snapshot.data[1])[finalmaplist[ind].keys.elementAt(index).substring(0, finalmaplist[ind].keys.elementAt(index).length - 2)];
+                                                      updateResources(newdata);
+                                                    }
+                                                  },
+                                                  icon: Icon(Icons.double_arrow, color: Colors.orangeAccent)
                                               )
                                             ],
                                           ),
@@ -244,21 +334,25 @@ class _DetailPageState extends State<DetailPage> {
         if(snapshot.hasData) {
           List finallist = [];
           List titles = ["Troops", "Siege Machines", "Super Troops", "Builder Hall Troops"];
-          finallist.add(Utils.getNormalTroops(snapshot.data));
-          finallist.add(Utils.getSiegeMachines(snapshot.data));
-          finallist.add(Utils.getSuperTroops(snapshot.data));
-          finallist.add(Utils.getBuilderTroops(snapshot.data));
+          List normaltroops = Utils.getNormalTroops(snapshot.data);
+          finallist.add(normaltroops);
+          List siegemachines = Utils.getSiegeMachines(snapshot.data);
+          finallist.add(siegemachines);
+          List supertroops = Utils.getSuperTroops(snapshot.data);
+          finallist.add(supertroops);
+          List buildertroops = Utils.getBuilderTroops(snapshot.data);
+          finallist.add(buildertroops);
           return ListView.builder(
             itemCount: titles.length,
             itemBuilder: (context, ind) {
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(titles[ind], style: const TextStyle(
+                  ind == 0 && normaltroops.isNotEmpty || ind == 1 && siegemachines.isNotEmpty || ind == 2 && supertroops.isNotEmpty || ind == 3 && buildertroops.isNotEmpty? Text(titles[ind], style: const TextStyle(
                       color: Colors.white,
                       fontFamily: "Poppins",
                       fontSize: 30)
-                  ),
+                  ) : SizedBox(width: 5),
                   Container(
                     child: GridView.builder(
                         shrinkWrap: true,
@@ -475,10 +569,10 @@ class _DetailPageState extends State<DetailPage> {
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(titles[ind], style: const TextStyle(
+                    ind == 0 && heroes.isNotEmpty || ind == 1 && bhheroes.isNotEmpty || ind == 2 && pets.isNotEmpty? Text(titles[ind], style: const TextStyle(
                         color: Colors.white,
                         fontFamily: "Poppins",
-                        fontSize: 30)),
+                        fontSize: 30)) : SizedBox(width: 5),
                     GridView.builder(
                         shrinkWrap: true,
                         physics: NeverScrollableScrollPhysics(),
@@ -497,7 +591,7 @@ class _DetailPageState extends State<DetailPage> {
                                 color: finallist[ind][index]["level"] ==
                                     finallist[ind][index]["maxLevel"] ? Color(
                                     0xFF532D1F) : Colors.black,
-                                child: Utils.isPet(finallist[ind][index]["name"])?
+                                child: Utils.isPet(finallist[ind][index]["name"]) && pets.isNotEmpty?
                                 GridTile(
                                   child: Padding(
                                     padding: const EdgeInsets.all(5.0),
@@ -543,7 +637,7 @@ class _DetailPageState extends State<DetailPage> {
                                     ),
                                   ),
                                 )
-                                : GridTile(
+                                : ind == 0 && heroes.isNotEmpty || ind == 1 && bhheroes.isNotEmpty? GridTile(
                                   child: Padding(
                                     padding: const EdgeInsets.all(5.0),
                                     child: Column(
@@ -609,7 +703,7 @@ class _DetailPageState extends State<DetailPage> {
                                                   )
                                                 ],
                                               ),
-                                              Column(
+                                              finallist[ind][index]["equipment"] != null? Column(
                                                 mainAxisAlignment: MainAxisAlignment
                                                     .start,
                                                 crossAxisAlignment: CrossAxisAlignment
@@ -632,14 +726,14 @@ class _DetailPageState extends State<DetailPage> {
                                                     ],
                                                   ),
                                                 ],
-                                              )
+                                              ) : SizedBox(width: 5)
                                             ],
                                           ),
                                         ),
                                       ],
                                     ),
                                   ),
-                                ),
+                                ) : SizedBox(height: 5),
                               ),
                             ),
                           );
@@ -994,6 +1088,7 @@ class _DetailPageState extends State<DetailPage> {
           if(snapshot.hasData) {
             return SingleChildScrollView(
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text("Allgemein", style: const TextStyle(
@@ -1136,260 +1231,265 @@ class _DetailPageState extends State<DetailPage> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 20),
-                  Text("Clan", style: const TextStyle(
-                      color: Colors.white,
-                      fontFamily: "Poppins",
-                      fontSize: 25)
-                  ),
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(20),
-                    child: Container(
-                      color: Colors.black,
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                          child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(snapshot.data[0]["clan"]["name"], style: const TextStyle(
-                                        color: Colors.white,
-                                        fontFamily: "Poppins",
-                                        fontSize: 30)
-                                    ),
-                                    SizedBox(height: 5),
-                                    Row(
-                                      children: [
-                                        Icon(Icons.language, color: Colors.white),
-                                        SizedBox(width: 5),
-                                        Text(snapshot.data[1]["location"]["name"], style: const TextStyle(
-                                            color: Colors.white,
-                                            fontFamily: "Poppins",
-                                            fontSize: 15)
-                                        ),
-                                      ],
-                                    ),
-                                    SizedBox(height: 5),
-                                    Row(
-                                      children: [
-                                        Icon(Icons.person, color: Colors.white),
-                                        SizedBox(width: 5),
-                                        Text("Mitglieder: ${snapshot.data[1]["members"]}", style: const TextStyle(
-                                            color: Colors.white,
-                                            fontFamily: "Poppins",
-                                            fontSize: 15)
-                                        ),
-                                      ],
-                                    ),
-                                    SizedBox(height: 5),
-                                    Row(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        Icon(Icons.sell, color: Colors.white),
-                                        SizedBox(width: 5),
-                                        snapshot.data[1]["labels"].length >= 1? Image.network(snapshot.data[1]["labels"][0]["iconUrls"]["small"], scale: 2) : Container(),
-                                        snapshot.data[1]["labels"].length >= 2? Image.network(snapshot.data[1]["labels"][1]["iconUrls"]["small"], scale: 2) : Container(),
-                                        snapshot.data[1]["labels"].length >= 3? Image.network(snapshot.data[1]["labels"][2]["iconUrls"]["small"], scale: 2) : Container(),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                                Column(
-                                  children: [
-                                    Text(snapshot.data[0]["clan"]["tag"], style: const TextStyle(
-                                        color: Colors.white,
-                                        fontFamily: "Poppins",
-                                        fontSize: 15)
-                                    ),
-                                    Image.network(snapshot.data[0]["clan"]["badgeUrls"]["medium"], scale: 2),
-                                  ],
-                                )
-                              ],
-                            ),
-                            SizedBox(height: 5),
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Icon(Icons.edit, color: Colors.white),
-                                SizedBox(width: 5),
-                                Container(
-                                  width: MediaQuery.of(context).size.width - 2 * 40,
-                                  child: Text(textWidthBasis: TextWidthBasis.parent, "${snapshot.data[1]["description"]}", style: const TextStyle(
-                                      color: Colors.white,
-                                      fontFamily: "Poppins",
-                                      fontSize: 11)
-                                  ),
-                                ),
-                              ],
-                            ),
-                            SizedBox(height: 5),
-                            Row(
-                              children: [
-                                Icon(Icons.key, color: Colors.white),
-                                SizedBox(width: 5),
-                                Utils.getRole(snapshot.data[0]["role"])
-                              ],
-                            ),
-                            SizedBox(height: 5),
-                            Row(
-                              children: [
-                                Image.asset('lib/utils/img/Trophy.png',
-                                    fit: BoxFit.cover, scale: 1.5),
-                                SizedBox(width: 7),
-                                Text("${snapshot.data[1]["clanPoints"]}", style: const TextStyle(
-                                    color: Colors.white,
-                                    fontFamily: "Poppins",
-                                    fontSize: 15)
-                                ),
-                                SizedBox(width: 10),
-                                Image.asset('lib/utils/img/BuilderHallTrophy.png',
-                                    fit: BoxFit.cover, scale: 11.5),
-                                SizedBox(width: 7),
-                                Text("${snapshot.data[1]["clanBuilderBasePoints"]}", style: const TextStyle(
-                                    color: Colors.white,
-                                    fontFamily: "Poppins",
-                                    fontSize: 15)
-                                ),
-                                SizedBox(width: 10),
-                                Image.asset('lib/utils/img/TrophyC.webp',
-                                    fit: BoxFit.cover, scale: 1.5),
-                                SizedBox(width: 7),
-                                Text("${snapshot.data[1]["clanCapitalPoints"]}", style: const TextStyle(
-                                    color: Colors.white,
-                                    fontFamily: "Poppins",
-                                    fontSize: 15)
-                                ),
-                              ],
-                            ),
-                            SizedBox(height: 5),
-                            Row(
-                              children: [
-                                DataProvider.awaitClanWarLeagueIcon(snapshot.data[1]["warLeague"]["name"]),
-                                SizedBox(width: 5),
-                                Text("Wins: ${snapshot.data[1]["warWins"]} / Ties: ${snapshot.data[1]["warTies"]} / Losses: ${snapshot.data[1]["warLosses"]}", style: const TextStyle(
-                                    color: Colors.white,
-                                    fontFamily: "Poppins",
-                                    fontSize: 15)
-                                ),
-                                SizedBox(width: 10),
-                                Icon(Icons.local_fire_department, color: Colors.white),
-                                Text("Streak: ${snapshot.data[1]["warWinStreak"]}", style: const TextStyle(
-                                    color: Colors.white,
-                                    fontFamily: "Poppins",
-                                    fontSize: 15)
-                                ),
-                              ],
-                            ),
-                          ]
-                        )
-                      )
-                    )
-                  ),
-                  SizedBox(height: 10),
-                  Wrap(
-                    spacing: 5.0,
-                    runSpacing: 5.0,
-                    children: List.generate(snapshot.data[1]["clanCapital"]["districts"].length, (index) {
-                      return ClipRRect(
-                        borderRadius: BorderRadius.circular(20),
-                        child: Container(
-                          color: Colors.black,
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                index == 0? Utils.getCapitalHallImage(snapshot.data[1]["clanCapital"]["districts"][index]["districtHallLevel"]) : Utils.getDistrictHallImage(snapshot.data[1]["clanCapital"]["districts"][index]["districtHallLevel"]),
-                                SizedBox(width: 5),
-                                Text("${snapshot.data[1]["clanCapital"]["districts"][index]["name"]}: ${snapshot.data[1]["clanCapital"]["districts"][index]["districtHallLevel"]}", style: const TextStyle(
-                                    color: Colors.white,
-                                    fontFamily: "Poppins",
-                                    fontSize: 15)
-                                ),
-                              ],
-                            )
-                          )
-                        )
-                      );
-                    }
-                  )
-                  ),
-                  SizedBox(height: 5),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
+                  snapshot.data[0]["clan"] != null? Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text("Donations: In | Out", style: const TextStyle(
+                      SizedBox(height: 20),
+                      Text("Clan", style: const TextStyle(
                           color: Colors.white,
                           fontFamily: "Poppins",
-                          fontSize: 15)
+                          fontSize: 25)
                       ),
-                    ],
-                  ),
-                  ListView.builder(
-                    shrinkWrap: true,
-                    physics: NeverScrollableScrollPhysics(),
-                    itemCount: snapshot.data[1]["memberList"].length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return Padding(
-                        padding: const EdgeInsets.all(3.0),
-                        child: ClipRRect(
-                            borderRadius: BorderRadius.circular(20),
-                            child: Container(
-                                color: snapshot.data[1]["memberList"][index]["tag"] == snapshot.data[0]["tag"]? Colors.green.shade800 : Colors.black,
-                                child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      ClipRRect(
+                          borderRadius: BorderRadius.circular(20),
+                          child: Container(
+                              color: Colors.black,
+                              child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      mainAxisAlignment: MainAxisAlignment.start,
                                       children: [
                                         Row(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                           children: [
-                                            Text("${snapshot.data[1]["memberList"][index]["clanRank"]}.", style: const TextStyle(
+                                            Column(
+                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              children: [
+                                                Text(snapshot.data[0]["clan"]["name"], style: const TextStyle(
+                                                    color: Colors.white,
+                                                    fontFamily: "Poppins",
+                                                    fontSize: 30)
+                                                ),
+                                                SizedBox(height: 5),
+                                                Row(
+                                                  children: [
+                                                    Icon(Icons.language, color: Colors.white),
+                                                    SizedBox(width: 5),
+                                                    Text(snapshot.data[1]["location"]["name"], style: const TextStyle(
+                                                        color: Colors.white,
+                                                        fontFamily: "Poppins",
+                                                        fontSize: 15)
+                                                    ),
+                                                  ],
+                                                ),
+                                                SizedBox(height: 5),
+                                                Row(
+                                                  children: [
+                                                    Icon(Icons.person, color: Colors.white),
+                                                    SizedBox(width: 5),
+                                                    Text("Mitglieder: ${snapshot.data[1]["members"]}", style: const TextStyle(
+                                                        color: Colors.white,
+                                                        fontFamily: "Poppins",
+                                                        fontSize: 15)
+                                                    ),
+                                                  ],
+                                                ),
+                                                SizedBox(height: 5),
+                                                Row(
+                                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                                  children: [
+                                                    Icon(Icons.sell, color: Colors.white),
+                                                    SizedBox(width: 5),
+                                                    snapshot.data[1]["labels"].length >= 1? Image.network(snapshot.data[1]["labels"][0]["iconUrls"]["small"], scale: 2) : Container(),
+                                                    snapshot.data[1]["labels"].length >= 2? Image.network(snapshot.data[1]["labels"][1]["iconUrls"]["small"], scale: 2) : Container(),
+                                                    snapshot.data[1]["labels"].length >= 3? Image.network(snapshot.data[1]["labels"][2]["iconUrls"]["small"], scale: 2) : Container(),
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
+                                            Column(
+                                              children: [
+                                                Text(snapshot.data[0]["clan"]["tag"], style: const TextStyle(
+                                                    color: Colors.white,
+                                                    fontFamily: "Poppins",
+                                                    fontSize: 15)
+                                                ),
+                                                Image.network(snapshot.data[0]["clan"]["badgeUrls"]["medium"], scale: 2),
+                                              ],
+                                            )
+                                          ],
+                                        ),
+                                        SizedBox(height: 5),
+                                        Row(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            Icon(Icons.edit, color: Colors.white),
+                                            SizedBox(width: 5),
+                                            Container(
+                                              width: MediaQuery.of(context).size.width - 2 * 40,
+                                              child: Text(textWidthBasis: TextWidthBasis.parent, "${snapshot.data[1]["description"]}", style: const TextStyle(
+                                                  color: Colors.white,
+                                                  fontFamily: "Poppins",
+                                                  fontSize: 11)
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(height: 5),
+                                        Row(
+                                          children: [
+                                            Icon(Icons.key, color: Colors.white),
+                                            SizedBox(width: 5),
+                                            Utils.getRole(snapshot.data[0]["role"])
+                                          ],
+                                        ),
+                                        SizedBox(height: 5),
+                                        Row(
+                                          children: [
+                                            Image.asset('lib/utils/img/Trophy.png',
+                                                fit: BoxFit.cover, scale: 1.5),
+                                            SizedBox(width: 7),
+                                            Text("${snapshot.data[1]["clanPoints"]}", style: const TextStyle(
                                                 color: Colors.white,
                                                 fontFamily: "Poppins",
                                                 fontSize: 15)
                                             ),
-                                            SizedBox(width: 5),
-                                            Image.network(snapshot.data[1]["memberList"][index]["league"]["iconUrls"]["small"], scale: 3),
-                                            SizedBox(width: 5),
-                                            DataProvider.awaitTownHallIcon(snapshot.data[1]["memberList"][index]["townHallLevel"], 5),
-                                            SizedBox(width: 5),
-                                            Text("${snapshot.data[1]["memberList"][index]["trophies"]}", style: const TextStyle(
+                                            SizedBox(width: 10),
+                                            Image.asset('lib/utils/img/BuilderHallTrophy.png',
+                                                fit: BoxFit.cover, scale: 11.5),
+                                            SizedBox(width: 7),
+                                            Text("${snapshot.data[1]["clanBuilderBasePoints"]}", style: const TextStyle(
                                                 color: Colors.white,
                                                 fontFamily: "Poppins",
                                                 fontSize: 15)
                                             ),
-                                            SizedBox(width: 5),
-                                            Text("| ${snapshot.data[1]["memberList"][index]["name"]}", style: const TextStyle(
+                                            SizedBox(width: 10),
+                                            Image.asset('lib/utils/img/TrophyC.webp',
+                                                fit: BoxFit.cover, scale: 1.5),
+                                            SizedBox(width: 7),
+                                            Text("${snapshot.data[1]["clanCapitalPoints"]}", style: const TextStyle(
                                                 color: Colors.white,
                                                 fontFamily: "Poppins",
                                                 fontSize: 15)
                                             ),
                                           ],
                                         ),
+                                        SizedBox(height: 5),
                                         Row(
                                           children: [
-                                            Text("${snapshot.data[1]["memberList"][index]["donationsReceived"]} | ${snapshot.data[1]["memberList"][index]["donations"]}", style: const TextStyle(
+                                            DataProvider.awaitClanWarLeagueIcon(snapshot.data[1]["warLeague"]["name"]),
+                                            SizedBox(width: 5),
+                                            Text("Wins: ${snapshot.data[1]["warWins"]} / Ties: ${snapshot.data[1]["warTies"]} / Losses: ${snapshot.data[1]["warLosses"]}", style: const TextStyle(
+                                                color: Colors.white,
+                                                fontFamily: "Poppins",
+                                                fontSize: 15)
+                                            ),
+                                            SizedBox(width: 10),
+                                            Icon(Icons.local_fire_department, color: Colors.white),
+                                            Text("Streak: ${snapshot.data[1]["warWinStreak"]}", style: const TextStyle(
+                                                color: Colors.white,
+                                                fontFamily: "Poppins",
+                                                fontSize: 15)
+                                            ),
+                                          ],
+                                        ),
+                                      ]
+                                  )
+                              )
+                          )
+                      ),
+                      SizedBox(height: 10),
+                      Wrap(
+                          spacing: 5.0,
+                          runSpacing: 5.0,
+                          children: List.generate(snapshot.data[1]["clanCapital"]["districts"].length, (index) {
+                            return ClipRRect(
+                                borderRadius: BorderRadius.circular(20),
+                                child: Container(
+                                    color: Colors.black,
+                                    child: Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Row(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            index == 0? Utils.getCapitalHallImage(snapshot.data[1]["clanCapital"]["districts"][index]["districtHallLevel"]) : Utils.getDistrictHallImage(snapshot.data[1]["clanCapital"]["districts"][index]["districtHallLevel"]),
+                                            SizedBox(width: 5),
+                                            Text("${snapshot.data[1]["clanCapital"]["districts"][index]["name"]}: ${snapshot.data[1]["clanCapital"]["districts"][index]["districtHallLevel"]}", style: const TextStyle(
                                                 color: Colors.white,
                                                 fontFamily: "Poppins",
                                                 fontSize: 15)
                                             ),
                                           ],
                                         )
-                                      ],
                                     )
                                 )
-                            )
-                        ),
-                      );
-                    }
-                  )
+                            );
+                          }
+                          )
+                      ),
+                      SizedBox(height: 5),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Text("Donations: In | Out", style: const TextStyle(
+                              color: Colors.white,
+                              fontFamily: "Poppins",
+                              fontSize: 15)
+                          ),
+                        ],
+                      ),
+                      ListView.builder(
+                          shrinkWrap: true,
+                          physics: NeverScrollableScrollPhysics(),
+                          itemCount: snapshot.data[1]["memberList"].length,
+                          itemBuilder: (BuildContext context, int index) {
+                            return Padding(
+                              padding: const EdgeInsets.all(3.0),
+                              child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(20),
+                                  child: Container(
+                                      color: snapshot.data[1]["memberList"][index]["tag"] == snapshot.data[0]["tag"]? Colors.green.shade800 : Colors.black,
+                                      child: Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Row(
+                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Row(
+                                                children: [
+                                                  Text("${snapshot.data[1]["memberList"][index]["clanRank"]}.", style: const TextStyle(
+                                                      color: Colors.white,
+                                                      fontFamily: "Poppins",
+                                                      fontSize: 15)
+                                                  ),
+                                                  SizedBox(width: 5),
+                                                  Image.network(snapshot.data[1]["memberList"][index]["league"]["iconUrls"]["small"], scale: 3),
+                                                  SizedBox(width: 5),
+                                                  DataProvider.awaitTownHallIcon(snapshot.data[1]["memberList"][index]["townHallLevel"], 5),
+                                                  SizedBox(width: 5),
+                                                  Text("${snapshot.data[1]["memberList"][index]["trophies"]}", style: const TextStyle(
+                                                      color: Colors.white,
+                                                      fontFamily: "Poppins",
+                                                      fontSize: 15)
+                                                  ),
+                                                  SizedBox(width: 5),
+                                                  Text("| ${snapshot.data[1]["memberList"][index]["name"]}", style: const TextStyle(
+                                                      color: Colors.white,
+                                                      fontFamily: "Poppins",
+                                                      fontSize: 15)
+                                                  ),
+                                                ],
+                                              ),
+                                              Row(
+                                                children: [
+                                                  Text("${snapshot.data[1]["memberList"][index]["donationsReceived"]} | ${snapshot.data[1]["memberList"][index]["donations"]}", style: const TextStyle(
+                                                      color: Colors.white,
+                                                      fontFamily: "Poppins",
+                                                      fontSize: 15)
+                                                  ),
+                                                ],
+                                              )
+                                            ],
+                                          )
+                                      )
+                                  )
+                              ),
+                            );
+                          }
+                      )
+                    ],
+                  ) : SizedBox(height: 5)
                 ]
               ),
             );
