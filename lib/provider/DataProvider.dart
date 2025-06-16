@@ -61,7 +61,9 @@ Image awaitBuilderHallIcon(int level, double scale) {
 Image awaitLeagueIcon(Map<String, dynamic> userdata) {
   //final data = awaitPlayerData(tag);
   //final userdata = await data;
-  return Image.network(userdata["league"]["iconUrls"]["small"], scale: 1.5);
+  return Image.network(userdata["league"]["iconUrls"]["small"], scale: 1.5, errorBuilder: (context, error, stackTrace) {
+    return Image.asset(unranked, scale: 3);
+  });
 }
 
 Image awaitBuilderLeagueIcon(Map<String, dynamic> userdata) {
@@ -162,7 +164,9 @@ Text awaitPlayerBuilderTrophies(Map<String, dynamic> userdata) {
 Image awaitClanIcon(Map<String, dynamic> userdata) {
   //final data = awaitPlayerData(tag);
   //final userdata = await data;
-  return Image.network(userdata["clan"]["badgeUrls"]["small"], scale: 1.2);
+  return Image.network(userdata["clan"]["badgeUrls"]["small"], scale: 1.2, errorBuilder: (context, error, stackTrace) {
+    return Image.asset(no_clan, scale: 3);
+  });
 }
 
 Text awaitClanTroopsOut(Map<String, dynamic> userdata)  {

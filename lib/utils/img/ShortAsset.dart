@@ -136,6 +136,9 @@ const emerald = 'lib/utils/img/builderhall_leagues/Emerald.png';
 const ruby = 'lib/utils/img/builderhall_leagues/Ruby.png';
 const diamond = 'lib/utils/img/builderhall_leagues/Diamond.png';
 
+const unranked = 'lib/utils/img/Unranked_League.webp';
+const no_clan = 'lib/utils/img/no_clan.png';
+
 //Town Halls
 const th1 = 'lib/utils/img/town_halls/Town_Hall_1.webp';
 const th2 = 'lib/utils/img/town_halls/Town_Hall_2.webp';
