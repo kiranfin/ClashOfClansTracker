@@ -31,7 +31,7 @@ class _HomePageState extends State<HomePage> {
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 15.0),
               child: FutureBuilder(
-                future: DataProvider.awaitPlayerData(userTag),
+                future: Future.wait([DataProvider.awaitPlayerData(userTag), DataProvider.awaitMaxBuildings(), DataProvider.awaitMaxTroops(), DataProvider.awaitMaxEquipment()]),
                 builder: (context, AsyncSnapshot ovsnap) {
                   if(ovsnap.hasData) {
                     return Column(
@@ -70,9 +70,9 @@ class _HomePageState extends State<HomePage> {
                                       mainAxisAlignment: MainAxisAlignment
                                           .start,
                                       children: [
-                                        DataProvider.awaitLeagueIcon(ovsnap.data),
+                                        DataProvider.awaitLeagueIcon(ovsnap.data[0]),
                                         SizedBox(width: 5),
-                                        DataProvider.awaitPlayerName(ovsnap.data)
+                                        DataProvider.awaitPlayerName(ovsnap.data[0])
                                       ],
                                     ),
                                     SizedBox(height: 10),
@@ -83,11 +83,11 @@ class _HomePageState extends State<HomePage> {
                                         Image.asset('lib/utils/img/Trophy.png',
                                             fit: BoxFit.cover, scale: 1.5),
                                         SizedBox(width: 7),
-                                        DataProvider.awaitPlayerTrophies(ovsnap.data),
+                                        DataProvider.awaitPlayerTrophies(ovsnap.data[0]),
                                         SizedBox(width: 7),
                                         Image.asset(legendTrophy, scale: 14),
                                         SizedBox(width: 7),
-                                        DataProvider.awaitPlayerLegendTrophies(ovsnap.data),
+                                        DataProvider.awaitPlayerLegendTrophies(ovsnap.data[0]),
                                       ],
                                     ),
                                     SizedBox(height: 10),
@@ -95,9 +95,9 @@ class _HomePageState extends State<HomePage> {
                                       mainAxisAlignment: MainAxisAlignment
                                           .start,
                                       children: [
-                                        DataProvider.awaitBuilderLeagueIcon(ovsnap.data),
+                                        DataProvider.awaitBuilderLeagueIcon(ovsnap.data[0]),
                                         SizedBox(width: 7),
-                                        DataProvider.awaitPlayerBuilderTrophies(ovsnap.data),
+                                        DataProvider.awaitPlayerBuilderTrophies(ovsnap.data[0]),
                                       ],
                                     ),
                                   ],
@@ -106,13 +106,13 @@ class _HomePageState extends State<HomePage> {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   crossAxisAlignment: CrossAxisAlignment.end,
                                   children: [
-                                    DataProvider.awaitClanIcon(ovsnap.data),
+                                    DataProvider.awaitClanIcon(ovsnap.data[0]),
                                     Row(
                                       mainAxisAlignment: MainAxisAlignment.end,
                                       children: [
-                                        DataProvider.awaitTownHallIcon(ovsnap.data["townHallLevel"], 3),
+                                        DataProvider.awaitTownHallIcon(ovsnap.data[0]["townHallLevel"], 3),
                                         SizedBox(width: 10),
-                                        DataProvider.awaitBuilderHallIcon(ovsnap.data["builderHallLevel"], 2.5),
+                                        DataProvider.awaitBuilderHallIcon(ovsnap.data[0]["builderHallLevel"], 2.5),
                                       ],
                                     )
                                   ],
@@ -136,7 +136,7 @@ class _HomePageState extends State<HomePage> {
                                       fontFamily: "Poppins",
                                       fontSize: 25)),
                                   Text("${(DataProvider.awaitOverallPercent(
-                                      ovsnap.data) * 100)
+                                      ovsnap.data[0], ovsnap.data[1], ovsnap.data[2], ovsnap.data[3]) * 100)
                                       .toStringAsFixed(1)}%",
                                       style: const TextStyle(
                                           color: Colors.white,
@@ -147,7 +147,7 @@ class _HomePageState extends State<HomePage> {
                               radius: 80,
                               lineWidth: 25,
                               percent: DataProvider.awaitOverallPercent(
-                                  ovsnap.data),
+                                  ovsnap.data[0], ovsnap.data[1], ovsnap.data[2], ovsnap.data[3]),
                               circularStrokeCap: CircularStrokeCap
                                   .round,
                               backgroundColor: Colors.white10,
@@ -203,7 +203,7 @@ class _HomePageState extends State<HomePage> {
                                         mainAxisAlignment: MainAxisAlignment
                                             .center,
                                         children: [
-                                          Text("${(DataProvider.awaitBuildingsPercent(ovsnap.data) * 100)
+                                          Text("${(DataProvider.awaitBuildingsPercent(ovsnap.data[0], ovsnap.data[1]) * 100)
                                               .toStringAsFixed(
                                               1)}%",
                                               style: const TextStyle(
@@ -214,7 +214,7 @@ class _HomePageState extends State<HomePage> {
                                       ),
                                       radius: 40,
                                       lineWidth: 12,
-                                      percent: DataProvider.awaitBuildingsPercent(ovsnap.data),
+                                      percent: DataProvider.awaitBuildingsPercent(ovsnap.data[0], ovsnap.data[1]),
                                       circularStrokeCap: CircularStrokeCap
                                           .round,
                                       backgroundColor: Colors.white10,
@@ -266,7 +266,7 @@ class _HomePageState extends State<HomePage> {
                                         mainAxisAlignment: MainAxisAlignment
                                             .center,
                                         children: [
-                                          Text("${(DataProvider.awaitTroopsPercent(ovsnap.data) * 100)
+                                          Text("${(DataProvider.awaitTroopsPercent(ovsnap.data[0], ovsnap.data[2]) * 100)
                                               .toStringAsFixed(1)}%",
                                               style: const TextStyle(
                                                   color: Colors.white,
@@ -276,7 +276,7 @@ class _HomePageState extends State<HomePage> {
                                       ),
                                       radius: 40,
                                       lineWidth: 12,
-                                      percent: DataProvider.awaitTroopsPercent(ovsnap.data),
+                                      percent: DataProvider.awaitTroopsPercent(ovsnap.data[0], ovsnap.data[2]),
                                       circularStrokeCap: CircularStrokeCap
                                           .round,
                                       backgroundColor: Colors.white10,
@@ -328,7 +328,7 @@ class _HomePageState extends State<HomePage> {
                                         mainAxisAlignment: MainAxisAlignment
                                             .center,
                                         children: [
-                                          Text("${(DataProvider.awaitSpellsPercent(ovsnap.data) * 100)
+                                          Text("${(DataProvider.awaitSpellsPercent(ovsnap.data[0], ovsnap.data[2]) * 100)
                                               .toStringAsFixed(1)}%",
                                               style: const TextStyle(
                                                   color: Colors.white,
@@ -338,7 +338,7 @@ class _HomePageState extends State<HomePage> {
                                       ),
                                       radius: 40,
                                       lineWidth: 12,
-                                      percent: DataProvider.awaitSpellsPercent(ovsnap.data),
+                                      percent: DataProvider.awaitSpellsPercent(ovsnap.data[0], ovsnap.data[2]),
                                       circularStrokeCap: CircularStrokeCap
                                           .round,
                                       backgroundColor: Colors.white10,
@@ -397,7 +397,7 @@ class _HomePageState extends State<HomePage> {
                                         mainAxisAlignment: MainAxisAlignment
                                             .center,
                                         children: [
-                                          Text("${(DataProvider.awaitHeroesPercent(ovsnap.data) * 100)
+                                          Text("${(DataProvider.awaitHeroesPercent(ovsnap.data[0], ovsnap.data[2]) * 100)
                                               .toStringAsFixed(1)}%",
                                               style: const TextStyle(
                                                   color: Colors.white,
@@ -407,7 +407,7 @@ class _HomePageState extends State<HomePage> {
                                       ),
                                       radius: 40,
                                       lineWidth: 12,
-                                      percent: DataProvider.awaitHeroesPercent(ovsnap.data),
+                                      percent: DataProvider.awaitHeroesPercent(ovsnap.data[0], ovsnap.data[2]),
                                       circularStrokeCap: CircularStrokeCap
                                           .round,
                                       backgroundColor: Colors.white10,
@@ -459,7 +459,7 @@ class _HomePageState extends State<HomePage> {
                                         mainAxisAlignment: MainAxisAlignment
                                             .center,
                                         children: [
-                                          Text("${(DataProvider.awaitEquipmentPercent(ovsnap.data) * 100)
+                                          Text("${(DataProvider.awaitEquipmentPercent(ovsnap.data[0], ovsnap.data[3]) * 100)
                                               .toStringAsFixed(1)}%",
                                               style: const TextStyle(
                                                   color: Colors.white,
@@ -469,7 +469,7 @@ class _HomePageState extends State<HomePage> {
                                       ),
                                       radius: 40,
                                       lineWidth: 12,
-                                      percent: DataProvider.awaitEquipmentPercent(ovsnap.data),
+                                      percent: DataProvider.awaitEquipmentPercent(ovsnap.data[0], ovsnap.data[3]),
                                       circularStrokeCap: CircularStrokeCap
                                           .round,
                                       backgroundColor: Colors.white10,
@@ -521,7 +521,7 @@ class _HomePageState extends State<HomePage> {
                                         mainAxisAlignment: MainAxisAlignment
                                             .center,
                                         children: [
-                                          Text("${(DataProvider.awaitAchievementsPercent(ovsnap.data) * 100)
+                                          Text("${(DataProvider.awaitAchievementsPercent(ovsnap.data[0]) * 100)
                                               .toStringAsFixed(1)}%",
                                               style: const TextStyle(
                                                   color: Colors.white,
@@ -531,7 +531,7 @@ class _HomePageState extends State<HomePage> {
                                       ),
                                       radius: 40,
                                       lineWidth: 12,
-                                      percent: DataProvider.awaitAchievementsPercent(ovsnap.data),
+                                      percent: DataProvider.awaitAchievementsPercent(ovsnap.data[0]),
                                       circularStrokeCap: CircularStrokeCap
                                           .round,
                                       backgroundColor: Colors.white10,
