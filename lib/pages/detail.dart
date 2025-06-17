@@ -118,7 +118,7 @@ class _DetailPageState extends State<DetailPage> {
 
   Widget getBuildingDetail() {
     return FutureBuilder(
-        future: Future.wait([DataProvider.awaitPlayerData(userTag), DataProvider.awaitBuildings()]),
+        future: Future.wait([DataProvider.awaitPlayerData(userTag), DataProvider.awaitMaxBuildings()]),
         builder: (context, AsyncSnapshot snapshot) {
           if(snapshot.hasData) {
             List titles = ["Defense", "Army", "Resources"];

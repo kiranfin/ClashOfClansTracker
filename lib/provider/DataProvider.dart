@@ -24,7 +24,7 @@ Future<Map<String, dynamic>> awaitPlayerClan(String tag) async {
   return jsonDecode(res.body) as Map<String, dynamic>;
 }
 
-Future<Map<String, dynamic>> awaitBuildings() async {
+Future<Map<String, dynamic>> awaitMaxBuildings() async {
   final url = Uri.parse('${Utils.getBaseUrl()}retrieve/buildings');
   final res = await http.get(url);
   final status = res.statusCode;
@@ -34,6 +34,14 @@ Future<Map<String, dynamic>> awaitBuildings() async {
 
 Future<Map<String, dynamic>> awaitMaxTroops() async {
   final url = Uri.parse('${Utils.getBaseUrl()}retrieve/troops');
+  final res = await http.get(url);
+  final status = res.statusCode;
+  if (status != 200) throw Exception('http.get error: statusCode= $status');
+  return jsonDecode(res.body) as Map<String, dynamic>;
+}
+
+Future<Map<String, dynamic>> awaitMaxEquipment() async {
+  final url = Uri.parse('${Utils.getBaseUrl()}retrieve/equipment');
   final res = await http.get(url);
   final status = res.statusCode;
   if (status != 200) throw Exception('http.get error: statusCode= $status');
