@@ -552,3 +552,119 @@ String getTownHallWeapon(int thlevel) {
   if(thlevel == 17) return "Inferno Artillery";
   return "Inferno Artillery";
 }
+
+Map<String, dynamic> getDefaultDefenses(int thlevel, Map<String, dynamic> buildings) {
+  Map<String, int> defensemap = {};
+  Map<String, dynamic> dmincount = getDefensesAndCount(thlevel, buildings);
+  Map<String, dynamic> dmaxcount = getMaxDefensesAndCount(thlevel, buildings);
+  Map<String, dynamic> dminlevel = getDefensesAndMaxLevel(thlevel, buildings);
+  dmincount.forEach((key, val){
+    int count = 0;
+    for (int i = 0; i < val; i++) {
+      int max = dminlevel[key]!;
+      defensemap["$key-$count"] = max;
+      count++;
+    }
+    if (val < dmaxcount[key]) {
+      for (int j = 0; j < dmaxcount[key] - val; j++) {
+        defensemap["$key-$count"] = 0;
+        count++;
+      }
+    }
+  });
+  dmaxcount.forEach((key, val){
+    if(!dmincount.containsKey(key)) {
+      for (int i = 0; i < val; i++) {
+        defensemap["$key-$i"] = 0;
+      }
+    }
+  });
+  return defensemap;
+}
+
+Map<String, dynamic> getDefaultTraps(int thlevel, Map<String, dynamic> buildings) {
+  Map<String, int> trapmap = {};
+  Map<String, dynamic> tmincount = getTrapsAndCount(thlevel, buildings);
+  Map<String, dynamic> tmaxcount = getMaxTrapsAndCount(thlevel, buildings);
+  Map<String, dynamic> tminlevel = getTrapsAndMaxLevel(thlevel, buildings);
+  tmincount.forEach((key, val){
+    int count = 0;
+    for (int i = 0; i < val; i++) {
+      int max = tminlevel[key]!;
+      trapmap["$key-$count"] = max;
+      count++;
+    }
+    if (val < tmaxcount[key]) {
+      for (int j = 0; j < tmaxcount[key] - val; j++) {
+        trapmap["$key-$count"] = 0;
+        count++;
+      }
+    }
+  });
+  tmaxcount.forEach((key, val){
+    if(!tmincount.containsKey(key)) {
+      for (int i = 0; i < val; i++) {
+        trapmap["$key-$i"] = 0;
+      }
+    }
+  });
+  return trapmap;
+}
+
+Map<String, dynamic> getDefaultArmyBuildings(int thlevel, Map<String, dynamic> buildings) {
+  Map<String, int> armymap = {};
+  Map<String, dynamic> amincount = getArmyAndCount(thlevel, buildings);
+  Map<String, dynamic> amaxcount = getMaxArmyAndCount(thlevel, buildings);
+  Map<String, dynamic> aminlevel = getArmyAndMaxLevel(thlevel, buildings);
+  amincount.forEach((key, val){
+    int count = 0;
+    for (int i = 0; i < val; i++) {
+      int max = aminlevel[key]!;
+      armymap["$key-$count"] = max;
+      count++;
+    }
+    if(val < amaxcount[key]) {
+      for(int j = 0; j < amaxcount[key] - val; j++) {
+        armymap["$key-$count"] = 0;
+        count++;
+      }
+    }
+  });
+  amaxcount.forEach((key, val){
+    if(!amincount.containsKey(key)) {
+      for (int i = 0; i < val; i++) {
+        armymap["$key-$i"] = 0;
+      }
+    }
+  });
+  return armymap;
+}
+
+Map<String, dynamic> getDefaultResources(int thlevel, Map<String, dynamic> buildings) {
+  Map<String, int> resourcesmap = {};
+  Map<String, dynamic> rmincount = getResourceAndCount(thlevel, buildings);
+  Map<String, dynamic> rmaxcount = getResourceAndCount(thlevel, buildings);
+  Map<String, dynamic> rminlevel = getResourceAndMaxLevel(thlevel, buildings);
+  rmincount.forEach((key, val){
+    int count = 0;
+    for (int i = 0; i < val; i++) {
+      int max = rminlevel[key]!;
+      resourcesmap["$key-$count"] = max;
+      count++;
+    }
+    if(val < rmaxcount[key]) {
+      for(int j = 0; j < rmaxcount[key] - val; j++) {
+        resourcesmap["$key-$count"] = 0;
+        count++;
+      }
+    }
+  });
+  rmaxcount.forEach((key, val){
+    if(!rmincount.containsKey(key)) {
+      for (int i = 0; i < val; i++) {
+        resourcesmap["$key-$i"] = 0;
+      }
+    }
+  });
+  return resourcesmap;
+}

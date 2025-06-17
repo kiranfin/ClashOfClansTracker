@@ -3,6 +3,7 @@ import 'package:clashofclanstracker/utils/img/ShortAsset.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
+import '../utils/UserSP.dart';
 import '../utils/Utils.dart' as Utils;
 
 Future<Map<String, dynamic>> awaitPlayerData(String tag) async {
@@ -220,7 +221,63 @@ double awaitOverallPercent(Map<String, dynamic> userdata, Map<String, dynamic> m
 }
 
 double awaitBuildingsPercent(Map<String, dynamic> userdata, Map<String, dynamic> maxdata) {
-  return 0.5;
+  var defensesString = UserSP.getUserDefenses(userdata["tag"].substring(1));
+  Map<String, dynamic> defenses = defensesString != null? Map<String, dynamic>.from(jsonDecode(defensesString)) : Utils.getDefaultDefenses(userdata["townHallLevel"], maxdata);
+  var trapsString = UserSP.getUserTraps(userdata["tag"].substring(1));
+  Map<String, dynamic> traps = trapsString != null? Map<String, dynamic>.from(jsonDecode(trapsString)) : Utils.getDefaultTraps(userdata["townHallLevel"], maxdata);
+  var armyString = UserSP.getUserArmyBuildings(userdata["tag"].substring(1));
+  Map<String, dynamic> armybuildings = armyString != null? Map<String, dynamic>.from(jsonDecode(armyString)) : Utils.getDefaultArmyBuildings(userdata["townHallLevel"], maxdata);
+  var resourcesString = UserSP.getUserResourceBuildings(userdata["tag"].substring(1));
+  Map<String, dynamic> resources = resourcesString != null? Map<String, dynamic>.from(jsonDecode(resourcesString)) : Utils.getDefaultResources(userdata["townHallLevel"], maxdata);
+
+  num sum = 0;
+  num max = 0;
+  defenses.forEach((key, val) {
+    sum += val;
+  });
+  traps.forEach((key, val) {
+    sum += val;
+  });
+  armybuildings.forEach((key, val) {
+    sum += val;
+  });
+  resources.forEach((key, val) {
+    sum += val;
+  });
+
+  final maxdefensescount = maxdata["defenses"]["counts"]["17"];
+  final maxdefenseslevel = maxdata["defenses"]["maxLevels"]["17"];
+  final maxtrapscount = maxdata["traps"]["counts"]["17"];
+  final maxtrapslevel = maxdata["traps"]["maxLevels"]["17"];
+  final maxarmyscount = maxdata["army"]["counts"]["17"];
+  final maxarmyslevel = maxdata["army"]["maxLevels"]["17"];
+  final maxresourcescount = maxdata["resources"]["counts"]["17"];
+  final maxresourceslevel = maxdata["resources"]["maxLevels"]["17"];
+  maxdefensescount.forEach((key, val){
+    for(int i = 0; i < val; i++) {
+      max += maxdefenseslevel[key];
+    }
+  });
+  maxtrapscount.forEach((key, val){
+    for(int i = 0; i < val; i++) {
+      max += maxtrapslevel[key];
+    }
+  });
+  maxarmyscount.forEach((key, val){
+    for(int i = 0; i < val; i++) {
+      max += maxarmyslevel[key];
+    }
+  });
+  maxresourcescount.forEach((key, val){
+    for(int i = 0; i < val; i++) {
+      max += maxresourceslevel[key];
+    }
+  });
+
+  print(sum);
+  print(max);
+  double res = max == 0? 0.0 : sum / max;
+  return res;
 }
 
 double awaitTroopsPercent(Map<String, dynamic> userdata, Map<String, dynamic> maxdata) {

@@ -28,129 +28,13 @@ class _DetailPageState extends State<DetailPage> {
 
   void loadData(int thlevel, Map<String, dynamic> buildings) {
     var defensesString = UserSP.getUserDefenses(userTag);
-    defenses = defensesString != null? Map<String, dynamic>.from(jsonDecode(defensesString)) : getDefaultDefenses(thlevel, buildings);
+    defenses = defensesString != null? Map<String, dynamic>.from(jsonDecode(defensesString)) : Utils.getDefaultDefenses(thlevel, buildings);
     var trapsString = UserSP.getUserTraps(userTag);
-    traps = trapsString != null? Map<String, dynamic>.from(jsonDecode(trapsString)) : getDefaultTraps(thlevel, buildings);
+    traps = trapsString != null? Map<String, dynamic>.from(jsonDecode(trapsString)) : Utils.getDefaultTraps(thlevel, buildings);
     var armyString = UserSP.getUserArmyBuildings(userTag);
-    armybuildings = armyString != null? Map<String, dynamic>.from(jsonDecode(armyString)) : getDefaultArmyBuildings(thlevel, buildings);
+    armybuildings = armyString != null? Map<String, dynamic>.from(jsonDecode(armyString)) : Utils.getDefaultArmyBuildings(thlevel, buildings);
     var resourcesString = UserSP.getUserResourceBuildings(userTag);
-    resources = resourcesString != null? Map<String, dynamic>.from(jsonDecode(resourcesString)) : getDefaultResources(thlevel, buildings);
-  }
-
-  Map<String, dynamic> getDefaultDefenses(int thlevel, Map<String, dynamic> buildings) {
-    Map<String, int> defensemap = {};
-    Map<String, dynamic> dmincount = Utils.getDefensesAndCount(thlevel, buildings);
-    Map<String, dynamic> dmaxcount = Utils.getMaxDefensesAndCount(thlevel, buildings);
-    Map<String, dynamic> dminlevel = Utils.getDefensesAndMaxLevel(thlevel, buildings);
-    dmincount.forEach((key, val){
-      int count = 0;
-      for (int i = 0; i < val; i++) {
-        int max = dminlevel[key]!;
-        defensemap["$key-$count"] = max;
-        count++;
-      }
-      if (val < dmaxcount[key]) {
-        for (int j = 0; j < dmaxcount[key] - val; j++) {
-          defensemap["$key-$count"] = 0;
-          count++;
-        }
-      }
-    });
-    dmaxcount.forEach((key, val){
-      if(!dmincount.containsKey(key)) {
-        for (int i = 0; i < val; i++) {
-          defensemap["$key-$i"] = 0;
-        }
-      }
-    });
-    return defensemap;
-  }
-
-  Map<String, dynamic> getDefaultTraps(int thlevel, Map<String, dynamic> buildings) {
-    Map<String, int> trapmap = {};
-    Map<String, dynamic> tmincount = Utils.getTrapsAndCount(thlevel, buildings);
-    Map<String, dynamic> tmaxcount = Utils.getMaxTrapsAndCount(thlevel, buildings);
-    Map<String, dynamic> tminlevel = Utils.getTrapsAndMaxLevel(thlevel, buildings);
-    tmincount.forEach((key, val){
-      int count = 0;
-      for (int i = 0; i < val; i++) {
-        int max = tminlevel[key]!;
-        trapmap["$key-$count"] = max;
-        count++;
-      }
-      if (val < tmaxcount[key]) {
-        for (int j = 0; j < tmaxcount[key] - val; j++) {
-          trapmap["$key-$count"] = 0;
-          count++;
-        }
-      }
-    });
-    tmaxcount.forEach((key, val){
-      if(!tmincount.containsKey(key)) {
-        for (int i = 0; i < val; i++) {
-          trapmap["$key-$i"] = 0;
-        }
-      }
-    });
-    return trapmap;
-  }
-
-  Map<String, dynamic> getDefaultArmyBuildings(int thlevel, Map<String, dynamic> buildings) {
-    Map<String, int> armymap = {};
-    Map<String, dynamic> amincount = Utils.getArmyAndCount(thlevel, buildings);
-    Map<String, dynamic> amaxcount = Utils.getMaxArmyAndCount(thlevel, buildings);
-    Map<String, dynamic> aminlevel = Utils.getArmyAndMaxLevel(thlevel, buildings);
-    amincount.forEach((key, val){
-      int count = 0;
-      for (int i = 0; i < val; i++) {
-        int max = aminlevel[key]!;
-        armymap["$key-$count"] = max;
-        count++;
-      }
-      if(val < amaxcount[key]) {
-        for(int j = 0; j < amaxcount[key] - val; j++) {
-          armymap["$key-$count"] = 0;
-          count++;
-        }
-      }
-    });
-    amaxcount.forEach((key, val){
-      if(!amincount.containsKey(key)) {
-        for (int i = 0; i < val; i++) {
-          armymap["$key-$i"] = 0;
-        }
-      }
-    });
-    return armymap;
-  }
-
-  Map<String, dynamic> getDefaultResources(int thlevel, Map<String, dynamic> buildings) {
-    Map<String, int> resourcesmap = {};
-    Map<String, dynamic> rmincount = Utils.getResourceAndCount(thlevel, buildings);
-    Map<String, dynamic> rmaxcount = Utils.getResourceAndCount(thlevel, buildings);
-    Map<String, dynamic> rminlevel = Utils.getResourceAndMaxLevel(thlevel, buildings);
-    rmincount.forEach((key, val){
-      int count = 0;
-      for (int i = 0; i < val; i++) {
-        int max = rminlevel[key]!;
-        resourcesmap["$key-$count"] = max;
-        count++;
-      }
-      if(val < rmaxcount[key]) {
-        for(int j = 0; j < rmaxcount[key] - val; j++) {
-          resourcesmap["$key-$count"] = 0;
-          count++;
-        }
-      }
-    });
-    rmaxcount.forEach((key, val){
-      if(!rmincount.containsKey(key)) {
-        for (int i = 0; i < val; i++) {
-          resourcesmap["$key-$i"] = 0;
-        }
-      }
-    });
-    return resourcesmap;
+    resources = resourcesString != null? Map<String, dynamic>.from(jsonDecode(resourcesString)) : Utils.getDefaultResources(thlevel, buildings);
   }
 
   void updateDefenses(Map<String, dynamic> newdata) async {
