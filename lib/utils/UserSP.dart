@@ -9,6 +9,7 @@ class UserSP {
   static Future setUsers(List<String> user) async => await _preferences.setStringList("user", user);
 
   static Future setUserDefenses(String user, String defenses) async => await _preferences.setString("userdefenses$user", defenses);
+  static Future setUserTraps(String user, String traps) async => await _preferences.setString("usertraps$user", traps);
   static Future setUserArmyBuildings(String user, String army) async => await _preferences.setString("userarmy$user", army);
   static Future setUserResourceBuildings(String user, String resources) async => await _preferences.setString("userresources$user", resources);
 
@@ -16,6 +17,7 @@ class UserSP {
   static List<String> getUser() => _preferences.getStringList("user") ?? [];
 
   static String? getUserDefenses(String user) => _preferences.getString("userdefenses$user");
+  static String? getUserTraps(String user) => _preferences.getString("usertraps$user");
   static String? getUserArmyBuildings(String user) => _preferences.getString("userarmy$user");
   static String? getUserResourceBuildings(String user) => _preferences.getString("userresources$user");
 }

@@ -200,6 +200,7 @@ const hog_rider_puppet = 'lib/utils/img/equipment/Hog_Rider_Puppet.webp';
 const haste_vial = 'lib/utils/img/equipment/Haste_Vial.webp';
 const rocket_spear = 'lib/utils/img/equipment/Rocket_Spear.webp';
 const electro_boots = 'lib/utils/img/equipment/Electro_Boots.webp';
+const dark_crown = 'lib/utils/img/equipment/Dark_Crown.webp';
 
 const shiny_ore = 'lib/utils/img/equipment/Shiny_Ore.webp';
 const glowy_ore = 'lib/utils/img/equipment/Glowy_Ore.webp';

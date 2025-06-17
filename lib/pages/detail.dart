@@ -22,12 +22,15 @@ class _DetailPageState extends State<DetailPage> {
   late String category = ModalRoute.of(context)!.settings.arguments as String;
 
   late Map<String, dynamic> defenses = {};
+  late Map<String, dynamic> traps = {};
   late Map<String, dynamic> armybuildings = {};
   late Map<String, dynamic> resources = {};
 
   void loadData(int thlevel, Map<String, dynamic> buildings) {
     var defensesString = UserSP.getUserDefenses(userTag);
     defenses = defensesString != null? Map<String, dynamic>.from(jsonDecode(defensesString)) : getDefaultDefenses(thlevel, buildings);
+    var trapsString = UserSP.getUserTraps(userTag);
+    traps = trapsString != null? Map<String, dynamic>.from(jsonDecode(trapsString)) : getDefaultTraps(thlevel, buildings);
     var armyString = UserSP.getUserArmyBuildings(userTag);
     armybuildings = armyString != null? Map<String, dynamic>.from(jsonDecode(armyString)) : getDefaultArmyBuildings(thlevel, buildings);
     var resourcesString = UserSP.getUserResourceBuildings(userTag);
@@ -36,25 +39,86 @@ class _DetailPageState extends State<DetailPage> {
 
   Map<String, dynamic> getDefaultDefenses(int thlevel, Map<String, dynamic> buildings) {
     Map<String, int> defensemap = {};
-    Map<String, dynamic> dcount = Utils.getDefensesAndCount(thlevel, buildings);
-    Map<String, dynamic> dlevel = Utils.getDefensesAndMaxLevel(thlevel, buildings);
-    dcount.forEach((key, val){
-      for(int i = 0; i < val; i++) {
-        int max = dlevel[key]!;
-        defensemap["$key-$i"] = max;
+    Map<String, dynamic> dmincount = Utils.getDefensesAndCount(thlevel, buildings);
+    Map<String, dynamic> dmaxcount = Utils.getMaxDefensesAndCount(thlevel, buildings);
+    Map<String, dynamic> dminlevel = Utils.getDefensesAndMaxLevel(thlevel, buildings);
+    dmincount.forEach((key, val){
+      int count = 0;
+      for (int i = 0; i < val; i++) {
+        int max = dminlevel[key]!;
+        defensemap["$key-$count"] = max;
+        count++;
+      }
+      if (val < dmaxcount[key]) {
+        for (int j = 0; j < dmaxcount[key] - val; j++) {
+          defensemap["$key-$count"] = 0;
+          count++;
+        }
+      }
+    });
+    dmaxcount.forEach((key, val){
+      if(!dmincount.containsKey(key)) {
+        for (int i = 0; i < val; i++) {
+          defensemap["$key-$i"] = 0;
+        }
       }
     });
     return defensemap;
   }
 
+  Map<String, dynamic> getDefaultTraps(int thlevel, Map<String, dynamic> buildings) {
+    Map<String, int> trapmap = {};
+    Map<String, dynamic> tmincount = Utils.getTrapsAndCount(thlevel, buildings);
+    Map<String, dynamic> tmaxcount = Utils.getMaxTrapsAndCount(thlevel, buildings);
+    Map<String, dynamic> tminlevel = Utils.getTrapsAndMaxLevel(thlevel, buildings);
+    tmincount.forEach((key, val){
+      int count = 0;
+      for (int i = 0; i < val; i++) {
+        int max = tminlevel[key]!;
+        trapmap["$key-$count"] = max;
+        count++;
+      }
+      if (val < tmaxcount[key]) {
+        for (int j = 0; j < tmaxcount[key] - val; j++) {
+          trapmap["$key-$count"] = 0;
+          count++;
+        }
+      }
+    });
+    tmaxcount.forEach((key, val){
+      if(!tmincount.containsKey(key)) {
+        for (int i = 0; i < val; i++) {
+          trapmap["$key-$i"] = 0;
+        }
+      }
+    });
+    return trapmap;
+  }
+
   Map<String, dynamic> getDefaultArmyBuildings(int thlevel, Map<String, dynamic> buildings) {
     Map<String, int> armymap = {};
-    Map<String, dynamic> acount = Utils.getArmyAndCount(thlevel, buildings);
-    Map<String, dynamic> alevel = Utils.getArmyAndMaxLevel(thlevel, buildings);
-    acount.forEach((key, val){
-      for(int i = 0; i < val; i++) {
-        int max = alevel[key]!;
-        armymap["$key-$i"] = max;
+    Map<String, dynamic> amincount = Utils.getArmyAndCount(thlevel, buildings);
+    Map<String, dynamic> amaxcount = Utils.getMaxArmyAndCount(thlevel, buildings);
+    Map<String, dynamic> aminlevel = Utils.getArmyAndMaxLevel(thlevel, buildings);
+    amincount.forEach((key, val){
+      int count = 0;
+      for (int i = 0; i < val; i++) {
+        int max = aminlevel[key]!;
+        armymap["$key-$count"] = max;
+        count++;
+      }
+      if(val < amaxcount[key]) {
+        for(int j = 0; j < amaxcount[key] - val; j++) {
+          armymap["$key-$count"] = 0;
+          count++;
+        }
+      }
+    });
+    amaxcount.forEach((key, val){
+      if(!amincount.containsKey(key)) {
+        for (int i = 0; i < val; i++) {
+          armymap["$key-$i"] = 0;
+        }
       }
     });
     return armymap;
@@ -62,12 +126,28 @@ class _DetailPageState extends State<DetailPage> {
 
   Map<String, dynamic> getDefaultResources(int thlevel, Map<String, dynamic> buildings) {
     Map<String, int> resourcesmap = {};
-    Map<String, dynamic> rcount = Utils.getResourceAndCount(thlevel, buildings);
-    Map<String, dynamic> rlevel = Utils.getResourceAndMaxLevel(thlevel, buildings);
-    rcount.forEach((key, val){
-      for(int i = 0; i < val; i++) {
-        int max = rlevel[key]!;
-        resourcesmap["$key-$i"] = max;
+    Map<String, dynamic> rmincount = Utils.getResourceAndCount(thlevel, buildings);
+    Map<String, dynamic> rmaxcount = Utils.getResourceAndCount(thlevel, buildings);
+    Map<String, dynamic> rminlevel = Utils.getResourceAndMaxLevel(thlevel, buildings);
+    rmincount.forEach((key, val){
+      int count = 0;
+      for (int i = 0; i < val; i++) {
+        int max = rminlevel[key]!;
+        resourcesmap["$key-$count"] = max;
+        count++;
+      }
+      if(val < rmaxcount[key]) {
+        for(int j = 0; j < rmaxcount[key] - val; j++) {
+          resourcesmap["$key-$count"] = 0;
+          count++;
+        }
+      }
+    });
+    rmaxcount.forEach((key, val){
+      if(!rmincount.containsKey(key)) {
+        for (int i = 0; i < val; i++) {
+          resourcesmap["$key-$i"] = 0;
+        }
       }
     });
     return resourcesmap;
@@ -78,6 +158,13 @@ class _DetailPageState extends State<DetailPage> {
       defenses = newdata;
     });
     UserSP.setUserDefenses(userTag, jsonEncode(newdata));
+  }
+
+  void updateTraps(Map<String, dynamic> newdata) async {
+    setState(() {
+      traps = newdata;
+    });
+    UserSP.setUserTraps(userTag, jsonEncode(newdata));
   }
 
   void updateArmyBuildings(Map<String, dynamic> newdata) async {
@@ -118,199 +205,260 @@ class _DetailPageState extends State<DetailPage> {
 
   Widget getBuildingDetail() {
     return FutureBuilder(
-        future: Future.wait([DataProvider.awaitPlayerData(userTag), DataProvider.awaitMaxBuildings()]),
+        future: Future.wait([DataProvider.awaitPlayerData(userTag), DataProvider.awaitBuildings()]),
         builder: (context, AsyncSnapshot snapshot) {
           if(snapshot.hasData) {
-            List titles = ["Defense", "Army", "Resources"];
+            List titles = ["Defense", "Traps", "Army", "Resources"];
             loadData(snapshot.data[0]["townHallLevel"], snapshot.data[1]);
             List<Map<String, dynamic>> finalmaplist = [];
-            finalmaplist.add(defenses);
+            Map<String, dynamic> copymap = {};
+            copymap["${Utils.getTownHallWeapon(snapshot.data[0]["townHallLevel"])}-0"] = snapshot.data[0]["townHallWeaponLevel"];
+            copymap.addAll(defenses);
+            defenses["${Utils.getTownHallWeapon(snapshot.data[0]["townHallLevel"])}-0"] = snapshot.data[0]["townHallWeaponLevel"];
+            finalmaplist.add(copymap);
+            finalmaplist.add(traps);
             finalmaplist.add(armybuildings);
             finalmaplist.add(resources);
             return ListView.builder(
               itemCount: titles.length,
-              itemBuilder: (BuildContext context, int ind) {
-                return Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(titles[ind], style: const TextStyle(
-                            color: Colors.white,
-                            fontFamily: "Poppins",
-                            fontSize: 30)
-                        ),
-                        ElevatedButton.icon(
-                          style: ButtonStyle(
-                              backgroundColor: WidgetStateProperty.all(Colors.white24),
-                              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                                  RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(15.0),
-                                      side: BorderSide(color: Colors.white24)
+                itemBuilder: (BuildContext context, int ind) {
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      ind == 0? ClipRRect(
+                        borderRadius: BorderRadius.circular(20),
+                        child: Container(
+                          width: MediaQuery
+                              .of(context)
+                              .size
+                              .width,
+                          color: Colors.black,
+                          child: GridTile(
+                            child: Padding(
+                              padding: const EdgeInsets.all(5.0),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  DataProvider.awaitTownHallIcon(snapshot.data[0]["townHallLevel"], 1.5),
+                                  SizedBox(width: 10),
+                                  Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text("Townhall ${snapshot.data[0]["townHallLevel"]}", style: const TextStyle(
+                                          color: Colors.white,
+                                          fontFamily: "Poppins",
+                                          fontSize: 30)),
+                                      snapshot.data[0]["townHallWeaponLevel"] != null? Text("Level ${snapshot.data[0]["townHallWeaponLevel"]}", style: const TextStyle(
+                                          color: Colors.white,
+                                          fontFamily: "Poppins",
+                                          fontSize: 18)) : SizedBox(height: 5),
+                                    ],
                                   )
-                              )
+                                ],
+                              ),
+                            ),
                           ),
-                          onPressed: () {
-                            Map<String, dynamic> newdata = finalmaplist[ind];
-                            if(ind == 0) {
-                              newdata.forEach((key, val) {
-                                newdata[key] = Utils.getDefensesAndMaxLevel(snapshot.data[0]["townHallLevel"], snapshot.data[1])[key.substring(0, key.length - 2)];
-                              });
-                              updateDefenses(newdata);
-                            } else if(ind == 1) {
-                              newdata.forEach((key, val) {
-                                newdata[key] = Utils.getArmyAndMaxLevel(snapshot.data[0]["townHallLevel"], snapshot.data[1])[key.substring(0, key.length - 2)];
-                              });
-                              updateArmyBuildings(newdata);
-                            } else if(ind == 2) {
-                              newdata.forEach((key, val) {
-                                newdata[key] = Utils.getResourceAndMaxLevel(snapshot.data[0]["townHallLevel"], snapshot.data[1])[key.substring(0, key.length - 2)];
-                              });
-                              updateResources(newdata);
-                            }
-                          },
-                          icon: Icon(Icons.skip_next, color: Colors.orangeAccent),
-                          label: Text("Max", style: const TextStyle(
+                        ),
+                      ) : SizedBox(height: 1),
+                      ind == 0? SizedBox(height: 20) : SizedBox(height: 1),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(titles[ind], style: const TextStyle(
                               color: Colors.white,
                               fontFamily: "Poppins",
-                              fontSize: 18)),
-                        ),
-                      ],
-                    ),
-                    Container(
-                      child: ListView.builder(
-                          shrinkWrap: true,
-                          physics: NeverScrollableScrollPhysics(),
-                          itemCount: finalmaplist[ind].length,
-                          itemBuilder: (BuildContext context, index) {
-                            return Padding(
-                              padding: const EdgeInsets.all(3.0),
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(20),
-                                child: Container(
-                                  color: Colors.black,
-                                  child: GridTile(
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(5.0),
-                                      child: Row(
-                                        mainAxisAlignment: MainAxisAlignment
-                                            .spaceBetween,
-                                        children: [
-                                          Row(
-                                            children: [
-                                              Utils.getBuildingImage(finalmaplist[ind].keys.elementAt(index).substring(0, finalmaplist[ind].keys.elementAt(index).length - 2), finalmaplist[ind].values.elementAt(index)),
-                                              SizedBox(width: 5),
-                                              AutoSizeText(
-                                                  "${finalmaplist[ind].keys.elementAt(index).substring(0, finalmaplist[ind].keys.elementAt(index).length - 2)} | ${finalmaplist[ind].values.elementAt(index)}",
-                                                  style: const TextStyle(
-                                                      color: Colors.white,
-                                                      fontFamily: "Poppins",
-                                                      fontSize: 15),
-                                                  maxLines: 1
-                                              ),
-                                            ],
-                                          ),
-                                          Row(
-                                            children: [
-                                              IconButton(
-                                                style: ButtonStyle(
-                                                  backgroundColor: WidgetStateProperty.all(Colors.white24),
-                                                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                                                    RoundedRectangleBorder(
-                                                      borderRadius: BorderRadius.circular(15.0),
-                                                      side: BorderSide(color: Colors.white24)
-                                                    )
-                                                  )
+                              fontSize: 30)
+                          ),
+                          ElevatedButton.icon(
+                            style: ButtonStyle(
+                                backgroundColor: WidgetStateProperty.all(Colors.white24),
+                                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                    RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(15.0),
+                                        side: BorderSide(color: Colors.white24)
+                                    )
+                                )
+                            ),
+                            onPressed: () {
+                              Map<String, dynamic> newdata = finalmaplist[ind];
+                              if(ind == 0) {
+                                newdata.forEach((key, val) {
+                                  newdata[key] = Utils.getMaxDefensesAndMaxLevel(snapshot.data[0]["townHallLevel"], snapshot.data[1])[key.substring(0, key.length - 2)];
+                                });
+                                updateDefenses(newdata);
+                              } else if(ind == 1) {
+                                newdata.forEach((key, val) {
+                                  newdata[key] = Utils.getMaxTrapsAndMaxLevel(snapshot.data[0]["townHallLevel"], snapshot.data[1])[key.substring(0, key.length - 2)];
+                                });
+                                updateTraps(newdata);
+                              } else if(ind == 2) {
+                                newdata.forEach((key, val) {
+                                  newdata[key] = Utils.getMaxArmyAndMaxLevel(snapshot.data[0]["townHallLevel"], snapshot.data[1])[key.substring(0, key.length - 2)];
+                                });
+                                updateArmyBuildings(newdata);
+                              } else if(ind == 3) {
+                                newdata.forEach((key, val) {
+                                  newdata[key] = Utils.getMaxResourceAndMaxLevel(snapshot.data[0]["townHallLevel"], snapshot.data[1])[key.substring(0, key.length - 2)];
+                                });
+                                updateResources(newdata);
+                              }
+                            },
+                            icon: Icon(Icons.skip_next, color: Colors.orangeAccent),
+                            label: Text("Max", style: const TextStyle(
+                                color: Colors.white,
+                                fontFamily: "Poppins",
+                                fontSize: 18)),
+                          ),
+                        ],
+                      ),
+                      Container(
+                        child: ListView.builder(
+                            shrinkWrap: true,
+                            physics: NeverScrollableScrollPhysics(),
+                            itemCount: finalmaplist[ind].length,
+                            itemBuilder: (BuildContext context, index) {
+                              return Padding(
+                                padding: const EdgeInsets.all(3.0),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(20),
+                                  child: Container(
+                                    color: Colors.black,
+                                    child: GridTile(
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(5.0),
+                                        child: Row(
+                                          mainAxisAlignment: MainAxisAlignment
+                                              .spaceBetween,
+                                          children: [
+                                            Row(
+                                              children: [
+                                                Container(
+                                                  height: 60,
+                                                  width: 60,
+                                                  child: Utils.getBuildingImage(snapshot.data[0]["townHallLevel"], finalmaplist[ind].keys.elementAt(index).substring(0, finalmaplist[ind].keys.elementAt(index).length - 2), finalmaplist[ind].values.elementAt(index)),
                                                 ),
-                                                onPressed: () {
-                                                  Map<String, dynamic> newdata = finalmaplist[ind];
-                                                  if(finalmaplist[ind].values.elementAt(index) - 1 >= 1) {
-                                                    newdata[finalmaplist[ind].keys.elementAt(index)] = finalmaplist[ind].values.elementAt(index) - 1;
-                                                    if (ind == 0) {
-                                                      updateDefenses(newdata);
-                                                    } else if (ind == 1) {
-                                                      updateArmyBuildings(
-                                                          newdata);
-                                                    } else if (ind == 2) {
-                                                      updateResources(newdata);
-                                                    }
-                                                  }
-                                                },
-                                                icon: Icon(Icons.remove, color: Colors.redAccent)
-                                              ),
-                                              IconButton(
-                                                style: ButtonStyle(
-                                                    backgroundColor: WidgetStateProperty.all(Colors.white24),
-                                                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                                                        RoundedRectangleBorder(
-                                                            borderRadius: BorderRadius.circular(15.0),
-                                                            side: BorderSide(color: Colors.white24)
+                                                SizedBox(width: 5),
+                                                AutoSizeText(
+                                                    "${finalmaplist[ind].keys.elementAt(index).substring(0, finalmaplist[ind].keys.elementAt(index).length - 2)} | ${Utils.getTownHallWeapon(snapshot.data[0]["townHallLevel"]) != finalmaplist[ind].keys.elementAt(index).substring(0, finalmaplist[ind].keys.elementAt(index).length - 2)? finalmaplist[ind].values.elementAt(index) : snapshot.data[0]["townHallWeaponLevel"]}",
+                                                    style: const TextStyle(
+                                                        color: Colors.white,
+                                                        fontFamily: "Poppins",
+                                                        fontSize: 15),
+                                                    maxLines: 1
+                                                ),
+                                              ],
+                                            ),
+                                            Utils.getTownHallWeapon(snapshot.data[0]["townHallLevel"]) != finalmaplist[ind].keys.elementAt(index).substring(0, finalmaplist[ind].keys.elementAt(index).length - 2)? Row(
+                                              children: [
+                                                IconButton(
+                                                    style: ButtonStyle(
+                                                        backgroundColor: WidgetStateProperty.all(Colors.white24),
+                                                        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                                            RoundedRectangleBorder(
+                                                                borderRadius: BorderRadius.circular(15.0),
+                                                                side: BorderSide(color: Colors.white24)
+                                                            )
                                                         )
-                                                    )
+                                                    ),
+                                                    onPressed: () {
+                                                      Map<String, dynamic> newdata = finalmaplist[ind];
+                                                      if(finalmaplist[ind].values.elementAt(index) - 1 >= 0) {
+                                                        newdata[finalmaplist[ind].keys.elementAt(index)] = finalmaplist[ind].values.elementAt(index) - 1;
+                                                        if (ind == 0) {
+                                                          updateDefenses(newdata);
+                                                        } else if (ind == 1) {
+                                                          updateTraps(newdata);
+                                                        } else if (ind == 2) {
+                                                          updateArmyBuildings(
+                                                              newdata);
+                                                        } else if (ind == 3) {
+                                                          updateResources(newdata);
+                                                        }
+                                                      }
+                                                    },
+                                                    icon: Icon(Icons.remove, color: Colors.redAccent)
                                                 ),
-                                                onPressed: (){
-                                                  Map<String, dynamic> newdata = finalmaplist[ind];
-                                                  if (ind == 0) {
-                                                    if(finalmaplist[ind].values.elementAt(index) + 1 <= Utils.getDefensesAndMaxLevel(snapshot.data[0]["townHallLevel"], snapshot.data[1])[finalmaplist[ind].keys.elementAt(index).substring(0, finalmaplist[ind].keys.elementAt(index).length - 2)]) {
-                                                      newdata[finalmaplist[ind].keys.elementAt(index)] = finalmaplist[ind].values.elementAt(index) + 1;
-                                                      updateDefenses(newdata);
-                                                    }
-                                                  } else if (ind == 1) {
-                                                    if(finalmaplist[ind].values.elementAt(index) + 1 <= Utils.getArmyAndMaxLevel(snapshot.data[0]["townHallLevel"], snapshot.data[1])[finalmaplist[ind].keys.elementAt(index).substring(0, finalmaplist[ind].keys.elementAt(index).length - 2)]) {
-                                                      newdata[finalmaplist[ind].keys.elementAt(index)] = finalmaplist[ind].values.elementAt(index) + 1;
-                                                      updateArmyBuildings(newdata);
-                                                    }
-                                                  } else if (ind == 2) {
-                                                    if(finalmaplist[ind].values.elementAt(index) + 1 <= Utils.getArmyAndMaxLevel(snapshot.data[0]["townHallLevel"], snapshot.data[1])[finalmaplist[ind].keys.elementAt(index).substring(0, finalmaplist[ind].keys.elementAt(index).length - 2)]) {
-                                                      newdata[finalmaplist[ind].keys.elementAt(index)] = finalmaplist[ind].values.elementAt(index) + 1;
-                                                      updateResources(newdata);
-                                                    }
-                                                  }
-                                                },
-                                                icon: Icon(Icons.add, color: Colors.lightGreen)
-                                              ),
-                                              IconButton(
-                                                  style: ButtonStyle(
-                                                      backgroundColor: WidgetStateProperty.all(Colors.white24),
-                                                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                                                          RoundedRectangleBorder(
-                                                              borderRadius: BorderRadius.circular(15.0),
-                                                              side: BorderSide(color: Colors.white24)
-                                                          )
-                                                      )
-                                                  ),
-                                                  onPressed: (){
-                                                    Map<String, dynamic> newdata = finalmaplist[ind];
-                                                    if (ind == 0) {
-                                                      newdata[finalmaplist[ind].keys.elementAt(index)] = Utils.getDefensesAndMaxLevel(snapshot.data[0]["townHallLevel"], snapshot.data[1])[finalmaplist[ind].keys.elementAt(index).substring(0, finalmaplist[ind].keys.elementAt(index).length - 2)];
-                                                      updateDefenses(newdata);
-                                                    } else if (ind == 1) {
-                                                      newdata[finalmaplist[ind].keys.elementAt(index)] = Utils.getArmyAndMaxLevel(snapshot.data[0]["townHallLevel"], snapshot.data[1])[finalmaplist[ind].keys.elementAt(index).substring(0, finalmaplist[ind].keys.elementAt(index).length - 2)];
-                                                      updateArmyBuildings(newdata);
-                                                    } else if (ind == 2) {
-                                                      newdata[finalmaplist[ind].keys.elementAt(index)] = Utils.getResourceAndMaxLevel(snapshot.data[0]["townHallLevel"], snapshot.data[1])[finalmaplist[ind].keys.elementAt(index).substring(0, finalmaplist[ind].keys.elementAt(index).length - 2)];
-                                                      updateResources(newdata);
-                                                    }
-                                                  },
-                                                  icon: Icon(Icons.double_arrow, color: Colors.orangeAccent)
-                                              )
-                                            ],
-                                          ),
-                                        ],
+                                                IconButton(
+                                                    style: ButtonStyle(
+                                                        backgroundColor: WidgetStateProperty.all(Colors.white24),
+                                                        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                                            RoundedRectangleBorder(
+                                                                borderRadius: BorderRadius.circular(15.0),
+                                                                side: BorderSide(color: Colors.white24)
+                                                            )
+                                                        )
+                                                    ),
+                                                    onPressed: (){
+                                                      Map<String, dynamic> newdata = finalmaplist[ind];
+                                                      if (ind == 0) {
+                                                        if(finalmaplist[ind].values.elementAt(index) + 1 <= Utils.getMaxDefensesAndMaxLevel(snapshot.data[0]["townHallLevel"], snapshot.data[1])[finalmaplist[ind].keys.elementAt(index).substring(0, finalmaplist[ind].keys.elementAt(index).length - 2)]) {
+                                                          newdata[finalmaplist[ind].keys.elementAt(index)] = finalmaplist[ind].values.elementAt(index) + 1;
+                                                          updateDefenses(newdata);
+                                                        }
+                                                      } else if (ind == 1) {
+                                                        if(finalmaplist[ind].values.elementAt(index) + 1 <= Utils.getMaxTrapsAndMaxLevel(snapshot.data[0]["townHallLevel"], snapshot.data[1])[finalmaplist[ind].keys.elementAt(index).substring(0, finalmaplist[ind].keys.elementAt(index).length - 2)]) {
+                                                          newdata[finalmaplist[ind].keys.elementAt(index)] = finalmaplist[ind].values.elementAt(index) + 1;
+                                                          updateTraps(newdata);
+                                                        }
+                                                      } else if (ind == 2) {
+                                                        if(finalmaplist[ind].values.elementAt(index) + 1 <= Utils.getMaxArmyAndMaxLevel(snapshot.data[0]["townHallLevel"], snapshot.data[1])[finalmaplist[ind].keys.elementAt(index).substring(0, finalmaplist[ind].keys.elementAt(index).length - 2)]) {
+                                                          newdata[finalmaplist[ind].keys.elementAt(index)] = finalmaplist[ind].values.elementAt(index) + 1;
+                                                          updateArmyBuildings(newdata);
+                                                        }
+                                                      } else if (ind == 3) {
+                                                        if(finalmaplist[ind].values.elementAt(index) + 1 <= Utils.getMaxResourceAndMaxLevel(snapshot.data[0]["townHallLevel"], snapshot.data[1])[finalmaplist[ind].keys.elementAt(index).substring(0, finalmaplist[ind].keys.elementAt(index).length - 2)]) {
+                                                          newdata[finalmaplist[ind].keys.elementAt(index)] = finalmaplist[ind].values.elementAt(index) + 1;
+                                                          updateResources(newdata);
+                                                        }
+                                                      }
+                                                    },
+                                                    icon: Icon(Icons.add, color: Colors.lightGreen)
+                                                ),
+                                                IconButton(
+                                                    style: ButtonStyle(
+                                                        backgroundColor: WidgetStateProperty.all(Colors.white24),
+                                                        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                                            RoundedRectangleBorder(
+                                                                borderRadius: BorderRadius.circular(15.0),
+                                                                side: BorderSide(color: Colors.white24)
+                                                            )
+                                                        )
+                                                    ),
+                                                    onPressed: (){
+                                                      Map<String, dynamic> newdata = finalmaplist[ind];
+                                                      if (ind == 0) {
+                                                        newdata[finalmaplist[ind].keys.elementAt(index)] = Utils.getMaxDefensesAndMaxLevel(snapshot.data[0]["townHallLevel"], snapshot.data[1])[finalmaplist[ind].keys.elementAt(index).substring(0, finalmaplist[ind].keys.elementAt(index).length - 2)];
+                                                        updateDefenses(newdata);
+                                                      } else if (ind == 1) {
+                                                        newdata[finalmaplist[ind].keys.elementAt(index)] = Utils.getMaxTrapsAndMaxLevel(snapshot.data[0]["townHallLevel"], snapshot.data[1])[finalmaplist[ind].keys.elementAt(index).substring(0, finalmaplist[ind].keys.elementAt(index).length - 2)];
+                                                        updateTraps(newdata);
+                                                      } else if (ind == 2) {
+                                                        newdata[finalmaplist[ind].keys.elementAt(index)] = Utils.getMaxArmyAndMaxLevel(snapshot.data[0]["townHallLevel"], snapshot.data[1])[finalmaplist[ind].keys.elementAt(index).substring(0, finalmaplist[ind].keys.elementAt(index).length - 2)];
+                                                        updateArmyBuildings(newdata);
+                                                      } else if (ind == 3) {
+                                                        newdata[finalmaplist[ind].keys.elementAt(index)] = Utils.getMaxResourceAndMaxLevel(snapshot.data[0]["townHallLevel"], snapshot.data[1])[finalmaplist[ind].keys.elementAt(index).substring(0, finalmaplist[ind].keys.elementAt(index).length - 2)];
+                                                        updateResources(newdata);
+                                                      }
+                                                    },
+                                                    icon: Icon(Icons.double_arrow, color: Colors.orangeAccent)
+                                                )
+                                              ],
+                                            ) : SizedBox(width: 50),
+                                          ],
+                                        ),
                                       ),
                                     ),
                                   ),
                                 ),
-                              ),
-                            );
-                          }
+                              );
+                            }
+                        ),
                       ),
-                    ),
-                    SizedBox(height: 20)
-                  ],
-                );
-              }
+                      SizedBox(height: 20)
+                    ],
+                  );
+                }
             );
           } else {
             return ListView.builder(

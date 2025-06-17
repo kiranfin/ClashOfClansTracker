@@ -149,6 +149,7 @@ Image getTroopImage(String name, String village) {
   if(name == "Haste Vial") return Image.asset(haste_vial, scale: 3.5);
   if(name == "Rocket Spear") return Image.asset(rocket_spear, scale: 3.5);
   if(name == "Electro Boots") return Image.asset(electro_boots, scale: 3.5);
+  if(name == "Dark Crown") return Image.asset(dark_crown, scale: 3.5);
   return Image.asset(defenseShield, scale: 3.5);
 }
 
@@ -460,34 +461,66 @@ Image getCapitalHallImage(int level) {
 }
 
 Map<String, dynamic> getDefensesAndCount(int thlevel, Map<String, dynamic> map) {
+  return map["defenses"]["minCounts"]["$thlevel"] ?? {};
+}
+
+Map<String, dynamic> getMaxDefensesAndCount(int thlevel, Map<String, dynamic> map) {
   return map["defenses"]["counts"]["$thlevel"] ?? {};
 }
 
 Map<String, dynamic> getDefensesAndMaxLevel(int thlevel, Map<String, dynamic> map) {
+  return map["defenses"]["minmaxLevels"]["$thlevel"] ?? {};
+}
+
+Map<String, dynamic> getMaxDefensesAndMaxLevel(int thlevel, Map<String, dynamic> map) {
   return map["defenses"]["maxLevels"]["$thlevel"] ?? {};
 }
 
 Map<String, dynamic> getTrapsAndCount(int thlevel, Map<String, dynamic> map) {
+  return map["traps"]["minCounts"]["$thlevel"] ?? {};
+}
+
+Map<String, dynamic> getMaxTrapsAndCount(int thlevel, Map<String, dynamic> map) {
   return map["traps"]["counts"]["$thlevel"] ?? {};
 }
 
 Map<String, dynamic> getTrapsAndMaxLevel(int thlevel, Map<String, dynamic> map) {
+  return map["traps"]["minmaxLevels"]["$thlevel"] ?? {};
+}
+
+Map<String, dynamic> getMaxTrapsAndMaxLevel(int thlevel, Map<String, dynamic> map) {
   return map["traps"]["maxLevels"]["$thlevel"] ?? {};
 }
 
 Map<String, dynamic> getArmyAndCount(int thlevel, Map<String, dynamic> map) {
+  return map["army"]["minCounts"]["$thlevel"] ?? {};
+}
+
+Map<String, dynamic> getMaxArmyAndCount(int thlevel, Map<String, dynamic> map) {
   return map["army"]["counts"]["$thlevel"] ?? {};
 }
 
 Map<String, dynamic> getArmyAndMaxLevel(int thlevel, Map<String, dynamic> map) {
+  return map["army"]["minmaxLevels"]["$thlevel"] ?? {};
+}
+
+Map<String, dynamic> getMaxArmyAndMaxLevel(int thlevel, Map<String, dynamic> map) {
   return map["army"]["maxLevels"]["$thlevel"] ?? {};
 }
 
 Map<String, dynamic> getResourceAndCount(int thlevel, Map<String, dynamic> map) {
+  return map["resources"]["minCounts"]["$thlevel"] ?? {};
+}
+
+Map<String, dynamic> getMaxResourceAndCount(int thlevel, Map<String, dynamic> map) {
   return map["resources"]["counts"]["$thlevel"] ?? {};
 }
 
 Map<String, dynamic> getResourceAndMaxLevel(int thlevel, Map<String, dynamic> map) {
+  return map["resources"]["minmaxLevels"]["$thlevel"] ?? {};
+}
+
+Map<String, dynamic> getMaxResourceAndMaxLevel(int thlevel, Map<String, dynamic> map) {
   return map["resources"]["maxLevels"]["$thlevel"] ?? {};
 }
 
@@ -499,7 +532,23 @@ int getWallsMaxLevel(int thlevel, Map<String, dynamic> map) {
   return map["walls"]["maxLevels"]["$thlevel"] ?? 0;
 }
 
-Image getBuildingImage(String name, int level) {
+Image getBuildingImage(int thlevel, String name, int level) {
   String pathname = 'lib/utils/img/buildings/$name$level.webp';
-  return Image.asset(pathname, scale: 2, errorBuilder: (ctx, error, stackTrace) => Image.asset(defenseShield, scale: 1));
+  if(getTownHallWeapon(thlevel) == name) {
+    pathname = 'lib/utils/img/buildings/$thlevel$name$level.webp';
+  }
+  return Image.asset(pathname, scale: 2, errorBuilder: (ctx, error, stackTrace) {
+    if(level == 0) {
+      return Opacity(opacity: 0.2, child: Image.asset('lib/utils/img/buildings/$name${level + 1}.webp', scale: 2));
+    } else {
+      return Image.asset(defenseShield, scale: 1);
+    }
+  });
+}
+
+String getTownHallWeapon(int thlevel) {
+  if(thlevel == 12) return "Giga Tesla";
+  if(thlevel == 13 || thlevel == 14 || thlevel == 15 || thlevel == 16) return "Giga Inferno";
+  if(thlevel == 17) return "Inferno Artillery";
+  return "Inferno Artillery";
 }

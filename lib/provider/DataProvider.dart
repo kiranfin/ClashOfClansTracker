@@ -24,7 +24,7 @@ Future<Map<String, dynamic>> awaitPlayerClan(String tag) async {
   return jsonDecode(res.body) as Map<String, dynamic>;
 }
 
-Future<Map<String, dynamic>> awaitMaxBuildings() async {
+Future<Map<String, dynamic>> awaitBuildings() async {
   final url = Uri.parse('${Utils.getBaseUrl()}retrieve/buildings');
   final res = await http.get(url);
   final status = res.statusCode;

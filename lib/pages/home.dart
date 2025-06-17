@@ -31,7 +31,7 @@ class _HomePageState extends State<HomePage> {
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 15.0),
               child: FutureBuilder(
-                future: Future.wait([DataProvider.awaitPlayerData(userTag), DataProvider.awaitMaxBuildings(), DataProvider.awaitMaxTroops(), DataProvider.awaitMaxEquipment()]),
+                future: Future.wait([DataProvider.awaitPlayerData(userTag), DataProvider.awaitBuildings(), DataProvider.awaitMaxTroops(), DataProvider.awaitMaxEquipment()]),
                 builder: (context, AsyncSnapshot ovsnap) {
                   if(ovsnap.hasData) {
                     return Column(
