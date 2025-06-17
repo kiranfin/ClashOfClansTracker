@@ -224,12 +224,16 @@ double awaitBuildingsPercent(Map<String, dynamic> userdata, Map<String, dynamic>
 }
 
 double awaitTroopsPercent(Map<String, dynamic> userdata, Map<String, dynamic> maxdata) {
-  //final data = awaitPlayerData(tag);
-  //final userdata = await data;
   final troops = userdata["troops"];
   num max = 0;
   final maxtroops = maxdata["troops"];
-  maxtroops.forEach((key, val) {
+  final maxbhtroops = maxdata["bhtroops"];
+  final maxsiegemachines = maxdata["siege_machines"];
+  Map finalmap = {};
+  finalmap.addAll(maxtroops);
+  finalmap.addAll(maxbhtroops);
+  finalmap.addAll(maxsiegemachines);
+  finalmap.forEach((key, val) {
     max += val;
   });
   num sum = 0;
