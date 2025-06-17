@@ -24,6 +24,22 @@ Future<Map<String, dynamic>> awaitPlayerClan(String tag) async {
   return jsonDecode(res.body) as Map<String, dynamic>;
 }
 
+Future<Map<String, dynamic>> awaitBuildings() async {
+  final url = Uri.parse('${Utils.getBaseUrl()}retrieve/buildings');
+  final res = await http.get(url);
+  final status = res.statusCode;
+  if (status != 200) throw Exception('http.get error: statusCode= $status');
+  return jsonDecode(res.body) as Map<String, dynamic>;
+}
+
+Future<Map<String, dynamic>> awaitMaxTroops() async {
+  final url = Uri.parse('${Utils.getBaseUrl()}retrieve/troops');
+  final res = await http.get(url);
+  final status = res.statusCode;
+  if (status != 200) throw Exception('http.get error: statusCode= $status');
+  return jsonDecode(res.body) as Map<String, dynamic>;
+}
+
 Image awaitTownHallIcon(int level, double scale) {
   if(level == 1) return Image.asset(th1, scale: scale);
   if(level == 2) return Image.asset(th2, scale: scale);
@@ -311,9 +327,4 @@ Future<List> awaitAchievements(String tag) async {
   final userdata = await data;
   final troops = userdata["achievements"]?? [];
   return troops;
-}
-
-Future<Map<String, dynamic>> awaitBuildings() async {
-  String jsonString = await rootBundle.loadString(buildings);
-  return jsonDecode(jsonString);
 }
