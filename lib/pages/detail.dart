@@ -260,8 +260,8 @@ class _DetailPageState extends State<DetailPage> {
                             ),
                           ),
                         ),
-                      ) : SizedBox(height: 1),
-                      ind == 0? SizedBox(height: 20) : SizedBox(height: 1),
+                      ) : const SizedBox(height: 1),
+                      ind == 0? const SizedBox(height: 20) : const SizedBox(height: 1),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -304,8 +304,8 @@ class _DetailPageState extends State<DetailPage> {
                                 updateResources(newdata);
                               }
                             },
-                            icon: Icon(Icons.skip_next, color: Colors.orangeAccent),
-                            label: Text("Max", style: const TextStyle(
+                            icon: const Icon(Icons.skip_next, color: Colors.orangeAccent),
+                            label: const Text("Max", style: TextStyle(
                                 color: Colors.white,
                                 fontFamily: "Poppins",
                                 fontSize: 18)),
@@ -338,7 +338,7 @@ class _DetailPageState extends State<DetailPage> {
                                                   width: 60,
                                                   child: Utils.getBuildingImage(snapshot.data[0]["townHallLevel"], finalmaplist[ind].keys.elementAt(index).substring(0, finalmaplist[ind].keys.elementAt(index).length - 2), finalmaplist[ind].values.elementAt(index)),
                                                 ),
-                                                SizedBox(width: 5),
+                                                const SizedBox(width: 5),
                                                 AutoSizeText(
                                                     "${finalmaplist[ind].keys.elementAt(index).substring(0, finalmaplist[ind].keys.elementAt(index).length - 2)} | ${Utils.getTownHallWeapon(snapshot.data[0]["townHallLevel"]) != finalmaplist[ind].keys.elementAt(index).substring(0, finalmaplist[ind].keys.elementAt(index).length - 2)? finalmaplist[ind].values.elementAt(index) : snapshot.data[0]["townHallWeaponLevel"]}",
                                                     style: const TextStyle(
@@ -377,7 +377,7 @@ class _DetailPageState extends State<DetailPage> {
                                                         }
                                                       }
                                                     },
-                                                    icon: Icon(Icons.remove, color: Colors.redAccent)
+                                                    icon: const Icon(Icons.remove, color: Colors.redAccent)
                                                 ),
                                                 IconButton(
                                                     style: ButtonStyle(
@@ -413,7 +413,7 @@ class _DetailPageState extends State<DetailPage> {
                                                         }
                                                       }
                                                     },
-                                                    icon: Icon(Icons.add, color: Colors.lightGreen)
+                                                    icon: const Icon(Icons.add, color: Colors.lightGreen)
                                                 ),
                                                 IconButton(
                                                     style: ButtonStyle(
@@ -441,10 +441,10 @@ class _DetailPageState extends State<DetailPage> {
                                                         updateResources(newdata);
                                                       }
                                                     },
-                                                    icon: Icon(Icons.double_arrow, color: Colors.orangeAccent)
+                                                    icon: const Icon(Icons.double_arrow, color: Colors.orangeAccent)
                                                 )
                                               ],
-                                            ) : SizedBox(width: 50),
+                                            ) : const SizedBox(width: 50),
                                           ],
                                         ),
                                       ),
@@ -455,7 +455,7 @@ class _DetailPageState extends State<DetailPage> {
                             }
                         ),
                       ),
-                      SizedBox(height: 20)
+                      const SizedBox(height: 20)
                     ],
                   );
                 }
