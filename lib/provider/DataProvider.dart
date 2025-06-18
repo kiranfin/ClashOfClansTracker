@@ -273,10 +273,7 @@ double awaitBuildingsPercent(Map<String, dynamic> userdata, Map<String, dynamic>
       max += maxresourceslevel[key];
     }
   });
-
-  print(sum);
-  print(max);
-  double res = max == 0? 0.0 : sum / max;
+  double res = max == 0? 0.0 : (sum / max) > 1? 1 : sum / max;
   return res;
 }
 
