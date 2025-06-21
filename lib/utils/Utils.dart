@@ -525,14 +525,23 @@ Map<String, dynamic> getMaxResourceAndMaxLevel(int thlevel, Map<String, dynamic>
 }
 
 int getWalls(int thlevel, Map<String, dynamic> map) {
+  return map["walls"]["minCounts"]["$thlevel"] ?? 0;
+}
+
+int getMaxWalls(int thlevel, Map<String, dynamic> map) {
   return map["walls"]["counts"]["$thlevel"] ?? 0;
 }
 
 int getWallsMaxLevel(int thlevel, Map<String, dynamic> map) {
+  return map["walls"]["minmaxLevels"]["$thlevel"] ?? 0;
+}
+
+int getMaxWallsMaxLevel(int thlevel, Map<String, dynamic> map) {
   return map["walls"]["maxLevels"]["$thlevel"] ?? 0;
 }
 
 Image getBuildingImage(int thlevel, String name, int level) {
+  if(name == "wall") name = "Wall";
   String pathname = 'lib/utils/img/buildings/$name$level.webp';
   if(getTownHallWeapon(thlevel) == name) {
     pathname = 'lib/utils/img/buildings/$thlevel$name$level.webp';
@@ -551,6 +560,16 @@ String getTownHallWeapon(int thlevel) {
   if(thlevel == 13 || thlevel == 14 || thlevel == 15 || thlevel == 16) return "Giga Inferno";
   if(thlevel == 17) return "Inferno Artillery";
   return "Inferno Artillery";
+}
+
+Map<String, dynamic> getDefaultWalls(int thlevel, Map<String, dynamic> buildings) {
+  Map<String, int> wallsmap = {};
+  int wmincount = getWalls(thlevel, buildings);
+  int wmaxcount = getMaxWalls(thlevel, buildings);
+  int wmaxlevel = getMaxWallsMaxLevel(thlevel, buildings);
+  int wminlevel = getWallsMaxLevel(thlevel, buildings);
+  wallsmap["wall-$wminlevel"] = wmincount;
+  return wallsmap;
 }
 
 Map<String, dynamic> getDefaultDefenses(int thlevel, Map<String, dynamic> buildings) {
@@ -667,4 +686,46 @@ Map<String, dynamic> getDefaultResources(int thlevel, Map<String, dynamic> build
     }
   });
   return resourcesmap;
+}
+
+Map<String, dynamic> rearrangeWalls(Map<String, dynamic> map, String key, int oldvalue, int diffvalue) {
+  if(diffvalue < 0) {
+    if(map[key] - diffvalue.abs() >= 0) {
+      int newval = int.parse(key.substring(key.lastIndexOf("-") + 1, key.length)) - 1;
+      if (map["${key.substring(0, key.lastIndexOf("-"))}-$newval"] != null) {
+        map["${key.substring(0, key.lastIndexOf("-"))}-$newval"] = map["${key.substring(0, key.lastIndexOf("-"))}-$newval"] + diffvalue.abs();
+      } else {
+        map["${key.substring(0, key.lastIndexOf("-"))}-$newval"] = diffvalue.abs();
+      }
+      if (map[key] - diffvalue.abs() >= 1) {
+        map[key] = map[key] - diffvalue.abs();
+      } else {
+        map.remove(key);
+      }
+    }
+  } else if(diffvalue > 0) {
+    if(map[key] - diffvalue.abs() >= 0) {
+      int newval = int.parse(key.substring(key.lastIndexOf("-") + 1, key.length)) + 1;
+      if (map["${key.substring(0, key.lastIndexOf("-"))}-$newval"] != null) {
+        map["${key.substring(0, key.lastIndexOf("-"))}-$newval"] = map["${key.substring(0, key.lastIndexOf("-"))}-$newval"] + diffvalue.abs();
+      } else {
+        map["${key.substring(0, key.lastIndexOf("-"))}-$newval"] = diffvalue.abs();
+      }
+      if (map[key] - diffvalue.abs() >= 1) {
+        map[key] = map[key] - diffvalue.abs();
+      } else {
+        map.remove(key);
+      }
+    }
+  }
+  return map;
+}
+
+bool canWallBeIncreased(int thlevel, Map<String, dynamic> map, int currentLevel) {
+  int wallmaxlevel = getMaxWallsMaxLevel(thlevel, map);
+  return currentLevel < wallmaxlevel;
+}
+
+bool canWallBeDecreased(int thlevel, Map<String, dynamic> map, int currentLevel) {
+  return currentLevel > 1;
 }

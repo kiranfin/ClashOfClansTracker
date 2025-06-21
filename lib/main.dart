@@ -106,7 +106,6 @@ class _DefaultPageState extends State<DefaultPage> {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             padding: EdgeInsets.all(16),
             onTabChange: (index) {
-              print(MediaQuery.of(context).size.width);
               navigateBottomBar(index);
             },
             tabs: [

@@ -183,9 +183,10 @@ class _HomePageState extends State<HomePage> {
                                         )
                                     )
                                 ),
-                                onPressed: () {
-                                  Navigator.pushNamed(
+                                onPressed: () async {
+                                  await Navigator.pushNamed(
                                       context, "/detail", arguments: "buildings");
+                                  setState(() {});
                                 },
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
@@ -246,9 +247,10 @@ class _HomePageState extends State<HomePage> {
                                         )
                                     )
                                 ),
-                                onPressed: () {
-                                  Navigator.pushNamed(
+                                onPressed: () async {
+                                  await Navigator.pushNamed(
                                       context, "/detail", arguments: "troops");
+                                  setState(() {});
                                 },
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
@@ -308,9 +310,10 @@ class _HomePageState extends State<HomePage> {
                                         )
                                     )
                                 ),
-                                onPressed: () {
-                                  Navigator.pushNamed(
+                                onPressed: () async {
+                                  await Navigator.pushNamed(
                                       context, "/detail", arguments: "spells");
+                                  setState(() {});
                                 },
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
@@ -377,9 +380,10 @@ class _HomePageState extends State<HomePage> {
                                         )
                                     )
                                 ),
-                                onPressed: () {
-                                  Navigator.pushNamed(
+                                onPressed: () async {
+                                  await Navigator.pushNamed(
                                       context, "/detail", arguments: "heroes");
+                                  setState(() {});
                                 },
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
@@ -439,9 +443,10 @@ class _HomePageState extends State<HomePage> {
                                         )
                                     )
                                 ),
-                                onPressed: () {
-                                  Navigator.pushNamed(context, "/detail",
+                                onPressed: () async {
+                                  await Navigator.pushNamed(context, "/detail",
                                       arguments: "equipment");
+                                  setState(() {});
                                 },
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
@@ -501,9 +506,10 @@ class _HomePageState extends State<HomePage> {
                                         )
                                     )
                                 ),
-                                onPressed: () {
-                                  Navigator.pushNamed(context, "/detail",
+                                onPressed: () async {
+                                  await Navigator.pushNamed(context, "/detail",
                                       arguments: "achievements");
+                                  setState(() {});
                                 },
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
@@ -771,8 +777,7 @@ class _HomePageState extends State<HomePage> {
                                     )
                                 ),
                                 onPressed: () {
-                                  Navigator.pushNamed(
-                                      context, "/detail", arguments: "troops");
+
                                 },
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
@@ -813,8 +818,7 @@ class _HomePageState extends State<HomePage> {
                                     )
                                 ),
                                 onPressed: () {
-                                  Navigator.pushNamed(
-                                      context, "/detail", arguments: "spells");
+
                                 },
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
@@ -863,8 +867,7 @@ class _HomePageState extends State<HomePage> {
                                     )
                                 ),
                                 onPressed: () {
-                                  Navigator.pushNamed(
-                                      context, "/detail", arguments: "heroes");
+
                                 },
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
@@ -905,8 +908,7 @@ class _HomePageState extends State<HomePage> {
                                     )
                                 ),
                                 onPressed: () {
-                                  Navigator.pushNamed(context, "/detail",
-                                      arguments: "equipment");
+
                                 },
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
@@ -948,8 +950,7 @@ class _HomePageState extends State<HomePage> {
                                     )
                                 ),
                                 onPressed: () {
-                                  Navigator.pushNamed(context, "/detail",
-                                      arguments: "achievements");
+
                                 },
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
