@@ -540,6 +540,16 @@ int getMaxWallsMaxLevel(int thlevel, Map<String, dynamic> map) {
   return map["walls"]["maxLevels"]["$thlevel"] ?? 0;
 }
 
+int getOverallMaxLevel(Map<String, dynamic> map) {
+  int max = 0;
+  map["walls"]["maxLevels"].forEach((key, val) {
+    if(int.parse(key) > max) {
+      max = int.parse(key);
+    }
+  });
+  return max;
+}
+
 Image getBuildingImage(int thlevel, String name, int level) {
   if(name == "wall") name = "Wall";
   String pathname = 'lib/utils/img/buildings/$name$level.webp';
@@ -721,9 +731,38 @@ Map<String, dynamic> rearrangeWalls(Map<String, dynamic> map, String key, int ol
   return map;
 }
 
+Map<String, dynamic> editWalls(Map<String, dynamic> buildings, Map<String, dynamic> map, String key, int oldvalue, int newval) {
+  int overallmax = getOverallMaxLevel(buildings);
+  int currentlevel = int.parse(key.substring(key.lastIndexOf("-") + 1, key.length));
+  print(overallmax);
+  print(currentlevel);
+  if(newval < oldvalue) {
+    if(currentlevel <= overallmax) {
+      map[key] = newval;
+      map["${key.substring(0, key.lastIndexOf("-"))}-${currentlevel + 1}"] = (map["${key.substring(0, key.lastIndexOf("-"))}-${currentlevel + 1}"] == null? 0 : map["${key.substring(0, key.lastIndexOf("-"))}-${currentlevel + 1}"]) + (oldvalue - newval);
+    } else {
+      if(currentlevel >= 1) {
+        map[key] = newval;
+        map["${key.substring(0, key.lastIndexOf("-"))}-${currentlevel - 1}"] = (map["${key.substring(0, key.lastIndexOf("-"))}-${currentlevel - 1}"] == null? 0 : map["${key.substring(0, key.lastIndexOf("-"))}-${currentlevel - 1}"]) + (oldvalue - newval);
+      }
+    }
+  } else if(newval > oldvalue) {
+    if(currentlevel >= 1) {
+      map[key] = newval;
+      map["${key.substring(0, key.lastIndexOf("-"))}-${currentlevel - 1}"] = (map["${key.substring(0, key.lastIndexOf("-"))}-${currentlevel - 1}"] == null? 0 : map["${key.substring(0, key.lastIndexOf("-"))}-${currentlevel - 1}"]) - (newval - oldvalue);
+    }
+  }
+  return map;
+}
+
 bool canWallBeIncreased(int thlevel, Map<String, dynamic> map, int currentLevel) {
   int wallmaxlevel = getMaxWallsMaxLevel(thlevel, map);
   return currentLevel < wallmaxlevel;
+}
+
+bool isWallUnderMax(int thlevel, Map<String, dynamic> map, int currentLevel) {
+  int wallmaxlevel = getMaxWalls(thlevel, map);
+  return currentLevel <= wallmaxlevel;
 }
 
 bool canWallBeDecreased(int thlevel, Map<String, dynamic> map, int currentLevel) {

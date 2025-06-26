@@ -6,6 +6,7 @@ import 'package:flutter/rendering.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
 import 'package:simple_animation_progress_bar/simple_animation_progress_bar.dart';
 import '../provider/DataProvider.dart' as DataProvider;
+import '../utils/Presets.dart' as Presets;
 import '../utils/UserSP.dart';
 import '../utils/Utils.dart' as Utils;
 
@@ -279,30 +280,17 @@ class _DetailPageState extends State<DetailPage> {
                                                             )
                                                         )
                                                     ),
-                                                    onPressed: (){
+                                                    onPressed: () async {
                                                       Map<String, dynamic> newdata = finalmaplist[ind];
                                                       if(ind == 0) {
-                                                        //pop-out
-                                                      } else if (ind == 1) {
-                                                        if(finalmaplist[ind].values.elementAt(index) + 1 <= Utils.getMaxDefensesAndMaxLevel(snapshot.data[0]["townHallLevel"], snapshot.data[1])[finalmaplist[ind].keys.elementAt(index).substring(0, finalmaplist[ind].keys.elementAt(index).lastIndexOf('-'))]) {
-                                                          newdata[finalmaplist[ind].keys.elementAt(index)] = finalmaplist[ind].values.elementAt(index) + 1;
-                                                          updateDefenses(newdata);
-                                                        }
-                                                      } else if (ind == 2) {
-                                                        if(finalmaplist[ind].values.elementAt(index) + 1 <= Utils.getMaxTrapsAndMaxLevel(snapshot.data[0]["townHallLevel"], snapshot.data[1])[finalmaplist[ind].keys.elementAt(index).substring(0, finalmaplist[ind].keys.elementAt(index).lastIndexOf('-'))]) {
-                                                          newdata[finalmaplist[ind].keys.elementAt(index)] = finalmaplist[ind].values.elementAt(index) + 1;
-                                                          updateTraps(newdata);
-                                                        }
-                                                      } else if (ind == 3) {
-                                                        if(finalmaplist[ind].values.elementAt(index) + 1 <= Utils.getMaxArmyAndMaxLevel(snapshot.data[0]["townHallLevel"], snapshot.data[1])[finalmaplist[ind].keys.elementAt(index).substring(0, finalmaplist[ind].keys.elementAt(index).lastIndexOf('-'))]) {
-                                                          newdata[finalmaplist[ind].keys.elementAt(index)] = finalmaplist[ind].values.elementAt(index) + 1;
-                                                          updateArmyBuildings(newdata);
-                                                        }
-                                                      } else if (ind == 4) {
-                                                        if(finalmaplist[ind].values.elementAt(index) + 1 <= Utils.getMaxResourceAndMaxLevel(snapshot.data[0]["townHallLevel"], snapshot.data[1])[finalmaplist[ind].keys.elementAt(index).substring(0, finalmaplist[ind].keys.elementAt(index).lastIndexOf('-'))]) {
-                                                          newdata[finalmaplist[ind].keys.elementAt(index)] = finalmaplist[ind].values.elementAt(index) + 1;
-                                                          updateResources(newdata);
-                                                        }
+                                                        String newval = await showDialog(
+                                                          context: context,
+                                                          builder: (BuildContext context) {
+                                                            return Presets.getEditWallsDialog(context, finalmaplist[ind].values.elementAt(index).toString());
+                                                          }
+                                                        );
+                                                        int intval = int.parse(newval);
+                                                        updateWalls(Utils.editWalls(snapshot.data[1], newdata, finalmaplist[ind].keys.elementAt(index), finalmaplist[ind].values.elementAt(index), intval));
                                                       }
                                                     },
                                                     icon: const Icon(Icons.edit, color: Colors.blueAccent)

@@ -221,6 +221,8 @@ double awaitOverallPercent(Map<String, dynamic> userdata, Map<String, dynamic> m
 }
 
 double awaitBuildingsPercent(Map<String, dynamic> userdata, Map<String, dynamic> maxdata) {
+  var wallsString = UserSP.getUserWalls(userdata["tag"].substring(1));
+  Map<String, dynamic> walls = wallsString != null? Map<String, dynamic>.from(jsonDecode(wallsString)) : Utils.getDefaultWalls(userdata["townHallLevel"], maxdata);
   var defensesString = UserSP.getUserDefenses(userdata["tag"].substring(1));
   Map<String, dynamic> defenses = defensesString != null? Map<String, dynamic>.from(jsonDecode(defensesString)) : Utils.getDefaultDefenses(userdata["townHallLevel"], maxdata);
   var trapsString = UserSP.getUserTraps(userdata["tag"].substring(1));
@@ -232,6 +234,12 @@ double awaitBuildingsPercent(Map<String, dynamic> userdata, Map<String, dynamic>
 
   num sum = 0;
   num max = 0;
+  walls.forEach((key, val) {
+    int add = int.parse(key.substring(key.lastIndexOf("-") + 1, key.length));
+    for(int i = 0; i < val; i++) {
+      sum += add;
+    }
+  });
   defenses.forEach((key, val) {
     sum += val;
   });
@@ -245,6 +253,8 @@ double awaitBuildingsPercent(Map<String, dynamic> userdata, Map<String, dynamic>
     sum += val;
   });
 
+  final maxwallscount = maxdata["walls"]["counts"]["17"];
+  final maxwallslevel = maxdata["walls"]["maxLevels"]["17"];
   final maxdefensescount = maxdata["defenses"]["counts"]["17"];
   final maxdefenseslevel = maxdata["defenses"]["maxLevels"]["17"];
   final maxtrapscount = maxdata["traps"]["counts"]["17"];
@@ -253,6 +263,9 @@ double awaitBuildingsPercent(Map<String, dynamic> userdata, Map<String, dynamic>
   final maxarmyslevel = maxdata["army"]["maxLevels"]["17"];
   final maxresourcescount = maxdata["resources"]["counts"]["17"];
   final maxresourceslevel = maxdata["resources"]["maxLevels"]["17"];
+  for(int i = 0; i < maxwallscount; i++) {
+    max += maxwallslevel;
+  }
   maxdefensescount.forEach((key, val){
     for(int i = 0; i < val; i++) {
       max += maxdefenseslevel[key];
