@@ -540,11 +540,11 @@ int getMaxWallsMaxLevel(int thlevel, Map<String, dynamic> map) {
   return map["walls"]["maxLevels"]["$thlevel"] ?? 0;
 }
 
-int getOverallMaxLevel(Map<String, dynamic> map) {
+int getWallOverallMaxLevel(Map<String, dynamic> map) {
   int max = 0;
   map["walls"]["maxLevels"].forEach((key, val) {
-    if(int.parse(key) > max) {
-      max = int.parse(key);
+    if(val > max) {
+      max = val;
     }
   });
   return max;
@@ -732,12 +732,10 @@ Map<String, dynamic> rearrangeWalls(Map<String, dynamic> map, String key, int ol
 }
 
 Map<String, dynamic> editWalls(Map<String, dynamic> buildings, Map<String, dynamic> map, String key, int oldvalue, int newval) {
-  int overallmax = getOverallMaxLevel(buildings);
+  int overallmax = getWallOverallMaxLevel(buildings);
   int currentlevel = int.parse(key.substring(key.lastIndexOf("-") + 1, key.length));
-  print(overallmax);
-  print(currentlevel);
   if(newval < oldvalue) {
-    if(currentlevel <= overallmax) {
+    if(currentlevel < overallmax) {
       map[key] = newval;
       map["${key.substring(0, key.lastIndexOf("-"))}-${currentlevel + 1}"] = (map["${key.substring(0, key.lastIndexOf("-"))}-${currentlevel + 1}"] == null? 0 : map["${key.substring(0, key.lastIndexOf("-"))}-${currentlevel + 1}"]) + (oldvalue - newval);
     } else {
@@ -747,7 +745,12 @@ Map<String, dynamic> editWalls(Map<String, dynamic> buildings, Map<String, dynam
       }
     }
   } else if(newval > oldvalue) {
-    if(currentlevel >= 1) {
+    if(currentlevel < overallmax) {
+      if(map["${key.substring(0, key.lastIndexOf("-"))}-${currentlevel + 1}"] >= (newval - oldvalue)) {
+        map[key] = newval;
+        map["${key.substring(0, key.lastIndexOf("-"))}-${currentlevel + 1}"] = (map["${key.substring(0, key.lastIndexOf("-"))}-${currentlevel + 1}"] == null ? 0 : map["${key.substring(0, key.lastIndexOf("-"))}-${currentlevel + 1}"]) - (newval - oldvalue);
+      }
+    } else if(currentlevel >= 1) {
       map[key] = newval;
       map["${key.substring(0, key.lastIndexOf("-"))}-${currentlevel - 1}"] = (map["${key.substring(0, key.lastIndexOf("-"))}-${currentlevel - 1}"] == null? 0 : map["${key.substring(0, key.lastIndexOf("-"))}-${currentlevel - 1}"]) - (newval - oldvalue);
     }
