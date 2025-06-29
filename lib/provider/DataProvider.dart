@@ -171,16 +171,16 @@ Text awaitPlayerName(Map<String, dynamic> userdata) {
   return Text(userdata["name"], style: TextStyle(color: Colors.white, fontSize: 25));
 }
 
-Text awaitPlayerTrophies(Map<String, dynamic> userdata) {
+Text awaitPlayerTrophies(Map<String, dynamic> userdata, double size) {
   //final data = awaitPlayerData(tag);
   //final userdata = await data;
-  return Text((userdata["trophies"]).toString(), style: TextStyle(color: Colors.white, fontSize: 15));
+  return Text((userdata["trophies"]).toString(), style: TextStyle(color: Colors.white, fontSize: size));
 }
 
-Text awaitPlayerLegendTrophies(Map<String, dynamic> userdata) {
+Text awaitPlayerLegendTrophies(Map<String, dynamic> userdata, double size) {
   //final data = awaitPlayerData(tag);
   //final userdata = await data;
-  return Text((userdata["legendStatistics"] != null? userdata["legendStatistics"]["legendTrophies"] : 0).toString(), style: TextStyle(color: Colors.white, fontSize: 15));
+  return Text((userdata["legendStatistics"] != null? userdata["legendStatistics"]["legendTrophies"] : 0).toString(), style: TextStyle(color: Colors.white, fontSize: size));
 }
 
 Text awaitPlayerBuilderTrophies(Map<String, dynamic> userdata) {

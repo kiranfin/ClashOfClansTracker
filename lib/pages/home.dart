@@ -18,7 +18,6 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
 
   String userTag = UserSP.getCurrentUser();
-  List<String> userlist = UserSP.getUser();
 
   @override
   Widget build(BuildContext context) {
@@ -83,11 +82,11 @@ class _HomePageState extends State<HomePage> {
                                         Image.asset('lib/utils/img/Trophy.png',
                                             fit: BoxFit.cover, scale: 1.5),
                                         SizedBox(width: 7),
-                                        DataProvider.awaitPlayerTrophies(ovsnap.data[0]),
+                                        DataProvider.awaitPlayerTrophies(ovsnap.data[0], 15),
                                         SizedBox(width: 7),
                                         Image.asset(legendTrophy, scale: 14),
                                         SizedBox(width: 7),
-                                        DataProvider.awaitPlayerLegendTrophies(ovsnap.data[0]),
+                                        DataProvider.awaitPlayerLegendTrophies(ovsnap.data[0], 15),
                                       ],
                                     ),
                                     SizedBox(height: 10),
