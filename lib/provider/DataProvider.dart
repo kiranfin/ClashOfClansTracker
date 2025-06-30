@@ -94,53 +94,53 @@ Image awaitLeagueIcon(Map<String, dynamic> userdata) {
   }
 }
 
-Image awaitBuilderLeagueIcon(Map<String, dynamic> userdata) {
+Image awaitBuilderLeagueIcon(Map<String, dynamic> userdata, double scale) {
   //final data = awaitPlayerData(tag);
   //final userdata = await data;
   final league = userdata["builderBaseLeague"]["name"];
-  if (league == "Wood League V") return Image.asset(wood, scale: 4);
-  if (league == "Wood League IV") return Image.asset(wood, scale: 4);
-  if (league == "Wood League III") return Image.asset(wood, scale: 4);
-  if (league == "Wood League II") return Image.asset(wood, scale: 4);
-  if (league == "Wood League I") return Image.asset(wood, scale: 4);
-  if (league == "Clay League V") return Image.asset(clay, scale: 4);
-  if (league == "Clay League IV") return Image.asset(clay, scale: 4);
-  if (league == "Clay League III") return Image.asset(clay, scale: 4);
-  if (league == "Clay League II") return Image.asset(clay, scale: 4);
-  if (league == "Clay League I") return Image.asset(clay, scale: 4);
-  if (league == "Stone League V") return Image.asset(stone, scale: 4);
-  if (league == "Stone League IV") return Image.asset(stone, scale: 4);
-  if (league == "Stone League III") return Image.asset(stone, scale: 4);
-  if (league == "Stone League II") return Image.asset(stone, scale: 4);
-  if (league == "Stone League I") return Image.asset(stone, scale: 4);
-  if (league == "Copper League V") return Image.asset(copper, scale: 4);
-  if (league == "Copper League IV") return Image.asset(copper, scale: 4);
-  if (league == "Copper League III") return Image.asset(copper, scale: 4);
-  if (league == "Copper League II") return Image.asset(copper, scale: 4);
-  if (league == "Copper League I") return Image.asset(copper, scale: 4);
-  if (league == "Brass League III") return Image.asset(brass, scale: 4);
-  if (league == "Brass League II") return Image.asset(brass, scale: 4);
-  if (league == "Brass League I") return Image.asset(brass, scale: 4);
-  if (league == "Iron League III") return Image.asset(iron, scale: 4);
-  if (league == "Iron League II") return Image.asset(iron, scale: 4);
-  if (league == "Iron League I") return Image.asset(iron, scale: 4);
-  if (league == "Steel League III") return Image.asset(steel, scale: 4);
-  if (league == "Steel League II") return Image.asset(steel, scale: 4);
-  if (league == "Steel League I") return Image.asset(steel, scale: 4);
-  if (league == "Titanium League III") return Image.asset(titanium, scale: 4);
-  if (league == "Titanium League II") return Image.asset(titanium, scale: 4);
-  if (league == "Titanium League I") return Image.asset(titanium, scale: 4);
-  if (league == "Platinum League III") return Image.asset(platinum, scale: 4);
-  if (league == "Platinum League II") return Image.asset(platinum, scale: 4);
-  if (league == "Platinum League I") return Image.asset(platinum, scale: 4);
-  if (league == "Emerald League III") return Image.asset(emerald, scale: 4);
-  if (league == "Emerald League II") return Image.asset(emerald, scale: 4);
-  if (league == "Emerald League I") return Image.asset(emerald, scale: 4);
-  if (league == "Ruby League III") return Image.asset(ruby, scale: 4);
-  if (league == "Ruby League II") return Image.asset(ruby, scale: 4);
-  if (league == "Ruby League I") return Image.asset(ruby, scale: 4);
-  if (league == "Diamond League I") return Image.asset(diamond, scale: 4);
-  return Image.asset(wood, scale: 4);
+  if (league == "Wood League V") return Image.asset(wood, scale: scale);
+  if (league == "Wood League IV") return Image.asset(wood, scale: scale);
+  if (league == "Wood League III") return Image.asset(wood, scale: scale);
+  if (league == "Wood League II") return Image.asset(wood, scale: scale);
+  if (league == "Wood League I") return Image.asset(wood, scale: scale);
+  if (league == "Clay League V") return Image.asset(clay, scale: scale);
+  if (league == "Clay League IV") return Image.asset(clay, scale: scale);
+  if (league == "Clay League III") return Image.asset(clay, scale: scale);
+  if (league == "Clay League II") return Image.asset(clay, scale: scale);
+  if (league == "Clay League I") return Image.asset(clay, scale: scale);
+  if (league == "Stone League V") return Image.asset(stone, scale: scale);
+  if (league == "Stone League IV") return Image.asset(stone, scale: scale);
+  if (league == "Stone League III") return Image.asset(stone, scale: scale);
+  if (league == "Stone League II") return Image.asset(stone, scale: scale);
+  if (league == "Stone League I") return Image.asset(stone, scale: scale);
+  if (league == "Copper League V") return Image.asset(copper, scale: scale);
+  if (league == "Copper League IV") return Image.asset(copper, scale: scale);
+  if (league == "Copper League III") return Image.asset(copper, scale: scale);
+  if (league == "Copper League II") return Image.asset(copper, scale: scale);
+  if (league == "Copper League I") return Image.asset(copper, scale: scale);
+  if (league == "Brass League III") return Image.asset(brass, scale: scale);
+  if (league == "Brass League II") return Image.asset(brass, scale: scale);
+  if (league == "Brass League I") return Image.asset(brass, scale: scale);
+  if (league == "Iron League III") return Image.asset(iron, scale: scale);
+  if (league == "Iron League II") return Image.asset(iron, scale: scale);
+  if (league == "Iron League I") return Image.asset(iron, scale: scale);
+  if (league == "Steel League III") return Image.asset(steel, scale: scale);
+  if (league == "Steel League II") return Image.asset(steel, scale: scale);
+  if (league == "Steel League I") return Image.asset(steel, scale: scale);
+  if (league == "Titanium League III") return Image.asset(titanium, scale: scale);
+  if (league == "Titanium League II") return Image.asset(titanium, scale: scale);
+  if (league == "Titanium League I") return Image.asset(titanium, scale: scale);
+  if (league == "Platinum League III") return Image.asset(platinum, scale: scale);
+  if (league == "Platinum League II") return Image.asset(platinum, scale: scale);
+  if (league == "Platinum League I") return Image.asset(platinum, scale: scale);
+  if (league == "Emerald League III") return Image.asset(emerald, scale: scale);
+  if (league == "Emerald League II") return Image.asset(emerald, scale: scale);
+  if (league == "Emerald League I") return Image.asset(emerald, scale: scale);
+  if (league == "Ruby League III") return Image.asset(ruby, scale: scale);
+  if (league == "Ruby League II") return Image.asset(ruby, scale: scale);
+  if (league == "Ruby League I") return Image.asset(ruby, scale: scale);
+  if (league == "Diamond League I") return Image.asset(diamond, scale: scale);
+  return Image.asset(wood, scale: scale);
 }
 
 Image awaitClanWarLeagueIcon(String league) {
@@ -183,10 +183,10 @@ Text awaitPlayerLegendTrophies(Map<String, dynamic> userdata, double size) {
   return Text((userdata["legendStatistics"] != null? userdata["legendStatistics"]["legendTrophies"] : 0).toString(), style: TextStyle(color: Colors.white, fontSize: size));
 }
 
-Text awaitPlayerBuilderTrophies(Map<String, dynamic> userdata) {
+Text awaitPlayerBuilderTrophies(Map<String, dynamic> userdata, double size) {
   //final data = awaitPlayerData(tag);
   //final userdata = await data;
-  return Text((userdata["builderBaseTrophies"]).toString(), style: TextStyle(color: Colors.white, fontSize: 15));
+  return Text((userdata["builderBaseTrophies"]).toString(), style: TextStyle(color: Colors.white, fontSize: size));
 }
 
 Image awaitClanIcon(Map<String, dynamic> userdata) {

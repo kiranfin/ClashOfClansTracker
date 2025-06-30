@@ -1259,7 +1259,7 @@ class _DetailPageState extends State<DetailPage> {
                                     SizedBox(height: 5),
                                     Row(
                                       children: [
-                                        DataProvider.awaitBuilderLeagueIcon(snapshot.data[0]),
+                                        DataProvider.awaitBuilderLeagueIcon(snapshot.data[0], 4),
                                         SizedBox(width: 7),
                                         Text("Best: ${snapshot.data[0]["bestBuilderBaseTrophies"]}", style: const TextStyle(
                                             color: Colors.white,

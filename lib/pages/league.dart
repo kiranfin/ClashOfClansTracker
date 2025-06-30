@@ -55,9 +55,7 @@ class _LeaguePageState extends State<LeaguePage> {
                                       children: [
                                         Row(
                                           children: [
-                                            DataProvider.awaitLeagueIcon(
-                                              snapshot.data[0],
-                                            ),
+                                            DataProvider.awaitLeagueIcon(snapshot.data[0]),
                                             SizedBox(width: 5),
                                             AutoSizeText(snapshot.data[0]["league"] != null? snapshot.data[0]["league"]["name"] : "Unranked",
                                               style: const TextStyle(
@@ -115,10 +113,7 @@ class _LeaguePageState extends State<LeaguePage> {
                                               scale: 14,
                                             ),
                                             SizedBox(width: 7),
-                                            DataProvider.awaitPlayerLegendTrophies(
-                                              snapshot.data[0],
-                                              20,
-                                            ),
+                                            DataProvider.awaitPlayerLegendTrophies(snapshot.data[0], 20),
                                           ],
                                         ) : null,
                                       ],
@@ -155,7 +150,7 @@ class _LeaguePageState extends State<LeaguePage> {
                                     ),
                                     Row(
                                       children: [
-                                        Icon(Icons.access_time_outlined, color: Colors.white),
+                                        Icon(Icons.access_time_outlined, color: Colors.white, size: 20),
                                         SizedBox(width: 5),
                                         Text("${index == 0? "${DateTime.parse(snapshot.data[0]["legendStatistics"]["previousSeason"]["id"] + "-01").year}-${(DateTime.parse(snapshot.data[0]["legendStatistics"]["previousSeason"]["id"] + "-01").month + 1).toString().padLeft(2, "0")}" : index == 1? (snapshot.data[0]["legendStatistics"]["previousSeason"]!=null? snapshot.data[0]["legendStatistics"]["previousSeason"]["id"] : "-") : (snapshot.data[0]["legendStatistics"]["bestSeason"]!=null? snapshot.data[0]["legendStatistics"]["bestSeason"]["id"] : "-")}",
                                           style: const TextStyle(
@@ -168,7 +163,7 @@ class _LeaguePageState extends State<LeaguePage> {
                                     ),
                                     Row(
                                       children: [
-                                        Icon(Icons.numbers, color: Colors.white),
+                                        Icon(Icons.tag, color: Colors.white, size: 20),
                                         SizedBox(width: 5),
                                         Text("${index == 0? (snapshot.data[0]["legendStatistics"]["currentSeason"]!=null?snapshot.data[0]["legendStatistics"]["currentSeason"]["rank"]: "-") : index == 1? (snapshot.data[0]["legendStatistics"]["previousSeason"]!=null? snapshot.data[0]["legendStatistics"]["previousSeason"]["rank"] : "-") : (snapshot.data[0]["legendStatistics"]["bestSeason"]!=null? snapshot.data[0]["legendStatistics"]["bestSeason"]["rank"]: "-")}",
                                           style: const TextStyle(
@@ -204,6 +199,46 @@ class _LeaguePageState extends State<LeaguePage> {
                         ],
                       ) : null,
                       ?snapshot.data[0]["legendStatistics"] != null? SizedBox(height: 20): null,
+                      ?snapshot.data[0]["builderBaseLeague"] != null? ClipRRect(
+                        borderRadius: BorderRadius.circular(20),
+                        child: Container(
+                          color: Colors.black,
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Row(
+                                  children: [
+                                    DataProvider.awaitBuilderLeagueIcon(snapshot.data[0], 2.5),
+                                    SizedBox(width: 7),
+                                    AutoSizeText(snapshot.data[0]["builderBaseLeague"] != null? snapshot.data[0]["builderBaseLeague"]["name"] : "Unranked",
+                                      style: const TextStyle(
+                                        color: Colors.white,
+                                        fontFamily: "Poppins",
+                                        fontSize: 25,
+                                      ),
+                                      maxLines: 1,
+                                    ),
+                                  ]
+                                ),
+                                Row(
+                                  children: [
+                                    Image.asset(
+                                      'lib/utils/img/BuilderHallTrophy.png',
+                                      fit: BoxFit.cover,
+                                      scale: 12,
+                                    ),
+                                    SizedBox(width: 5),
+                                    DataProvider.awaitPlayerBuilderTrophies(snapshot.data[0], 20),
+                                  ],
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
+                      ) : null,
+                      ?snapshot.data[0]["builderBaseLeague"] != null? SizedBox(height: 20): null,
                     ],
                   );
                 } else {

@@ -94,9 +94,9 @@ class _HomePageState extends State<HomePage> {
                                       mainAxisAlignment: MainAxisAlignment
                                           .start,
                                       children: [
-                                        DataProvider.awaitBuilderLeagueIcon(ovsnap.data[0]),
+                                        DataProvider.awaitBuilderLeagueIcon(ovsnap.data[0], 4),
                                         SizedBox(width: 7),
-                                        DataProvider.awaitPlayerBuilderTrophies(ovsnap.data[0]),
+                                        DataProvider.awaitPlayerBuilderTrophies(ovsnap.data[0], 15),
                                       ],
                                     ),
                                   ],
