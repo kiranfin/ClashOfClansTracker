@@ -59,7 +59,7 @@ class _LeaguePageState extends State<LeaguePage> {
                                               snapshot.data[0],
                                             ),
                                             SizedBox(width: 5),
-                                            AutoSizeText(snapshot.data[0]["league"]["name"],
+                                            AutoSizeText(snapshot.data[0]["league"] != null? snapshot.data[0]["league"]["name"] : "Unranked",
                                               style: const TextStyle(
                                                 color: Colors.white,
                                                 fontFamily: "Poppins",
