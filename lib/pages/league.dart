@@ -131,27 +131,77 @@ class _LeaguePageState extends State<LeaguePage> {
                         ),
                       ),
                       SizedBox(height: 20),
-                      ?snapshot.data[0]["legendStatistics"] != null? Wrap(
-                        spacing: 5.0,
-                        runSpacing: 5.0,
-                        children: List.generate(3 ,(index) {
-                            return ClipRRect(
-                              borderRadius: BorderRadius.circular(20),
-                              child: Container(
-                                color: Colors.black,
+                      ?snapshot.data[0]["legendStatistics"] != null? Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          for(int index = 0; index < 3; index++) ClipRRect(
+                            borderRadius: BorderRadius.circular(20),
+                            child: Container(
+                              width: MediaQuery.of(context).size.width - 3 * 95,
+                              color: Colors.black,
                                 child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-
-                                    ],
-                                  ),
+                                padding: const EdgeInsets.all(8.0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    AutoSizeText(index == 0? "Current" : index == 1? "Previous" : "Best",
+                                      style: const TextStyle(
+                                        color: Colors.white,
+                                        fontFamily: "Poppins",
+                                        fontSize: 20,
+                                      ),
+                                      maxLines: 1,
+                                    ),
+                                    Row(
+                                      children: [
+                                        Icon(Icons.access_time_outlined, color: Colors.white),
+                                        SizedBox(width: 5),
+                                        Text("${index == 0? "${DateTime.parse(snapshot.data[0]["legendStatistics"]["previousSeason"]["id"] + "-01").year}-${(DateTime.parse(snapshot.data[0]["legendStatistics"]["previousSeason"]["id"] + "-01").month + 1).toString().padLeft(2, "0")}" : index == 1? (snapshot.data[0]["legendStatistics"]["previousSeason"]!=null? snapshot.data[0]["legendStatistics"]["previousSeason"]["id"] : "-") : (snapshot.data[0]["legendStatistics"]["bestSeason"]!=null? snapshot.data[0]["legendStatistics"]["bestSeason"]["id"] : "-")}",
+                                          style: const TextStyle(
+                                            color: Colors.white,
+                                            fontFamily: "Poppins",
+                                            fontSize: 15,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    Row(
+                                      children: [
+                                        Icon(Icons.numbers, color: Colors.white),
+                                        SizedBox(width: 5),
+                                        Text("${index == 0? (snapshot.data[0]["legendStatistics"]["currentSeason"]!=null?snapshot.data[0]["legendStatistics"]["currentSeason"]["rank"]: "-") : index == 1? (snapshot.data[0]["legendStatistics"]["previousSeason"]!=null? snapshot.data[0]["legendStatistics"]["previousSeason"]["rank"] : "-") : (snapshot.data[0]["legendStatistics"]["bestSeason"]!=null? snapshot.data[0]["legendStatistics"]["bestSeason"]["rank"]: "-")}",
+                                          style: const TextStyle(
+                                            color: Colors.white,
+                                            fontFamily: "Poppins",
+                                            fontSize: 15,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    Row(
+                                      children: [
+                                        Image.asset(
+                                          'lib/utils/img/Trophy.png',
+                                          fit: BoxFit.cover,
+                                          scale: 1.5,
+                                        ),
+                                        SizedBox(width: 5),
+                                        Text("${index == 0? (snapshot.data[0]["legendStatistics"]["currentSeason"]!=null?snapshot.data[0]["legendStatistics"]["currentSeason"]["trophies"] : "-") : index == 1? (snapshot.data[0]["legendStatistics"]["previousSeason"]!=null? snapshot.data[0]["legendStatistics"]["previousSeason"]["trophies"] : "-") : (snapshot.data[0]["legendStatistics"]["bestSeason"]!=null? snapshot.data[0]["legendStatistics"]["bestSeason"]["trophies"]: "-")}",
+                                          style: const TextStyle(
+                                            color: Colors.white,
+                                            fontFamily: "Poppins",
+                                            fontSize: 15,
+                                          ),
+                                        ),
+                                      ],
+                                    )
+                                  ],
                                 ),
                               ),
-                            );
-                          },
-                        ),
+                            ),
+                          )
+                        ],
                       ) : null,
                       ?snapshot.data[0]["legendStatistics"] != null? SizedBox(height: 20): null,
                     ],
