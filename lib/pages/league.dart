@@ -239,6 +239,61 @@ class _LeaguePageState extends State<LeaguePage> {
                         ),
                       ) : null,
                       ?snapshot.data[0]["builderBaseLeague"] != null? SizedBox(height: 20): null,
+                      Text("Current CWL",
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontFamily: "Poppins",
+                          fontSize: 25,
+                        ),
+                      ),
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(20),
+                        child: Container(
+                          color: Colors.black,
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                  children: [
+                                    Column(
+                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                      children: [
+                                        Text("-",
+                                          style: const TextStyle(
+                                            color: Colors.white,
+                                            fontFamily: "Poppins",
+                                            fontSize: 25,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    Image.asset(
+                                      'lib/utils/img/CWLIcon.png',
+                                      fit: BoxFit.cover,
+                                      scale: 2.5,
+                                    ),
+                                    Column(
+                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                      children: [
+                                        Text("-",
+                                          style: const TextStyle(
+                                            color: Colors.white,
+                                            fontFamily: "Poppins",
+                                            fontSize: 25,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ]
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      )
                     ],
                   );
                 } else {
