@@ -405,22 +405,192 @@ class _LeaguePageState extends State<LeaguePage> {
                         ClipRRect(
                           borderRadius: BorderRadius.circular(20),
                           child: Container(
-                            height: 150,
                             color: Colors.black,
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
-                              child: Shimmer(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [Row(children: [])],
-                                ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Column(
+                                        mainAxisAlignment:
+                                        MainAxisAlignment.start,
+                                        crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                        children: [
+                                          Row(
+                                            children: [
+                                              ClipRRect(borderRadius: BorderRadius.circular(10),child: Shimmer(child: Container(width: 50, height: 50))),
+                                              SizedBox(width: 5),
+                                              ClipRRect(borderRadius: BorderRadius.circular(10),child: Shimmer(child: Container(width: 80, height: 30))),
+                                            ],
+                                          ),
+                                          ClipRRect(borderRadius: BorderRadius.circular(10),child: Shimmer(child: Container(width: 120, height: 20))),
+                                          SizedBox(height: 5),
+                                          ClipRRect(borderRadius: BorderRadius.circular(10),child: Shimmer(child: Container(width: 120, height: 20))),
+                                        ],
+                                      ),
+                                      Column(
+                                        mainAxisAlignment:
+                                        MainAxisAlignment.start,
+                                        crossAxisAlignment:
+                                        CrossAxisAlignment.end,
+                                        children: [
+                                          Row(
+                                            children: [
+                                              ClipRRect(borderRadius: BorderRadius.circular(10),child: Shimmer(child: Container(width: 20, height: 20))),
+                                              SizedBox(width: 7),
+                                              ClipRRect(borderRadius: BorderRadius.circular(10),child: Shimmer(child: Container(width: 50, height: 20))),
+                                            ],
+                                          )
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ],
                               ),
                             ),
                           ),
                         ),
-                      ],
-                    );
+                        SizedBox(height: 20),
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(20),
+                        child: Container(
+                          color: Colors.black,
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Row(
+                                  children: [
+                                    ClipRRect(borderRadius: BorderRadius.circular(10),child: Shimmer(child: Container(width: 50, height: 50))),
+                                    SizedBox(width: 7),
+                                    ClipRRect(borderRadius: BorderRadius.circular(10),child: Shimmer(child: Container(width: 100, height: 30))),
+                                  ]
+                                ),
+                                Row(
+                                  children: [
+                                    ClipRRect(borderRadius: BorderRadius.circular(10),child: Shimmer(child: Container(width: 20, height: 20))),
+                                    SizedBox(width: 5),
+                                    ClipRRect(borderRadius: BorderRadius.circular(10),child: Shimmer(child: Container(width: 50, height: 20))),
+                                  ],
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: 20),
+                      Text("Current CWL",
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontFamily: "Poppins",
+                          fontSize: 25,
+                        ),
+                      ),
+                      SizedBox(height: 5),
+                      ElevatedButton(
+                        style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all(Colors.black),
+                          shape: MaterialStateProperty.all<RoundedRectangleBorder>(RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)))
+                        ),
+                        onPressed: () {
+
+                        },
+                        child: Container(
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                ClipRRect(borderRadius: BorderRadius.circular(10),child: Shimmer(child: Container(width: 150, height: 20))),
+                                SizedBox(height: 5),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                  children: [
+                                    Column(
+                                      children: [
+                                        ClipRRect(borderRadius: BorderRadius.circular(10),child: Shimmer(child: Container(width: 60, height: 60))),
+                                        ClipRRect(borderRadius: BorderRadius.circular(10),child: Shimmer(child: Container(width: 120, height: 20))),
+                                      ],
+                                    ),
+                                    Image.asset(
+                                      'lib/utils/img/CWLIcon.png',
+                                      fit: BoxFit.cover,
+                                      scale: 2.5,
+                                    ),
+                                    Column(
+                                      children: [
+                                        ClipRRect(borderRadius: BorderRadius.circular(10),child: Shimmer(child: Container(width: 60, height: 60))),
+                                        ClipRRect(borderRadius: BorderRadius.circular(10),child: Shimmer(child: Container(width: 120, height: 20))),
+                                      ],
+                                    ),
+                                  ]
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: 20),
+                      Text("Current Clan War",
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontFamily: "Poppins",
+                          fontSize: 25,
+                        ),
+                      ),
+                      SizedBox(height: 5),
+                      ElevatedButton(
+                        style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all(Colors.black),
+                        shape: MaterialStateProperty.all<RoundedRectangleBorder>(RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)))
+                        ),
+                        onPressed: () {
+
+                        },
+                        child: Container(
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              ClipRRect(borderRadius: BorderRadius.circular(10),child: Shimmer(child: Container(width: 150, height: 20))),
+                              SizedBox(height: 5),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                children: [
+                                  Column(
+                                    children: [
+                                      ClipRRect(borderRadius: BorderRadius.circular(10),child: Shimmer(child: Container(width: 60, height: 60))),
+                                      ClipRRect(borderRadius: BorderRadius.circular(10),child: Shimmer(child: Container(width: 120, height: 20))),
+                                    ],
+                                  ),
+                                  Image.asset(
+                                    'lib/utils/img/CWLIcon.png',
+                                    fit: BoxFit.cover,
+                                    scale: 2.5,
+                                  ),
+                                  Column(
+                                    children: [
+                                      ClipRRect(borderRadius: BorderRadius.circular(10),child: Shimmer(child: Container(width: 60, height: 60))),
+                                      ClipRRect(borderRadius: BorderRadius.circular(10),child: Shimmer(child: Container(width: 120, height: 20))),
+                                    ],
+                                  ),
+                                ]
+                              ),
+                            ],
+                          ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  );
                   }
                 },
               ),
