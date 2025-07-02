@@ -339,7 +339,7 @@ class _LeaguePageState extends State<LeaguePage> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                               Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
                                   Row(
                                     children: [
@@ -347,7 +347,7 @@ class _LeaguePageState extends State<LeaguePage> {
                                       SizedBox(width: 5),
                                       ?snapshot.data[3]["state"] == "preparation" || snapshot.data[3]["state"] == "inWar"? CountDownText(
                                       due: DateTime.parse(snapshot.data[3]["state"] == "preparation"? snapshot.data[3]["startTime"] : snapshot.data[3]["endTime"]),
-                                      finishedText: "War over!",
+                                      finishedText: "War vorbei!",
                                       showLabel: true,
                                       longDateName: true,
                                       hoursTextLong: ":",

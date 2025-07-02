@@ -74,7 +74,358 @@ Future<Map<String,dynamic>> awaitCurrentClanWar(String tag) async {
   final res = await http.get(url);
   final status = res.statusCode;
   if (status != 200) throw Exception('http.get error: statusCode= $status');
-  return jsonDecode(res.body) as Map<String, dynamic>;
+  //return jsonDecode(res.body) as Map<String, dynamic>;
+  return {
+    "state": "warEnded",
+    "teamSize": 5,
+    "attacksPerMember": 2,
+    "battleModifier": "none",
+    "preparationStartTime": "20250630T202521.000Z",
+    "startTime": "20250701T192521.000Z",
+    "endTime": "20250702T192521.000Z",
+    "clan": {
+      "tag": "#2JC9C9UVR",
+      "name": "ADL",
+      "badgeUrls": {
+        "small": "https://api-assets.clashofclans.com/badges/70/-PQg5hdYr5VYxDgB0XHbTYs_qthHRPSZWOqWKa4Z4cc.png",
+        "large": "https://api-assets.clashofclans.com/badges/512/-PQg5hdYr5VYxDgB0XHbTYs_qthHRPSZWOqWKa4Z4cc.png",
+        "medium": "https://api-assets.clashofclans.com/badges/200/-PQg5hdYr5VYxDgB0XHbTYs_qthHRPSZWOqWKa4Z4cc.png"
+      },
+      "clanLevel": 2,
+      "attacks": 8,
+      "stars": 14,
+      "destructionPercentage": 98.6,
+      "members": [
+        {
+          "tag": "#GJP99GYU8",
+          "name": "akash",
+          "townhallLevel": 11,
+          "mapPosition": 3,
+          "attacks": [
+            {
+              "attackerTag": "#GJP99GYU8",
+              "defenderTag": "#QYUG988LC",
+              "stars": 3,
+              "destructionPercentage": 100,
+              "order": 9,
+              "duration": 120
+            },
+            {
+              "attackerTag": "#GJP99GYU8",
+              "defenderTag": "#9V9JUC800",
+              "stars": 3,
+              "destructionPercentage": 100,
+              "order": 10,
+              "duration": 112
+            }
+          ],
+          "opponentAttacks": 1,
+          "bestOpponentAttack": {
+            "attackerTag": "#QYUG988LC",
+            "defenderTag": "#GJP99GYU8",
+            "stars": 3,
+            "destructionPercentage": 100,
+            "order": 6,
+            "duration": 97
+          }
+        },
+        {
+          "tag": "#Y80G9UQ0P",
+          "name": "Harman_Chohan",
+          "townhallLevel": 12,
+          "mapPosition": 2,
+          "attacks": [
+            {
+              "attackerTag": "#Y80G9UQ0P",
+              "defenderTag": "#QQ02UQJL2",
+              "stars": 1,
+              "destructionPercentage": 70,
+              "order": 12,
+              "duration": 135
+            },
+            {
+              "attackerTag": "#Y80G9UQ0P",
+              "defenderTag": "#QYUG988LC",
+              "stars": 3,
+              "destructionPercentage": 100,
+              "order": 13,
+              "duration": 85
+            }
+          ],
+          "opponentAttacks": 1,
+          "bestOpponentAttack": {
+            "attackerTag": "#QQ02UQJL2",
+            "defenderTag": "#Y80G9UQ0P",
+            "stars": 3,
+            "destructionPercentage": 100,
+            "order": 2,
+            "duration": 79
+          }
+        },
+        {
+          "tag": "#GCP092QQJ",
+          "name": "cash",
+          "townhallLevel": 9,
+          "mapPosition": 4,
+          "attacks": [
+            {
+              "attackerTag": "#GCP092QQJ",
+              "defenderTag": "#G9JPG2L0U",
+              "stars": 3,
+              "destructionPercentage": 100,
+              "order": 7,
+              "duration": 81
+            },
+            {
+              "attackerTag": "#GCP092QQJ",
+              "defenderTag": "#GR00CYYVR",
+              "stars": 3,
+              "destructionPercentage": 100,
+              "order": 11,
+              "duration": 75
+            }
+          ],
+          "opponentAttacks": 2,
+          "bestOpponentAttack": {
+            "attackerTag": "#9V9JUC800",
+            "defenderTag": "#GCP092QQJ",
+            "stars": 3,
+            "destructionPercentage": 100,
+            "order": 5,
+            "duration": 84
+          }
+        },
+        {
+          "tag": "#QL9G0RY9Q",
+          "name": "harsh virk",
+          "townhallLevel": 7,
+          "mapPosition": 5,
+          "opponentAttacks": 3,
+          "bestOpponentAttack": {
+            "attackerTag": "#9V9JUC800",
+            "defenderTag": "#QL9G0RY9Q",
+            "stars": 3,
+            "destructionPercentage": 100,
+            "order": 14,
+            "duration": 48
+          }
+        },
+        {
+          "tag": "#YG9QUUJLP",
+          "name": "harry virk",
+          "townhallLevel": 13,
+          "mapPosition": 1,
+          "attacks": [
+            {
+              "attackerTag": "#YG9QUUJLP",
+              "defenderTag": "#QQ02UQJL2",
+              "stars": 2,
+              "destructionPercentage": 93,
+              "order": 17,
+              "duration": 149
+            },
+            {
+              "attackerTag": "#YG9QUUJLP",
+              "defenderTag": "#QYUG988LC",
+              "stars": 3,
+              "destructionPercentage": 100,
+              "order": 18,
+              "duration": 126
+            }
+          ],
+          "opponentAttacks": 3,
+          "bestOpponentAttack": {
+            "attackerTag": "#QYUG988LC",
+            "defenderTag": "#YG9QUUJLP",
+            "stars": 2,
+            "destructionPercentage": 77,
+            "order": 8,
+            "duration": 107
+          }
+        }
+      ]
+    },
+    "opponent": {
+      "tag": "#2JJ8YV2GP",
+      "name": "EL-TURCO",
+      "badgeUrls": {
+        "small": "https://api-assets.clashofclans.com/badges/70/DcHcgP14dK0OPmf_G77JtangGL7_5u6oAOWUbbXP8Yw.png",
+        "large": "https://api-assets.clashofclans.com/badges/512/DcHcgP14dK0OPmf_G77JtangGL7_5u6oAOWUbbXP8Yw.png",
+        "medium": "https://api-assets.clashofclans.com/badges/200/DcHcgP14dK0OPmf_G77JtangGL7_5u6oAOWUbbXP8Yw.png"
+      },
+      "clanLevel": 1,
+      "attacks": 10,
+      "stars": 14,
+      "destructionPercentage": 95.4,
+      "members": [
+        {
+          "tag": "#QYUG988LC",
+          "name": "enesw",
+          "townhallLevel": 12,
+          "mapPosition": 2,
+          "attacks": [
+            {
+              "attackerTag": "#QYUG988LC",
+              "defenderTag": "#GJP99GYU8",
+              "stars": 3,
+              "destructionPercentage": 100,
+              "order": 6,
+              "duration": 97
+            },
+            {
+              "attackerTag": "#QYUG988LC",
+              "defenderTag": "#YG9QUUJLP",
+              "stars": 2,
+              "destructionPercentage": 77,
+              "order": 8,
+              "duration": 107
+            }
+          ],
+          "opponentAttacks": 3,
+          "bestOpponentAttack": {
+            "attackerTag": "#GJP99GYU8",
+            "defenderTag": "#QYUG988LC",
+            "stars": 3,
+            "destructionPercentage": 100,
+            "order": 9,
+            "duration": 120
+          }
+        },
+        {
+          "tag": "#QQ02UQJL2",
+          "name": "crewHERKÜL",
+          "townhallLevel": 13,
+          "mapPosition": 1,
+          "attacks": [
+            {
+              "attackerTag": "#QQ02UQJL2",
+              "defenderTag": "#Y80G9UQ0P",
+              "stars": 3,
+              "destructionPercentage": 100,
+              "order": 2,
+              "duration": 79
+            },
+            {
+              "attackerTag": "#QQ02UQJL2",
+              "defenderTag": "#YG9QUUJLP",
+              "stars": 1,
+              "destructionPercentage": 72,
+              "order": 4,
+              "duration": 94
+            }
+          ],
+          "opponentAttacks": 2,
+          "bestOpponentAttack": {
+            "attackerTag": "#YG9QUUJLP",
+            "defenderTag": "#QQ02UQJL2",
+            "stars": 2,
+            "destructionPercentage": 93,
+            "order": 17,
+            "duration": 149
+          }
+        },
+        {
+          "tag": "#9V9JUC800",
+          "name": "Ethem kisacik",
+          "townhallLevel": 11,
+          "mapPosition": 3,
+          "attacks": [
+            {
+              "attackerTag": "#9V9JUC800",
+              "defenderTag": "#GCP092QQJ",
+              "stars": 3,
+              "destructionPercentage": 100,
+              "order": 5,
+              "duration": 84
+            },
+            {
+              "attackerTag": "#9V9JUC800",
+              "defenderTag": "#QL9G0RY9Q",
+              "stars": 3,
+              "destructionPercentage": 100,
+              "order": 14,
+              "duration": 48
+            }
+          ],
+          "opponentAttacks": 1,
+          "bestOpponentAttack": {
+            "attackerTag": "#GJP99GYU8",
+            "defenderTag": "#9V9JUC800",
+            "stars": 3,
+            "destructionPercentage": 100,
+            "order": 10,
+            "duration": 112
+          }
+        },
+        {
+          "tag": "#GR00CYYVR",
+          "name": "GÖKBEY",
+          "townhallLevel": 7,
+          "mapPosition": 5,
+          "attacks": [
+            {
+              "attackerTag": "#GR00CYYVR",
+              "defenderTag": "#YG9QUUJLP",
+              "stars": 0,
+              "destructionPercentage": 16,
+              "order": 15,
+              "duration": 47
+            },
+            {
+              "attackerTag": "#GR00CYYVR",
+              "defenderTag": "#QL9G0RY9Q",
+              "stars": 1,
+              "destructionPercentage": 52,
+              "order": 16,
+              "duration": 71
+            }
+          ],
+          "opponentAttacks": 1,
+          "bestOpponentAttack": {
+            "attackerTag": "#GCP092QQJ",
+            "defenderTag": "#GR00CYYVR",
+            "stars": 3,
+            "destructionPercentage": 100,
+            "order": 11,
+            "duration": 75
+          }
+        },
+        {
+          "tag": "#G9JPG2L0U",
+          "name": "ÜVEYİK",
+          "townhallLevel": 7,
+          "mapPosition": 4,
+          "attacks": [
+            {
+              "attackerTag": "#G9JPG2L0U",
+              "defenderTag": "#QL9G0RY9Q",
+              "stars": 2,
+              "destructionPercentage": 87,
+              "order": 1,
+              "duration": 88
+            },
+            {
+              "attackerTag": "#G9JPG2L0U",
+              "defenderTag": "#GCP092QQJ",
+              "stars": 0,
+              "destructionPercentage": 37,
+              "order": 3,
+              "duration": 74
+            }
+          ],
+          "opponentAttacks": 1,
+          "bestOpponentAttack": {
+            "attackerTag": "#GCP092QQJ",
+            "defenderTag": "#G9JPG2L0U",
+            "stars": 3,
+            "destructionPercentage": 100,
+            "order": 7,
+            "duration": 81
+          }
+        }
+      ]
+    }
+  };
 }
 
 Future<Map<String,dynamic>> awaitClanWarLog(String tag) async {

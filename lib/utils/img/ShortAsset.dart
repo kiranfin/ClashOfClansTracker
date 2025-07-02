@@ -211,6 +211,8 @@ const two_star = 'lib/utils/img/2_Stars.webp';
 const three_star = 'lib/utils/img/3_Stars.webp';
 const exp = 'lib/utils/img/XP.webp';
 const star = 'lib/utils/img/Star.webp';
+const whitestar = 'lib/utils/img/White_Star.png';
+const whitestarempty = 'lib/utils/img/White_Star_Empty.png';
 const capital_gold = 'lib/utils/img/CapitalGold.webp';
 
 const war_bronze1 = 'lib/utils/img/clan_leagues/WarBronzeI.webp';

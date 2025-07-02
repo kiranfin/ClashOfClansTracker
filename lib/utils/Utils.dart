@@ -886,5 +886,21 @@ Text getStateText(String text) {
 Text getClanWarStateText(String text) {
   if(text == "preparation") return Text("Vorbereitung", style: const TextStyle(color: Colors.white, fontFamily: "Poppins", fontSize: 20));
   if(text == "inWar") return Text("Endet in", style: const TextStyle(color: Colors.white, fontFamily: "Poppins", fontSize: 20));
-  return Text("-", style: const TextStyle(color: Colors.white, fontFamily: "Poppins", fontSize: 20));
+  return Text("War vorbei", style: const TextStyle(color: Colors.white, fontFamily: "Poppins", fontSize: 20));
+}
+
+Row getClanWarStars(Map<String, dynamic> map) {
+  return Row(
+    children: [
+      for(int i = 0; i < map["bestOpponentAttack"]["stars"]; i++) Image.asset(whitestar, scale: 6),
+      for(int i = 0; i < (3 - map["bestOpponentAttack"]["stars"]); i++) Image.asset(whitestarempty, scale: 6),
+      SizedBox(width: 5),
+      Text("${map["bestOpponentAttack"]["destructionPercentage"]}%", style: const TextStyle(color: Colors.white, fontFamily: "Poppins", fontSize: 12))
+    ],
+  );
+}
+
+List<Map<String, dynamic>> sortClanWarMembers(List<Map<String, dynamic>> members) {
+  members.sort((a, b) => (a['mapPosition']).compareTo(b['mapPosition']));
+  return members;
 }
