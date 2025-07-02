@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io' as io;
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:clashofclanstracker/utils/img/ShortAsset.dart';
 import 'package:flutter/material.dart';
 
@@ -770,4 +771,114 @@ bool isWallUnderMax(int thlevel, Map<String, dynamic> map, int currentLevel) {
 
 bool canWallBeDecreased(int thlevel, Map<String, dynamic> map, int currentLevel) {
   return currentLevel > 1;
+}
+
+Widget getFirstClan(Map<String, dynamic> map) {
+  return Column(
+    crossAxisAlignment: CrossAxisAlignment.center,
+    children: [
+      ?map["clan"] !=null? Image.network(map["clan"]["badgeUrls"]["small"], scale: 1) : null,
+      ?map["clan"] !=null? SizedBox(height: 10) : null,
+      AutoSizeText(map["clan"] !=null? map["clan"]["name"] : "-",
+        style: const TextStyle(
+          color: Colors.white,
+          fontFamily: "Poppins",
+          fontSize: 20,
+        ),
+        maxLines: 1,
+      ),
+      ?map["clan"] !=null? Row(
+        children: [
+          Image.asset(star, scale: 1.5),
+          SizedBox(width: 5),
+          Text("${map["clan"]["stars"]}",
+            style: const TextStyle(
+              color: Colors.white,
+              fontFamily: "Poppins",
+              fontSize: 15,
+            )
+          ),
+          SizedBox(width: 15),
+          Icon(Icons.percent, color: Colors.white, size: 20),
+          SizedBox(width: 2),
+          Text("${map["clan"]["destructionPercentage"].toStringAsFixed(2)}",
+            style: const TextStyle(
+              color: Colors.white,
+              fontFamily: "Poppins",
+              fontSize: 15,
+            )
+          )
+        ],
+      ) : null,
+      ?map["clan"] !=null? Row(
+        children: [
+          Text("Attacks: ${map["clan"]["attacks"]}",
+            style: const TextStyle(
+              color: Colors.white,
+              fontFamily: "Poppins",
+              fontSize: 15,
+            )
+          )
+        ],
+      ) : null,
+    ],
+  );
+}
+
+Widget getOpponentClan(Map<String, dynamic> map) {
+  return Column(
+    crossAxisAlignment: CrossAxisAlignment.center,
+    children: [
+      ?map["opponent"] !=null? Image.network(map["opponent"]["badgeUrls"]["small"], scale: 1) : null,
+      ?map["opponent"] !=null?SizedBox(height: 10) : null,
+      AutoSizeText(map["opponent"] !=null? map["opponent"]["name"] : "-",
+        style: const TextStyle(
+          color: Colors.white,
+          fontFamily: "Poppins",
+          fontSize: 20,
+        ),
+        maxLines: 1,
+      ),
+      ?map["opponent"] !=null? Row(
+        children: [
+          Image.asset(star, scale: 1.5),
+          SizedBox(width: 5),
+          Text("${map["opponent"]["stars"]}",
+            style: const TextStyle(
+              color: Colors.white,
+              fontFamily: "Poppins",
+              fontSize: 15,
+            )
+          ),
+          SizedBox(width: 12),
+          Icon(Icons.percent, color: Colors.white, size: 20),
+          SizedBox(width: 2),
+          Text("${map["opponent"]["destructionPercentage"].toStringAsFixed(2)}",
+            style: const TextStyle(
+              color: Colors.white,
+              fontFamily: "Poppins",
+              fontSize: 15,
+            )
+          )
+        ],
+      ) : null,
+      ?map["opponent"] !=null? Row(
+        children: [
+          Text("Attacks: ${map["opponent"]["attacks"]}",
+            style: const TextStyle(
+              color: Colors.white,
+              fontFamily: "Poppins",
+              fontSize: 15,
+            )
+          )
+        ],
+      ) : null,
+    ],
+  );
+}
+
+Text getStateText(String text) {
+  if(text == "preparation") return Text("Vorbereitung", style: const TextStyle(color: Colors.white, fontFamily: "Poppins", fontSize: 20));
+  if(text == "inWar") return Text("Endet in", style: const TextStyle(color: Colors.white, fontFamily: "Poppins", fontSize: 20));
+  return Text("Neue Runde in", style: const TextStyle(color: Colors.white, fontFamily: "Poppins", fontSize: 20));
 }

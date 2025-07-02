@@ -91,7 +91,7 @@ class _DetailPageState extends State<DetailPage> {
           padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 15.0),
           child: category == "buildings"? getBuildingDetail() : category == "troops" ? getTroopDetail() : category == "spells"?
           getSpellDetail() : category == "heroes"? getHeroesDetail() : category == "equipment"?
-          getEquipmentDetail() : category == "achievements"? getAchievementDetails() : category == "profile"? getProfileDetails() : null,
+          getEquipmentDetail() : category == "achievements"? getAchievementDetails() : category == "profile"? getProfileDetails() : category == "cwl"? getClanWarLeagueDetails() : null,
         ),
       ),
     );
@@ -1597,6 +1597,70 @@ class _DetailPageState extends State<DetailPage> {
                   ) : SizedBox(height: 5)
                 ]
               ),
+            );
+          } else {
+            return ListView.builder(
+                itemCount: 12,
+                itemBuilder: (BuildContext context, int index) {
+                  return ListTile(
+                    title: Shimmer(child: Container(width: 50, height: 15, color: Colors.black45)),
+                  );
+                }
+            );
+          }
+        }
+    );
+  }
+
+  Widget getClanWarLeagueDetails() {
+    return FutureBuilder(
+        future: DataProvider.awaitAllClanWarLeagueRounds(userTag),
+        builder: (context, AsyncSnapshot snapshot) {
+          if(snapshot.hasData) {
+            return ListView.builder(
+                itemCount: snapshot.data.length,
+                itemBuilder: (context, ind) {
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      ?snapshot.data["round${ind + 1}"].length != 0? Text("Round ${ind + 1}", style: const TextStyle(
+                          color: Colors.white,
+                          fontFamily: "Poppins",
+                          fontSize: 30)
+                      ) : null,
+                      SizedBox(height: 10),
+                      for(var element in snapshot.data["round${ind + 1}"]) Padding(
+                        padding: const EdgeInsets.only(bottom: 10),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(20),
+                          child: Container(
+                            color: Colors.black,
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                    children: [
+                                      Utils.getFirstClan(element),
+                                      Image.asset(
+                                        'lib/utils/img/CWLIcon.png',
+                                        fit: BoxFit.cover,
+                                        scale: 2.5,
+                                      ),
+                                      Utils.getOpponentClan(element),
+                                    ]
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  );
+                }
             );
           } else {
             return ListView.builder(

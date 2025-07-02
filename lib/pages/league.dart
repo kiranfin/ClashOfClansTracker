@@ -1,4 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:date_count_down/date_count_down.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
 import '../provider/DataProvider.dart' as DataProvider;
@@ -23,11 +24,11 @@ class _LeaguePageState extends State<LeaguePage> {
         child: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.symmetric(
-              horizontal: 10.0,
-              vertical: 15.0,
+              horizontal: 20.0,
+              vertical: 25.0,
             ),
             child: FutureBuilder(
-              future: Future.wait([DataProvider.awaitPlayerData(userTag)]),
+              future: Future.wait([DataProvider.awaitPlayerData(userTag), DataProvider.awaitClanWarLeague(userTag), DataProvider.awaitCurrentClanWarLeagueWar(userTag)]),
               builder: (context, AsyncSnapshot snapshot) {
                 if (snapshot.hasData) {
                   return Column(
@@ -133,7 +134,7 @@ class _LeaguePageState extends State<LeaguePage> {
                           for(int index = 0; index < 3; index++) ClipRRect(
                             borderRadius: BorderRadius.circular(20),
                             child: Container(
-                              width: MediaQuery.of(context).size.width - 3 * 95,
+                              width: MediaQuery.of(context).size.width - 3 * 98,
                               color: Colors.black,
                                 child: Padding(
                                 padding: const EdgeInsets.all(8.0),
@@ -246,50 +247,68 @@ class _LeaguePageState extends State<LeaguePage> {
                           fontSize: 25,
                         ),
                       ),
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(20),
-                        child: Container(
-                          color: Colors.black,
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                  children: [
-                                    Column(
-                                      crossAxisAlignment: CrossAxisAlignment.center,
-                                      children: [
-                                        Text("-",
+                      SizedBox(height: 5),
+                      ElevatedButton(
+                        style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all(
+                          Colors.black),
+                          shape: MaterialStateProperty.all<
+                            RoundedRectangleBorder>(
+                            RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30.0),
+                            )
+                          )
+                        ),
+                        onPressed: () {
+                          Navigator.pushNamed(context, "/detail", arguments: "cwl");
+                        },
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(20),
+                          child: Container(
+                            color: Colors.black,
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Utils.getStateText(snapshot.data[2]["state"]),
+                                      SizedBox(width: 5),
+                                      ?snapshot.data[2]["state"] == "preparation" || snapshot.data[2]["state"] == "inWar"? CountDownText(
+                                        due: DateTime.parse(snapshot.data[2]["state"] == "preparation"? snapshot.data[2]["startTime"] : snapshot.data[2]["endTime"]),
+                                        finishedText: "War over!",
+                                        showLabel: true,
+                                        longDateName: true,
+                                        hoursTextLong: ":",
+                                        minutesTextLong: ":",
+                                        secondsTextLong: "",
+                                        style: const TextStyle(color: Colors.white, fontFamily: "Poppins",fontSize: 20),
+                                      ) : Text("-",
                                           style: const TextStyle(
                                             color: Colors.white,
                                             fontFamily: "Poppins",
-                                            fontSize: 25,
+                                            fontSize: 20,
                                           ),
                                         ),
-                                      ],
-                                    ),
-                                    Image.asset(
-                                      'lib/utils/img/CWLIcon.png',
-                                      fit: BoxFit.cover,
-                                      scale: 2.5,
-                                    ),
-                                    Column(
-                                      crossAxisAlignment: CrossAxisAlignment.center,
-                                      children: [
-                                        Text("-",
-                                          style: const TextStyle(
-                                            color: Colors.white,
-                                            fontFamily: "Poppins",
-                                            fontSize: 25,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ]
-                                ),
-                              ],
+                                    ],
+                                  ),
+                                  SizedBox(height: 5),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                    children: [
+                                      Utils.getFirstClan(snapshot.data[2]),
+                                      Image.asset(
+                                        'lib/utils/img/CWLIcon.png',
+                                        fit: BoxFit.cover,
+                                        scale: 2.5,
+                                      ),
+                                      Utils.getOpponentClan(snapshot.data[2]),
+                                    ]
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         ),

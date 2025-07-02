@@ -25,6 +25,47 @@ Future<Map<String, dynamic>> awaitPlayerClan(String tag) async {
   return jsonDecode(res.body) as Map<String, dynamic>;
 }
 
+Future<Map<String, dynamic>> awaitClanWarLeague(String tag) async {
+  var player = await awaitPlayerData(tag);
+  if(player["clan"] == null) return {};
+  String clantag = player["clan"]["tag"].substring(1);
+  final url = Uri.parse('${Utils.getBaseUrl()}clanwarleague/current/$clantag');
+  final res = await http.get(url);
+  final status = res.statusCode;
+  if (status != 200) throw Exception('http.get error: statusCode= $status');
+  return jsonDecode(res.body) as Map<String, dynamic>;
+}
+
+Future<Map<String, dynamic>?> awaitCurrentClanWarLeagueWar(String tag) async {
+  var player = await awaitPlayerData(tag);
+  if(player["clan"] == null) return {};
+  String clantag = player["clan"]["tag"].substring(1);
+  final url = Uri.parse('${Utils.getBaseUrl()}clanwarleague/currentday/$clantag');
+  final res = await http.get(url);
+  final status = res.statusCode;
+  if (status != 200) throw Exception('http.get error: statusCode= $status');
+  return jsonDecode(res.body) as Map<String, dynamic>;
+}
+
+Future<Map<String, dynamic>> awaitClanWarLeagueWar(String tag) async {
+  final url = Uri.parse('${Utils.getBaseUrl()}clanwarleague/war/$tag');
+  final res = await http.get(url);
+  final status = res.statusCode;
+  if (status != 200) throw Exception('http.get error: statusCode= $status');
+  return jsonDecode(res.body) as Map<String, dynamic>;
+}
+
+Future<Map<String,dynamic>> awaitAllClanWarLeagueRounds(String tag) async {
+  var player = await awaitPlayerData(tag);
+  if(player["clan"] == null) return {};
+  String clantag = player["clan"]["tag"].substring(1);
+  final url = Uri.parse('${Utils.getBaseUrl()}clanwarleague/rounds/$clantag');
+  final res = await http.get(url);
+  final status = res.statusCode;
+  if (status != 200) throw Exception('http.get error: statusCode= $status');
+  return jsonDecode(res.body) as Map<String, dynamic>;
+}
+
 Future<Map<String, dynamic>> awaitBuildings() async {
   final url = Uri.parse('${Utils.getBaseUrl()}retrieve/buildings');
   final res = await http.get(url);
