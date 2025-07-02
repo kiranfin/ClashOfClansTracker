@@ -206,26 +206,26 @@ Image awaitBuilderLeagueIcon(Map<String, dynamic> userdata, double scale) {
   return Image.asset(wood, scale: scale);
 }
 
-Image awaitClanWarLeagueIcon(String league) {
-  if(league == "Bronze League I") return Image.asset(war_bronze1, scale: 1.2);
-  if(league == "Bronze League II") return Image.asset(war_bronze2, scale: 1.2);
-  if(league == "Bronze League III") return Image.asset(war_bronze3, scale: 1.2);
-  if(league == "Silver League I") return Image.asset(war_silver1, scale: 1.2);
-  if(league == "Silver League II") return Image.asset(war_silver2, scale: 1.2);
-  if(league == "Silver League III") return Image.asset(war_silver3, scale: 1.2);
-  if(league == "Gold League I") return Image.asset(war_gold1, scale: 1.2);
-  if(league == "Gold League II") return Image.asset(war_gold2, scale: 1.2);
-  if(league == "Gold League III") return Image.asset(war_gold3, scale: 1.2);
-  if(league == "Crystal League I") return Image.asset(war_crystal1, scale: 1.2);
-  if(league == "Crystal League II") return Image.asset(war_crystal2, scale: 1.2);
-  if(league == "Crystal League III") return Image.asset(war_crystal3, scale: 1.2);
-  if(league == "Master League I") return Image.asset(war_master1, scale: 1.2);
-  if(league == "Master League II") return Image.asset(war_master2, scale: 1.2);
-  if(league == "Master League III") return Image.asset(war_master3, scale: 1.2);
-  if(league == "Champion League I") return Image.asset(war_champion1, scale: 1.2);
-  if(league == "Champion League II") return Image.asset(war_champion2, scale: 1.2);
-  if(league == "Champion League III") return Image.asset(war_champion3, scale: 1.2);
-  return Image.asset(war_bronze1, scale: 1);
+Image awaitClanWarLeagueIcon(String league, double scale) {
+  if(league == "Bronze League I") return Image.asset(war_bronze1, scale: scale);
+  if(league == "Bronze League II") return Image.asset(war_bronze2, scale: scale);
+  if(league == "Bronze League III") return Image.asset(war_bronze3, scale: scale);
+  if(league == "Silver League I") return Image.asset(war_silver1, scale: scale);
+  if(league == "Silver League II") return Image.asset(war_silver2, scale: scale);
+  if(league == "Silver League III") return Image.asset(war_silver3, scale: scale);
+  if(league == "Gold League I") return Image.asset(war_gold1, scale: scale);
+  if(league == "Gold League II") return Image.asset(war_gold2, scale: scale);
+  if(league == "Gold League III") return Image.asset(war_gold3, scale: scale);
+  if(league == "Crystal League I") return Image.asset(war_crystal1, scale: scale);
+  if(league == "Crystal League II") return Image.asset(war_crystal2, scale: scale);
+  if(league == "Crystal League III") return Image.asset(war_crystal3, scale: scale);
+  if(league == "Master League I") return Image.asset(war_master1, scale: scale);
+  if(league == "Master League II") return Image.asset(war_master2, scale: scale);
+  if(league == "Master League III") return Image.asset(war_master3, scale: scale);
+  if(league == "Champion League I") return Image.asset(war_champion1, scale: scale);
+  if(league == "Champion League II") return Image.asset(war_champion2, scale: scale);
+  if(league == "Champion League III") return Image.asset(war_champion3, scale: scale);
+  return Image.asset(war_bronze1, scale: scale);
 }
 
 Text awaitPlayerName(Map<String, dynamic> userdata) {

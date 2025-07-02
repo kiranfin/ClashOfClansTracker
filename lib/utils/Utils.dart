@@ -904,3 +904,44 @@ List<Map<String, dynamic>> sortClanWarMembers(List<Map<String, dynamic>> members
   members.sort((a, b) => (a['mapPosition']).compareTo(b['mapPosition']));
   return members;
 }
+
+Map<String, dynamic> getClanWarRanking(Map<String, dynamic> map) {
+  Map<String, dynamic> tempmap = {};
+  map.forEach((key, val){
+    for(var war in val) {
+      if(tempmap[war["clan"]["tag"]] == null) tempmap[war["clan"]["tag"]] = {};
+      if(tempmap[war["opponent"]["tag"]] == null) tempmap[war["opponent"]["tag"]] = {};
+      tempmap[war["clan"]["tag"]]["name"] = war["clan"]["name"];
+      tempmap[war["opponent"]["tag"]]["name"] = war["opponent"]["name"];
+      tempmap[war["clan"]["tag"]]["stars"] = tempmap[war["clan"]["tag"]]["stars"]?? 0 + war["clan"]["stars"];
+      tempmap[war["opponent"]["tag"]]["stars"] = tempmap[war["opponent"]["tag"]]["stars"]?? 0 + war["opponent"]["stars"];
+      tempmap[war["clan"]["tag"]]["percentage"] = tempmap[war["clan"]["tag"]]["percentage"]?? 0 + (war["clan"]["destructionPercentage"] / 100) * (war["teamSize"] * 100);
+      tempmap[war["opponent"]["tag"]]["percentage"] = tempmap[war["opponent"]["tag"]]["percentage"]?? 0 + (war["opponent"]["destructionPercentage"] / 100) * (war["teamSize"] * 100);
+      if(war["state"] == "ended") { //Wenn War vorbei ist
+        if(war["clan"]["stars"] > war["opponent"]["stars"]) { //Clan mehr Sterne
+          tempmap[war["clan"]["tag"]]["stars"] = tempmap[war["clan"]["tag"]]["stars"]?? 0 + 10;
+        } else if(war["clan"]["stars"] < war["opponent"]["stars"]) { //Opponent mehr Sterne
+          tempmap[war["opponent"]["tag"]]["stars"] = tempmap[war["opponent"]["tag"]]["stars"]?? 0 + 10;
+        } else if(war["clan"]["stars"] == war["opponent"]["stars"]) { //Gleich viele Sterne
+          if(war["clan"]["destructionPercentage"] > war["opponent"]["destructionPercentage"]) tempmap[war["clan"]["tag"]]["stars"] = tempmap[war["clan"]["tag"]]["stars"]?? 0 + 10;
+          if(war["clan"]["destructionPercentage"] < war["opponent"]["destructionPercentage"]) tempmap[war["opponent"]["tag"]]["stars"] = tempmap[war["opponent"]["tag"]]["stars"]?? 0 + 10;
+        }
+      }
+    }
+  });
+  final sortedEntries = tempmap.entries.toList()
+    ..sort((a, b) {
+      final starsA = a.value["stars"]!;
+      final starsB = b.value["stars"]!;
+      final percentageA = a.value["percentage"]!;
+      final percentageB = b.value["percentage"]!;
+
+      if (starsA != starsB) {
+        return starsB.compareTo(starsA); // Absteigend nach stars
+      } else {
+        return percentageB.compareTo(percentageA); // Absteigend nach percentage
+      }
+    });
+  final sortedMap = Map<String, dynamic>.fromEntries(sortedEntries);
+  return sortedMap;
+}

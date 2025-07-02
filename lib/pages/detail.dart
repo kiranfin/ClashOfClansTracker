@@ -1485,7 +1485,7 @@ class _DetailPageState extends State<DetailPage> {
                                         SizedBox(height: 5),
                                         Row(
                                           children: [
-                                            DataProvider.awaitClanWarLeagueIcon(snapshot.data[1]["warLeague"]["name"]),
+                                            DataProvider.awaitClanWarLeagueIcon(snapshot.data[1]["warLeague"]["name"], 1.2),
                                             SizedBox(width: 5),
                                             Text("Wins: ${snapshot.data[1]["warWins"]} / Ties: ${snapshot.data[1]["warTies"]} / Losses: ${snapshot.data[1]["warLosses"]}", style: const TextStyle(
                                                 color: Colors.white,
@@ -1625,53 +1625,134 @@ class _DetailPageState extends State<DetailPage> {
 
   Widget getClanWarLeagueDetails() {
     return FutureBuilder(
-        future: DataProvider.awaitAllClanWarLeagueRounds(userTag),
+        future: Future.wait([DataProvider.awaitAllClanWarLeagueRounds(userTag), DataProvider.awaitPlayerClan(userTag)]),
         builder: (context, AsyncSnapshot snapshot) {
           if(snapshot.hasData) {
-            return ListView.builder(
-                itemCount: snapshot.data.length,
-                itemBuilder: (context, ind) {
-                  return Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      ?snapshot.data["round${ind + 1}"].length != 0? Text("Round ${ind + 1}", style: const TextStyle(
-                          color: Colors.white,
-                          fontFamily: "Poppins",
-                          fontSize: 30)
-                      ) : null,
-                      SizedBox(height: 10),
-                      for(var element in snapshot.data["round${ind + 1}"]) Padding(
-                        padding: const EdgeInsets.only(bottom: 10),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(20),
-                          child: Container(
-                            color: Colors.black,
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                    children: [
-                                      Utils.getFirstClan(element),
-                                      Image.asset(
-                                        'lib/utils/img/CWLIcon.png',
-                                        fit: BoxFit.cover,
-                                        scale: 2.5,
-                                      ),
-                                      Utils.getOpponentClan(element),
-                                    ]
-                                  ),
-                                ],
-                              ),
+            List ranking = Utils.getClanWarRanking(snapshot.data[0]).values.toList();
+            return SingleChildScrollView(
+              child: Column(
+                children: [
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(20),
+                    child: Container(
+                      width: MediaQuery.of(context).size.width - 2 * 10,
+                      color: Colors.black,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                              children: [
+                                DataProvider.awaitClanWarLeagueIcon(snapshot.data[1]["warLeague"]["name"], 1),
+                                SizedBox(width: 5),
+                                Text(snapshot.data[1]["warLeague"]["name"], style: const TextStyle(
+                                    color: Colors.white,
+                                    fontFamily: "Poppins",
+                                    fontSize: 30)
+                                ),
+                              ],
                             ),
-                          ),
+                            Text("${snapshot.data[0]["round1"][0]["teamSize"]} vs. ${snapshot.data[0]["round1"][0]["teamSize"]}", style: const TextStyle(
+                                color: Colors.white,
+                                fontFamily: "Poppins",
+                                fontSize: 20)
+                            ),
+                          ],
                         ),
                       ),
-                    ],
-                  );
-                }
+                    ),
+                  ),
+                  ListView.builder(
+                      shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
+                      itemCount: ranking.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return Padding(
+                          padding: const EdgeInsets.all(3.0),
+                          child: ClipRRect(
+                              borderRadius: BorderRadius.circular(20),
+                              child: Container(
+                                  color: Colors.black,
+                                  child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text("${index + 1}. ${ranking[index]["name"]}", style: const TextStyle(
+                                              color: Colors.white,
+                                              fontFamily: "Poppins",
+                                              fontSize: 20)
+                                          ),
+                                          Row(
+                                            children: [
+                                              Image.asset(star, scale: 1.5),
+                                              SizedBox(width: 5),
+                                              Text("${ranking[index]["stars"]} | ${ranking[index]["percentage"].toStringAsFixed(0)}%", style: const TextStyle(
+                                                  color: Colors.white,
+                                                  fontFamily: "Poppins",
+                                                  fontSize: 15)
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      )
+                                  )
+                              )
+                          ),
+                        );
+                      }
+                  ),
+                  SizedBox(height: 20),
+                  ListView.builder(
+                      physics: NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      itemCount: snapshot.data[0].length,
+                      itemBuilder: (context, ind) {
+                        return Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            ?snapshot.data[0]["round${ind + 1}"].length != 0? Text("Round ${ind + 1}", style: const TextStyle(
+                                color: Colors.white,
+                                fontFamily: "Poppins",
+                                fontSize: 30)
+                            ) : null,
+                            SizedBox(height: 10),
+                            for(var element in snapshot.data[0]["round${ind + 1}"]) Padding(
+                              padding: const EdgeInsets.only(bottom: 10),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(20),
+                                child: Container(
+                                  color: Colors.black,
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Row(
+                                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                          children: [
+                                            Utils.getFirstClan(element),
+                                            Image.asset(
+                                              'lib/utils/img/CWLIcon.png',
+                                              fit: BoxFit.cover,
+                                              scale: 2.5,
+                                            ),
+                                            Utils.getOpponentClan(element),
+                                          ]
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        );
+                      }
+                  ),
+                ],
+              ),
             );
           } else {
             return ListView.builder(
