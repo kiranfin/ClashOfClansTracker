@@ -28,7 +28,7 @@ class _LeaguePageState extends State<LeaguePage> {
               vertical: 25.0,
             ),
             child: FutureBuilder(
-              future: Future.wait([DataProvider.awaitPlayerData(userTag), DataProvider.awaitClanWarLeague(userTag), DataProvider.awaitCurrentClanWarLeagueWar(userTag)]),
+              future: Future.wait([DataProvider.awaitPlayerData(userTag), DataProvider.awaitClanWarLeague(userTag), DataProvider.awaitCurrentClanWarLeagueWar(userTag), DataProvider.awaitCurrentClanWar(userTag)]),
               builder: (context, AsyncSnapshot snapshot) {
                 if (snapshot.hasData) {
                   return Column(
@@ -262,53 +262,128 @@ class _LeaguePageState extends State<LeaguePage> {
                         onPressed: () {
                           Navigator.pushNamed(context, "/detail", arguments: "cwl");
                         },
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(20),
-                          child: Container(
-                            color: Colors.black,
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
+                        child: Container(
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Utils.getStateText(snapshot.data[2]["state"]),
+                                    SizedBox(width: 5),
+                                    snapshot.data[2]["state"] == "preparation" || snapshot.data[2]["state"] == "inWar"? CountDownText(
+                                      due: DateTime.parse(snapshot.data[2]["state"] == "preparation"? snapshot.data[2]["startTime"] : snapshot.data[2]["endTime"]),
+                                      finishedText: "War over!",
+                                      showLabel: true,
+                                      longDateName: true,
+                                      hoursTextLong: ":",
+                                      minutesTextLong: ":",
+                                      secondsTextLong: "",
+                                      style: const TextStyle(color: Colors.white, fontFamily: "Poppins",fontSize: 20),
+                                    ) : Text("-",
+                                        style: const TextStyle(
+                                          color: Colors.white,
+                                          fontFamily: "Poppins",
+                                          fontSize: 20,
+                                        ),
+                                      ),
+                                  ],
+                                ),
+                                SizedBox(height: 5),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                  children: [
+                                    Utils.getFirstClan(snapshot.data[2]),
+                                    Image.asset(
+                                      'lib/utils/img/CWLIcon.png',
+                                      fit: BoxFit.cover,
+                                      scale: 2.5,
+                                    ),
+                                    Utils.getOpponentClan(snapshot.data[2]),
+                                  ]
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: 20),
+                      Text("Current Clan War",
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontFamily: "Poppins",
+                          fontSize: 25,
+                        ),
+                      ),
+                      SizedBox(height: 5),
+                      ElevatedButton(
+                        style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all(
+                          Colors.black),
+                          shape: MaterialStateProperty.all<
+                            RoundedRectangleBorder>(
+                              RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(30.0),
+                            )
+                          )
+                        ),
+                        onPressed: () {
+                        Navigator.pushNamed(context, "/detail", arguments: "clanwar");
+                        },
+                        child: Container(
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      Utils.getStateText(snapshot.data[2]["state"]),
+                                      Utils.getClanWarStateText(snapshot.data[3]["state"]),
                                       SizedBox(width: 5),
-                                      ?snapshot.data[2]["state"] == "preparation" || snapshot.data[2]["state"] == "inWar"? CountDownText(
-                                        due: DateTime.parse(snapshot.data[2]["state"] == "preparation"? snapshot.data[2]["startTime"] : snapshot.data[2]["endTime"]),
-                                        finishedText: "War over!",
-                                        showLabel: true,
-                                        longDateName: true,
-                                        hoursTextLong: ":",
-                                        minutesTextLong: ":",
-                                        secondsTextLong: "",
-                                        style: const TextStyle(color: Colors.white, fontFamily: "Poppins",fontSize: 20),
-                                      ) : Text("-",
-                                          style: const TextStyle(
-                                            color: Colors.white,
-                                            fontFamily: "Poppins",
-                                            fontSize: 20,
-                                          ),
-                                        ),
+                                      ?snapshot.data[3]["state"] == "preparation" || snapshot.data[3]["state"] == "inWar"? CountDownText(
+                                      due: DateTime.parse(snapshot.data[3]["state"] == "preparation"? snapshot.data[3]["startTime"] : snapshot.data[3]["endTime"]),
+                                      finishedText: "War over!",
+                                      showLabel: true,
+                                      longDateName: true,
+                                      hoursTextLong: ":",
+                                      minutesTextLong: ":",
+                                      secondsTextLong: "",
+                                      style: const TextStyle(color: Colors.white, fontFamily: "Poppins", fontSize: 20),
+                                      ) : null,
                                     ],
                                   ),
-                                  SizedBox(height: 5),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                  ?snapshot.data[3]["state"] != "notInWar"? Row(
                                     children: [
-                                      Utils.getFirstClan(snapshot.data[2]),
-                                      Image.asset(
-                                        'lib/utils/img/CWLIcon.png',
-                                        fit: BoxFit.cover,
-                                        scale: 2.5,
+                                      Text("${snapshot.data[3]["teamSize"]} vs. ${snapshot.data[3]["teamSize"]}",
+                                        style: const TextStyle(
+                                          color: Colors.white,
+                                          fontFamily: "Poppins",
+                                          fontSize: 20,
+                                        ),
                                       ),
-                                      Utils.getOpponentClan(snapshot.data[2]),
-                                    ]
-                                  ),
+                                    ],
+                                  ) : null,
                                 ],
                               ),
+                              SizedBox(height: 5),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                children: [
+                                  Utils.getFirstClan(snapshot.data[3]),
+                                  Image.asset(
+                                    'lib/utils/img/CWLIcon.png',
+                                    fit: BoxFit.cover,
+                                    scale: 2.5,
+                                  ),
+                                  Utils.getOpponentClan(snapshot.data[3]),
+                                ]
+                              ),
+                            ],
                             ),
                           ),
                         ),

@@ -66,6 +66,28 @@ Future<Map<String,dynamic>> awaitAllClanWarLeagueRounds(String tag) async {
   return jsonDecode(res.body) as Map<String, dynamic>;
 }
 
+Future<Map<String,dynamic>> awaitCurrentClanWar(String tag) async {
+  var player = await awaitPlayerData(tag);
+  if(player["clan"] == null) return {};
+  String clantag = player["clan"]["tag"].substring(1);
+  final url = Uri.parse('${Utils.getBaseUrl()}clanwar/current/$clantag');
+  final res = await http.get(url);
+  final status = res.statusCode;
+  if (status != 200) throw Exception('http.get error: statusCode= $status');
+  return jsonDecode(res.body) as Map<String, dynamic>;
+}
+
+Future<Map<String,dynamic>> awaitClanWarLog(String tag) async {
+  var player = await awaitPlayerData(tag);
+  if(player["clan"] == null) return {};
+  String clantag = player["clan"]["tag"].substring(1);
+  final url = Uri.parse('${Utils.getBaseUrl()}clanwar/warlog/$clantag');
+  final res = await http.get(url);
+  final status = res.statusCode;
+  if (status != 200) throw Exception('http.get error: statusCode= $status');
+  return jsonDecode(res.body) as Map<String, dynamic>;
+}
+
 Future<Map<String, dynamic>> awaitBuildings() async {
   final url = Uri.parse('${Utils.getBaseUrl()}retrieve/buildings');
   final res = await http.get(url);

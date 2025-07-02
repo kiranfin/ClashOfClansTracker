@@ -777,9 +777,9 @@ Widget getFirstClan(Map<String, dynamic> map) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.center,
     children: [
-      ?map["clan"] !=null? Image.network(map["clan"]["badgeUrls"]["small"], scale: 1) : null,
-      ?map["clan"] !=null? SizedBox(height: 10) : null,
-      AutoSizeText(map["clan"] !=null? map["clan"]["name"] : "-",
+      ?map["clan"] !=null && map["state"] != "notInWar"? Image.network(map["clan"]["badgeUrls"]["small"], scale: 1) : null,
+      ?map["clan"] !=null && map["state"] != "notInWar"? SizedBox(height: 10) : null,
+      AutoSizeText(map["clan"] !=null && map["state"] != "notInWar"? map["clan"]["name"] : "-",
         style: const TextStyle(
           color: Colors.white,
           fontFamily: "Poppins",
@@ -787,7 +787,7 @@ Widget getFirstClan(Map<String, dynamic> map) {
         ),
         maxLines: 1,
       ),
-      ?map["clan"] !=null? Row(
+      ?map["clan"] !=null && map["state"] != "notInWar"? Row(
         children: [
           Image.asset(star, scale: 1.5),
           SizedBox(width: 5),
@@ -810,7 +810,7 @@ Widget getFirstClan(Map<String, dynamic> map) {
           )
         ],
       ) : null,
-      ?map["clan"] !=null? Row(
+      ?map["clan"] !=null && map["state"] != "notInWar"? Row(
         children: [
           Text("Attacks: ${map["clan"]["attacks"]}",
             style: const TextStyle(
@@ -829,9 +829,9 @@ Widget getOpponentClan(Map<String, dynamic> map) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.center,
     children: [
-      ?map["opponent"] !=null? Image.network(map["opponent"]["badgeUrls"]["small"], scale: 1) : null,
-      ?map["opponent"] !=null?SizedBox(height: 10) : null,
-      AutoSizeText(map["opponent"] !=null? map["opponent"]["name"] : "-",
+      ?map["opponent"] !=null && map["state"] != "notInWar"? Image.network(map["opponent"]["badgeUrls"]["small"], scale: 1) : null,
+      ?map["opponent"] !=null && map["state"] != "notInWar"? SizedBox(height: 10) : null,
+      AutoSizeText(map["opponent"] !=null && map["state"] != "notInWar"? map["opponent"]["name"] : "-",
         style: const TextStyle(
           color: Colors.white,
           fontFamily: "Poppins",
@@ -839,7 +839,7 @@ Widget getOpponentClan(Map<String, dynamic> map) {
         ),
         maxLines: 1,
       ),
-      ?map["opponent"] !=null? Row(
+      ?map["opponent"] !=null && map["state"] != "notInWar"? Row(
         children: [
           Image.asset(star, scale: 1.5),
           SizedBox(width: 5),
@@ -862,7 +862,7 @@ Widget getOpponentClan(Map<String, dynamic> map) {
           )
         ],
       ) : null,
-      ?map["opponent"] !=null? Row(
+      ?map["opponent"] !=null && map["state"] != "notInWar"? Row(
         children: [
           Text("Attacks: ${map["opponent"]["attacks"]}",
             style: const TextStyle(
@@ -881,4 +881,10 @@ Text getStateText(String text) {
   if(text == "preparation") return Text("Vorbereitung", style: const TextStyle(color: Colors.white, fontFamily: "Poppins", fontSize: 20));
   if(text == "inWar") return Text("Endet in", style: const TextStyle(color: Colors.white, fontFamily: "Poppins", fontSize: 20));
   return Text("Neue Runde in", style: const TextStyle(color: Colors.white, fontFamily: "Poppins", fontSize: 20));
+}
+
+Text getClanWarStateText(String text) {
+  if(text == "preparation") return Text("Vorbereitung", style: const TextStyle(color: Colors.white, fontFamily: "Poppins", fontSize: 20));
+  if(text == "inWar") return Text("Endet in", style: const TextStyle(color: Colors.white, fontFamily: "Poppins", fontSize: 20));
+  return Text("-", style: const TextStyle(color: Colors.white, fontFamily: "Poppins", fontSize: 20));
 }
