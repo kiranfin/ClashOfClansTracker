@@ -19,402 +19,411 @@ class _LeaguePageState extends State<LeaguePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 20.0,
-              vertical: 25.0,
-            ),
-            child: FutureBuilder(
-              future: Future.wait([DataProvider.awaitPlayerData(userTag), DataProvider.awaitClanWarLeague(userTag), DataProvider.awaitCurrentClanWarLeagueWar(userTag), DataProvider.awaitCurrentClanWar(userTag)]),
-              builder: (context, AsyncSnapshot snapshot) {
-                if (snapshot.hasData) {
-                  return Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(20),
-                        child: Container(
-                          color: Colors.black,
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Row(
-                                          children: [
-                                            DataProvider.awaitLeagueIcon(snapshot.data[0]),
-                                            SizedBox(width: 5),
-                                            AutoSizeText(snapshot.data[0]["league"] != null? snapshot.data[0]["league"]["name"] : "Unranked",
-                                              style: const TextStyle(
-                                                color: Colors.white,
-                                                fontFamily: "Poppins",
-                                                fontSize: 30,
+    return Container(
+      decoration: const BoxDecoration(
+          gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [/*Color(0xFF1C2952)*/Color(0xFF171717), /*Color(0xFF101E6B)*/Color(0xFF171717)]
+          )
+      ),
+      child: Scaffold(
+        body: SafeArea(
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 20.0,
+                vertical: 25.0,
+              ),
+              child: FutureBuilder(
+                future: Future.wait([DataProvider.awaitPlayerData(userTag), DataProvider.awaitClanWarLeague(userTag), DataProvider.awaitCurrentClanWarLeagueWar(userTag), DataProvider.awaitCurrentClanWar(userTag)]),
+                builder: (context, AsyncSnapshot snapshot) {
+                  if (snapshot.hasData) {
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(20),
+                          child: Container(
+                            color: Colors.black,
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Row(
+                                            children: [
+                                              DataProvider.awaitLeagueIcon(snapshot.data[0]),
+                                              SizedBox(width: 5),
+                                              AutoSizeText(snapshot.data[0]["league"] != null? snapshot.data[0]["league"]["name"] : "Unranked",
+                                                style: const TextStyle(
+                                                  color: Colors.white,
+                                                  fontFamily: "Poppins",
+                                                  fontSize: 30,
+                                                ),
+                                                maxLines: 1,
                                               ),
-                                              maxLines: 1,
-                                            ),
-                                          ],
-                                        ),
-                                        Text(
-                                          "Attack Wins: ${snapshot.data[0]["attackWins"]}",
-                                          style: const TextStyle(
-                                            color: Colors.white,
-                                            fontFamily: "Poppins",
-                                            fontSize: 15,
+                                            ],
                                           ),
-                                        ),
-                                        SizedBox(height: 5),
-                                        Text(
-                                          "Defense Wins: ${snapshot.data[0]["defenseWins"]}",
-                                          style: const TextStyle(
-                                            color: Colors.white,
-                                            fontFamily: "Poppins",
-                                            fontSize: 15,
+                                          Text(
+                                            "Attack Wins: ${snapshot.data[0]["attackWins"]}",
+                                            style: const TextStyle(
+                                              color: Colors.white,
+                                              fontFamily: "Poppins",
+                                              fontSize: 15,
+                                            ),
                                           ),
-                                        ),
-                                      ],
-                                    ),
-                                    Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.end,
-                                      children: [
-                                        Row(
-                                          children: [
-                                            Image.asset(
-                                              'lib/utils/img/Trophy.png',
-                                              fit: BoxFit.cover,
-                                              scale: 1.5,
+                                          SizedBox(height: 5),
+                                          Text(
+                                            "Defense Wins: ${snapshot.data[0]["defenseWins"]}",
+                                            style: const TextStyle(
+                                              color: Colors.white,
+                                              fontFamily: "Poppins",
+                                              fontSize: 15,
                                             ),
-                                            SizedBox(width: 7),
-                                            DataProvider.awaitPlayerTrophies(
-                                              snapshot.data[0],
-                                              20,
-                                            ),
-                                          ],
-                                        ),
-                                        ?snapshot.data[0]["legendStatistics"] !=null? Row(
-                                          children: [
-                                            Image.asset(
-                                              legendTrophy,
-                                              scale: 14,
-                                            ),
-                                            SizedBox(width: 7),
-                                            DataProvider.awaitPlayerLegendTrophies(snapshot.data[0], 20),
-                                          ],
-                                        ) : null,
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                      SizedBox(height: 20),
-                      ?snapshot.data[0]["legendStatistics"] != null? Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          for(int index = 0; index < 3; index++) ClipRRect(
-                            borderRadius: BorderRadius.circular(20),
-                            child: Container(
-                              width: MediaQuery.of(context).size.width - 3 * 98,
-                              color: Colors.black,
-                                child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    AutoSizeText(index == 0? "Current" : index == 1? "Previous" : "Best",
-                                      style: const TextStyle(
-                                        color: Colors.white,
-                                        fontFamily: "Poppins",
-                                        fontSize: 20,
+                                          ),
+                                        ],
                                       ),
-                                      maxLines: 1,
-                                    ),
-                                    Row(
-                                      children: [
-                                        Icon(Icons.access_time_outlined, color: Colors.white, size: 20),
-                                        SizedBox(width: 5),
-                                        Text("${index == 0? "${DateTime.parse(snapshot.data[0]["legendStatistics"]["previousSeason"]["id"] + "-01").year}-${(DateTime.parse(snapshot.data[0]["legendStatistics"]["previousSeason"]["id"] + "-01").month + 1).toString().padLeft(2, "0")}" : index == 1? (snapshot.data[0]["legendStatistics"]["previousSeason"]!=null? snapshot.data[0]["legendStatistics"]["previousSeason"]["id"] : "-") : (snapshot.data[0]["legendStatistics"]["bestSeason"]!=null? snapshot.data[0]["legendStatistics"]["bestSeason"]["id"] : "-")}",
-                                          style: const TextStyle(
-                                            color: Colors.white,
-                                            fontFamily: "Poppins",
-                                            fontSize: 15,
+                                      Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.end,
+                                        children: [
+                                          Row(
+                                            children: [
+                                              Image.asset(
+                                                'lib/utils/img/Trophy.png',
+                                                fit: BoxFit.cover,
+                                                scale: 1.5,
+                                              ),
+                                              SizedBox(width: 7),
+                                              DataProvider.awaitPlayerTrophies(
+                                                snapshot.data[0],
+                                                20,
+                                              ),
+                                            ],
                                           ),
-                                        ),
-                                      ],
-                                    ),
-                                    Row(
-                                      children: [
-                                        Icon(Icons.tag, color: Colors.white, size: 20),
-                                        SizedBox(width: 5),
-                                        Text("${index == 0? (snapshot.data[0]["legendStatistics"]["currentSeason"]!=null?snapshot.data[0]["legendStatistics"]["currentSeason"]["rank"]: "-") : index == 1? (snapshot.data[0]["legendStatistics"]["previousSeason"]!=null? snapshot.data[0]["legendStatistics"]["previousSeason"]["rank"] : "-") : (snapshot.data[0]["legendStatistics"]["bestSeason"]!=null? snapshot.data[0]["legendStatistics"]["bestSeason"]["rank"]: "-")}",
-                                          style: const TextStyle(
-                                            color: Colors.white,
-                                            fontFamily: "Poppins",
-                                            fontSize: 15,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    Row(
-                                      children: [
-                                        Image.asset(
-                                          'lib/utils/img/Trophy.png',
-                                          fit: BoxFit.cover,
-                                          scale: 1.5,
-                                        ),
-                                        SizedBox(width: 5),
-                                        Text("${index == 0? (snapshot.data[0]["legendStatistics"]["currentSeason"]!=null?snapshot.data[0]["legendStatistics"]["currentSeason"]["trophies"] : "-") : index == 1? (snapshot.data[0]["legendStatistics"]["previousSeason"]!=null? snapshot.data[0]["legendStatistics"]["previousSeason"]["trophies"] : "-") : (snapshot.data[0]["legendStatistics"]["bestSeason"]!=null? snapshot.data[0]["legendStatistics"]["bestSeason"]["trophies"]: "-")}",
-                                          style: const TextStyle(
-                                            color: Colors.white,
-                                            fontFamily: "Poppins",
-                                            fontSize: 15,
-                                          ),
-                                        ),
-                                      ],
-                                    )
-                                  ],
-                                ),
+                                          ?snapshot.data[0]["legendStatistics"] !=null? Row(
+                                            children: [
+                                              Image.asset(
+                                                legendTrophy,
+                                                scale: 14,
+                                              ),
+                                              SizedBox(width: 7),
+                                              DataProvider.awaitPlayerLegendTrophies(snapshot.data[0], 20),
+                                            ],
+                                          ) : null,
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ],
                               ),
                             ),
-                          )
-                        ],
-                      ) : null,
-                      ?snapshot.data[0]["legendStatistics"] != null? SizedBox(height: 20): null,
-                      ?snapshot.data[0]["builderBaseLeague"] != null? ClipRRect(
-                        borderRadius: BorderRadius.circular(20),
-                        child: Container(
-                          color: Colors.black,
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Row(
-                                  children: [
-                                    DataProvider.awaitBuilderLeagueIcon(snapshot.data[0], 2.5),
-                                    SizedBox(width: 7),
-                                    AutoSizeText(snapshot.data[0]["builderBaseLeague"] != null? snapshot.data[0]["builderBaseLeague"]["name"] : "Unranked",
-                                      style: const TextStyle(
-                                        color: Colors.white,
-                                        fontFamily: "Poppins",
-                                        fontSize: 25,
-                                      ),
-                                      maxLines: 1,
-                                    ),
-                                  ]
-                                ),
-                                Row(
-                                  children: [
-                                    Image.asset(
-                                      'lib/utils/img/BuilderHallTrophy.png',
-                                      fit: BoxFit.cover,
-                                      scale: 12,
-                                    ),
-                                    SizedBox(width: 5),
-                                    DataProvider.awaitPlayerBuilderTrophies(snapshot.data[0], 20),
-                                  ],
-                                )
-                              ],
-                            ),
                           ),
                         ),
-                      ) : null,
-                      ?snapshot.data[0]["builderBaseLeague"] != null? SizedBox(height: 20): null,
-                      Text("Current CWL",
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontFamily: "Poppins",
-                          fontSize: 25,
-                        ),
-                      ),
-                      SizedBox(height: 5),
-                      ElevatedButton(
-                        style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all(
-                          Colors.black),
-                          shape: MaterialStateProperty.all<
-                            RoundedRectangleBorder>(
-                            RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(30.0),
-                            )
-                          )
-                        ),
-                        onPressed: () {
-                          Navigator.pushNamed(context, "/detail", arguments: "cwl");
-                        },
-                        child: Container(
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Utils.getStateText(snapshot.data[2]["state"]),
-                                    SizedBox(width: 5),
-                                    snapshot.data[2]["state"] == "preparation" || snapshot.data[2]["state"] == "inWar"? CountDownText(
-                                      due: DateTime.parse(snapshot.data[2]["state"] == "preparation"? snapshot.data[2]["startTime"] : snapshot.data[2]["endTime"]),
-                                      finishedText: "War over!",
-                                      showLabel: true,
-                                      longDateName: true,
-                                      hoursTextLong: ":",
-                                      minutesTextLong: ":",
-                                      secondsTextLong: "",
-                                      style: const TextStyle(color: Colors.white, fontFamily: "Poppins",fontSize: 20),
-                                    ) : Text("-",
+                        SizedBox(height: 20),
+                        ?snapshot.data[0]["legendStatistics"] != null? Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            for(int index = 0; index < 3; index++) ClipRRect(
+                              borderRadius: BorderRadius.circular(20),
+                              child: Container(
+                                width: MediaQuery.of(context).size.width - 3 * 98,
+                                color: Colors.black,
+                                  child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      AutoSizeText(index == 0? "Current" : index == 1? "Previous" : "Best",
                                         style: const TextStyle(
                                           color: Colors.white,
                                           fontFamily: "Poppins",
                                           fontSize: 20,
                                         ),
+                                        maxLines: 1,
                                       ),
+                                      Row(
+                                        children: [
+                                          Icon(Icons.access_time_outlined, color: Colors.white, size: 20),
+                                          SizedBox(width: 5),
+                                          Text("${index == 0? "${DateTime.parse(snapshot.data[0]["legendStatistics"]["previousSeason"]["id"] + "-01").year}-${(DateTime.parse(snapshot.data[0]["legendStatistics"]["previousSeason"]["id"] + "-01").month + 1).toString().padLeft(2, "0")}" : index == 1? (snapshot.data[0]["legendStatistics"]["previousSeason"]!=null? snapshot.data[0]["legendStatistics"]["previousSeason"]["id"] : "-") : (snapshot.data[0]["legendStatistics"]["bestSeason"]!=null? snapshot.data[0]["legendStatistics"]["bestSeason"]["id"] : "-")}",
+                                            style: const TextStyle(
+                                              color: Colors.white,
+                                              fontFamily: "Poppins",
+                                              fontSize: 15,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      Row(
+                                        children: [
+                                          Icon(Icons.tag, color: Colors.white, size: 20),
+                                          SizedBox(width: 5),
+                                          Text("${index == 0? (snapshot.data[0]["legendStatistics"]["currentSeason"]!=null?snapshot.data[0]["legendStatistics"]["currentSeason"]["rank"]: "-") : index == 1? (snapshot.data[0]["legendStatistics"]["previousSeason"]!=null? snapshot.data[0]["legendStatistics"]["previousSeason"]["rank"] : "-") : (snapshot.data[0]["legendStatistics"]["bestSeason"]!=null? snapshot.data[0]["legendStatistics"]["bestSeason"]["rank"]: "-")}",
+                                            style: const TextStyle(
+                                              color: Colors.white,
+                                              fontFamily: "Poppins",
+                                              fontSize: 15,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      Row(
+                                        children: [
+                                          Image.asset(
+                                            'lib/utils/img/Trophy.png',
+                                            fit: BoxFit.cover,
+                                            scale: 1.5,
+                                          ),
+                                          SizedBox(width: 5),
+                                          Text("${index == 0? (snapshot.data[0]["legendStatistics"]["currentSeason"]!=null?snapshot.data[0]["legendStatistics"]["currentSeason"]["trophies"] : "-") : index == 1? (snapshot.data[0]["legendStatistics"]["previousSeason"]!=null? snapshot.data[0]["legendStatistics"]["previousSeason"]["trophies"] : "-") : (snapshot.data[0]["legendStatistics"]["bestSeason"]!=null? snapshot.data[0]["legendStatistics"]["bestSeason"]["trophies"]: "-")}",
+                                            style: const TextStyle(
+                                              color: Colors.white,
+                                              fontFamily: "Poppins",
+                                              fontSize: 15,
+                                            ),
+                                          ),
+                                        ],
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            )
+                          ],
+                        ) : null,
+                        ?snapshot.data[0]["legendStatistics"] != null? SizedBox(height: 20): null,
+                        ?snapshot.data[0]["builderBaseLeague"] != null? ClipRRect(
+                          borderRadius: BorderRadius.circular(20),
+                          child: Container(
+                            color: Colors.black,
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Row(
+                                    children: [
+                                      DataProvider.awaitBuilderLeagueIcon(snapshot.data[0], 2.5),
+                                      SizedBox(width: 7),
+                                      AutoSizeText(snapshot.data[0]["builderBaseLeague"] != null? snapshot.data[0]["builderBaseLeague"]["name"] : "Unranked",
+                                        style: const TextStyle(
+                                          color: Colors.white,
+                                          fontFamily: "Poppins",
+                                          fontSize: 25,
+                                        ),
+                                        maxLines: 1,
+                                      ),
+                                    ]
+                                  ),
+                                  Row(
+                                    children: [
+                                      Image.asset(
+                                        'lib/utils/img/BuilderHallTrophy.png',
+                                        fit: BoxFit.cover,
+                                        scale: 12,
+                                      ),
+                                      SizedBox(width: 5),
+                                      DataProvider.awaitPlayerBuilderTrophies(snapshot.data[0], 20),
+                                    ],
+                                  )
+                                ],
+                              ),
+                            ),
+                          ),
+                        ) : null,
+                        ?snapshot.data[0]["builderBaseLeague"] != null? SizedBox(height: 20): null,
+                        Text("Current CWL",
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontFamily: "Poppins",
+                            fontSize: 25,
+                          ),
+                        ),
+                        SizedBox(height: 5),
+                        ElevatedButton(
+                          style: ButtonStyle(
+                            backgroundColor: MaterialStateProperty.all(
+                            Colors.black),
+                            shape: MaterialStateProperty.all<
+                              RoundedRectangleBorder>(
+                              RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(30.0),
+                              )
+                            )
+                          ),
+                          onPressed: () {
+                            Navigator.pushNamed(context, "/detail", arguments: "cwl");
+                          },
+                          child: Container(
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Utils.getStateText(snapshot.data[2]["state"]),
+                                      SizedBox(width: 5),
+                                      snapshot.data[2]["state"] == "preparation" || snapshot.data[2]["state"] == "inWar"? CountDownText(
+                                        due: DateTime.parse(snapshot.data[2]["state"] == "preparation"? snapshot.data[2]["startTime"] : snapshot.data[2]["endTime"]),
+                                        finishedText: "War over!",
+                                        showLabel: true,
+                                        longDateName: true,
+                                        hoursTextLong: ":",
+                                        minutesTextLong: ":",
+                                        secondsTextLong: "",
+                                        style: const TextStyle(color: Colors.white, fontFamily: "Poppins",fontSize: 20),
+                                      ) : Text("-",
+                                          style: const TextStyle(
+                                            color: Colors.white,
+                                            fontFamily: "Poppins",
+                                            fontSize: 20,
+                                          ),
+                                        ),
+                                    ],
+                                  ),
+                                  SizedBox(height: 5),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                    children: [
+                                      Utils.getFirstClan(snapshot.data[2]),
+                                      Image.asset(
+                                        'lib/utils/img/CWLIcon.png',
+                                        fit: BoxFit.cover,
+                                        scale: 2.5,
+                                      ),
+                                      Utils.getOpponentClan(snapshot.data[2]),
+                                    ]
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: 20),
+                        Text("Current Clan War",
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontFamily: "Poppins",
+                            fontSize: 25,
+                          ),
+                        ),
+                        SizedBox(height: 5),
+                        ElevatedButton(
+                          style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all(
+                            Colors.black),
+                            shape: MaterialStateProperty.all<
+                              RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(30.0),
+                              )
+                            )
+                          ),
+                          onPressed: () {
+                          Navigator.pushNamed(context, "/detail", arguments: "clanwar");
+                          },
+                          child: Container(
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Utils.getClanWarStateText(snapshot.data[3]["state"]),
+                                        SizedBox(width: 5),
+                                        ?snapshot.data[3]["state"] == "preparation" || snapshot.data[3]["state"] == "inWar"? CountDownText(
+                                        due: DateTime.parse(snapshot.data[3]["state"] == "preparation"? snapshot.data[3]["startTime"] : snapshot.data[3]["endTime"]),
+                                        finishedText: "War vorbei!",
+                                        showLabel: true,
+                                        longDateName: true,
+                                        hoursTextLong: ":",
+                                        minutesTextLong: ":",
+                                        secondsTextLong: "",
+                                        style: const TextStyle(color: Colors.white, fontFamily: "Poppins", fontSize: 20),
+                                        ) : null,
+                                      ],
+                                    ),
+                                    ?snapshot.data[3]["state"] != "notInWar"? Row(
+                                      children: [
+                                        Text("${snapshot.data[3]["teamSize"]} vs. ${snapshot.data[3]["teamSize"]}",
+                                          style: const TextStyle(
+                                            color: Colors.white,
+                                            fontFamily: "Poppins",
+                                            fontSize: 20,
+                                          ),
+                                        ),
+                                      ],
+                                    ) : null,
                                   ],
                                 ),
                                 SizedBox(height: 5),
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                                   children: [
-                                    Utils.getFirstClan(snapshot.data[2]),
+                                    Utils.getFirstClan(snapshot.data[3]),
                                     Image.asset(
                                       'lib/utils/img/CWLIcon.png',
                                       fit: BoxFit.cover,
                                       scale: 2.5,
                                     ),
-                                    Utils.getOpponentClan(snapshot.data[2]),
+                                    Utils.getOpponentClan(snapshot.data[3]),
                                   ]
                                 ),
                               ],
+                              ),
                             ),
                           ),
-                        ),
-                      ),
-                      SizedBox(height: 20),
-                      Text("Current Clan War",
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontFamily: "Poppins",
-                          fontSize: 25,
-                        ),
-                      ),
-                      SizedBox(height: 5),
-                      ElevatedButton(
-                        style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all(
-                          Colors.black),
-                          shape: MaterialStateProperty.all<
-                            RoundedRectangleBorder>(
-                              RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(30.0),
-                            )
-                          )
-                        ),
-                        onPressed: () {
-                        Navigator.pushNamed(context, "/detail", arguments: "clanwar");
-                        },
-                        child: Container(
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Row(
-                                    children: [
-                                      Utils.getClanWarStateText(snapshot.data[3]["state"]),
-                                      SizedBox(width: 5),
-                                      ?snapshot.data[3]["state"] == "preparation" || snapshot.data[3]["state"] == "inWar"? CountDownText(
-                                      due: DateTime.parse(snapshot.data[3]["state"] == "preparation"? snapshot.data[3]["startTime"] : snapshot.data[3]["endTime"]),
-                                      finishedText: "War vorbei!",
-                                      showLabel: true,
-                                      longDateName: true,
-                                      hoursTextLong: ":",
-                                      minutesTextLong: ":",
-                                      secondsTextLong: "",
-                                      style: const TextStyle(color: Colors.white, fontFamily: "Poppins", fontSize: 20),
-                                      ) : null,
-                                    ],
-                                  ),
-                                  ?snapshot.data[3]["state"] != "notInWar"? Row(
-                                    children: [
-                                      Text("${snapshot.data[3]["teamSize"]} vs. ${snapshot.data[3]["teamSize"]}",
-                                        style: const TextStyle(
-                                          color: Colors.white,
-                                          fontFamily: "Poppins",
-                                          fontSize: 20,
-                                        ),
-                                      ),
-                                    ],
-                                  ) : null,
-                                ],
-                              ),
-                              SizedBox(height: 5),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                children: [
-                                  Utils.getFirstClan(snapshot.data[3]),
-                                  Image.asset(
-                                    'lib/utils/img/CWLIcon.png',
-                                    fit: BoxFit.cover,
-                                    scale: 2.5,
-                                  ),
-                                  Utils.getOpponentClan(snapshot.data[3]),
-                                ]
-                              ),
-                            ],
-                            ),
-                          ),
-                        ),
-                      )
-                    ],
-                  );
-                } else {
-                  return Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(20),
-                        child: Container(
-                          height: 150,
-                          color: Colors.black,
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Shimmer(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [Row(children: [])],
+                        )
+                      ],
+                    );
+                  } else {
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(20),
+                          child: Container(
+                            height: 150,
+                            color: Colors.black,
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Shimmer(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [Row(children: [])],
+                                ),
                               ),
                             ),
                           ),
                         ),
-                      ),
-                    ],
-                  );
-                }
-              },
+                      ],
+                    );
+                  }
+                },
+              ),
             ),
           ),
         ),

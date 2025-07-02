@@ -80,20 +80,29 @@ class _DetailPageState extends State<DetailPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: const Color(0xFF171717),
-        leading: IconButton(onPressed: () {
-          Navigator.pop(context);
-        }, icon: Icon(Icons.arrow_back, color: Colors.white)),
+    return Container(
+      decoration: const BoxDecoration(
+          gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [/*Color(0xFF1C2952)*/Color(0xFF171717), /*Color(0xFF101E6B)*/Color(0xFF171717)]
+          )
       ),
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 15.0),
-          child: category == "buildings"? getBuildingDetail() : category == "troops" ? getTroopDetail() : category == "spells"?
-          getSpellDetail() : category == "heroes"? getHeroesDetail() : category == "equipment"?
-          getEquipmentDetail() : category == "achievements"? getAchievementDetails() : category == "profile"? getProfileDetails() :
-          category == "cwl"? getClanWarLeagueDetails() : category == "clanwar"? getClanWarDetails() : null,
+      child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          leading: IconButton(onPressed: () {
+            Navigator.pop(context);
+          }, icon: Icon(Icons.arrow_back, color: Colors.white)),
+        ),
+        body: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 15.0),
+            child: category == "buildings"? getBuildingDetail() : category == "troops" ? getTroopDetail() : category == "spells"?
+            getSpellDetail() : category == "heroes"? getHeroesDetail() : category == "equipment"?
+            getEquipmentDetail() : category == "achievements"? getAchievementDetails() : category == "profile"? getProfileDetails() :
+            category == "cwl"? getClanWarLeagueDetails() : category == "clanwar"? getClanWarDetails() : null,
+          ),
         ),
       ),
     );
@@ -1712,7 +1721,7 @@ class _DetailPageState extends State<DetailPage> {
                               ],
                             ),
                             Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
                                 Utils.getFirstClan(snapshot.data),
                                 Image.asset(

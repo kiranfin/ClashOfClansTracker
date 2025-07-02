@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
-        scaffoldBackgroundColor: const Color(0xFF171717),
+        scaffoldBackgroundColor: Colors.transparent,
         useMaterial3: true,
       ),
       home: UserSP.getUser().isEmpty? StartScreenPage() : DefaultPage(1),
