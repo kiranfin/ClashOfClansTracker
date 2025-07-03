@@ -911,20 +911,26 @@ Map<String, dynamic> getClanWarRanking(Map<String, dynamic> map) {
     for(var war in val) {
       if(tempmap[war["clan"]["tag"]] == null) tempmap[war["clan"]["tag"]] = {};
       if(tempmap[war["opponent"]["tag"]] == null) tempmap[war["opponent"]["tag"]] = {};
+      if(tempmap[war["clan"]["tag"]]["stars"] == null) tempmap[war["clan"]["tag"]]["stars"] = 0;
+      if(tempmap[war["opponent"]["tag"]]["stars"] == null) tempmap[war["opponent"]["tag"]]["stars"] = 0;
+      if(tempmap[war["clan"]["tag"]]["percentage"] == null) tempmap[war["clan"]["tag"]]["percentage"] = 0;
+      if(tempmap[war["opponent"]["tag"]]["percentage"] == null) tempmap[war["opponent"]["tag"]]["percentage"] = 0;
       tempmap[war["clan"]["tag"]]["name"] = war["clan"]["name"];
       tempmap[war["opponent"]["tag"]]["name"] = war["opponent"]["name"];
-      tempmap[war["clan"]["tag"]]["stars"] = tempmap[war["clan"]["tag"]]["stars"]?? 0 + war["clan"]["stars"];
-      tempmap[war["opponent"]["tag"]]["stars"] = tempmap[war["opponent"]["tag"]]["stars"]?? 0 + war["opponent"]["stars"];
-      tempmap[war["clan"]["tag"]]["percentage"] = tempmap[war["clan"]["tag"]]["percentage"]?? 0 + (war["clan"]["destructionPercentage"] / 100) * (war["teamSize"] * 100);
-      tempmap[war["opponent"]["tag"]]["percentage"] = tempmap[war["opponent"]["tag"]]["percentage"]?? 0 + (war["opponent"]["destructionPercentage"] / 100) * (war["teamSize"] * 100);
-      if(war["state"] == "ended") { //Wenn War vorbei ist
+      tempmap[war["clan"]["tag"]]["stars"] = tempmap[war["clan"]["tag"]]["stars"] + war["clan"]["stars"];
+      tempmap[war["opponent"]["tag"]]["stars"] = tempmap[war["opponent"]["tag"]]["stars"] + war["opponent"]["stars"];
+      tempmap[war["clan"]["tag"]]["percentage"] = tempmap[war["clan"]["tag"]]["percentage"] + (war["clan"]["destructionPercentage"] / 100) * (war["teamSize"] * 100);
+      tempmap[war["opponent"]["tag"]]["percentage"] = tempmap[war["opponent"]["tag"]]["percentage"] + (war["opponent"]["destructionPercentage"] / 100) * (war["teamSize"] * 100);
+      if(war["state"] == "warEnded") { //Wenn War vorbei ist
+        print(war["clan"]["stars"]);
+        print(war["opponent"]["stars"]);
         if(war["clan"]["stars"] > war["opponent"]["stars"]) { //Clan mehr Sterne
-          tempmap[war["clan"]["tag"]]["stars"] = tempmap[war["clan"]["tag"]]["stars"]?? 0 + 10;
+          tempmap[war["clan"]["tag"]]["stars"] = tempmap[war["clan"]["tag"]]["stars"] + 10;
         } else if(war["clan"]["stars"] < war["opponent"]["stars"]) { //Opponent mehr Sterne
-          tempmap[war["opponent"]["tag"]]["stars"] = tempmap[war["opponent"]["tag"]]["stars"]?? 0 + 10;
+          tempmap[war["opponent"]["tag"]]["stars"] = tempmap[war["opponent"]["tag"]]["stars"] + 10;
         } else if(war["clan"]["stars"] == war["opponent"]["stars"]) { //Gleich viele Sterne
-          if(war["clan"]["destructionPercentage"] > war["opponent"]["destructionPercentage"]) tempmap[war["clan"]["tag"]]["stars"] = tempmap[war["clan"]["tag"]]["stars"]?? 0 + 10;
-          if(war["clan"]["destructionPercentage"] < war["opponent"]["destructionPercentage"]) tempmap[war["opponent"]["tag"]]["stars"] = tempmap[war["opponent"]["tag"]]["stars"]?? 0 + 10;
+          if(war["clan"]["destructionPercentage"] > war["opponent"]["destructionPercentage"]) tempmap[war["clan"]["tag"]]["stars"] = tempmap[war["clan"]["tag"]]["stars"] + 10;
+          if(war["clan"]["destructionPercentage"] < war["opponent"]["destructionPercentage"]) tempmap[war["opponent"]["tag"]]["stars"] = tempmap[war["opponent"]["tag"]]["stars"] + 10;
         }
       }
     }
