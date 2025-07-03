@@ -93,6 +93,12 @@ class _StartScreenPageState extends State<StartScreenPage> {
                                         valid = true;
                                         value = val;
                                       });
+                                    } else if(UserSP.getUser().contains(value)){
+                                      setState(() {
+                                        errorText = "Bereits hinzugefügt";
+                                        valid = false;
+                                        value = null;
+                                      });
                                     } else {
                                       setState(() {
                                         errorText = 'Falsches Format';
@@ -125,10 +131,12 @@ class _StartScreenPageState extends State<StartScreenPage> {
                           onPressed: () {
                             if(valid) {
                               List<String> old = UserSP.getUser();
-                              old.add(value!);
-                              UserSP.setUsers(old);
-                              UserSP.setCurrentUser(value!);
-                              Navigator.popAndPushNamed(context, "/default");
+                              if (!old.contains(value!)) {
+                                old.add(value!);
+                                UserSP.setUsers(old);
+                                UserSP.setCurrentUser(value!);
+                                Navigator.popAndPushNamed(context, "/default");
+                              }
                             }
                           },
                           child: Row(

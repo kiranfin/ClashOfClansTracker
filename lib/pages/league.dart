@@ -38,6 +38,7 @@ class _LeaguePageState extends State<LeaguePage> {
               child: FutureBuilder(
                 future: Future.wait([DataProvider.awaitPlayerData(userTag), DataProvider.awaitClanWarLeague(userTag), DataProvider.awaitCurrentClanWarLeagueWar(userTag), DataProvider.awaitCurrentClanWar(userTag), DataProvider.awaitNextClanWarLeagueWar(userTag)]),
                 builder: (context, AsyncSnapshot snapshot) {
+                  snapshot.hasError? print(snapshot.error): null;
                   if (snapshot.hasData) {
                     return Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -161,7 +162,7 @@ class _LeaguePageState extends State<LeaguePage> {
                                         children: [
                                           Icon(Icons.access_time_outlined, color: Colors.white, size: 20),
                                           SizedBox(width: 5),
-                                          Text("${index == 0? "${DateTime.parse(snapshot.data[0]["legendStatistics"]["previousSeason"]["id"] + "-01").year}-${(DateTime.parse(snapshot.data[0]["legendStatistics"]["previousSeason"]["id"] + "-01").month + 1).toString().padLeft(2, "0")}" : index == 1? (snapshot.data[0]["legendStatistics"]["previousSeason"]!=null? snapshot.data[0]["legendStatistics"]["previousSeason"]["id"] : "-") : (snapshot.data[0]["legendStatistics"]["bestSeason"]!=null? snapshot.data[0]["legendStatistics"]["bestSeason"]["id"] : "-")}",
+                                          Text("${index == 0? "${DateTime.now().year}-${(DateTime.now().month).toString().padLeft(2, "0")}" : index == 1? (snapshot.data[0]["legendStatistics"]["previousSeason"]!=null? snapshot.data[0]["legendStatistics"]["previousSeason"]["id"] : "-") : (snapshot.data[0]["legendStatistics"]["bestSeason"]!=null? snapshot.data[0]["legendStatistics"]["bestSeason"]["id"] : "-")}",
                                             style: const TextStyle(
                                               color: Colors.white,
                                               fontFamily: "Poppins",
@@ -248,15 +249,15 @@ class _LeaguePageState extends State<LeaguePage> {
                           ),
                         ) : null,
                         ?snapshot.data[0]["builderBaseLeague"] != null? SizedBox(height: 20): null,
-                        Text("Current CWL",
+                        ?snapshot.data[2]["state"] != null? Text("Current CWL",
                           style: const TextStyle(
                             color: Colors.white,
                             fontFamily: "Poppins",
                             fontSize: 25,
                           ),
-                        ),
-                        SizedBox(height: 5),
-                        ElevatedButton(
+                        ) : null,
+                        ?snapshot.data[2]["state"] != null? SizedBox(height: 5) : null,
+                        ?snapshot.data[2]["state"] != null? ElevatedButton(
                           style: ButtonStyle(
                             backgroundColor: MaterialStateProperty.all(
                             Colors.black),
@@ -301,32 +302,35 @@ class _LeaguePageState extends State<LeaguePage> {
                                   ),
                                   SizedBox(height: 5),
                                   Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Utils.getFirstClan(snapshot.data[2]),
-                                      Image.asset(
-                                        'lib/utils/img/CWLIcon.png',
-                                        fit: BoxFit.cover,
-                                        scale: 2.5,
+                                      Flexible(flex: 4, child: Utils.getFirstClan(snapshot.data[2])),
+                                      Flexible(
+                                        flex: 2,
+                                        child: Image.asset(
+                                          'lib/utils/img/CWLIcon.png',
+                                          fit: BoxFit.cover,
+                                          scale: 2.5,
+                                        ),
                                       ),
-                                      Utils.getOpponentClan(snapshot.data[2]),
+                                      Flexible(flex: 4, child: Utils.getOpponentClan(snapshot.data[2])),
                                     ]
                                   ),
                                 ],
                               ),
                             ),
                           ),
-                        ),
-                        SizedBox(height: 20),
-                        Text("Current Clan War",
+                        ) : null,
+                        ?snapshot.data[3]["state"] != null? SizedBox(height: 20) : null,
+                        ?snapshot.data[3]["state"] != null? Text("Current Clan War",
                           style: const TextStyle(
                             color: Colors.white,
                             fontFamily: "Poppins",
                             fontSize: 25,
                           ),
-                        ),
-                        SizedBox(height: 5),
-                        ElevatedButton(
+                        ) : null,
+                        ?snapshot.data[3]["state"] != null? SizedBox(height: 5) : null,
+                        ?snapshot.data[3]["state"] != null? ElevatedButton(
                           style: ButtonStyle(
                           backgroundColor: MaterialStateProperty.all(
                             Colors.black),
@@ -338,7 +342,7 @@ class _LeaguePageState extends State<LeaguePage> {
                             )
                           ),
                           onPressed: () {
-                          Navigator.pushNamed(context, "/detail", arguments: "clanwar");
+                            Navigator.pushNamed(context, "/detail", arguments: "clanwar");
                           },
                           child: Container(
                             child: Padding(
@@ -351,7 +355,13 @@ class _LeaguePageState extends State<LeaguePage> {
                                   children: [
                                     Row(
                                       children: [
-                                        Utils.getClanWarStateText(snapshot.data[3]["state"]),
+                                        snapshot.data[3].isEmpty? Text("Clan Log private",
+                                        style: const TextStyle(
+                                          color: Colors.white,
+                                          fontFamily: "Poppins",
+                                          fontSize: 25,
+                                          ),
+                                        ) : Utils.getClanWarStateText(snapshot.data[3]["state"]),
                                         SizedBox(width: 5),
                                         ?snapshot.data[3]["state"] == "preparation" || snapshot.data[3]["state"] == "inWar"? CountDownText(
                                         due: DateTime.parse(snapshot.data[3]["state"] == "preparation"? snapshot.data[3]["startTime"] : snapshot.data[3]["endTime"]),
@@ -395,7 +405,7 @@ class _LeaguePageState extends State<LeaguePage> {
                               ),
                             ),
                           ),
-                        )
+                        ) : null
                       ],
                     );
                   } else {

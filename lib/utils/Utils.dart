@@ -788,6 +788,7 @@ Widget getFirstClan(Map<String, dynamic> map) {
         maxLines: 1,
       ),
       ?map["clan"] !=null && map["state"] != "notInWar"? Row(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Image.asset(star, scale: 1.5),
           SizedBox(width: 5),
@@ -811,6 +812,7 @@ Widget getFirstClan(Map<String, dynamic> map) {
         ],
       ) : null,
       ?map["clan"] !=null && map["state"] != "notInWar"? Row(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text("Attacks: ${map["clan"]["attacks"]}",
             style: const TextStyle(
@@ -840,6 +842,7 @@ Widget getOpponentClan(Map<String, dynamic> map) {
         maxLines: 1,
       ),
       ?map["opponent"] !=null && map["state"] != "notInWar"? Row(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Image.asset(star, scale: 1.5),
           SizedBox(width: 5),
@@ -863,6 +866,7 @@ Widget getOpponentClan(Map<String, dynamic> map) {
         ],
       ) : null,
       ?map["opponent"] !=null && map["state"] != "notInWar"? Row(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text("Attacks: ${map["opponent"]["attacks"]}",
             style: const TextStyle(

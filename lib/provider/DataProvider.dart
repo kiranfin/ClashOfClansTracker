@@ -10,7 +10,8 @@ Future<Map<String, dynamic>> awaitPlayerData(String tag) async {
   final url = Uri.parse('${Utils.getBaseUrl()}players/$tag');
   final res = await http.get(url);
   final status = res.statusCode;
-  if (status != 200) throw Exception('http.get error: statusCode= $status');
+  final reason = res.reasonPhrase;
+  if (status != 200) throw Exception('http.get error (player data): statusCode= $status reason= $reason');
   return jsonDecode(res.body) as Map<String, dynamic>;
 }
 
@@ -21,7 +22,8 @@ Future<Map<String, dynamic>> awaitPlayerClan(String tag) async {
   final url = Uri.parse('${Utils.getBaseUrl()}clans/$clantag');
   final res = await http.get(url);
   final status = res.statusCode;
-  if (status != 200) throw Exception('http.get error: statusCode= $status');
+  final reason = res.reasonPhrase;
+  if (status != 200) throw Exception('http.get error (player clan): statusCode= $status reason= $reason');
   return jsonDecode(res.body) as Map<String, dynamic>;
 }
 
@@ -32,7 +34,8 @@ Future<Map<String, dynamic>> awaitClanWarLeague(String tag) async {
   final url = Uri.parse('${Utils.getBaseUrl()}clanwarleague/current/$clantag');
   final res = await http.get(url);
   final status = res.statusCode;
-  if (status != 200) throw Exception('http.get error: statusCode= $status');
+  final reason = res.reasonPhrase;
+  if (status != 200) throw Exception('http.get error (clan war league): statusCode= $status reason= $reason');
   return jsonDecode(res.body) as Map<String, dynamic>;
 }
 
@@ -43,7 +46,8 @@ Future<Map<String, dynamic>?> awaitCurrentClanWarLeagueWar(String tag) async {
   final url = Uri.parse('${Utils.getBaseUrl()}clanwarleague/currentday/$clantag');
   final res = await http.get(url);
   final status = res.statusCode;
-  if (status != 200) throw Exception('http.get error: statusCode= $status');
+  final reason = res.reasonPhrase;
+  if (status != 200) throw Exception('http.get error (current clan war league war): statusCode= $status reason= $reason');
   return jsonDecode(res.body) as Map<String, dynamic>;
 }
 
@@ -54,7 +58,8 @@ Future<Map<String, dynamic>?> awaitNextClanWarLeagueWar(String tag) async {
   final url = Uri.parse('${Utils.getBaseUrl()}clanwarleague/nextday/$clantag');
   final res = await http.get(url);
   final status = res.statusCode;
-  if (status != 200) throw Exception('http.get error: statusCode= $status');
+  final reason = res.reasonPhrase;
+  if (status != 200) throw Exception('http.get error (next clan war league war): statusCode= $status reason= $reason');
   return jsonDecode(res.body) as Map<String, dynamic>;
 }
 
@@ -62,7 +67,8 @@ Future<Map<String, dynamic>> awaitClanWarLeagueWar(String tag) async {
   final url = Uri.parse('${Utils.getBaseUrl()}clanwarleague/war/$tag');
   final res = await http.get(url);
   final status = res.statusCode;
-  if (status != 200) throw Exception('http.get error: statusCode= $status');
+  final reason = res.reasonPhrase;
+  if (status != 200) throw Exception('http.get error (clan war league war): statusCode= $status reason= $reason');
   return jsonDecode(res.body) as Map<String, dynamic>;
 }
 
@@ -73,7 +79,8 @@ Future<Map<String,dynamic>> awaitAllClanWarLeagueRounds(String tag) async {
   final url = Uri.parse('${Utils.getBaseUrl()}clanwarleague/rounds/$clantag');
   final res = await http.get(url);
   final status = res.statusCode;
-  if (status != 200) throw Exception('http.get error: statusCode= $status');
+  final reason = res.reasonPhrase;
+  if (status != 200) throw Exception('http.get error (all clan war league rounds): statusCode= $status reason= $reason');
   return jsonDecode(res.body) as Map<String, dynamic>;
 }
 
@@ -84,7 +91,8 @@ Future<Map<String,dynamic>> awaitCurrentClanWar(String tag) async {
   final url = Uri.parse('${Utils.getBaseUrl()}clanwar/current/$clantag');
   final res = await http.get(url);
   final status = res.statusCode;
-  if (status != 200) throw Exception('http.get error: statusCode= $status');
+  final reason = res.reasonPhrase;
+  if (status != 200) throw Exception('http.get error (current clan war): statusCode= $status reason= $reason');
   return jsonDecode(res.body) as Map<String, dynamic>;
 }
 
@@ -95,7 +103,8 @@ Future<Map<String,dynamic>> awaitClanWarLog(String tag) async {
   final url = Uri.parse('${Utils.getBaseUrl()}clanwar/warlog/$clantag');
   final res = await http.get(url);
   final status = res.statusCode;
-  if (status != 200) throw Exception('http.get error: statusCode= $status');
+  final reason = res.reasonPhrase;
+  if (status != 200) throw Exception('http.get error (clan war log): statusCode= $status reason= $reason');
   return jsonDecode(res.body) as Map<String, dynamic>;
 }
 

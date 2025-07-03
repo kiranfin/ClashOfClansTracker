@@ -1732,13 +1732,16 @@ class _DetailPageState extends State<DetailPage> {
                                         Row(
                                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                                           children: [
-                                            Utils.getFirstClan(element),
-                                            Image.asset(
-                                              'lib/utils/img/CWLIcon.png',
-                                              fit: BoxFit.cover,
-                                              scale: 2.5,
+                                            Flexible(flex: 4, child: Utils.getFirstClan(element)),
+                                            Flexible(
+                                              flex: 2,
+                                              child: Image.asset(
+                                                'lib/utils/img/CWLIcon.png',
+                                                fit: BoxFit.cover,
+                                                scale: 2.5,
+                                              ),
                                             ),
-                                            Utils.getOpponentClan(element),
+                                            Flexible(flex: 4, child: Utils.getOpponentClan(element)),
                                           ]
                                         ),
                                       ],
