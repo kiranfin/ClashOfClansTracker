@@ -36,7 +36,7 @@ class _LeaguePageState extends State<LeaguePage> {
                 vertical: 25.0,
               ),
               child: FutureBuilder(
-                future: Future.wait([DataProvider.awaitPlayerData(userTag), DataProvider.awaitClanWarLeague(userTag), DataProvider.awaitCurrentClanWarLeagueWar(userTag), DataProvider.awaitCurrentClanWar(userTag)]),
+                future: Future.wait([DataProvider.awaitPlayerData(userTag), DataProvider.awaitClanWarLeague(userTag), DataProvider.awaitCurrentClanWarLeagueWar(userTag), DataProvider.awaitCurrentClanWar(userTag), DataProvider.awaitNextClanWarLeagueWar(userTag)]),
                 builder: (context, AsyncSnapshot snapshot) {
                   if (snapshot.hasData) {
                     return Column(
@@ -281,8 +281,8 @@ class _LeaguePageState extends State<LeaguePage> {
                                     children: [
                                       Utils.getStateText(snapshot.data[2]["state"]),
                                       SizedBox(width: 5),
-                                      snapshot.data[2]["state"] == "preparation" || snapshot.data[2]["state"] == "inWar"? CountDownText(
-                                        due: DateTime.parse(snapshot.data[2]["state"] == "preparation"? snapshot.data[2]["startTime"] : snapshot.data[2]["endTime"]),
+                                      snapshot.data[2]["state"] == "preparation" || snapshot.data[2]["state"] == "inWar" || snapshot.data[2]["state"] == "warEnded"? CountDownText(
+                                        due: snapshot.data[2]["state"] == "preparation"? DateTime.parse(snapshot.data[2]["startTime"]) : snapshot.data[2]["state"] == "inWar"? DateTime.parse(snapshot.data[2]["endTime"]) : DateTime.parse(snapshot.data[4]["startTime"]),
                                         finishedText: "War over!",
                                         showLabel: true,
                                         longDateName: true,
