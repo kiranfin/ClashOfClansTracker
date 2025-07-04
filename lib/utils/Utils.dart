@@ -926,8 +926,6 @@ Map<String, dynamic> getClanWarRanking(Map<String, dynamic> map) {
       tempmap[war["clan"]["tag"]]["percentage"] = tempmap[war["clan"]["tag"]]["percentage"] + (war["clan"]["destructionPercentage"] / 100) * (war["teamSize"] * 100);
       tempmap[war["opponent"]["tag"]]["percentage"] = tempmap[war["opponent"]["tag"]]["percentage"] + (war["opponent"]["destructionPercentage"] / 100) * (war["teamSize"] * 100);
       if(war["state"] == "warEnded") { //Wenn War vorbei ist
-        print(war["clan"]["stars"]);
-        print(war["opponent"]["stars"]);
         if(war["clan"]["stars"] > war["opponent"]["stars"]) { //Clan mehr Sterne
           tempmap[war["clan"]["tag"]]["stars"] = tempmap[war["clan"]["tag"]]["stars"] + 10;
         } else if(war["clan"]["stars"] < war["opponent"]["stars"]) { //Opponent mehr Sterne
