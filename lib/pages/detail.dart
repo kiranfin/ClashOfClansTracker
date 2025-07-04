@@ -470,21 +470,16 @@ class _DetailPageState extends State<DetailPage> {
                       fontSize: 30)
                   ) : SizedBox(width: 5),
                   Container(
-                    child: GridView.builder(
-                        shrinkWrap: true,
-                        physics: NeverScrollableScrollPhysics(),
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 3,
-                          crossAxisSpacing: 5.0,
-                          mainAxisSpacing: 5.0,
-                        ),
-                        itemCount: finallist[ind].length,
-                        itemBuilder: (BuildContext context, int index) {
+                    child: Wrap(
+                        spacing: 5.0,
+                        runSpacing: 5.0,
+                        children: List.generate(finallist[ind].length, (index) {
                           return Padding(
                             padding: const EdgeInsets.all(3.0),
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(20),
                               child: Container(
+                                width: 120,
                                 color: finallist[ind][index]["level"] ==
                                     finallist[ind][index]["maxLevel"] ? Color(
                                     0xFF532D1F) : Colors.black,
@@ -558,6 +553,7 @@ class _DetailPageState extends State<DetailPage> {
                             ),
                           );
                         }
+                      ),
                     ),
                   ),
                   SizedBox(height: 20)
@@ -586,19 +582,16 @@ class _DetailPageState extends State<DetailPage> {
         builder: (context, AsyncSnapshot snapshot) {
           if(snapshot.hasData) {
             List finallist = Utils.getSpells(snapshot.data);
-            return GridView.builder(
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 3,
-                  crossAxisSpacing: 5.0,
-                  mainAxisSpacing: 5.0,
-                ),
-                itemCount: finallist.length,
-                itemBuilder: (BuildContext context, int index) {
+            return Wrap(
+                spacing: 5.0,
+                runSpacing: 5.0,
+                children: List.generate(finallist.length, (index) {
                   return Padding(
                     padding: const EdgeInsets.all(3.0),
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(20),
                       child: Container(
+                        width: 120,
                         color: finallist[index]["level"] == finallist[index]["maxLevel"]? Color(
                             0xFF532D1F): Colors.black,
                         child: GridTile(
@@ -650,6 +643,7 @@ class _DetailPageState extends State<DetailPage> {
                     ),
                   );
                 }
+              )
             );
           } else {
             return ListView.builder(
@@ -689,26 +683,21 @@ class _DetailPageState extends State<DetailPage> {
                         color: Colors.white,
                         fontFamily: "Poppins",
                         fontSize: 30)) : SizedBox(width: 5),
-                    GridView.builder(
-                        shrinkWrap: true,
-                        physics: NeverScrollableScrollPhysics(),
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: ind == 2? 3 : 2,
-                          crossAxisSpacing: 5.0,
-                          mainAxisSpacing: 5.0,
-                        ),
-                        itemCount: finallist[ind].length,
-                        itemBuilder: (BuildContext context, int index) {
+                        Wrap(
+                        spacing: 5.0,
+                        runSpacing: 5.0,
+                        children: List.generate(finallist[ind].length, (index) {
                           return Padding(
                             padding: const EdgeInsets.all(3.0),
-                            child: ClipRRect(
+                            child: Utils.isPet(finallist[ind][index]["name"]) && pets.isNotEmpty?
+                            ClipRRect(
                               borderRadius: BorderRadius.circular(20),
                               child: Container(
+                                width: 120,
                                 color: finallist[ind][index]["level"] ==
                                     finallist[ind][index]["maxLevel"] ? Color(
                                     0xFF532D1F) : Colors.black,
-                                child: Utils.isPet(finallist[ind][index]["name"]) && pets.isNotEmpty?
-                                GridTile(
+                                child: GridTile(
                                   child: Padding(
                                     padding: const EdgeInsets.all(5.0),
                                     child: Column(
@@ -752,8 +741,17 @@ class _DetailPageState extends State<DetailPage> {
                                       ],
                                     ),
                                   ),
-                                )
-                                : ind == 0 && heroes.isNotEmpty || ind == 1 && bhheroes.isNotEmpty? GridTile(
+                                ),
+                              ),
+                            )
+                            : ind == 0 && heroes.isNotEmpty || ind == 1 && bhheroes.isNotEmpty? ClipRRect(
+                              borderRadius: BorderRadius.circular(20),
+                              child: Container(
+                                width: 180,
+                                color: finallist[ind][index]["level"] ==
+                                    finallist[ind][index]["maxLevel"] ? Color(
+                                    0xFF532D1F) : Colors.black,
+                                child: GridTile(
                                   child: Padding(
                                     padding: const EdgeInsets.all(5.0),
                                     child: Column(
@@ -849,11 +847,12 @@ class _DetailPageState extends State<DetailPage> {
                                       ],
                                     ),
                                   ),
-                                ) : SizedBox(height: 5),
+                                ),
                               ),
-                            ),
+                            ) : SizedBox(height: 5),
                           );
                         }
+                      ),
                     ),
                     SizedBox(height: 20)
                   ]
@@ -898,21 +897,16 @@ class _DetailPageState extends State<DetailPage> {
                         fontSize: 30)
                     ),
                     Container(
-                      child: GridView.builder(
-                          shrinkWrap: true,
-                          physics: NeverScrollableScrollPhysics(),
-                          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 3,
-                            crossAxisSpacing: 5.0,
-                            mainAxisSpacing: 5.0,
-                          ),
-                          itemCount: finallist[ind].length,
-                          itemBuilder: (BuildContext context, int index) {
+                      child: Wrap(
+                          spacing: 5.0,
+                          runSpacing: 5.0,
+                          children: List.generate(finallist[ind].length, (index) {
                             return Padding(
                               padding: const EdgeInsets.all(3.0),
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(20),
                                 child: Container(
+                                  width: 120,
                                   color: finallist[ind][index]["level"] ==
                                       finallist[ind][index]["maxLevel"] ? Color(
                                       0xFF532D1F) : Colors.black,
@@ -1012,6 +1006,7 @@ class _DetailPageState extends State<DetailPage> {
                               ),
                             );
                           }
+                        )
                       ),
                     ),
                     SizedBox(height: 20)
