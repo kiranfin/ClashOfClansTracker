@@ -282,9 +282,9 @@ class _LeaguePageState extends State<LeaguePage> {
                                     children: [
                                       Utils.getStateText(snapshot.data[2]["state"]),
                                       SizedBox(width: 5),
-                                      snapshot.data[2]["state"] == "preparation" || snapshot.data[2]["state"] == "inWar" || snapshot.data[2]["state"] == "warEnded"? CountDownText(
+                                      (snapshot.data[2]["state"] == "preparation" || snapshot.data[2]["state"] == "inWar" || snapshot.data[2]["state"] == "warEnded") && (snapshot.data[4].isNotEmpty)? CountDownText(
                                         due: snapshot.data[2]["state"] == "preparation"? DateTime.parse(snapshot.data[2]["startTime"]) : snapshot.data[2]["state"] == "inWar"? DateTime.parse(snapshot.data[2]["endTime"]) : DateTime.parse(snapshot.data[4]["startTime"]),
-                                        finishedText: "War over!",
+                                        finishedText: "-",
                                         showLabel: true,
                                         longDateName: true,
                                         hoursTextLong: ":",

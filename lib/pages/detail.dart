@@ -1688,7 +1688,13 @@ class _DetailPageState extends State<DetailPage> {
                                             children: [
                                               Image.asset(star, scale: 1.5),
                                               SizedBox(width: 5),
-                                              Text("${ranking[index]["stars"]} | ${ranking[index]["percentage"].toStringAsFixed(0)}%", style: const TextStyle(
+                                              Text("${ranking[index]["stars"]}", style: const TextStyle(
+                                                  color: Colors.white,
+                                                  fontFamily: "Poppins",
+                                                  fontSize: 15)
+                                              ),
+                                              SizedBox(width: 15),
+                                              Text("${ranking[index]["percentage"].toStringAsFixed(0)}%", style: const TextStyle(
                                                   color: Colors.white,
                                                   fontFamily: "Poppins",
                                                   fontSize: 15)
