@@ -140,68 +140,73 @@ class _LeaguePageState extends State<LeaguePage> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            for(int index = 0; index < 3; index++) ClipRRect(
-                              borderRadius: BorderRadius.circular(20),
-                              child: Container(
-                                width: MediaQuery.of(context).size.width - 3 * 98,
-                                color: Colors.black,
-                                  child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      AutoSizeText(index == 0? "Current" : index == 1? "Previous" : "Best",
-                                        style: const TextStyle(
-                                          color: Colors.white,
-                                          fontFamily: "Poppins",
-                                          fontSize: 20,
-                                        ),
-                                        maxLines: 1,
-                                      ),
-                                      Row(
+                            for(int index = 0; index < 3; index++) Flexible(
+                              flex: 1,
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 3.0),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(20),
+                                  child: Container(
+                                    color: Colors.black,
+                                      child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
-                                          Icon(Icons.access_time_outlined, color: Colors.white, size: 20),
-                                          SizedBox(width: 5),
-                                          Text("${index == 0? "${DateTime.now().year}-${(DateTime.now().month).toString().padLeft(2, "0")}" : index == 1? (snapshot.data[0]["legendStatistics"]["previousSeason"]!=null? snapshot.data[0]["legendStatistics"]["previousSeason"]["id"] : "-") : (snapshot.data[0]["legendStatistics"]["bestSeason"]!=null? snapshot.data[0]["legendStatistics"]["bestSeason"]["id"] : "-")}",
+                                          AutoSizeText(index == 0? "Current" : index == 1? "Previous" : "Best",
                                             style: const TextStyle(
                                               color: Colors.white,
                                               fontFamily: "Poppins",
-                                              fontSize: 15,
+                                              fontSize: 20,
                                             ),
+                                            maxLines: 1,
                                           ),
+                                          Row(
+                                            children: [
+                                              Icon(Icons.access_time_outlined, color: Colors.white, size: 20),
+                                              SizedBox(width: 5),
+                                              Text("${index == 0? "${DateTime.now().year}-${(DateTime.now().month).toString().padLeft(2, "0")}" : index == 1? (snapshot.data[0]["legendStatistics"]["previousSeason"]!=null? snapshot.data[0]["legendStatistics"]["previousSeason"]["id"] : "-") : (snapshot.data[0]["legendStatistics"]["bestSeason"]!=null? snapshot.data[0]["legendStatistics"]["bestSeason"]["id"] : "-")}",
+                                                style: const TextStyle(
+                                                  color: Colors.white,
+                                                  fontFamily: "Poppins",
+                                                  fontSize: 15,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          Row(
+                                            children: [
+                                              Icon(Icons.tag, color: Colors.white, size: 20),
+                                              SizedBox(width: 5),
+                                              Text("${index == 0? (snapshot.data[0]["legendStatistics"]["currentSeason"]!=null?snapshot.data[0]["legendStatistics"]["currentSeason"]["rank"]: "-") : index == 1? (snapshot.data[0]["legendStatistics"]["previousSeason"]!=null? snapshot.data[0]["legendStatistics"]["previousSeason"]["rank"] : "-") : (snapshot.data[0]["legendStatistics"]["bestSeason"]!=null? snapshot.data[0]["legendStatistics"]["bestSeason"]["rank"]: "-")}",
+                                                style: const TextStyle(
+                                                  color: Colors.white,
+                                                  fontFamily: "Poppins",
+                                                  fontSize: 15,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          Row(
+                                            children: [
+                                              Image.asset(
+                                                'lib/utils/img/Trophy.png',
+                                                fit: BoxFit.cover,
+                                                scale: 1.5,
+                                              ),
+                                              SizedBox(width: 5),
+                                              Text("${index == 0? (snapshot.data[0]["legendStatistics"]["currentSeason"]!=null?snapshot.data[0]["legendStatistics"]["currentSeason"]["trophies"] : "-") : index == 1? (snapshot.data[0]["legendStatistics"]["previousSeason"]!=null? snapshot.data[0]["legendStatistics"]["previousSeason"]["trophies"] : "-") : (snapshot.data[0]["legendStatistics"]["bestSeason"]!=null? snapshot.data[0]["legendStatistics"]["bestSeason"]["trophies"]: "-")}",
+                                                style: const TextStyle(
+                                                  color: Colors.white,
+                                                  fontFamily: "Poppins",
+                                                  fontSize: 15,
+                                                ),
+                                              ),
+                                            ],
+                                          )
                                         ],
                                       ),
-                                      Row(
-                                        children: [
-                                          Icon(Icons.tag, color: Colors.white, size: 20),
-                                          SizedBox(width: 5),
-                                          Text("${index == 0? (snapshot.data[0]["legendStatistics"]["currentSeason"]!=null?snapshot.data[0]["legendStatistics"]["currentSeason"]["rank"]: "-") : index == 1? (snapshot.data[0]["legendStatistics"]["previousSeason"]!=null? snapshot.data[0]["legendStatistics"]["previousSeason"]["rank"] : "-") : (snapshot.data[0]["legendStatistics"]["bestSeason"]!=null? snapshot.data[0]["legendStatistics"]["bestSeason"]["rank"]: "-")}",
-                                            style: const TextStyle(
-                                              color: Colors.white,
-                                              fontFamily: "Poppins",
-                                              fontSize: 15,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      Row(
-                                        children: [
-                                          Image.asset(
-                                            'lib/utils/img/Trophy.png',
-                                            fit: BoxFit.cover,
-                                            scale: 1.5,
-                                          ),
-                                          SizedBox(width: 5),
-                                          Text("${index == 0? (snapshot.data[0]["legendStatistics"]["currentSeason"]!=null?snapshot.data[0]["legendStatistics"]["currentSeason"]["trophies"] : "-") : index == 1? (snapshot.data[0]["legendStatistics"]["previousSeason"]!=null? snapshot.data[0]["legendStatistics"]["previousSeason"]["trophies"] : "-") : (snapshot.data[0]["legendStatistics"]["bestSeason"]!=null? snapshot.data[0]["legendStatistics"]["bestSeason"]["trophies"]: "-")}",
-                                            style: const TextStyle(
-                                              color: Colors.white,
-                                              fontFamily: "Poppins",
-                                              fontSize: 15,
-                                            ),
-                                          ),
-                                        ],
-                                      )
-                                    ],
+                                    ),
                                   ),
                                 ),
                               ),
