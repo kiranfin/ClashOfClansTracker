@@ -69,60 +69,66 @@ class _HomePageState extends State<HomePage> {
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Row(
-                                        mainAxisAlignment: MainAxisAlignment
-                                            .start,
-                                        children: [
-                                          DataProvider.awaitLeagueIcon(ovsnap.data[0]),
-                                          SizedBox(width: 5),
-                                          DataProvider.awaitPlayerName(ovsnap.data[0])
-                                        ],
-                                      ),
-                                      SizedBox(height: 10),
-                                      Row(
-                                        mainAxisAlignment: MainAxisAlignment
-                                            .start,
-                                        children: [
-                                          Image.asset('lib/utils/img/Trophy.png',
-                                              fit: BoxFit.cover, scale: 1.5),
-                                          SizedBox(width: 7),
-                                          DataProvider.awaitPlayerTrophies(ovsnap.data[0], 15),
-                                          SizedBox(width: 7),
-                                          Image.asset(legendTrophy, scale: 14),
-                                          SizedBox(width: 7),
-                                          DataProvider.awaitPlayerLegendTrophies(ovsnap.data[0], 15),
-                                        ],
-                                      ),
-                                      SizedBox(height: 10),
-                                      Row(
-                                        mainAxisAlignment: MainAxisAlignment
-                                            .start,
-                                        children: [
-                                          DataProvider.awaitBuilderLeagueIcon(ovsnap.data[0], 4),
-                                          SizedBox(width: 7),
-                                          DataProvider.awaitPlayerBuilderTrophies(ovsnap.data[0], 15),
-                                        ],
-                                      ),
-                                    ],
+                                  Flexible(
+                                    flex: 2,
+                                    child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Row(
+                                          mainAxisAlignment: MainAxisAlignment
+                                              .start,
+                                          children: [
+                                            DataProvider.awaitLeagueIcon(ovsnap.data[0]),
+                                            SizedBox(width: 5),
+                                            DataProvider.awaitPlayerName(ovsnap.data[0])
+                                          ],
+                                        ),
+                                        SizedBox(height: 10),
+                                        Row(
+                                          mainAxisAlignment: MainAxisAlignment
+                                              .start,
+                                          children: [
+                                            Image.asset('lib/utils/img/Trophy.png',
+                                                fit: BoxFit.cover, scale: 1.5),
+                                            SizedBox(width: 7),
+                                            DataProvider.awaitPlayerTrophies(ovsnap.data[0], 15),
+                                            SizedBox(width: 7),
+                                            Image.asset(legendTrophy, scale: 14),
+                                            SizedBox(width: 7),
+                                            DataProvider.awaitPlayerLegendTrophies(ovsnap.data[0], 15),
+                                          ],
+                                        ),
+                                        SizedBox(height: 10),
+                                        Row(
+                                          mainAxisAlignment: MainAxisAlignment
+                                              .start,
+                                          children: [
+                                            DataProvider.awaitBuilderLeagueIcon(ovsnap.data[0], 4),
+                                            SizedBox(width: 7),
+                                            DataProvider.awaitPlayerBuilderTrophies(ovsnap.data[0], 15),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
                                   ),
-                                  Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment: CrossAxisAlignment.end,
-                                    children: [
-                                      DataProvider.awaitClanIcon(ovsnap.data[0]),
-                                      Row(
-                                        mainAxisAlignment: MainAxisAlignment.end,
-                                        children: [
-                                          DataProvider.awaitTownHallIcon(ovsnap.data[0]["townHallLevel"], 3),
-                                          SizedBox(width: 10),
-                                          DataProvider.awaitBuilderHallIcon(ovsnap.data[0]["builderHallLevel"], 2.5),
-                                        ],
-                                      )
-                                    ],
+                                  Flexible(
+                                    flex: 1,
+                                    child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      crossAxisAlignment: CrossAxisAlignment.end,
+                                      children: [
+                                        DataProvider.awaitClanIcon(ovsnap.data[0]),
+                                        Row(
+                                          mainAxisAlignment: MainAxisAlignment.end,
+                                          children: [
+                                            DataProvider.awaitTownHallIcon(ovsnap.data[0]["townHallLevel"], 3),
+                                            SizedBox(width: 10),
+                                            DataProvider.awaitBuilderHallIcon(ovsnap.data[0]["builderHallLevel"], 2.5),
+                                          ],
+                                        )
+                                      ],
+                                    ),
                                   )
                                 ],
                               ),
@@ -174,193 +180,196 @@ class _HomePageState extends State<HomePage> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Container(
-                                margin: EdgeInsets.all(10),
-                                height: 120.0,
-                                width: 110.0,
-                                child: ElevatedButton(
-                                  style: ButtonStyle(
-                                      backgroundColor: MaterialStateProperty.all(
-                                          Colors.black),
-                                      shape: MaterialStateProperty.all<
-                                          RoundedRectangleBorder>(
-                                          RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.circular(
-                                                30.0),
-                                          )
-                                      )
-                                  ),
-                                  onPressed: () async {
-                                    await Navigator.pushNamed(
-                                        context, "/detail", arguments: "buildings");
-                                    setState(() {});
-                                  },
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      AutoSizeText(
-                                          'Buildings',
-                                          style: const TextStyle(
-                                              color: Colors.white,
-                                              fontFamily: "Poppins"),
-                                          maxLines: 1
-                                      ),
-                                      SizedBox(height: 5),
-                                      CircularPercentIndicator(
-                                        center: Column(
-                                          mainAxisAlignment: MainAxisAlignment
-                                              .center,
-                                          children: [
-                                            Text("${(DataProvider.awaitBuildingsPercent(ovsnap.data[0], ovsnap.data[1]) * 100)
-                                                .toStringAsFixed(
-                                                1)}%",
-                                                style: const TextStyle(
-                                                    color: Colors.white,
-                                                    fontFamily: "Poppins",
-                                                    fontSize: 15)),
-                                          ],
+                              Flexible(
+                                child: Container(
+                                  margin: EdgeInsets.all(10),
+                                  height: 120.0,
+                                  child: ElevatedButton(
+                                    style: ButtonStyle(
+                                        backgroundColor: MaterialStateProperty.all(
+                                            Colors.black),
+                                        shape: MaterialStateProperty.all<
+                                            RoundedRectangleBorder>(
+                                            RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.circular(
+                                                  30.0),
+                                            )
+                                        )
+                                    ),
+                                    onPressed: () async {
+                                      await Navigator.pushNamed(
+                                          context, "/detail", arguments: "buildings");
+                                      setState(() {});
+                                    },
+                                    child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        AutoSizeText(
+                                            'Buildings',
+                                            style: const TextStyle(
+                                                color: Colors.white,
+                                                fontFamily: "Poppins"),
+                                            maxLines: 1
                                         ),
-                                        radius: 40,
-                                        lineWidth: 12,
-                                        percent: DataProvider.awaitBuildingsPercent(ovsnap.data[0], ovsnap.data[1]),
-                                        circularStrokeCap: CircularStrokeCap
-                                            .round,
-                                        backgroundColor: Colors.white10,
-                                        rotateLinearGradient: true,
-                                        linearGradient: LinearGradient(
-                                            colors: [
-                                              Colors.orange,
-                                              Colors.deepOrangeAccent
-                                            ]
+                                        SizedBox(height: 5),
+                                        CircularPercentIndicator(
+                                          center: Column(
+                                            mainAxisAlignment: MainAxisAlignment
+                                                .center,
+                                            children: [
+                                              Text("${(DataProvider.awaitBuildingsPercent(ovsnap.data[0], ovsnap.data[1]) * 100)
+                                                  .toStringAsFixed(
+                                                  1)}%",
+                                                  style: const TextStyle(
+                                                      color: Colors.white,
+                                                      fontFamily: "Poppins",
+                                                      fontSize: 15)),
+                                            ],
+                                          ),
+                                          radius: 40,
+                                          lineWidth: 12,
+                                          percent: DataProvider.awaitBuildingsPercent(ovsnap.data[0], ovsnap.data[1]),
+                                          circularStrokeCap: CircularStrokeCap
+                                              .round,
+                                          backgroundColor: Colors.white10,
+                                          rotateLinearGradient: true,
+                                          linearGradient: LinearGradient(
+                                              colors: [
+                                                Colors.orange,
+                                                Colors.deepOrangeAccent
+                                              ]
+                                          ),
                                         ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              Container(
-                                margin: EdgeInsets.all(10),
-                                height: 120.0,
-                                width: 110.0,
-                                child: ElevatedButton(
-                                  style: ButtonStyle(
-                                      backgroundColor: MaterialStateProperty.all(
-                                          Colors.black),
-                                      shape: MaterialStateProperty.all<
-                                          RoundedRectangleBorder>(
-                                          RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.circular(
-                                                30.0),
-                                          )
-                                      )
-                                  ),
-                                  onPressed: () async {
-                                    await Navigator.pushNamed(
-                                        context, "/detail", arguments: "troops");
-                                    setState(() {});
-                                  },
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      AutoSizeText(
-                                          'Troops',
-                                          style: const TextStyle(
-                                              color: Colors.white,
-                                              fontFamily: "Poppins"),
-                                          maxLines: 1
-                                      ),
-                                      SizedBox(height: 5),
-                                      CircularPercentIndicator(
-                                        center: Column(
-                                          mainAxisAlignment: MainAxisAlignment
-                                              .center,
-                                          children: [
-                                            Text("${(DataProvider.awaitTroopsPercent(ovsnap.data[0], ovsnap.data[2]) * 100)
-                                                .toStringAsFixed(1)}%",
-                                                style: const TextStyle(
-                                                    color: Colors.white,
-                                                    fontFamily: "Poppins",
-                                                    fontSize: 15)),
-                                          ],
-                                        ),
-                                        radius: 40,
-                                        lineWidth: 12,
-                                        percent: DataProvider.awaitTroopsPercent(ovsnap.data[0], ovsnap.data[2]),
-                                        circularStrokeCap: CircularStrokeCap
-                                            .round,
-                                        backgroundColor: Colors.white10,
-                                        rotateLinearGradient: true,
-                                        linearGradient: LinearGradient(
-                                            colors: [
-                                              Colors.lightGreen,
-                                              Colors.green
-                                            ]
-                                        ),
-                                      ),
-                                    ],
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ),
-                              Container(
-                                margin: EdgeInsets.all(10),
-                                height: 120.0,
-                                width: 110.0,
-                                child: ElevatedButton(
-                                  style: ButtonStyle(
-                                      backgroundColor: MaterialStateProperty.all(
-                                          Colors.black),
-                                      shape: MaterialStateProperty.all<
-                                          RoundedRectangleBorder>(
-                                          RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.circular(
-                                                30.0),
-                                          )
-                                      )
+                              Flexible(
+                                child: Container(
+                                  margin: EdgeInsets.all(10),
+                                  height: 120.0,
+                                  child: ElevatedButton(
+                                    style: ButtonStyle(
+                                        backgroundColor: MaterialStateProperty.all(
+                                            Colors.black),
+                                        shape: MaterialStateProperty.all<
+                                            RoundedRectangleBorder>(
+                                            RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.circular(
+                                                  30.0),
+                                            )
+                                        )
+                                    ),
+                                    onPressed: () async {
+                                      await Navigator.pushNamed(
+                                          context, "/detail", arguments: "troops");
+                                      setState(() {});
+                                    },
+                                    child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        AutoSizeText(
+                                            'Troops',
+                                            style: const TextStyle(
+                                                color: Colors.white,
+                                                fontFamily: "Poppins"),
+                                            maxLines: 1
+                                        ),
+                                        SizedBox(height: 5),
+                                        CircularPercentIndicator(
+                                          center: Column(
+                                            mainAxisAlignment: MainAxisAlignment
+                                                .center,
+                                            children: [
+                                              Text("${(DataProvider.awaitTroopsPercent(ovsnap.data[0], ovsnap.data[2]) * 100)
+                                                  .toStringAsFixed(1)}%",
+                                                  style: const TextStyle(
+                                                      color: Colors.white,
+                                                      fontFamily: "Poppins",
+                                                      fontSize: 15)),
+                                            ],
+                                          ),
+                                          radius: 40,
+                                          lineWidth: 12,
+                                          percent: DataProvider.awaitTroopsPercent(ovsnap.data[0], ovsnap.data[2]),
+                                          circularStrokeCap: CircularStrokeCap
+                                              .round,
+                                          backgroundColor: Colors.white10,
+                                          rotateLinearGradient: true,
+                                          linearGradient: LinearGradient(
+                                              colors: [
+                                                Colors.lightGreen,
+                                                Colors.green
+                                              ]
+                                          ),
+                                        ),
+                                      ],
+                                    ),
                                   ),
-                                  onPressed: () async {
-                                    await Navigator.pushNamed(
-                                        context, "/detail", arguments: "spells");
-                                    setState(() {});
-                                  },
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      AutoSizeText(
-                                          'Spells',
-                                          style: const TextStyle(
-                                              color: Colors.white,
-                                              fontFamily: "Poppins"),
-                                          maxLines: 1
-                                      ),
-                                      SizedBox(height: 5),
-                                      CircularPercentIndicator(
-                                        center: Column(
-                                          mainAxisAlignment: MainAxisAlignment
-                                              .center,
-                                          children: [
-                                            Text("${(DataProvider.awaitSpellsPercent(ovsnap.data[0], ovsnap.data[2]) * 100)
-                                                .toStringAsFixed(1)}%",
-                                                style: const TextStyle(
-                                                    color: Colors.white,
-                                                    fontFamily: "Poppins",
-                                                    fontSize: 15)),
-                                          ],
+                                ),
+                              ),
+                              Flexible(
+                                child: Container(
+                                  margin: EdgeInsets.all(10),
+                                  height: 120.0,
+                                  child: ElevatedButton(
+                                    style: ButtonStyle(
+                                        backgroundColor: MaterialStateProperty.all(
+                                            Colors.black),
+                                        shape: MaterialStateProperty.all<
+                                            RoundedRectangleBorder>(
+                                            RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.circular(
+                                                  30.0),
+                                            )
+                                        )
+                                    ),
+                                    onPressed: () async {
+                                      await Navigator.pushNamed(
+                                          context, "/detail", arguments: "spells");
+                                      setState(() {});
+                                    },
+                                    child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        AutoSizeText(
+                                            'Spells',
+                                            style: const TextStyle(
+                                                color: Colors.white,
+                                                fontFamily: "Poppins"),
+                                            maxLines: 1
                                         ),
-                                        radius: 40,
-                                        lineWidth: 12,
-                                        percent: DataProvider.awaitSpellsPercent(ovsnap.data[0], ovsnap.data[2]),
-                                        circularStrokeCap: CircularStrokeCap
-                                            .round,
-                                        backgroundColor: Colors.white10,
-                                        rotateLinearGradient: true,
-                                        linearGradient: LinearGradient(
-                                            colors: [
-                                              Colors.pinkAccent,
-                                              Colors.purple
-                                            ]
+                                        SizedBox(height: 5),
+                                        CircularPercentIndicator(
+                                          center: Column(
+                                            mainAxisAlignment: MainAxisAlignment
+                                                .center,
+                                            children: [
+                                              Text("${(DataProvider.awaitSpellsPercent(ovsnap.data[0], ovsnap.data[2]) * 100)
+                                                  .toStringAsFixed(1)}%",
+                                                  style: const TextStyle(
+                                                      color: Colors.white,
+                                                      fontFamily: "Poppins",
+                                                      fontSize: 15)),
+                                            ],
+                                          ),
+                                          radius: 40,
+                                          lineWidth: 12,
+                                          percent: DataProvider.awaitSpellsPercent(ovsnap.data[0], ovsnap.data[2]),
+                                          circularStrokeCap: CircularStrokeCap
+                                              .round,
+                                          backgroundColor: Colors.white10,
+                                          rotateLinearGradient: true,
+                                          linearGradient: LinearGradient(
+                                              colors: [
+                                                Colors.pinkAccent,
+                                                Colors.purple
+                                              ]
+                                          ),
                                         ),
-                                      ),
-                                    ],
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ),
@@ -371,192 +380,195 @@ class _HomePageState extends State<HomePage> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Container(
-                                margin: EdgeInsets.all(10),
-                                height: 120.0,
-                                width: 110.0,
-                                child: ElevatedButton(
-                                  style: ButtonStyle(
-                                      backgroundColor: MaterialStateProperty.all(
-                                          Colors.black),
-                                      shape: MaterialStateProperty.all<
-                                          RoundedRectangleBorder>(
-                                          RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.circular(
-                                                30.0),
-                                          )
-                                      )
-                                  ),
-                                  onPressed: () async {
-                                    await Navigator.pushNamed(
-                                        context, "/detail", arguments: "heroes");
-                                    setState(() {});
-                                  },
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      AutoSizeText(
-                                          'Heroes',
-                                          style: const TextStyle(
-                                              color: Colors.white,
-                                              fontFamily: "Poppins"),
-                                          maxLines: 1
-                                      ),
-                                      SizedBox(height: 5),
-                                      CircularPercentIndicator(
-                                        center: Column(
-                                          mainAxisAlignment: MainAxisAlignment
-                                              .center,
-                                          children: [
-                                            Text("${(DataProvider.awaitHeroesPercent(ovsnap.data[0], ovsnap.data[2]) * 100)
-                                                .toStringAsFixed(1)}%",
-                                                style: const TextStyle(
-                                                    color: Colors.white,
-                                                    fontFamily: "Poppins",
-                                                    fontSize: 15)),
-                                          ],
+                              Flexible(
+                                child: Container(
+                                  margin: EdgeInsets.all(10),
+                                  height: 120.0,
+                                  child: ElevatedButton(
+                                    style: ButtonStyle(
+                                        backgroundColor: MaterialStateProperty.all(
+                                            Colors.black),
+                                        shape: MaterialStateProperty.all<
+                                            RoundedRectangleBorder>(
+                                            RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.circular(
+                                                  30.0),
+                                            )
+                                        )
+                                    ),
+                                    onPressed: () async {
+                                      await Navigator.pushNamed(
+                                          context, "/detail", arguments: "heroes");
+                                      setState(() {});
+                                    },
+                                    child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        AutoSizeText(
+                                            'Heroes',
+                                            style: const TextStyle(
+                                                color: Colors.white,
+                                                fontFamily: "Poppins"),
+                                            maxLines: 1
                                         ),
-                                        radius: 40,
-                                        lineWidth: 12,
-                                        percent: DataProvider.awaitHeroesPercent(ovsnap.data[0], ovsnap.data[2]),
-                                        circularStrokeCap: CircularStrokeCap
-                                            .round,
-                                        backgroundColor: Colors.white10,
-                                        rotateLinearGradient: true,
-                                        linearGradient: LinearGradient(
-                                            colors: [
-                                              Colors.cyan,
-                                              Colors.blueAccent
-                                            ]
+                                        SizedBox(height: 5),
+                                        CircularPercentIndicator(
+                                          center: Column(
+                                            mainAxisAlignment: MainAxisAlignment
+                                                .center,
+                                            children: [
+                                              Text("${(DataProvider.awaitHeroesPercent(ovsnap.data[0], ovsnap.data[2]) * 100)
+                                                  .toStringAsFixed(1)}%",
+                                                  style: const TextStyle(
+                                                      color: Colors.white,
+                                                      fontFamily: "Poppins",
+                                                      fontSize: 15)),
+                                            ],
+                                          ),
+                                          radius: 40,
+                                          lineWidth: 12,
+                                          percent: DataProvider.awaitHeroesPercent(ovsnap.data[0], ovsnap.data[2]),
+                                          circularStrokeCap: CircularStrokeCap
+                                              .round,
+                                          backgroundColor: Colors.white10,
+                                          rotateLinearGradient: true,
+                                          linearGradient: LinearGradient(
+                                              colors: [
+                                                Colors.cyan,
+                                                Colors.blueAccent
+                                              ]
+                                          ),
                                         ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              Container(
-                                margin: EdgeInsets.all(10),
-                                height: 120.0,
-                                width: 110.0,
-                                child: ElevatedButton(
-                                  style: ButtonStyle(
-                                      backgroundColor: MaterialStateProperty.all(
-                                          Colors.black),
-                                      shape: MaterialStateProperty.all<
-                                          RoundedRectangleBorder>(
-                                          RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.circular(
-                                                30.0),
-                                          )
-                                      )
-                                  ),
-                                  onPressed: () async {
-                                    await Navigator.pushNamed(context, "/detail",
-                                        arguments: "equipment");
-                                    setState(() {});
-                                  },
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      AutoSizeText(
-                                          'Equipment',
-                                          style: const TextStyle(
-                                              color: Colors.white,
-                                              fontFamily: "Poppins"),
-                                          maxLines: 1
-                                      ),
-                                      SizedBox(height: 5),
-                                      CircularPercentIndicator(
-                                        center: Column(
-                                          mainAxisAlignment: MainAxisAlignment
-                                              .center,
-                                          children: [
-                                            Text("${(DataProvider.awaitEquipmentPercent(ovsnap.data[0], ovsnap.data[3]) * 100)
-                                                .toStringAsFixed(1)}%",
-                                                style: const TextStyle(
-                                                    color: Colors.white,
-                                                    fontFamily: "Poppins",
-                                                    fontSize: 15)),
-                                          ],
-                                        ),
-                                        radius: 40,
-                                        lineWidth: 12,
-                                        percent: DataProvider.awaitEquipmentPercent(ovsnap.data[0], ovsnap.data[3]),
-                                        circularStrokeCap: CircularStrokeCap
-                                            .round,
-                                        backgroundColor: Colors.white10,
-                                        rotateLinearGradient: true,
-                                        linearGradient: LinearGradient(
-                                            colors: [
-                                              Colors.blueGrey,
-                                              Colors.teal
-                                            ]
-                                        ),
-                                      ),
-                                    ],
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ),
-                              Container(
-                                margin: EdgeInsets.all(10),
-                                height: 120.0,
-                                width: 110.0,
-                                child: ElevatedButton(
-                                  style: ButtonStyle(
-                                      backgroundColor: MaterialStateProperty.all(
-                                          Colors.black),
-                                      shape: MaterialStateProperty.all<
-                                          RoundedRectangleBorder>(
-                                          RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.circular(
-                                                30.0),
-                                          )
-                                      )
+                              Flexible(
+                                child: Container(
+                                  margin: EdgeInsets.all(10),
+                                  height: 120.0,
+                                  child: ElevatedButton(
+                                    style: ButtonStyle(
+                                        backgroundColor: MaterialStateProperty.all(
+                                            Colors.black),
+                                        shape: MaterialStateProperty.all<
+                                            RoundedRectangleBorder>(
+                                            RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.circular(
+                                                  30.0),
+                                            )
+                                        )
+                                    ),
+                                    onPressed: () async {
+                                      await Navigator.pushNamed(context, "/detail",
+                                          arguments: "equipment");
+                                      setState(() {});
+                                    },
+                                    child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        AutoSizeText(
+                                            'Equipment',
+                                            style: const TextStyle(
+                                                color: Colors.white,
+                                                fontFamily: "Poppins"),
+                                            maxLines: 1
+                                        ),
+                                        SizedBox(height: 5),
+                                        CircularPercentIndicator(
+                                          center: Column(
+                                            mainAxisAlignment: MainAxisAlignment
+                                                .center,
+                                            children: [
+                                              Text("${(DataProvider.awaitEquipmentPercent(ovsnap.data[0], ovsnap.data[3]) * 100)
+                                                  .toStringAsFixed(1)}%",
+                                                  style: const TextStyle(
+                                                      color: Colors.white,
+                                                      fontFamily: "Poppins",
+                                                      fontSize: 15)),
+                                            ],
+                                          ),
+                                          radius: 40,
+                                          lineWidth: 12,
+                                          percent: DataProvider.awaitEquipmentPercent(ovsnap.data[0], ovsnap.data[3]),
+                                          circularStrokeCap: CircularStrokeCap
+                                              .round,
+                                          backgroundColor: Colors.white10,
+                                          rotateLinearGradient: true,
+                                          linearGradient: LinearGradient(
+                                              colors: [
+                                                Colors.blueGrey,
+                                                Colors.teal
+                                              ]
+                                          ),
+                                        ),
+                                      ],
+                                    ),
                                   ),
-                                  onPressed: () async {
-                                    await Navigator.pushNamed(context, "/detail",
-                                        arguments: "achievements");
-                                    setState(() {});
-                                  },
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      AutoSizeText(
-                                          'Achievem.',
-                                          style: const TextStyle(
-                                              color: Colors.white,
-                                              fontFamily: "Poppins"),
-                                          maxLines: 1
-                                      ),
-                                      SizedBox(height: 5),
-                                      CircularPercentIndicator(
-                                        center: Column(
-                                          mainAxisAlignment: MainAxisAlignment
-                                              .center,
-                                          children: [
-                                            Text("${(DataProvider.awaitAchievementsPercent(ovsnap.data[0]) * 100)
-                                                .toStringAsFixed(1)}%",
-                                                style: const TextStyle(
-                                                    color: Colors.white,
-                                                    fontFamily: "Poppins",
-                                                    fontSize: 15)),
-                                          ],
+                                ),
+                              ),
+                              Flexible(
+                                child: Container(
+                                  margin: EdgeInsets.all(10),
+                                  height: 120.0,
+                                  child: ElevatedButton(
+                                    style: ButtonStyle(
+                                        backgroundColor: MaterialStateProperty.all(
+                                            Colors.black),
+                                        shape: MaterialStateProperty.all<
+                                            RoundedRectangleBorder>(
+                                            RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.circular(
+                                                  30.0),
+                                            )
+                                        )
+                                    ),
+                                    onPressed: () async {
+                                      await Navigator.pushNamed(context, "/detail",
+                                          arguments: "achievements");
+                                      setState(() {});
+                                    },
+                                    child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        AutoSizeText(
+                                            'Achievem.',
+                                            style: const TextStyle(
+                                                color: Colors.white,
+                                                fontFamily: "Poppins"),
+                                            maxLines: 1
                                         ),
-                                        radius: 40,
-                                        lineWidth: 12,
-                                        percent: DataProvider.awaitAchievementsPercent(ovsnap.data[0]),
-                                        circularStrokeCap: CircularStrokeCap
-                                            .round,
-                                        backgroundColor: Colors.white10,
-                                        rotateLinearGradient: true,
-                                        linearGradient: LinearGradient(
-                                            colors: [
-                                              Colors.yellow,
-                                              Colors.orange
-                                            ]
+                                        SizedBox(height: 5),
+                                        CircularPercentIndicator(
+                                          center: Column(
+                                            mainAxisAlignment: MainAxisAlignment
+                                                .center,
+                                            children: [
+                                              Text("${(DataProvider.awaitAchievementsPercent(ovsnap.data[0]) * 100)
+                                                  .toStringAsFixed(1)}%",
+                                                  style: const TextStyle(
+                                                      color: Colors.white,
+                                                      fontFamily: "Poppins",
+                                                      fontSize: 15)),
+                                            ],
+                                          ),
+                                          radius: 40,
+                                          lineWidth: 12,
+                                          percent: DataProvider.awaitAchievementsPercent(ovsnap.data[0]),
+                                          circularStrokeCap: CircularStrokeCap
+                                              .round,
+                                          backgroundColor: Colors.white10,
+                                          rotateLinearGradient: true,
+                                          linearGradient: LinearGradient(
+                                              colors: [
+                                                Colors.yellow,
+                                                Colors.orange
+                                              ]
+                                          ),
                                         ),
-                                      ),
-                                    ],
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ),
@@ -727,126 +739,129 @@ class _HomePageState extends State<HomePage> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Container(
-                                margin: EdgeInsets.all(10),
-                                height: 120.0,
-                                width: 110.0,
-                                child: ElevatedButton(
-                                  style: ButtonStyle(
-                                      backgroundColor: MaterialStateProperty.all(
-                                          Colors.black),
-                                      shape: MaterialStateProperty.all<
-                                          RoundedRectangleBorder>(
-                                          RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.circular(
-                                                30.0),
-                                          )
-                                      )
-                                  ),
-                                  onPressed: () {
+                              Flexible(
+                                child: Container(
+                                  margin: EdgeInsets.all(10),
+                                  height: 120.0,
+                                  child: ElevatedButton(
+                                    style: ButtonStyle(
+                                        backgroundColor: MaterialStateProperty.all(
+                                            Colors.black),
+                                        shape: MaterialStateProperty.all<
+                                            RoundedRectangleBorder>(
+                                            RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.circular(
+                                                  30.0),
+                                            )
+                                        )
+                                    ),
+                                    onPressed: () {
 
-                                  },
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      AutoSizeText(
-                                          'Buildings',
-                                          style: const TextStyle(
-                                              color: Colors.white,
-                                              fontFamily: "Poppins"),
-                                          maxLines: 1
-                                      ),
-                                      SizedBox(height: 5),
-                                      ClipRRect(
-                                          borderRadius: BorderRadius.circular(10),
-                                          child: Shimmer(child: Container(
-                                              width: 110,
-                                              height: 80,
-                                              color: Colors.black45))),
-                                    ],
+                                    },
+                                    child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        AutoSizeText(
+                                            'Buildings',
+                                            style: const TextStyle(
+                                                color: Colors.white,
+                                                fontFamily: "Poppins"),
+                                            maxLines: 1
+                                        ),
+                                        SizedBox(height: 5),
+                                        ClipRRect(
+                                            borderRadius: BorderRadius.circular(10),
+                                            child: Shimmer(child: Container(
+                                                width: 110,
+                                                height: 80,
+                                                color: Colors.black45))),
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ),
-                              Container(
-                                margin: EdgeInsets.all(10),
-                                height: 120.0,
-                                width: 110.0,
-                                child: ElevatedButton(
-                                  style: ButtonStyle(
-                                      backgroundColor: MaterialStateProperty.all(
-                                          Colors.black),
-                                      shape: MaterialStateProperty.all<
-                                          RoundedRectangleBorder>(
-                                          RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.circular(
-                                                30.0),
-                                          )
-                                      )
-                                  ),
-                                  onPressed: () {
+                              Flexible(
+                                child: Container(
+                                  margin: EdgeInsets.all(10),
+                                  height: 120.0,
+                                  child: ElevatedButton(
+                                    style: ButtonStyle(
+                                        backgroundColor: MaterialStateProperty.all(
+                                            Colors.black),
+                                        shape: MaterialStateProperty.all<
+                                            RoundedRectangleBorder>(
+                                            RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.circular(
+                                                  30.0),
+                                            )
+                                        )
+                                    ),
+                                    onPressed: () {
 
-                                  },
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      AutoSizeText(
-                                          'Troops',
-                                          style: const TextStyle(
-                                              color: Colors.white,
-                                              fontFamily: "Poppins"),
-                                          maxLines: 1
-                                      ),
-                                      SizedBox(height: 5),
-                                      ClipRRect(
-                                          borderRadius: BorderRadius.circular(10),
-                                          child: Shimmer(child: Container(
-                                              width: 110,
-                                              height: 80,
-                                              color: Colors.black45))
-                                      ),
-                                    ],
+                                    },
+                                    child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        AutoSizeText(
+                                            'Troops',
+                                            style: const TextStyle(
+                                                color: Colors.white,
+                                                fontFamily: "Poppins"),
+                                            maxLines: 1
+                                        ),
+                                        SizedBox(height: 5),
+                                        ClipRRect(
+                                            borderRadius: BorderRadius.circular(10),
+                                            child: Shimmer(child: Container(
+                                                width: 110,
+                                                height: 80,
+                                                color: Colors.black45))
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ),
-                              Container(
-                                margin: EdgeInsets.all(10),
-                                height: 120.0,
-                                width: 110.0,
-                                child: ElevatedButton(
-                                  style: ButtonStyle(
-                                      backgroundColor: MaterialStateProperty.all(
-                                          Colors.black),
-                                      shape: MaterialStateProperty.all<
-                                          RoundedRectangleBorder>(
-                                          RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.circular(
-                                                30.0),
-                                          )
-                                      )
-                                  ),
-                                  onPressed: () {
+                              Flexible(
+                                child: Container(
+                                  margin: EdgeInsets.all(10),
+                                  height: 120.0,
+                                  child: ElevatedButton(
+                                    style: ButtonStyle(
+                                        backgroundColor: MaterialStateProperty.all(
+                                            Colors.black),
+                                        shape: MaterialStateProperty.all<
+                                            RoundedRectangleBorder>(
+                                            RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.circular(
+                                                  30.0),
+                                            )
+                                        )
+                                    ),
+                                    onPressed: () {
 
-                                  },
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      AutoSizeText(
-                                          'Spells',
-                                          style: const TextStyle(
-                                              color: Colors.white,
-                                              fontFamily: "Poppins"),
-                                          maxLines: 1
-                                      ),
-                                      SizedBox(height: 5),
-                                      ClipRRect(
-                                          borderRadius: BorderRadius
-                                              .circular(10),
-                                          child: Shimmer(child: Container(
-                                              width: 110,
-                                              height: 80,
-                                              color: Colors.black45))
-                                      ),
-                                    ],
+                                    },
+                                    child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        AutoSizeText(
+                                            'Spells',
+                                            style: const TextStyle(
+                                                color: Colors.white,
+                                                fontFamily: "Poppins"),
+                                            maxLines: 1
+                                        ),
+                                        SizedBox(height: 5),
+                                        ClipRRect(
+                                            borderRadius: BorderRadius
+                                                .circular(10),
+                                            child: Shimmer(child: Container(
+                                                width: 110,
+                                                height: 80,
+                                                color: Colors.black45))
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ),
@@ -857,128 +872,131 @@ class _HomePageState extends State<HomePage> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Container(
-                                margin: EdgeInsets.all(10),
-                                height: 120.0,
-                                width: 110.0,
-                                child: ElevatedButton(
-                                  style: ButtonStyle(
-                                      backgroundColor: MaterialStateProperty.all(
-                                          Colors.black),
-                                      shape: MaterialStateProperty.all<
-                                          RoundedRectangleBorder>(
-                                          RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.circular(
-                                                30.0),
-                                          )
-                                      )
-                                  ),
-                                  onPressed: () {
+                              Flexible(
+                                child: Container(
+                                  margin: EdgeInsets.all(10),
+                                  height: 120.0,
+                                  child: ElevatedButton(
+                                    style: ButtonStyle(
+                                        backgroundColor: MaterialStateProperty.all(
+                                            Colors.black),
+                                        shape: MaterialStateProperty.all<
+                                            RoundedRectangleBorder>(
+                                            RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.circular(
+                                                  30.0),
+                                            )
+                                        )
+                                    ),
+                                    onPressed: () {
 
-                                  },
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      AutoSizeText(
-                                          'Heros',
-                                          style: const TextStyle(
-                                              color: Colors.white,
-                                              fontFamily: "Poppins"),
-                                          maxLines: 1
-                                      ),
-                                      SizedBox(height: 5),
-                                      ClipRRect(
-                                          borderRadius: BorderRadius.circular(10),
-                                          child: Shimmer(child: Container(
-                                              width: 110,
-                                              height: 80,
-                                              color: Colors.black45))
-                                      ),
-                                    ],
+                                    },
+                                    child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        AutoSizeText(
+                                            'Heros',
+                                            style: const TextStyle(
+                                                color: Colors.white,
+                                                fontFamily: "Poppins"),
+                                            maxLines: 1
+                                        ),
+                                        SizedBox(height: 5),
+                                        ClipRRect(
+                                            borderRadius: BorderRadius.circular(10),
+                                            child: Shimmer(child: Container(
+                                                width: 110,
+                                                height: 80,
+                                                color: Colors.black45))
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ),
-                              Container(
-                                margin: EdgeInsets.all(10),
-                                height: 120.0,
-                                width: 110.0,
-                                child: ElevatedButton(
-                                  style: ButtonStyle(
-                                      backgroundColor: MaterialStateProperty.all(
-                                          Colors.black),
-                                      shape: MaterialStateProperty.all<
-                                          RoundedRectangleBorder>(
-                                          RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.circular(
-                                                30.0),
-                                          )
-                                      )
-                                  ),
-                                  onPressed: () {
+                              Flexible(
+                                child: Container(
+                                  margin: EdgeInsets.all(10),
+                                  height: 120.0,
+                                  child: ElevatedButton(
+                                    style: ButtonStyle(
+                                        backgroundColor: MaterialStateProperty.all(
+                                            Colors.black),
+                                        shape: MaterialStateProperty.all<
+                                            RoundedRectangleBorder>(
+                                            RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.circular(
+                                                  30.0),
+                                            )
+                                        )
+                                    ),
+                                    onPressed: () {
 
-                                  },
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      AutoSizeText(
-                                          'Equipment',
-                                          style: const TextStyle(
-                                              color: Colors.white,
-                                              fontFamily: "Poppins"),
-                                          maxLines: 1
-                                      ),
-                                      SizedBox(height: 5),
-                                      ClipRRect(
-                                          borderRadius: BorderRadius
-                                              .circular(10),
-                                          child: Shimmer(child: Container(
-                                              width: 110,
-                                              height: 80,
-                                              color: Colors.black45))
-                                      ),
-                                    ],
+                                    },
+                                    child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        AutoSizeText(
+                                            'Equipment',
+                                            style: const TextStyle(
+                                                color: Colors.white,
+                                                fontFamily: "Poppins"),
+                                            maxLines: 1
+                                        ),
+                                        SizedBox(height: 5),
+                                        ClipRRect(
+                                            borderRadius: BorderRadius
+                                                .circular(10),
+                                            child: Shimmer(child: Container(
+                                                width: 110,
+                                                height: 80,
+                                                color: Colors.black45))
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ),
-                              Container(
-                                margin: EdgeInsets.all(10),
-                                height: 120.0,
-                                width: 110.0,
-                                child: ElevatedButton(
-                                  style: ButtonStyle(
-                                      backgroundColor: MaterialStateProperty.all(
-                                          Colors.black),
-                                      shape: MaterialStateProperty.all<
-                                          RoundedRectangleBorder>(
-                                          RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.circular(
-                                                30.0),
-                                          )
-                                      )
-                                  ),
-                                  onPressed: () {
+                              Flexible(
+                                child: Container(
+                                  margin: EdgeInsets.all(10),
+                                  height: 120.0,
+                                  child: ElevatedButton(
+                                    style: ButtonStyle(
+                                        backgroundColor: MaterialStateProperty.all(
+                                            Colors.black),
+                                        shape: MaterialStateProperty.all<
+                                            RoundedRectangleBorder>(
+                                            RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.circular(
+                                                  30.0),
+                                            )
+                                        )
+                                    ),
+                                    onPressed: () {
 
-                                  },
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      AutoSizeText(
-                                          'Achievem.',
-                                          style: const TextStyle(
-                                              color: Colors.white,
-                                              fontFamily: "Poppins"),
-                                          maxLines: 1
-                                      ),
-                                      SizedBox(height: 5),
-                                      ClipRRect(
-                                          borderRadius: BorderRadius
-                                              .circular(10),
-                                          child: Shimmer(child: Container(
-                                              width: 110,
-                                              height: 80,
-                                              color: Colors.black45))
-                                      ),
-                                    ],
+                                    },
+                                    child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        AutoSizeText(
+                                            'Achievem.',
+                                            style: const TextStyle(
+                                                color: Colors.white,
+                                                fontFamily: "Poppins"),
+                                            maxLines: 1
+                                        ),
+                                        SizedBox(height: 5),
+                                        ClipRRect(
+                                            borderRadius: BorderRadius
+                                                .circular(10),
+                                            child: Shimmer(child: Container(
+                                                width: 110,
+                                                height: 80,
+                                                color: Colors.black45))
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ),

@@ -1733,7 +1733,7 @@ class _DetailPageState extends State<DetailPage> {
                                         Row(
                                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                                           children: [
-                                            Flexible(flex: 4, child: Utils.getFirstClan(element)),
+                                            Flexible(flex: 5, child: Utils.getFirstClan(element)),
                                             Flexible(
                                               flex: 2,
                                               child: Image.asset(
@@ -1742,7 +1742,7 @@ class _DetailPageState extends State<DetailPage> {
                                                 scale: 2.5,
                                               ),
                                             ),
-                                            Flexible(flex: 4, child: Utils.getOpponentClan(element)),
+                                            Flexible(flex: 5, child: Utils.getOpponentClan(element)),
                                           ]
                                         ),
                                       ],

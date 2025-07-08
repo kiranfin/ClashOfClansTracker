@@ -309,7 +309,7 @@ class _LeaguePageState extends State<LeaguePage> {
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Flexible(flex: 4, child: Utils.getFirstClan(snapshot.data[2])),
+                                      Flexible(flex: 5, child: Utils.getFirstClan(snapshot.data[2])),
                                       Flexible(
                                         flex: 2,
                                         child: Image.asset(
@@ -318,7 +318,7 @@ class _LeaguePageState extends State<LeaguePage> {
                                           scale: 2.5,
                                         ),
                                       ),
-                                      Flexible(flex: 4, child: Utils.getOpponentClan(snapshot.data[2])),
+                                      Flexible(flex: 5, child: Utils.getOpponentClan(snapshot.data[2])),
                                     ]
                                   ),
                                 ],
@@ -397,13 +397,13 @@ class _LeaguePageState extends State<LeaguePage> {
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                                   children: [
-                                    Utils.getFirstClan(snapshot.data[3]),
-                                    Image.asset(
-                                      'lib/utils/img/CWLIcon.png',
-                                      fit: BoxFit.cover,
-                                      scale: 2.5,
-                                    ),
-                                    Utils.getOpponentClan(snapshot.data[3]),
+                                    Flexible(flex: 5, child: Utils.getFirstClan(snapshot.data[3])),
+                                    Flexible(flex: 2, child: Image.asset(
+                                    'lib/utils/img/CWLIcon.png',
+                                    fit: BoxFit.cover,
+                                    scale: 2.5,
+                                    )),
+                                    Flexible(flex: 5, child: Utils.getOpponentClan(snapshot.data[3])),
                                   ]
                                 ),
                               ],
@@ -528,22 +528,28 @@ class _LeaguePageState extends State<LeaguePage> {
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                                   children: [
-                                    Column(
-                                      children: [
-                                        ClipRRect(borderRadius: BorderRadius.circular(10),child: Shimmer(child: Container(width: 60, height: 60))),
-                                        ClipRRect(borderRadius: BorderRadius.circular(10),child: Shimmer(child: Container(width: 120, height: 20))),
-                                      ],
+                                    Flexible(
+                                    flex: 5,
+                                      child: Column(
+                                        children: [
+                                          ClipRRect(borderRadius: BorderRadius.circular(10),child: Shimmer(child: Container(width: 60, height: 60))),
+                                          ClipRRect(borderRadius: BorderRadius.circular(10),child: Shimmer(child: Container(width: 120, height: 20))),
+                                        ],
+                                      ),
                                     ),
-                                    Image.asset(
+                                    Flexible(flex: 2, child: Image.asset(
                                       'lib/utils/img/CWLIcon.png',
                                       fit: BoxFit.cover,
                                       scale: 2.5,
-                                    ),
-                                    Column(
-                                      children: [
-                                        ClipRRect(borderRadius: BorderRadius.circular(10),child: Shimmer(child: Container(width: 60, height: 60))),
-                                        ClipRRect(borderRadius: BorderRadius.circular(10),child: Shimmer(child: Container(width: 120, height: 20))),
-                                      ],
+                                    )),
+                                    Flexible(
+                                      flex: 5,
+                                      child: Column(
+                                        children: [
+                                          ClipRRect(borderRadius: BorderRadius.circular(10),child: Shimmer(child: Container(width: 60, height: 60))),
+                                          ClipRRect(borderRadius: BorderRadius.circular(10),child: Shimmer(child: Container(width: 120, height: 20))),
+                                        ],
+                                      ),
                                     ),
                                   ]
                                 ),
@@ -580,22 +586,28 @@ class _LeaguePageState extends State<LeaguePage> {
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                                 children: [
-                                  Column(
-                                    children: [
-                                      ClipRRect(borderRadius: BorderRadius.circular(10),child: Shimmer(child: Container(width: 60, height: 60))),
-                                      ClipRRect(borderRadius: BorderRadius.circular(10),child: Shimmer(child: Container(width: 120, height: 20))),
-                                    ],
+                                  Flexible(
+                                    flex: 5,
+                                    child: Column(
+                                      children: [
+                                        ClipRRect(borderRadius: BorderRadius.circular(10),child: Shimmer(child: Container(width: 60, height: 60))),
+                                        ClipRRect(borderRadius: BorderRadius.circular(10),child: Shimmer(child: Container(width: 120, height: 20))),
+                                      ],
+                                    ),
                                   ),
-                                  Image.asset(
+                                  Flexible(flex: 2, child: Image.asset(
                                     'lib/utils/img/CWLIcon.png',
                                     fit: BoxFit.cover,
                                     scale: 2.5,
-                                  ),
-                                  Column(
-                                    children: [
-                                      ClipRRect(borderRadius: BorderRadius.circular(10),child: Shimmer(child: Container(width: 60, height: 60))),
-                                      ClipRRect(borderRadius: BorderRadius.circular(10),child: Shimmer(child: Container(width: 120, height: 20))),
-                                    ],
+                                  )),
+                                  Flexible(
+                                    flex: 5,
+                                    child: Column(
+                                      children: [
+                                        ClipRRect(borderRadius: BorderRadius.circular(10),child: Shimmer(child: Container(width: 60, height: 60))),
+                                        ClipRRect(borderRadius: BorderRadius.circular(10),child: Shimmer(child: Container(width: 120, height: 20))),
+                                      ],
+                                    ),
                                   ),
                                 ]
                               ),
