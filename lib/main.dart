@@ -86,42 +86,45 @@ class _DefaultPageState extends State<DefaultPage> {
         value: SystemUiOverlayStyle.light,
         child: pages[selectedindex]
       ),
-      bottomNavigationBar: Container(
-        color: Colors.black,
-        child: Padding(
-          padding: const EdgeInsets.only(
-              left: 15,
-              top: 5,
-              bottom: 20,
-              right: 15
-          ),
-          child: GNav(
-            selectedIndex: 1,
-            color: Colors.white,
-            backgroundColor: Colors.black,
-            activeColor: Colors.white,
-            hoverColor: Colors.grey.shade900,
-            gap: 8,
-            tabBackgroundColor: Colors.grey.shade900,
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            padding: EdgeInsets.all(16),
-            onTabChange: (index) {
-              navigateBottomBar(index);
-            },
-            tabs: [
-              GButton(
-                icon: Icons.emoji_events,
-                text: "League",
-              ),
-              GButton(
-                icon: Icons.home,
-                text: "Start",
-              ),
-              GButton(
-                icon: Icons.settings,
-                text: "Einstellungen",
-              ),
-            ],
+      bottomNavigationBar: Padding(
+        padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewPadding.bottom),
+        child: Container(
+          color: Colors.black,
+          child: Padding(
+            padding: const EdgeInsets.only(
+                left: 15,
+                top: 5,
+                bottom: 20,
+                right: 15
+            ),
+            child: GNav(
+              selectedIndex: 1,
+              color: Colors.white,
+              backgroundColor: Colors.black,
+              activeColor: Colors.white,
+              hoverColor: Colors.grey.shade900,
+              gap: 8,
+              tabBackgroundColor: Colors.grey.shade900,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              padding: EdgeInsets.all(16),
+              onTabChange: (index) {
+                navigateBottomBar(index);
+              },
+              tabs: [
+                GButton(
+                  icon: Icons.emoji_events,
+                  text: "League",
+                ),
+                GButton(
+                  icon: Icons.home,
+                  text: "Start",
+                ),
+                GButton(
+                  icon: Icons.settings,
+                  text: "Einstellungen",
+                ),
+              ],
+            ),
           ),
         ),
       ),
