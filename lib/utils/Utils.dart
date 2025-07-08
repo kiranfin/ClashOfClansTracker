@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'UserSP.dart';
 
 String getBaseUrl() {
-  final baseUrl = 'http://185.239.238.224:3000/';
+  final baseUrl = 'http://195.201.102.92:3000/';
   return baseUrl;
 }
 
