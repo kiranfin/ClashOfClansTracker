@@ -1945,7 +1945,7 @@ class _DetailPageState extends State<DetailPage> {
                                                     fontSize: 15
                                                   ),
                                                 ),
-                                                for(var attack in member["attacks"]) Column(
+                                                for(var attack in (member["attacks"] ?? [])) Column(
                                                   crossAxisAlignment: CrossAxisAlignment.start,
                                                   children: [
                                                     Row(

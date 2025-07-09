@@ -896,15 +896,15 @@ Text getClanWarStateText(String text) {
 Row getClanWarStars(Map<String, dynamic> map) {
   return Row(
     children: [
-      for(int i = 0; i < map["bestOpponentAttack"]["stars"]; i++) Image.asset(whitestar, scale: 6),
-      for(int i = 0; i < (3 - map["bestOpponentAttack"]["stars"]); i++) Image.asset(whitestarempty, scale: 6),
+      for(int i = 0; i < (map["bestOpponentAttack"] != null? map["bestOpponentAttack"]["stars"] : 0); i++) Image.asset(whitestar, scale: 6),
+      for(int i = 0; i < (3 - (map["bestOpponentAttack"] != null? map["bestOpponentAttack"]["stars"] : 0)); i++) Image.asset(whitestarempty, scale: 6),
       SizedBox(width: 5),
-      Text("${map["bestOpponentAttack"]["destructionPercentage"]}%", style: const TextStyle(color: Colors.white, fontFamily: "Poppins", fontSize: 12))
+      Text("${map["bestOpponentAttack"] != null? map["bestOpponentAttack"]["destructionPercentage"] : 0}%", style: const TextStyle(color: Colors.white, fontFamily: "Poppins", fontSize: 12))
     ],
   );
 }
 
-List<Map<String, dynamic>> sortClanWarMembers(List<Map<String, dynamic>> members) {
+List<dynamic> sortClanWarMembers(List<dynamic> members) {
   members.sort((a, b) => (a['mapPosition']).compareTo(b['mapPosition']));
   return members;
 }
@@ -952,4 +952,20 @@ Map<String, dynamic> getClanWarRanking(Map<String, dynamic> map) {
     });
   final sortedMap = Map<String, dynamic>.fromEntries(sortedEntries);
   return sortedMap;
+}
+
+List<dynamic> filterClanWars(List<dynamic> map){
+  List<Map<String, dynamic>> result = [];
+  for (var val in map) {
+    if(val["attacksPerMember"] == 2) result.add(val);
+  }
+  return result;
+}
+
+List<dynamic> filterClanWarLeagueWars(List<dynamic> map){
+  List<Map<String, dynamic>> result = [];
+  for (var val in map) {
+    if(val["attacksPerMember"] == 1) result.add(val);
+  }
+  return result;
 }

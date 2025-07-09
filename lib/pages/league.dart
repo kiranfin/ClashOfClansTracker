@@ -36,7 +36,7 @@ class _LeaguePageState extends State<LeaguePage> {
                 vertical: 25.0,
               ),
               child: FutureBuilder(
-                future: Future.wait([DataProvider.awaitPlayerData(userTag), DataProvider.awaitClanWarLeague(userTag), DataProvider.awaitCurrentClanWarLeagueWar(userTag), DataProvider.awaitCurrentClanWar(userTag), DataProvider.awaitNextClanWarLeagueWar(userTag)]),
+                future: Future.wait([DataProvider.awaitPlayerData(userTag), DataProvider.awaitClanWarLeague(userTag), DataProvider.awaitCurrentClanWarLeagueWar(userTag), DataProvider.awaitCurrentClanWar(userTag), DataProvider.awaitNextClanWarLeagueWar(userTag), DataProvider.awaitClanWarLog(userTag)]),
                 builder: (context, AsyncSnapshot snapshot) {
                   snapshot.hasError? print(snapshot.error): null;
                   if (snapshot.hasData) {
@@ -135,7 +135,7 @@ class _LeaguePageState extends State<LeaguePage> {
                             ),
                           ),
                         ),
-                        SizedBox(height: 20),
+                        ?snapshot.data[0]["legendStatistics"] != null? SizedBox(height: 20): null,
                         ?snapshot.data[0]["legendStatistics"] != null? Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -213,7 +213,7 @@ class _LeaguePageState extends State<LeaguePage> {
                             )
                           ],
                         ) : null,
-                        ?snapshot.data[0]["legendStatistics"] != null? SizedBox(height: 20): null,
+                        ?snapshot.data[0]["builderBaseLeague"] != null? SizedBox(height: 20): null,
                         ?snapshot.data[0]["builderBaseLeague"] != null? ClipRRect(
                           borderRadius: BorderRadius.circular(20),
                           child: Container(
@@ -253,7 +253,7 @@ class _LeaguePageState extends State<LeaguePage> {
                             ),
                           ),
                         ) : null,
-                        ?snapshot.data[0]["builderBaseLeague"] != null? SizedBox(height: 20): null,
+                        ?snapshot.data[2]["state"] != null? SizedBox(height: 20): null,
                         ?snapshot.data[2]["state"] != null? Text("Current CWL",
                           style: const TextStyle(
                             color: Colors.white,
@@ -410,7 +410,151 @@ class _LeaguePageState extends State<LeaguePage> {
                               ),
                             ),
                           ),
-                        ) : null
+                        ) : null,
+                        ?snapshot.data[5]["items"].isNotEmpty? SizedBox(height: 20) : null,
+                        ?snapshot.data[5]["items"].isNotEmpty? Text("Clan War Log",
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontFamily: "Poppins",
+                            fontSize: 25,
+                          ),
+                        ) : null,
+                        ?snapshot.data[5]["items"].isNotEmpty? SizedBox(height: 5) : null,
+                        ?snapshot.data[5]["items"].isNotEmpty? ListView.builder(
+                          physics: NeverScrollableScrollPhysics(),
+                          shrinkWrap: true,
+                          itemCount: 4,
+                          itemBuilder: (BuildContext context, int index) {
+                            List<dynamic> clanwars = Utils.filterClanWars(snapshot.data[5]["items"]);
+                            return ClipRRect(
+                              borderRadius: BorderRadius.circular(20),
+                              child: Container(
+                                margin: EdgeInsets.symmetric(vertical: 2),
+                                width: MediaQuery.of(context).size.width - 2 * 20,
+                                color: clanwars[index]["result"] == "win"? const Color(0xff1b3317) : clanwars[index]["result"] == "lose"? const Color(0xff2b0e0e) : Colors.black,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Row(
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        children: [
+                                          Text("${clanwars[index]["teamSize"]} vs. ${clanwars[index]["teamSize"]}", style: const TextStyle(
+                                            color: Colors.white,
+                                            fontFamily: "Poppins",
+                                            fontSize: 15)
+                                          ),
+                                        ],
+                                      ),
+                                      Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Flexible(
+                                            flex: 5,
+                                            child: Column(
+                                              mainAxisAlignment: MainAxisAlignment.end,
+                                              children: [
+                                                Row(
+                                                  mainAxisAlignment: MainAxisAlignment.end,
+                                                  children: [
+                                                    AutoSizeText(clanwars[index]["clan"]["name"], style: const TextStyle(
+                                                      color: Colors.white,
+                                                      fontFamily: "Poppins",
+                                                      fontSize: 12),
+                                                      maxLines: 1,
+                                                    ),
+                                                    SizedBox(width: 5),
+                                                    Image.network(clanwars[index]["clan"]["badgeUrls"]["small"], scale: 2),
+                                                  ],
+                                                ),
+                                                Row(
+                                                  mainAxisAlignment: MainAxisAlignment.end,
+                                                  children: [
+                                                    Text("${clanwars[index]["clan"]["stars"]}", style: const TextStyle(
+                                                      color: Colors.white,
+                                                      fontFamily: "Poppins",
+                                                      fontSize: 15)
+                                                    ),
+                                                    SizedBox(width: 2),
+                                                    Image.asset(whitestar, scale: 6),
+                                                  ],
+                                                )
+                                              ],
+                                            ),
+                                          ),
+                                          Flexible(
+                                            flex: 2,
+                                            child: Image.asset(
+                                              'lib/utils/img/CWLIcon.png',
+                                              fit: BoxFit.cover,
+                                              scale: 4,
+                                            ),
+                                          ),
+                                          Flexible(
+                                            flex: 5,
+                                            child: Column(
+                                              mainAxisAlignment: MainAxisAlignment.start,
+                                              children: [
+                                                Row(
+                                                  children: [
+                                                    Image.network(clanwars[index]["opponent"]["badgeUrls"]["small"], scale: 2),
+                                                    SizedBox(width: 5),
+                                                    AutoSizeText(clanwars[index]["opponent"]["name"], style: const TextStyle(
+                                                      color: Colors.white,
+                                                      fontFamily: "Poppins",
+                                                      fontSize: 12),
+                                                      maxLines: 1,
+                                                    ),
+                                                  ],
+                                                ),
+                                                Row(
+                                                  children: [
+                                                    Image.asset(whitestar, scale: 6),
+                                                    SizedBox(width: 2),
+                                                    Text("${clanwars[index]["opponent"]["stars"]}", style: const TextStyle(
+                                                      color: Colors.white,
+                                                      fontFamily: "Poppins",
+                                                      fontSize: 15)
+                                                    ),
+                                                  ],
+                                                )
+                                              ],
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                    ],
+                                  )
+                                )
+                              )
+                            );
+                        }) : null,
+                        SizedBox(height: 3),
+                        ElevatedButton(
+                          style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all(Colors.black),
+                          shape: MaterialStateProperty.all<RoundedRectangleBorder>(RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)))
+                          ),
+                          onPressed: () {
+
+                          },
+                          child: Container(
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text("See all", style: const TextStyle(
+                                    color: Colors.white,
+                                    fontFamily: "Poppins",
+                                    fontSize: 15)
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
                       ],
                     );
                   } else {
