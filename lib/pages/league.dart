@@ -1,4 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:clashofclanstracker/utils/ArgumentClass.dart';
 import 'package:date_count_down/date_count_down.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
@@ -274,7 +275,7 @@ class _LeaguePageState extends State<LeaguePage> {
                             )
                           ),
                           onPressed: () {
-                            Navigator.pushNamed(context, "/detail", arguments: "cwl");
+                            Navigator.pushNamed(context, "/detail", arguments: ArgumentClass("cwl", {}));
                           },
                           child: Container(
                             child: Padding(
@@ -347,7 +348,7 @@ class _LeaguePageState extends State<LeaguePage> {
                             )
                           ),
                           onPressed: () {
-                            Navigator.pushNamed(context, "/detail", arguments: "clanwar");
+                            Navigator.pushNamed(context, "/detail", arguments: ArgumentClass("clanwar", snapshot.data[3]));
                           },
                           child: Container(
                             child: Padding(
@@ -537,7 +538,7 @@ class _LeaguePageState extends State<LeaguePage> {
                           shape: MaterialStateProperty.all<RoundedRectangleBorder>(RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)))
                           ),
                           onPressed: () {
-
+                            Navigator.pushNamed(context, "/detail", arguments: ArgumentClass("clanwarlog", {}));
                           },
                           child: Container(
                             child: Padding(

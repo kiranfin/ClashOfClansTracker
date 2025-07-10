@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:clashofclanstracker/pages/startscreen.dart';
+import 'package:clashofclanstracker/utils/ArgumentClass.dart';
 import 'package:clashofclanstracker/utils/UserSP.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
@@ -64,7 +65,7 @@ class _HomePageState extends State<HomePage> {
                               ),
                               onPressed: () {
                                 Navigator.pushNamed(
-                                    context, "/detail", arguments: "profile");
+                                    context, "/detail", arguments: ArgumentClass("profile", {}));
                               },
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -198,7 +199,7 @@ class _HomePageState extends State<HomePage> {
                                     ),
                                     onPressed: () async {
                                       await Navigator.pushNamed(
-                                          context, "/detail", arguments: "buildings");
+                                          context, "/detail", arguments: ArgumentClass("buildings", {}));
                                       setState(() {});
                                     },
                                     child: Column(
@@ -263,7 +264,7 @@ class _HomePageState extends State<HomePage> {
                                     ),
                                     onPressed: () async {
                                       await Navigator.pushNamed(
-                                          context, "/detail", arguments: "troops");
+                                          context, "/detail", arguments: ArgumentClass("troops", {}));
                                       setState(() {});
                                     },
                                     child: Column(
@@ -327,7 +328,7 @@ class _HomePageState extends State<HomePage> {
                                     ),
                                     onPressed: () async {
                                       await Navigator.pushNamed(
-                                          context, "/detail", arguments: "spells");
+                                          context, "/detail", arguments: ArgumentClass("spells", {}));
                                       setState(() {});
                                     },
                                     child: Column(
@@ -398,7 +399,7 @@ class _HomePageState extends State<HomePage> {
                                     ),
                                     onPressed: () async {
                                       await Navigator.pushNamed(
-                                          context, "/detail", arguments: "heroes");
+                                          context, "/detail", arguments: ArgumentClass("heroes", {}));
                                       setState(() {});
                                     },
                                     child: Column(
@@ -462,7 +463,7 @@ class _HomePageState extends State<HomePage> {
                                     ),
                                     onPressed: () async {
                                       await Navigator.pushNamed(context, "/detail",
-                                          arguments: "equipment");
+                                          arguments: ArgumentClass("equipment", {}));
                                       setState(() {});
                                     },
                                     child: Column(
@@ -526,7 +527,7 @@ class _HomePageState extends State<HomePage> {
                                     ),
                                     onPressed: () async {
                                       await Navigator.pushNamed(context, "/detail",
-                                          arguments: "achievements");
+                                          arguments: ArgumentClass("achievements", {}));
                                       setState(() {});
                                     },
                                     child: Column(

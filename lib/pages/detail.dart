@@ -7,6 +7,7 @@ import 'package:flutter/rendering.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
 import 'package:simple_animation_progress_bar/simple_animation_progress_bar.dart';
 import '../provider/DataProvider.dart' as DataProvider;
+import '../utils/ArgumentClass.dart';
 import '../utils/Presets.dart' as Presets;
 import '../utils/UserSP.dart';
 import '../utils/Utils.dart' as Utils;
@@ -21,7 +22,9 @@ class DetailPage extends StatefulWidget {
 class _DetailPageState extends State<DetailPage> {
 
   String userTag = UserSP.getCurrentUser();
-  late String category = ModalRoute.of(context)!.settings.arguments as String;
+  late ArgumentClass arguments = ModalRoute.of(context)!.settings.arguments as ArgumentClass;
+  late String category = arguments.page;
+  late Map<String, dynamic> war = arguments.war;
 
   late Map<String, dynamic> walls = {};
   late Map<String, dynamic> defenses = {};
@@ -101,7 +104,7 @@ class _DetailPageState extends State<DetailPage> {
             child: category == "buildings"? getBuildingDetail() : category == "troops" ? getTroopDetail() : category == "spells"?
             getSpellDetail() : category == "heroes"? getHeroesDetail() : category == "equipment"?
             getEquipmentDetail() : category == "achievements"? getAchievementDetails() : category == "profile"? getProfileDetails() :
-            category == "cwl"? getClanWarLeagueDetails() : category == "clanwar"? getClanWarDetails() : null,
+            category == "cwl"? getClanWarLeagueDetails() : category == "clanwar"? getClanWarDetails(war) : category == "clanwarlog"? getClanWarLogDetails() : null,
           ),
         ),
       ),
@@ -1772,245 +1775,386 @@ class _DetailPageState extends State<DetailPage> {
     );
   }
 
-  Widget getClanWarDetails() {
-    return FutureBuilder(
-        future: DataProvider.awaitCurrentClanWar(userTag),
-        builder: (context, AsyncSnapshot snapshot) {
-          if(snapshot.hasData) {
-            return SingleChildScrollView(
-              child: Column(
+  Widget getClanWarDetails(Map<String, dynamic> war) {
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          ClipRRect(
+            borderRadius: BorderRadius.circular(20),
+            child: Container(
+              color: Colors.black,
+              child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                      children: [
+                        Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                        Utils.getClanWarStateText(war["state"]),
+                        SizedBox(width: 5),
+                        ?war["state"] == "preparation" || war["state"] == "inWar"? CountDownText(
+                          due: DateTime.parse(war["state"] == "preparation"? war["startTime"] : war["endTime"]),
+                          finishedText: "War over!",
+                          showLabel: true,
+                          longDateName: true,
+                          hoursTextLong: ":",
+                          minutesTextLong: ":",
+                          secondsTextLong: "",
+                          style: const TextStyle(color: Colors.white, fontFamily: "Poppins", fontSize: 20),
+                        ) : null,
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Utils.getFirstClan(war),
+                        Image.asset(
+                          'lib/utils/img/CWLIcon.png',
+                          fit: BoxFit.cover,
+                          scale: 2.5,
+                        ),
+                        Utils.getOpponentClan(war),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          SizedBox(height: 20),
+          ? war["state"] != "notInWar"? Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(20),
-                    child: Container(
-                      color: Colors.black,
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Column(
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Utils.getClanWarStateText(snapshot.data["state"]),
-                                SizedBox(width: 5),
-                                ?snapshot.data["state"] == "preparation" || snapshot.data["state"] == "inWar"? CountDownText(
-                                  due: DateTime.parse(snapshot.data["state"] == "preparation"? snapshot.data["startTime"] : snapshot.data["endTime"]),
-                                  finishedText: "War over!",
-                                  showLabel: true,
-                                  longDateName: true,
-                                  hoursTextLong: ":",
-                                  minutesTextLong: ":",
-                                  secondsTextLong: "",
-                                  style: const TextStyle(color: Colors.white, fontFamily: "Poppins", fontSize: 20),
-                                ) : null,
-                              ],
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [
-                                Utils.getFirstClan(snapshot.data),
-                                Image.asset(
-                                  'lib/utils/img/CWLIcon.png',
-                                  fit: BoxFit.cover,
-                                  scale: 2.5,
+                  for(var member in Utils.sortClanWarMembers(war["clan"]["members"])) Padding(
+                    padding: const EdgeInsets.only(bottom: 8.0),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(20),
+                      child: Container(
+                        width: (MediaQuery.of(context).size.width / 2) - 20,
+                        color: Colors.black,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Utils.getClanWarStars(member),
+                                      Container(
+                                        height: 70,
+                                        child: DataProvider.awaitTownHallIcon(member["townhallLevel"], 2),
+                                      )
+                                    ],
+                                  ),
+                                  Column(
+                                    children: [
+                                      Text("Attacks",
+                                      style: const TextStyle(
+                                      color: Colors.white,
+                                      fontFamily: "Poppins",
+                                      fontSize: 15
+                                      ),
+                                      ),
+                                      for(var attack in member["attacks"]?? []) Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          Row(
+                                          mainAxisAlignment: MainAxisAlignment.start,
+                                          children: [
+                                            Text("${war["opponent"]["members"].where((m) => m['tag'] == attack["defenderTag"]).toList()[0]["mapPosition"]}.",
+                                              style: const TextStyle(
+                                                color: Colors.white,
+                                                fontFamily: "Poppins",
+                                                fontSize: 15
+                                              ),
+                                            ),
+                                            SizedBox(width: 2),
+                                            for(int i = 0; i < attack["stars"]; i++) Image.asset(whitestar, scale: 6),
+                                            for(int j = 0; j < (3 - attack["stars"]); j++) Image.asset(whitestarempty, scale: 6),
+                                          ],
+                                          ),
+                                          Row(
+                                            children: [
+                                              SizedBox(width: 15),
+                                              Text("${attack["destructionPercentage"]}%",
+                                                style: const TextStyle(
+                                                  color: Colors.white,
+                                                  fontFamily: "Poppins",
+                                                  fontSize: 15
+                                                ),
+                                              )
+                                            ],
+                                          )
+                                        ],
+                                      ),
+                                    ],
+                                  )
+                                ],
+                              ),
+                              AutoSizeText("${member["mapPosition"]}. ${member["name"]}",
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                  fontFamily: "Poppins",
+                                  fontSize: 15
                                 ),
-                                Utils.getOpponentClan(snapshot.data),
-                              ],
-                            ),
-                          ],
+                                maxLines: 1,
+                              )
+                            ],
+                          ),
                         ),
                       ),
                     ),
                   ),
-                  SizedBox(height: 20),
-                  ? snapshot.data["state"] != "notInWar"? Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            for(var member in Utils.sortClanWarMembers(snapshot.data["clan"]["members"])) Padding(
-                              padding: const EdgeInsets.only(bottom: 8.0),
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(20),
-                                child: Container(
-                                  width: (MediaQuery.of(context).size.width / 2) - 20,
-                                  color: Colors.black,
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        Row(
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Column(
-                                              crossAxisAlignment: CrossAxisAlignment.start,
-                                              children: [
-                                                Utils.getClanWarStars(member),
-                                                Container(
-                                                  height: 70,
-                                                  child: DataProvider.awaitTownHallIcon(member["townhallLevel"], 2),
-                                                )
-                                              ],
-                                            ),
-                                            Column(
-                                              children: [
-                                                Text("Attacks",
-                                                  style: const TextStyle(
-                                                    color: Colors.white,
-                                                    fontFamily: "Poppins",
-                                                    fontSize: 15
-                                                  ),
-                                                ),
-                                                for(var attack in member["attacks"]?? []) Column(
-                                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                                  children: [
-                                                    Row(
-                                                      mainAxisAlignment: MainAxisAlignment.start,
-                                                      children: [
-                                                        Text("${snapshot.data["opponent"]["members"].where((m) => m['tag'] == attack["defenderTag"]).toList()[0]["mapPosition"]}.",
-                                                          style: const TextStyle(
-                                                            color: Colors.white,
-                                                            fontFamily: "Poppins",
-                                                            fontSize: 15
-                                                          ),
-                                                        ),
-                                                        SizedBox(width: 2),
-                                                        for(int i = 0; i < attack["stars"]; i++) Image.asset(whitestar, scale: 6),
-                                                        for(int j = 0; j < (3 - attack["stars"]); j++) Image.asset(whitestarempty, scale: 6),
-                                                      ],
-                                                    ),
-                                                    Row(
-                                                      children: [
-                                                        SizedBox(width: 15),
-                                                        Text("${attack["destructionPercentage"]}%",
-                                                          style: const TextStyle(
-                                                            color: Colors.white,
-                                                            fontFamily: "Poppins",
-                                                            fontSize: 15
-                                                          ),
-                                                        )
-                                                      ],
-                                                    )
-                                                  ],
-                                                ),
-                                              ],
-                                            )
-                                          ],
-                                        ),
-                                        AutoSizeText("${member["mapPosition"]}. ${member["name"]}",
-                                          style: const TextStyle(
-                                            color: Colors.white,
-                                            fontFamily: "Poppins",
-                                            fontSize: 15
-                                          ),
-                                          maxLines: 1,
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            for(var member in Utils.sortClanWarMembers(snapshot.data["opponent"]["members"])) Padding(
-                              padding: const EdgeInsets.only(bottom: 8.0),
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(20),
-                                child: Container(
-                                  width: (MediaQuery.of(context).size.width / 2) - 20,
-                                  color: Colors.black,
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.end,
-                                      children: [
-                                        Row(
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Column(
-                                              crossAxisAlignment: CrossAxisAlignment.start,
-                                              children: [
-                                                Text("Attacks",
-                                                  style: const TextStyle(
-                                                    color: Colors.white,
-                                                    fontFamily: "Poppins",
-                                                    fontSize: 15
-                                                  ),
-                                                ),
-                                                for(var attack in (member["attacks"] ?? [])) Column(
-                                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                                  children: [
-                                                    Row(
-                                                      mainAxisAlignment: MainAxisAlignment.start,
-                                                      children: [
-                                                        Text("${snapshot.data["clan"]["members"].where((m) => m['tag'] == attack["defenderTag"]).toList()[0]["mapPosition"]}.",
-                                                          style: const TextStyle(
-                                                            color: Colors.white,
-                                                            fontFamily: "Poppins",
-                                                            fontSize: 15
-                                                          ),
-                                                        ),
-                                                        SizedBox(width: 2),
-                                                        for(int i = 0; i < attack["stars"]; i++) Image.asset(whitestar, scale: 6),
-                                                        for(int j = 0; j < (3 - attack["stars"]); j++) Image.asset(whitestarempty, scale: 6),
-                                                      ],
-                                                    ),
-                                                    Row(
-                                                      children: [
-                                                        SizedBox(width: 15),
-                                                        Text("${attack["destructionPercentage"]}%",
-                                                          style: const TextStyle(
-                                                            color: Colors.white,
-                                                            fontFamily: "Poppins",
-                                                            fontSize: 15
-                                                          ),
-                                                        )
-                                                      ],
-                                                    )
-                                                  ],
-                                                )
-                                              ],
-                                            ),
-                                            Column(
-                                              crossAxisAlignment: CrossAxisAlignment.end,
-                                              children: [
-                                                Utils.getClanWarStars(member),
-                                                Container(
-                                                  height: 70,
-                                                  child: DataProvider.awaitTownHallIcon(member["townhallLevel"], 2),
-                                                ),
-                                              ],
-                                            )
-                                          ],
-                                        ),
-                                        AutoSizeText("${member["mapPosition"]}. ${member["name"]}",
-                                          style: const TextStyle(
-                                            color: Colors.white,
-                                            fontFamily: "Poppins",
-                                            fontSize: 15
-                                          ),
-                                          maxLines: 1,
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ) : null,
-                ]
+                ],
               ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  for(var member in Utils.sortClanWarMembers(war["opponent"]["members"])) Padding(
+                    padding: const EdgeInsets.only(bottom: 8.0),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(20),
+                      child: Container(
+                        width: (MediaQuery.of(context).size.width / 2) - 20,
+                        color: Colors.black,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text("Attacks",
+                                      style: const TextStyle(
+                                      color: Colors.white,
+                                      fontFamily: "Poppins",
+                                      fontSize: 15
+                                      ),
+                                      ),
+                                      for(var attack in (member["attacks"] ?? [])) Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          Row(
+                                          mainAxisAlignment: MainAxisAlignment.start,
+                                            children: [
+                                              Text("${war["clan"]["members"].where((m) => m['tag'] == attack["defenderTag"]).toList()[0]["mapPosition"]}.",
+                                                style: const TextStyle(
+                                                  color: Colors.white,
+                                                  fontFamily: "Poppins",
+                                                  fontSize: 15
+                                                ),
+                                              ),
+                                              SizedBox(width: 2),
+                                              for(int i = 0; i < attack["stars"]; i++) Image.asset(whitestar, scale: 6),
+                                              for(int j = 0; j < (3 - attack["stars"]); j++) Image.asset(whitestarempty, scale: 6),
+                                            ],
+                                          ),
+                                          Row(
+                                            children: [
+                                              SizedBox(width: 15),
+                                              Text("${attack["destructionPercentage"]}%",
+                                                style: const TextStyle(
+                                                  color: Colors.white,
+                                                  fontFamily: "Poppins",
+                                                  fontSize: 15
+                                                ),
+                                              )
+                                            ],
+                                          )
+                                        ],
+                                      )
+                                    ],
+                                  ),
+                                  Column(
+                                    crossAxisAlignment: CrossAxisAlignment.end,
+                                    children: [
+                                      Utils.getClanWarStars(member),
+                                      Container(
+                                        height: 70,
+                                        child: DataProvider.awaitTownHallIcon(member["townhallLevel"], 2),
+                                      ),
+                                    ],
+                                  )
+                                ],
+                              ),
+                              AutoSizeText("${member["mapPosition"]}. ${member["name"]}",
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                  fontFamily: "Poppins",
+                                  fontSize: 15
+                                ),
+                                maxLines: 1,
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ) : null,
+        ]
+      ),
+    );
+  }
+
+  Widget getClanWarLogDetails() {
+    return FutureBuilder(
+        future: DataProvider.awaitClanWarLog(userTag),
+        builder: (context, AsyncSnapshot snapshot) {
+          if(snapshot.hasData) {
+            List<dynamic> clanwars = Utils.filterClanWars(snapshot.data["items"]);
+            return SingleChildScrollView(
+              child: ListView.builder(
+                  physics: NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  itemCount: clanwars.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return ClipRRect(
+                        borderRadius: BorderRadius.circular(20),
+                        child: Container(
+                            margin: EdgeInsets.symmetric(vertical: 2),
+                            width: MediaQuery.of(context).size.width - 2 * 20,
+                            color: clanwars[index]["result"] == "win"? const Color(0xff1b3317) : clanwars[index]["result"] == "lose"? const Color(0xff2b0e0e) : const Color(0xff494949),
+                            child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        Text("${clanwars[index]["teamSize"]} vs. ${clanwars[index]["teamSize"]}", style: const TextStyle(
+                                            color: Colors.white,
+                                            fontFamily: "Poppins",
+                                            fontSize: 15)
+                                        ),
+                                      ],
+                                    ),
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Flexible(
+                                          flex: 5,
+                                          child: Column(
+                                            mainAxisAlignment: MainAxisAlignment.end,
+                                            children: [
+                                              Row(
+                                                mainAxisAlignment: MainAxisAlignment.end,
+                                                children: [
+                                                  AutoSizeText(clanwars[index]["clan"]["name"], style: const TextStyle(
+                                                      color: Colors.white,
+                                                      fontFamily: "Poppins",
+                                                      fontSize: 12),
+                                                    maxLines: 1,
+                                                  ),
+                                                  SizedBox(width: 5),
+                                                  Image.network(clanwars[index]["clan"]["badgeUrls"]["small"], scale: 2),
+                                                ],
+                                              ),
+                                              Row(
+                                                mainAxisAlignment: MainAxisAlignment.end,
+                                                children: [
+                                                  Text("${clanwars[index]["clan"]["stars"]}", style: const TextStyle(
+                                                      color: Colors.white,
+                                                      fontFamily: "Poppins",
+                                                      fontSize: 15)
+                                                  ),
+                                                  SizedBox(width: 2),
+                                                  Image.asset(whitestar, scale: 6),
+                                                ],
+                                              )
+                                            ],
+                                          ),
+                                        ),
+                                        Flexible(
+                                          flex: 2,
+                                          child: Image.asset(
+                                            'lib/utils/img/CWLIcon.png',
+                                            fit: BoxFit.cover,
+                                            scale: 4,
+                                          ),
+                                        ),
+                                        Flexible(
+                                          flex: 5,
+                                          child: Column(
+                                            mainAxisAlignment: MainAxisAlignment.start,
+                                            children: [
+                                              Row(
+                                                children: [
+                                                  Image.network(clanwars[index]["opponent"]["badgeUrls"]["small"], scale: 2),
+                                                  SizedBox(width: 5),
+                                                  AutoSizeText(clanwars[index]["opponent"]["name"], style: const TextStyle(
+                                                      color: Colors.white,
+                                                      fontFamily: "Poppins",
+                                                      fontSize: 12),
+                                                    maxLines: 1,
+                                                  ),
+                                                ],
+                                              ),
+                                              Row(
+                                                children: [
+                                                  Image.asset(whitestar, scale: 6),
+                                                  SizedBox(width: 2),
+                                                  Text("${clanwars[index]["opponent"]["stars"]}", style: const TextStyle(
+                                                      color: Colors.white,
+                                                      fontFamily: "Poppins",
+                                                      fontSize: 15)
+                                                  ),
+                                                ],
+                                              )
+                                            ],
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                    ?clanwars[index]["clan"]["members"] != null? Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        TextButton(
+                                          style: ButtonStyle(
+                                              backgroundColor: MaterialStateProperty.all(
+                                                  Colors.black),
+                                              shape: MaterialStateProperty.all<
+                                                  RoundedRectangleBorder>(
+                                                  RoundedRectangleBorder(
+                                                    borderRadius: BorderRadius.circular(
+                                                        30.0),
+                                                  )
+                                              )
+                                          ),
+                                          onPressed: (){
+                                            Navigator.pushNamed(context, "/detail", arguments: ArgumentClass("clanwar", clanwars[index]));
+                                          },
+                                          child: Text("Details", style: const TextStyle(
+                                            color: Colors.white,
+                                            fontFamily: "Poppins",
+                                            fontSize: 15)
+                                          )
+                                        )
+                                      ],
+                                    ) : null,
+                                  ],
+                                )
+                            )
+                        )
+                    );
+                  }),
             );
           } else {
             return ListView.builder(
