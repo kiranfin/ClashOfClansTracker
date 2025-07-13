@@ -1823,6 +1823,7 @@ class _DetailPageState extends State<DetailPage> {
           ),
           SizedBox(height: 20),
           ? war["state"] != "notInWar"? Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Column(
