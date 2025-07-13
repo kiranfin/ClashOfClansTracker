@@ -2015,10 +2015,11 @@ class _DetailPageState extends State<DetailPage> {
 
   Widget getClanWarLogDetails() {
     return FutureBuilder(
-        future: DataProvider.awaitClanWarLog(userTag),
+        future: Future.wait([DataProvider.awaitClanWarLog(userTag), DataProvider.awaitExtClanWarLog(userTag)]),
         builder: (context, AsyncSnapshot snapshot) {
           if(snapshot.hasData) {
-            List<dynamic> clanwars = Utils.filterClanWars(snapshot.data["items"]);
+            List<dynamic> clanwars = Utils.filterClanWars(snapshot.data[0]["items"]);
+            List<dynamic> clanwarsext = Utils.filterClanWars(snapshot.data[1]);
             return SingleChildScrollView(
               child: ListView.builder(
                   physics: NeverScrollableScrollPhysics(),
@@ -2123,7 +2124,7 @@ class _DetailPageState extends State<DetailPage> {
                                         )
                                       ],
                                     ),
-                                    ?clanwars[index]["clan"]["members"] != null? Row(
+                                    ?(index < clanwarsext.length && clanwarsext[index]["clan"]["members"] != null)? Row(
                                       mainAxisAlignment: MainAxisAlignment.center,
                                       children: [
                                         TextButton(
@@ -2139,7 +2140,7 @@ class _DetailPageState extends State<DetailPage> {
                                               )
                                           ),
                                           onPressed: (){
-                                            Navigator.pushNamed(context, "/detail", arguments: ArgumentClass("clanwar", clanwars[index]));
+                                            Navigator.pushNamed(context, "/detail", arguments: ArgumentClass("clanwar", clanwarsext[index]));
                                           },
                                           child: Text("Details", style: const TextStyle(
                                             color: Colors.white,
