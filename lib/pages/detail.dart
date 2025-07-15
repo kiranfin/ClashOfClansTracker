@@ -2125,7 +2125,7 @@ class _DetailPageState extends State<DetailPage> {
                                         )
                                       ],
                                     ),
-                                    ?(index < clanwarsext.length && clanwarsext[index]["clan"]["members"] != null)? Row(
+                                    ?(index < 10 && clanwarsext[index]["clan"]["members"] != null)? Row(
                                       mainAxisAlignment: MainAxisAlignment.center,
                                       children: [
                                         TextButton(

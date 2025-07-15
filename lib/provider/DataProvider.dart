@@ -100,12 +100,14 @@ Future<List<dynamic>> awaitExtClanWarLog(String tag) async {
   var player = await awaitPlayerData(tag);
   if(player["clan"] == null) return [];
   String clantag = player["clan"]["tag"].substring(1);
-  final url = Uri.parse('https://api.clashk.ing/war/%23$clantag/previous?timestamp_start=0&timestamp_end=9999999999&limit=10');
+  final url = Uri.parse('https://api.clashk.ing/war/%23$clantag/previous?timestamp_start=0&timestamp_end=9999999999&limit=30');
   final res = await http.get(url);
   final status = res.statusCode;
   final reason = res.reasonPhrase;
   if (status != 200) throw Exception('http.get error (clan war log): statusCode= $status reason= $reason');
-  return jsonDecode(res.body) as List<dynamic>;
+  List<dynamic> resultList = jsonDecode(res.body) as List<dynamic>;
+  List<dynamic> sortedresultList = resultList.where((o) => o['attacksPerMember'] == 2).toList();
+  return sortedresultList;
 }
 
 Future<Map<String,dynamic>> awaitClanWarLog(String tag) async {

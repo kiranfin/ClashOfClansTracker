@@ -424,7 +424,7 @@ class _LeaguePageState extends State<LeaguePage> {
                         ?snapshot.data[5]["items"].isNotEmpty? ListView.builder(
                           physics: NeverScrollableScrollPhysics(),
                           shrinkWrap: true,
-                          itemCount: snapshot.data[5]["items"].length,
+                          itemCount: 4,
                           itemBuilder: (BuildContext context, int index) {
                             List<dynamic> clanwars = Utils.filterClanWars(snapshot.data[5]["items"]);
                             return ClipRRect(
