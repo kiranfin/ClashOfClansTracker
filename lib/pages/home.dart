@@ -30,7 +30,7 @@ class _HomePageState extends State<HomePage> {
           gradient: LinearGradient(
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
-              colors: [/*Color(0xFF1C2952)*/Color(0xFF171717), /*Color(0xFF101E6B)*/Color(0xFF171717)]
+              colors: [/*Color(0xFF1C2952)*/Color(0xFF09090B), /*Color(0xFF101E6B)*/Color(0xFF0E1011)]
           )
       ),
       child: Scaffold(
@@ -52,16 +52,21 @@ class _HomePageState extends State<HomePage> {
                                 .of(context)
                                 .size
                                 .width - 2 * 20,
+                            decoration: BoxDecoration(
+                              border: Border.all(color: Colors.black),
+                              gradient: LinearGradient(
+                                begin: Alignment.topLeft,
+                                end: Alignment.bottomRight,
+                                colors: [Colors.black, const Color(0xff17191A)],
+                              ),
+                              borderRadius: BorderRadius.circular(30),
+                            ),
                             child: ElevatedButton(
-                              style: ButtonStyle(
-                                  backgroundColor: MaterialStateProperty.all(
-                                      Colors.black),
-                                  shape: MaterialStateProperty.all<
-                                      RoundedRectangleBorder>(
-                                      RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(30.0),
-                                      )
-                                  )
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.transparent,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(30),
+                                ),
                               ),
                               onPressed: () {
                                 Navigator.pushNamed(
@@ -185,17 +190,21 @@ class _HomePageState extends State<HomePage> {
                                 child: Container(
                                   margin: EdgeInsets.all(10),
                                   height: 120.0,
+                                  decoration: BoxDecoration(
+                                    border: Border.all(color: Colors.black),
+                                    gradient: LinearGradient(
+                                      begin: Alignment.topLeft,
+                                      end: Alignment.bottomRight,
+                                      colors: [Colors.black, const Color(0xff17191A)],
+                                    ),
+                                    borderRadius: BorderRadius.circular(30),
+                                  ),
                                   child: ElevatedButton(
-                                    style: ButtonStyle(
-                                        backgroundColor: MaterialStateProperty.all(
-                                            Colors.black),
-                                        shape: MaterialStateProperty.all<
-                                            RoundedRectangleBorder>(
-                                            RoundedRectangleBorder(
-                                              borderRadius: BorderRadius.circular(
-                                                  30.0),
-                                            )
-                                        )
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: Colors.transparent,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(30),
+                                      ),
                                     ),
                                     onPressed: () async {
                                       await Navigator.pushNamed(
@@ -250,17 +259,21 @@ class _HomePageState extends State<HomePage> {
                                 child: Container(
                                   margin: EdgeInsets.all(10),
                                   height: 120.0,
+                                  decoration: BoxDecoration(
+                                    border: Border.all(color: Colors.black),
+                                    gradient: LinearGradient(
+                                      begin: Alignment.topLeft,
+                                      end: Alignment.bottomRight,
+                                      colors: [Colors.black, const Color(0xff17191A)],
+                                    ),
+                                    borderRadius: BorderRadius.circular(30),
+                                  ),
                                   child: ElevatedButton(
-                                    style: ButtonStyle(
-                                        backgroundColor: MaterialStateProperty.all(
-                                            Colors.black),
-                                        shape: MaterialStateProperty.all<
-                                            RoundedRectangleBorder>(
-                                            RoundedRectangleBorder(
-                                              borderRadius: BorderRadius.circular(
-                                                  30.0),
-                                            )
-                                        )
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: Colors.transparent,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(30),
+                                      ),
                                     ),
                                     onPressed: () async {
                                       await Navigator.pushNamed(
@@ -314,17 +327,21 @@ class _HomePageState extends State<HomePage> {
                                 child: Container(
                                   margin: EdgeInsets.all(10),
                                   height: 120.0,
+                                  decoration: BoxDecoration(
+                                    border: Border.all(color: Colors.black),
+                                    gradient: LinearGradient(
+                                      begin: Alignment.topLeft,
+                                      end: Alignment.bottomRight,
+                                      colors: [Colors.black, const Color(0xff17191A)],
+                                    ),
+                                    borderRadius: BorderRadius.circular(30),
+                                  ),
                                   child: ElevatedButton(
-                                    style: ButtonStyle(
-                                        backgroundColor: MaterialStateProperty.all(
-                                            Colors.black),
-                                        shape: MaterialStateProperty.all<
-                                            RoundedRectangleBorder>(
-                                            RoundedRectangleBorder(
-                                              borderRadius: BorderRadius.circular(
-                                                  30.0),
-                                            )
-                                        )
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: Colors.transparent,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(30),
+                                      ),
                                     ),
                                     onPressed: () async {
                                       await Navigator.pushNamed(
@@ -385,17 +402,21 @@ class _HomePageState extends State<HomePage> {
                                 child: Container(
                                   margin: EdgeInsets.all(10),
                                   height: 120.0,
+                                  decoration: BoxDecoration(
+                                    border: Border.all(color: Colors.black),
+                                    gradient: LinearGradient(
+                                      begin: Alignment.topLeft,
+                                      end: Alignment.bottomRight,
+                                      colors: [Colors.black, const Color(0xff17191A)],
+                                    ),
+                                    borderRadius: BorderRadius.circular(30),
+                                  ),
                                   child: ElevatedButton(
-                                    style: ButtonStyle(
-                                        backgroundColor: MaterialStateProperty.all(
-                                            Colors.black),
-                                        shape: MaterialStateProperty.all<
-                                            RoundedRectangleBorder>(
-                                            RoundedRectangleBorder(
-                                              borderRadius: BorderRadius.circular(
-                                                  30.0),
-                                            )
-                                        )
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: Colors.transparent,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(30),
+                                      ),
                                     ),
                                     onPressed: () async {
                                       await Navigator.pushNamed(
@@ -449,17 +470,21 @@ class _HomePageState extends State<HomePage> {
                                 child: Container(
                                   margin: EdgeInsets.all(10),
                                   height: 120.0,
+                                  decoration: BoxDecoration(
+                                    border: Border.all(color: Colors.black),
+                                    gradient: LinearGradient(
+                                      begin: Alignment.topLeft,
+                                      end: Alignment.bottomRight,
+                                      colors: [Colors.black, const Color(0xff17191A)],
+                                    ),
+                                    borderRadius: BorderRadius.circular(30),
+                                  ),
                                   child: ElevatedButton(
-                                    style: ButtonStyle(
-                                        backgroundColor: MaterialStateProperty.all(
-                                            Colors.black),
-                                        shape: MaterialStateProperty.all<
-                                            RoundedRectangleBorder>(
-                                            RoundedRectangleBorder(
-                                              borderRadius: BorderRadius.circular(
-                                                  30.0),
-                                            )
-                                        )
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: Colors.transparent,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(30),
+                                      ),
                                     ),
                                     onPressed: () async {
                                       await Navigator.pushNamed(context, "/detail",
@@ -513,17 +538,21 @@ class _HomePageState extends State<HomePage> {
                                 child: Container(
                                   margin: EdgeInsets.all(10),
                                   height: 120.0,
+                                  decoration: BoxDecoration(
+                                    border: Border.all(color: Colors.black),
+                                    gradient: LinearGradient(
+                                      begin: Alignment.topLeft,
+                                      end: Alignment.bottomRight,
+                                      colors: [Colors.black, const Color(0xff17191A)],
+                                    ),
+                                    borderRadius: BorderRadius.circular(30),
+                                  ),
                                   child: ElevatedButton(
-                                    style: ButtonStyle(
-                                        backgroundColor: MaterialStateProperty.all(
-                                            Colors.black),
-                                        shape: MaterialStateProperty.all<
-                                            RoundedRectangleBorder>(
-                                            RoundedRectangleBorder(
-                                              borderRadius: BorderRadius.circular(
-                                                  30.0),
-                                            )
-                                        )
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: Colors.transparent,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(30),
+                                      ),
                                     ),
                                     onPressed: () async {
                                       await Navigator.pushNamed(context, "/detail",
@@ -588,16 +617,21 @@ class _HomePageState extends State<HomePage> {
                                 .of(context)
                                 .size
                                 .width - 2 * 20,
+                            decoration: BoxDecoration(
+                              border: Border.all(color: Colors.black),
+                              gradient: LinearGradient(
+                                begin: Alignment.topLeft,
+                                end: Alignment.bottomRight,
+                                colors: [Colors.black, const Color(0xff17191A)],
+                              ),
+                              borderRadius: BorderRadius.circular(30),
+                            ),
                             child: ElevatedButton(
-                              style: ButtonStyle(
-                                  backgroundColor: MaterialStateProperty.all(
-                                      Colors.black),
-                                  shape: MaterialStateProperty.all<
-                                      RoundedRectangleBorder>(
-                                      RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(30.0),
-                                      )
-                                  )
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.transparent,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(30),
+                                ),
                               ),
                               onPressed: () {},
                               child: Row(
@@ -744,17 +778,21 @@ class _HomePageState extends State<HomePage> {
                                 child: Container(
                                   margin: EdgeInsets.all(10),
                                   height: 120.0,
+                                  decoration: BoxDecoration(
+                                    border: Border.all(color: Colors.black),
+                                    gradient: LinearGradient(
+                                      begin: Alignment.topLeft,
+                                      end: Alignment.bottomRight,
+                                      colors: [Colors.black, const Color(0xff17191A)],
+                                    ),
+                                    borderRadius: BorderRadius.circular(30),
+                                  ),
                                   child: ElevatedButton(
-                                    style: ButtonStyle(
-                                        backgroundColor: MaterialStateProperty.all(
-                                            Colors.black),
-                                        shape: MaterialStateProperty.all<
-                                            RoundedRectangleBorder>(
-                                            RoundedRectangleBorder(
-                                              borderRadius: BorderRadius.circular(
-                                                  30.0),
-                                            )
-                                        )
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: Colors.transparent,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(30),
+                                      ),
                                     ),
                                     onPressed: () {
 
@@ -785,17 +823,21 @@ class _HomePageState extends State<HomePage> {
                                 child: Container(
                                   margin: EdgeInsets.all(10),
                                   height: 120.0,
+                                  decoration: BoxDecoration(
+                                    border: Border.all(color: Colors.black),
+                                    gradient: LinearGradient(
+                                      begin: Alignment.topLeft,
+                                      end: Alignment.bottomRight,
+                                      colors: [Colors.black, const Color(0xff17191A)],
+                                    ),
+                                    borderRadius: BorderRadius.circular(30),
+                                  ),
                                   child: ElevatedButton(
-                                    style: ButtonStyle(
-                                        backgroundColor: MaterialStateProperty.all(
-                                            Colors.black),
-                                        shape: MaterialStateProperty.all<
-                                            RoundedRectangleBorder>(
-                                            RoundedRectangleBorder(
-                                              borderRadius: BorderRadius.circular(
-                                                  30.0),
-                                            )
-                                        )
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: Colors.transparent,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(30),
+                                      ),
                                     ),
                                     onPressed: () {
 
@@ -827,17 +869,21 @@ class _HomePageState extends State<HomePage> {
                                 child: Container(
                                   margin: EdgeInsets.all(10),
                                   height: 120.0,
+                                  decoration: BoxDecoration(
+                                    border: Border.all(color: Colors.black),
+                                    gradient: LinearGradient(
+                                      begin: Alignment.topLeft,
+                                      end: Alignment.bottomRight,
+                                      colors: [Colors.black, const Color(0xff17191A)],
+                                    ),
+                                    borderRadius: BorderRadius.circular(30),
+                                  ),
                                   child: ElevatedButton(
-                                    style: ButtonStyle(
-                                        backgroundColor: MaterialStateProperty.all(
-                                            Colors.black),
-                                        shape: MaterialStateProperty.all<
-                                            RoundedRectangleBorder>(
-                                            RoundedRectangleBorder(
-                                              borderRadius: BorderRadius.circular(
-                                                  30.0),
-                                            )
-                                        )
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: Colors.transparent,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(30),
+                                      ),
                                     ),
                                     onPressed: () {
 
@@ -877,17 +923,21 @@ class _HomePageState extends State<HomePage> {
                                 child: Container(
                                   margin: EdgeInsets.all(10),
                                   height: 120.0,
+                                  decoration: BoxDecoration(
+                                    border: Border.all(color: Colors.black),
+                                    gradient: LinearGradient(
+                                      begin: Alignment.topLeft,
+                                      end: Alignment.bottomRight,
+                                      colors: [Colors.black, const Color(0xff17191A)],
+                                    ),
+                                    borderRadius: BorderRadius.circular(30),
+                                  ),
                                   child: ElevatedButton(
-                                    style: ButtonStyle(
-                                        backgroundColor: MaterialStateProperty.all(
-                                            Colors.black),
-                                        shape: MaterialStateProperty.all<
-                                            RoundedRectangleBorder>(
-                                            RoundedRectangleBorder(
-                                              borderRadius: BorderRadius.circular(
-                                                  30.0),
-                                            )
-                                        )
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: Colors.transparent,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(30),
+                                      ),
                                     ),
                                     onPressed: () {
 
@@ -919,17 +969,21 @@ class _HomePageState extends State<HomePage> {
                                 child: Container(
                                   margin: EdgeInsets.all(10),
                                   height: 120.0,
+                                  decoration: BoxDecoration(
+                                    border: Border.all(color: Colors.black),
+                                    gradient: LinearGradient(
+                                      begin: Alignment.topLeft,
+                                      end: Alignment.bottomRight,
+                                      colors: [Colors.black, const Color(0xff17191A)],
+                                    ),
+                                    borderRadius: BorderRadius.circular(30),
+                                  ),
                                   child: ElevatedButton(
-                                    style: ButtonStyle(
-                                        backgroundColor: MaterialStateProperty.all(
-                                            Colors.black),
-                                        shape: MaterialStateProperty.all<
-                                            RoundedRectangleBorder>(
-                                            RoundedRectangleBorder(
-                                              borderRadius: BorderRadius.circular(
-                                                  30.0),
-                                            )
-                                        )
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: Colors.transparent,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(30),
+                                      ),
                                     ),
                                     onPressed: () {
 
@@ -962,17 +1016,21 @@ class _HomePageState extends State<HomePage> {
                                 child: Container(
                                   margin: EdgeInsets.all(10),
                                   height: 120.0,
+                                  decoration: BoxDecoration(
+                                    border: Border.all(color: Colors.black),
+                                    gradient: LinearGradient(
+                                      begin: Alignment.topLeft,
+                                      end: Alignment.bottomRight,
+                                      colors: [Colors.black, const Color(0xff17191A)],
+                                    ),
+                                    borderRadius: BorderRadius.circular(30),
+                                  ),
                                   child: ElevatedButton(
-                                    style: ButtonStyle(
-                                        backgroundColor: MaterialStateProperty.all(
-                                            Colors.black),
-                                        shape: MaterialStateProperty.all<
-                                            RoundedRectangleBorder>(
-                                            RoundedRectangleBorder(
-                                              borderRadius: BorderRadius.circular(
-                                                  30.0),
-                                            )
-                                        )
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: Colors.transparent,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(30),
+                                      ),
                                     ),
                                     onPressed: () {
 
