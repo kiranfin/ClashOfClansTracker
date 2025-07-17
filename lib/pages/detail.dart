@@ -88,7 +88,7 @@ class _DetailPageState extends State<DetailPage> {
           gradient: LinearGradient(
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
-              colors: [/*Color(0xFF1C2952)*/Color(0xFF171717), /*Color(0xFF101E6B)*/Color(0xFF171717)]
+              colors: [/*Color(0xFF1C2952)*/Color(0xFF09090B), /*Color(0xFF101E6B)*/Color(0xFF0E1011)]
           )
       ),
       child: Scaffold(
@@ -134,7 +134,7 @@ class _DetailPageState extends State<DetailPage> {
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      ind == 0? ClipRRect(
+                      ?ind == 0? ClipRRect(
                         borderRadius: BorderRadius.circular(20),
                         child: Container(
                           width: MediaQuery
@@ -169,264 +169,309 @@ class _DetailPageState extends State<DetailPage> {
                             ),
                           ),
                         ),
-                      ) : const SizedBox(height: 1),
-                      ind == 0? const SizedBox(height: 20) : const SizedBox(height: 1),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(titles[ind], style: const TextStyle(
-                              color: Colors.white,
-                              fontFamily: "Poppins",
-                              fontSize: 30)
-                          ),
-                          ElevatedButton.icon(
-                            style: ButtonStyle(
-                                backgroundColor: WidgetStateProperty.all(Colors.white24),
-                                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                                    RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(15.0),
-                                        side: BorderSide(color: Colors.white24)
-                                    )
-                                )
+                      ) : null,
+                      ?ind == 0? const SizedBox(height: 20) : null,
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(20),
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              border: Border.all(color: Colors.black),
+                              gradient: LinearGradient(
+                                begin: Alignment.centerLeft,
+                                end: Alignment.centerRight,
+                                colors: [Colors.black, const Color(0xff17191A)],
+                              ),
+                              borderRadius: BorderRadius.circular(30),
                             ),
-                            onPressed: () {
-                              Map<String, dynamic> newdata = finalmaplist[ind];
-                              if(ind == 0) {
-                                newdata.clear();
-                                newdata["wall-${Utils.getMaxWallsMaxLevel(snapshot.data[0]["townHallLevel"], snapshot.data[1])}"] = Utils.getMaxWalls(snapshot.data[0]["townHallLevel"], snapshot.data[1]);
-                                updateWalls(newdata);
-                              } else if(ind == 1) {
-                                newdata.forEach((key, val) {
-                                  newdata[key] = Utils.getMaxDefensesAndMaxLevel(snapshot.data[0]["townHallLevel"], snapshot.data[1])[key.substring(0, key.length - 2)];
-                                });
-                                updateDefenses(newdata);
-                              } else if(ind == 2) {
-                                newdata.forEach((key, val) {
-                                  newdata[key] = Utils.getMaxTrapsAndMaxLevel(snapshot.data[0]["townHallLevel"], snapshot.data[1])[key.substring(0, key.length - 2)];
-                                });
-                                updateTraps(newdata);
-                              } else if(ind == 3) {
-                                newdata.forEach((key, val) {
-                                  newdata[key] = Utils.getMaxArmyAndMaxLevel(snapshot.data[0]["townHallLevel"], snapshot.data[1])[key.substring(0, key.length - 2)];
-                                });
-                                updateArmyBuildings(newdata);
-                              } else if(ind == 4) {
-                                newdata.forEach((key, val) {
-                                  newdata[key] = Utils.getMaxResourceAndMaxLevel(snapshot.data[0]["townHallLevel"], snapshot.data[1])[key.substring(0, key.length - 2)];
-                                });
-                                updateResources(newdata);
-                              }
-                            },
-                            icon: const Icon(Icons.skip_next, color: Colors.orangeAccent),
-                            label: const Text("Max", style: TextStyle(
-                                color: Colors.white,
-                                fontFamily: "Poppins",
-                                fontSize: 18)),
-                          ),
-                        ],
-                      ),
-                      Container(
-                        child: ListView.builder(
-                            shrinkWrap: true,
-                            physics: NeverScrollableScrollPhysics(),
-                            itemCount: finalmaplist[ind].length,
-                            itemBuilder: (BuildContext context, index) {
-                              return Padding(
-                                padding: const EdgeInsets.all(3.0),
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(20),
-                                  child: Container(
-                                    color: Colors.black,
-                                    child: GridTile(
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(5.0),
-                                        child: Row(
-                                          mainAxisAlignment: MainAxisAlignment
-                                              .spaceBetween,
-                                          children: [
-                                            Row(
-                                              children: [
-                                                Container(
-                                                  height: 60,
-                                                  width: 60,
-                                                  child: ind==0? Utils.getBuildingImage(snapshot.data[0]["townHallLevel"], finalmaplist[ind].keys.elementAt(index).substring(0, finalmaplist[ind].keys.elementAt(index).lastIndexOf('-')), int.parse(finalmaplist[ind].keys.elementAt(index).substring(finalmaplist[ind].keys.elementAt(index).lastIndexOf('-') + 1, finalmaplist[ind].keys.elementAt(index).length))) : Utils.getBuildingImage(snapshot.data[0]["townHallLevel"], finalmaplist[ind].keys.elementAt(index).substring(0, finalmaplist[ind].keys.elementAt(index).lastIndexOf('-')), finalmaplist[ind].values.elementAt(index)),
-                                                ),
-                                                const SizedBox(width: 5),
-                                                ind == 0? Column(
-                                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                                  children: [
-                                                    AutoSizeText(
-                                                        "Level ${finalmaplist[ind].keys.elementAt(index).substring(5, finalmaplist[ind].keys.elementAt(index).length)}",
-                                                        style: const TextStyle(
-                                                            color: Colors.white,
-                                                            fontFamily: "Poppins",
-                                                            fontSize: 15),
-                                                        maxLines: 1
-                                                    ),
-                                                    AutoSizeText(
-                                                        "${Utils.getTownHallWeapon(snapshot.data[0]["townHallLevel"]) != finalmaplist[ind].keys.elementAt(index).substring(0, finalmaplist[ind].keys.elementAt(index).lastIndexOf('-'))? finalmaplist[ind].values.elementAt(index) : snapshot.data[0]["townHallWeaponLevel"]}",
-                                                        style: const TextStyle(
-                                                            color: Colors.white,
-                                                            fontFamily: "Poppins",
-                                                            fontSize: 15),
-                                                        maxLines: 1
-                                                    )
-                                                  ],
-                                                ) : AutoSizeText(
-                                                    "${finalmaplist[ind].keys.elementAt(index).substring(0, finalmaplist[ind].keys.elementAt(index).lastIndexOf('-'))} | ${Utils.getTownHallWeapon(snapshot.data[0]["townHallLevel"]) != finalmaplist[ind].keys.elementAt(index).substring(0, finalmaplist[ind].keys.elementAt(index).lastIndexOf('-'))? finalmaplist[ind].values.elementAt(index) : snapshot.data[0]["townHallWeaponLevel"]}",
-                                                    style: const TextStyle(
-                                                        color: Colors.white,
-                                                        fontFamily: "Poppins",
-                                                        fontSize: 15),
-                                                    maxLines: 1
-                                                ),
-                                              ],
-                                            ),
-                                            Utils.getTownHallWeapon(snapshot.data[0]["townHallLevel"]) != finalmaplist[ind].keys.elementAt(index).substring(0, finalmaplist[ind].keys.elementAt(index).lastIndexOf('-'))? Row(
-                                              children: [
-                                                ind == 0? IconButton(
-                                                    style: ButtonStyle(
-                                                        backgroundColor: WidgetStateProperty.all(Colors.white24),
-                                                        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                                                            RoundedRectangleBorder(
-                                                                borderRadius: BorderRadius.circular(15.0),
-                                                                side: BorderSide(color: Colors.white24)
-                                                            )
-                                                        )
-                                                    ),
-                                                    onPressed: () async {
-                                                      Map<String, dynamic> newdata = finalmaplist[ind];
-                                                      if(ind == 0) {
-                                                        String newval = await showDialog(
-                                                          context: context,
-                                                          builder: (BuildContext context) {
-                                                            return Presets.getEditWallsDialog(context, finalmaplist[ind].values.elementAt(index).toString());
-                                                          }
-                                                        );
-                                                        int intval = int.parse(newval);
-                                                        updateWalls(Utils.editWalls(snapshot.data[1], newdata, finalmaplist[ind].keys.elementAt(index), finalmaplist[ind].values.elementAt(index), intval));
-                                                      }
-                                                    },
-                                                    icon: const Icon(Icons.edit, color: Colors.blueAccent)
-                                                ) : const SizedBox(width: 1),
-                                                IconButton(
-                                                    style: ButtonStyle(
-                                                        backgroundColor: WidgetStateProperty.all(Colors.white24),
-                                                        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                                                            RoundedRectangleBorder(
-                                                                borderRadius: BorderRadius.circular(15.0),
-                                                                side: BorderSide(color: Colors.white24)
-                                                            )
-                                                        )
-                                                    ),
-                                                    onPressed: () {
-                                                      Map<String, dynamic> newdata = finalmaplist[ind];
-                                                      if(finalmaplist[ind].values.elementAt(index) - 1 >= 0) {
-                                                        if(ind == 0) {
-                                                          if(Utils.canWallBeDecreased(snapshot.data[0]["townHallLevel"], snapshot.data[1], int.parse(finalmaplist[ind].keys.elementAt(index).substring(5, finalmaplist[ind].keys.elementAt(index).length)))) {
-                                                            updateWalls(Utils.rearrangeWalls(newdata, finalmaplist[ind].keys.elementAt(index), finalmaplist[ind].values.elementAt(index), -1));
-                                                          }
-                                                        } else {
-                                                          newdata[finalmaplist[ind].keys.elementAt(index)] = finalmaplist[ind].values.elementAt(index) - 1;
-                                                          if (ind == 1) {
-                                                            updateDefenses(newdata);
-                                                          } else if (ind == 2) {
-                                                            updateTraps(newdata);
-                                                          } else if (ind == 3) {
-                                                            updateArmyBuildings(newdata);
-                                                          } else if (ind == 4) {
-                                                            updateResources(newdata);
-                                                          }
-                                                        }
-                                                      }
-                                                    },
-                                                    icon: const Icon(Icons.remove, color: Colors.redAccent)
-                                                ),
-                                                IconButton(
-                                                    style: ButtonStyle(
-                                                        backgroundColor: WidgetStateProperty.all(Colors.white24),
-                                                        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                                                            RoundedRectangleBorder(
-                                                                borderRadius: BorderRadius.circular(15.0),
-                                                                side: BorderSide(color: Colors.white24)
-                                                            )
-                                                        )
-                                                    ),
-                                                    onPressed: (){
-                                                      Map<String, dynamic> newdata = finalmaplist[ind];
-                                                      if(ind == 0) {
-                                                        if(Utils.canWallBeIncreased(snapshot.data[0]["townHallLevel"], snapshot.data[1], int.parse(finalmaplist[ind].keys.elementAt(index).substring(5, finalmaplist[ind].keys.elementAt(index).length)))) {
-                                                          updateWalls(Utils.rearrangeWalls(newdata, finalmaplist[ind].keys.elementAt(index), finalmaplist[ind].values.elementAt(index), 1));
-                                                        }
-                                                      } else if (ind == 1) {
-                                                        if(finalmaplist[ind].values.elementAt(index) + 1 <= Utils.getMaxDefensesAndMaxLevel(snapshot.data[0]["townHallLevel"], snapshot.data[1])[finalmaplist[ind].keys.elementAt(index).substring(0, finalmaplist[ind].keys.elementAt(index).lastIndexOf('-'))]) {
-                                                          newdata[finalmaplist[ind].keys.elementAt(index)] = finalmaplist[ind].values.elementAt(index) + 1;
-                                                          updateDefenses(newdata);
-                                                        }
-                                                      } else if (ind == 2) {
-                                                        if(finalmaplist[ind].values.elementAt(index) + 1 <= Utils.getMaxTrapsAndMaxLevel(snapshot.data[0]["townHallLevel"], snapshot.data[1])[finalmaplist[ind].keys.elementAt(index).substring(0, finalmaplist[ind].keys.elementAt(index).lastIndexOf('-'))]) {
-                                                          newdata[finalmaplist[ind].keys.elementAt(index)] = finalmaplist[ind].values.elementAt(index) + 1;
-                                                          updateTraps(newdata);
-                                                        }
-                                                      } else if (ind == 3) {
-                                                        if(finalmaplist[ind].values.elementAt(index) + 1 <= Utils.getMaxArmyAndMaxLevel(snapshot.data[0]["townHallLevel"], snapshot.data[1])[finalmaplist[ind].keys.elementAt(index).substring(0, finalmaplist[ind].keys.elementAt(index).lastIndexOf('-'))]) {
-                                                          newdata[finalmaplist[ind].keys.elementAt(index)] = finalmaplist[ind].values.elementAt(index) + 1;
-                                                          updateArmyBuildings(newdata);
-                                                        }
-                                                      } else if (ind == 4) {
-                                                        if(finalmaplist[ind].values.elementAt(index) + 1 <= Utils.getMaxResourceAndMaxLevel(snapshot.data[0]["townHallLevel"], snapshot.data[1])[finalmaplist[ind].keys.elementAt(index).substring(0, finalmaplist[ind].keys.elementAt(index).lastIndexOf('-'))]) {
-                                                          newdata[finalmaplist[ind].keys.elementAt(index)] = finalmaplist[ind].values.elementAt(index) + 1;
-                                                          updateResources(newdata);
-                                                        }
-                                                      }
-                                                    },
-                                                    icon: const Icon(Icons.add, color: Colors.lightGreen)
-                                                ),
-                                                IconButton(
-                                                    style: ButtonStyle(
-                                                        backgroundColor: WidgetStateProperty.all(Colors.white24),
-                                                        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                                                            RoundedRectangleBorder(
-                                                                borderRadius: BorderRadius.circular(15.0),
-                                                                side: BorderSide(color: Colors.white24)
-                                                            )
-                                                        )
-                                                    ),
-                                                    onPressed: (){
-                                                      Map<String, dynamic> newdata = finalmaplist[ind];
-                                                      if(ind == 0) {
-                                                        if(Utils.canWallBeIncreased(snapshot.data[0]["townHallLevel"], snapshot.data[1], int.parse(finalmaplist[ind].keys.elementAt(index).substring(5, finalmaplist[ind].keys.elementAt(index).length)))) {
-                                                          updateWalls(Utils.rearrangeWalls(newdata, finalmaplist[ind].keys.elementAt(index), finalmaplist[ind].values.elementAt(index), finalmaplist[ind].values.elementAt(index)));
-                                                        }
-                                                      } else if (ind == 1) {
-                                                        newdata[finalmaplist[ind].keys.elementAt(index)] = Utils.getMaxDefensesAndMaxLevel(snapshot.data[0]["townHallLevel"], snapshot.data[1])[finalmaplist[ind].keys.elementAt(index).substring(0, finalmaplist[ind].keys.elementAt(index).lastIndexOf('-'))];
-                                                        updateDefenses(newdata);
-                                                      } else if (ind == 2) {
-                                                        newdata[finalmaplist[ind].keys.elementAt(index)] = Utils.getMaxTrapsAndMaxLevel(snapshot.data[0]["townHallLevel"], snapshot.data[1])[finalmaplist[ind].keys.elementAt(index).substring(0, finalmaplist[ind].keys.elementAt(index).lastIndexOf('-'))];
-                                                        updateTraps(newdata);
-                                                      } else if (ind == 3) {
-                                                        newdata[finalmaplist[ind].keys.elementAt(index)] = Utils.getMaxArmyAndMaxLevel(snapshot.data[0]["townHallLevel"], snapshot.data[1])[finalmaplist[ind].keys.elementAt(index).substring(0, finalmaplist[ind].keys.elementAt(index).lastIndexOf('-'))];
-                                                        updateArmyBuildings(newdata);
-                                                      } else if (ind == 4) {
-                                                        newdata[finalmaplist[ind].keys.elementAt(index)] = Utils.getMaxResourceAndMaxLevel(snapshot.data[0]["townHallLevel"], snapshot.data[1])[finalmaplist[ind].keys.elementAt(index).substring(0, finalmaplist[ind].keys.elementAt(index).lastIndexOf('-'))];
-                                                        updateResources(newdata);
-                                                      }
-                                                    },
-                                                    icon: const Icon(Icons.double_arrow, color: Colors.orangeAccent)
-                                                )
-                                              ],
-                                            ) : const SizedBox(width: 50),
-                                          ],
-                                        ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Column(
+                                children: [
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(titles[ind], style: const TextStyle(
+                                          color: Colors.white,
+                                          fontFamily: "Poppins",
+                                          fontSize: 30)
                                       ),
+                                      ElevatedButton.icon(
+                                        style: ElevatedButton.styleFrom(
+                                          backgroundColor: Colors.white24,
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.circular(15),
+                                            side: BorderSide(color: Colors.white24)
+                                          ),
+                                        ),
+                                        onPressed: () {
+                                          Map<String, dynamic> newdata = finalmaplist[ind];
+                                          if(ind == 0) {
+                                            newdata.clear();
+                                            newdata["wall-${Utils.getMaxWallsMaxLevel(snapshot.data[0]["townHallLevel"], snapshot.data[1])}"] = Utils.getMaxWalls(snapshot.data[0]["townHallLevel"], snapshot.data[1]);
+                                            updateWalls(newdata);
+                                          } else if(ind == 1) {
+                                            newdata.forEach((key, val) {
+                                              newdata[key] = Utils.getMaxDefensesAndMaxLevel(snapshot.data[0]["townHallLevel"], snapshot.data[1])[key.substring(0, key.length - 2)];
+                                            });
+                                            updateDefenses(newdata);
+                                          } else if(ind == 2) {
+                                            newdata.forEach((key, val) {
+                                              newdata[key] = Utils.getMaxTrapsAndMaxLevel(snapshot.data[0]["townHallLevel"], snapshot.data[1])[key.substring(0, key.length - 2)];
+                                            });
+                                            updateTraps(newdata);
+                                          } else if(ind == 3) {
+                                            newdata.forEach((key, val) {
+                                              newdata[key] = Utils.getMaxArmyAndMaxLevel(snapshot.data[0]["townHallLevel"], snapshot.data[1])[key.substring(0, key.length - 2)];
+                                            });
+                                            updateArmyBuildings(newdata);
+                                          } else if(ind == 4) {
+                                            newdata.forEach((key, val) {
+                                              newdata[key] = Utils.getMaxResourceAndMaxLevel(snapshot.data[0]["townHallLevel"], snapshot.data[1])[key.substring(0, key.length - 2)];
+                                            });
+                                            updateResources(newdata);
+                                          }
+                                        },
+                                        icon: const Icon(Icons.skip_next, color: Colors.orangeAccent),
+                                        label: const Text("Max", style: TextStyle(
+                                            color: Colors.white,
+                                            fontFamily: "Poppins",
+                                            fontSize: 18)),
+                                      ),
+                                    ],
+                                  ),
+                                  Container(
+                                    child: ListView.builder(
+                                        shrinkWrap: true,
+                                        physics: NeverScrollableScrollPhysics(),
+                                        itemCount: finalmaplist[ind].length,
+                                        itemBuilder: (BuildContext context, index) {
+                                          return Padding(
+                                            padding: const EdgeInsets.all(3.0),
+                                            child: ClipRRect(
+                                              borderRadius: BorderRadius.circular(20),
+                                              child: Container(
+                                                color: Colors.black,
+                                                child: GridTile(
+                                                  child: Padding(
+                                                    padding: const EdgeInsets.all(5.0),
+                                                    child: Row(
+                                                      mainAxisAlignment: MainAxisAlignment
+                                                          .spaceBetween,
+                                                      children: [
+                                                        Flexible(
+                                                          flex: 3,
+                                                          child: Row(
+                                                            children: [
+                                                              Container(
+                                                                height: 60,
+                                                                width: 60,
+                                                                child: ind==0? Utils.getBuildingImage(snapshot.data[0]["townHallLevel"], finalmaplist[ind].keys.elementAt(index).substring(0, finalmaplist[ind].keys.elementAt(index).lastIndexOf('-')), int.parse(finalmaplist[ind].keys.elementAt(index).substring(finalmaplist[ind].keys.elementAt(index).lastIndexOf('-') + 1, finalmaplist[ind].keys.elementAt(index).length))) : Utils.getBuildingImage(snapshot.data[0]["townHallLevel"], finalmaplist[ind].keys.elementAt(index).substring(0, finalmaplist[ind].keys.elementAt(index).lastIndexOf('-')), finalmaplist[ind].values.elementAt(index)),
+                                                              ),
+                                                              const SizedBox(width: 5),
+                                                              ind == 0? Column(
+                                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                                children: [
+                                                                  AutoSizeText(
+                                                                      "Level ${finalmaplist[ind].keys.elementAt(index).substring(5, finalmaplist[ind].keys.elementAt(index).length)}",
+                                                                      style: const TextStyle(
+                                                                          color: Colors.white,
+                                                                          fontFamily: "Poppins",
+                                                                          fontSize: 15),
+                                                                      maxLines: 1
+                                                                  ),
+                                                                  AutoSizeText(
+                                                                      "${Utils.getTownHallWeapon(snapshot.data[0]["townHallLevel"]) != finalmaplist[ind].keys.elementAt(index).substring(0, finalmaplist[ind].keys.elementAt(index).lastIndexOf('-'))? finalmaplist[ind].values.elementAt(index) : snapshot.data[0]["townHallWeaponLevel"]}",
+                                                                      style: const TextStyle(
+                                                                          color: Colors.white,
+                                                                          fontFamily: "Poppins",
+                                                                          fontSize: 15),
+                                                                      maxLines: 1
+                                                                  )
+                                                                ],
+                                                              ) : Expanded(
+                                                                child: Column(
+                                                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                                                  children: [
+                                                                    AutoSizeText(
+                                                                      finalmaplist[ind].keys.elementAt(index).substring(0, finalmaplist[ind].keys.elementAt(index).lastIndexOf('-')),
+                                                                      style: const TextStyle(
+                                                                          color: Colors.white,
+                                                                          fontFamily: "Poppins", fontSize: 15),
+                                                                    ),
+                                                                    ClipRRect(
+                                                                      borderRadius: BorderRadius.circular(20),
+                                                                      child: Container(
+                                                                      color: const Color(0xff542f13),
+                                                                        child: Padding(
+                                                                          padding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 5.0),
+                                                                          child: AutoSizeText(
+                                                                            "Lvl ${Utils.getTownHallWeapon(snapshot.data[0]["townHallLevel"]) != finalmaplist[ind].keys.elementAt(index).substring(0, finalmaplist[ind].keys.elementAt(index).lastIndexOf('-'))? finalmaplist[ind].values.elementAt(index) : snapshot.data[0]["townHallWeaponLevel"]}",
+                                                                            style: const TextStyle(
+                                                                            color: Colors.white70,
+                                                                            fontFamily: "Poppins", fontSize: 15),
+                                                                          ),
+                                                                        ),
+                                                                      ),
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ),
+                                                        Utils.getTownHallWeapon(snapshot.data[0]["townHallLevel"]) != finalmaplist[ind].keys.elementAt(index).substring(0, finalmaplist[ind].keys.elementAt(index).lastIndexOf('-'))? Row(
+                                                          children: [
+                                                            ?ind == 0? IconButton(
+                                                                style: ButtonStyle(
+                                                                    backgroundColor: WidgetStateProperty.all(Colors.white24),
+                                                                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                                                        RoundedRectangleBorder(
+                                                                            borderRadius: BorderRadius.circular(15.0),
+                                                                            side: BorderSide(color: Colors.white24)
+                                                                        )
+                                                                    )
+                                                                ),
+                                                                onPressed: () async {
+                                                                  Map<String, dynamic> newdata = finalmaplist[ind];
+                                                                  if(ind == 0) {
+                                                                    String newval = await showDialog(
+                                                                      context: context,
+                                                                      builder: (BuildContext context) {
+                                                                        return Presets.getEditWallsDialog(context, finalmaplist[ind].values.elementAt(index).toString());
+                                                                      }
+                                                                    );
+                                                                    int intval = int.parse(newval);
+                                                                    updateWalls(Utils.editWalls(snapshot.data[1], newdata, finalmaplist[ind].keys.elementAt(index), finalmaplist[ind].values.elementAt(index), intval));
+                                                                  }
+                                                                },
+                                                                icon: const Icon(Icons.edit, color: Colors.blueAccent)
+                                                            ) : null,
+                                                            IconButton(
+                                                                style: ButtonStyle(
+                                                                    backgroundColor: WidgetStateProperty.all(Colors.white24),
+                                                                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                                                        RoundedRectangleBorder(
+                                                                            borderRadius: BorderRadius.circular(15.0),
+                                                                            side: BorderSide(color: Colors.white24)
+                                                                        )
+                                                                    )
+                                                                ),
+                                                                onPressed: () {
+                                                                  Map<String, dynamic> newdata = finalmaplist[ind];
+                                                                  if(finalmaplist[ind].values.elementAt(index) - 1 >= 0) {
+                                                                    if(ind == 0) {
+                                                                      if(Utils.canWallBeDecreased(snapshot.data[0]["townHallLevel"], snapshot.data[1], int.parse(finalmaplist[ind].keys.elementAt(index).substring(5, finalmaplist[ind].keys.elementAt(index).length)))) {
+                                                                        updateWalls(Utils.rearrangeWalls(newdata, finalmaplist[ind].keys.elementAt(index), finalmaplist[ind].values.elementAt(index), -1));
+                                                                      }
+                                                                    } else {
+                                                                      newdata[finalmaplist[ind].keys.elementAt(index)] = finalmaplist[ind].values.elementAt(index) - 1;
+                                                                      if (ind == 1) {
+                                                                        updateDefenses(newdata);
+                                                                      } else if (ind == 2) {
+                                                                        updateTraps(newdata);
+                                                                      } else if (ind == 3) {
+                                                                        updateArmyBuildings(newdata);
+                                                                      } else if (ind == 4) {
+                                                                        updateResources(newdata);
+                                                                      }
+                                                                    }
+                                                                  }
+                                                                },
+                                                                icon: const Icon(Icons.remove, color: Colors.redAccent)
+                                                            ),
+                                                            IconButton(
+                                                                style: ButtonStyle(
+                                                                    backgroundColor: WidgetStateProperty.all(Colors.white24),
+                                                                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                                                        RoundedRectangleBorder(
+                                                                            borderRadius: BorderRadius.circular(15.0),
+                                                                            side: BorderSide(color: Colors.white24)
+                                                                        )
+                                                                    )
+                                                                ),
+                                                                onPressed: (){
+                                                                  Map<String, dynamic> newdata = finalmaplist[ind];
+                                                                  if(ind == 0) {
+                                                                    if(Utils.canWallBeIncreased(snapshot.data[0]["townHallLevel"], snapshot.data[1], int.parse(finalmaplist[ind].keys.elementAt(index).substring(5, finalmaplist[ind].keys.elementAt(index).length)))) {
+                                                                      updateWalls(Utils.rearrangeWalls(newdata, finalmaplist[ind].keys.elementAt(index), finalmaplist[ind].values.elementAt(index), 1));
+                                                                    }
+                                                                  } else if (ind == 1) {
+                                                                    if(finalmaplist[ind].values.elementAt(index) + 1 <= Utils.getMaxDefensesAndMaxLevel(snapshot.data[0]["townHallLevel"], snapshot.data[1])[finalmaplist[ind].keys.elementAt(index).substring(0, finalmaplist[ind].keys.elementAt(index).lastIndexOf('-'))]) {
+                                                                      newdata[finalmaplist[ind].keys.elementAt(index)] = finalmaplist[ind].values.elementAt(index) + 1;
+                                                                      updateDefenses(newdata);
+                                                                    }
+                                                                  } else if (ind == 2) {
+                                                                    if(finalmaplist[ind].values.elementAt(index) + 1 <= Utils.getMaxTrapsAndMaxLevel(snapshot.data[0]["townHallLevel"], snapshot.data[1])[finalmaplist[ind].keys.elementAt(index).substring(0, finalmaplist[ind].keys.elementAt(index).lastIndexOf('-'))]) {
+                                                                      newdata[finalmaplist[ind].keys.elementAt(index)] = finalmaplist[ind].values.elementAt(index) + 1;
+                                                                      updateTraps(newdata);
+                                                                    }
+                                                                  } else if (ind == 3) {
+                                                                    if(finalmaplist[ind].values.elementAt(index) + 1 <= Utils.getMaxArmyAndMaxLevel(snapshot.data[0]["townHallLevel"], snapshot.data[1])[finalmaplist[ind].keys.elementAt(index).substring(0, finalmaplist[ind].keys.elementAt(index).lastIndexOf('-'))]) {
+                                                                      newdata[finalmaplist[ind].keys.elementAt(index)] = finalmaplist[ind].values.elementAt(index) + 1;
+                                                                      updateArmyBuildings(newdata);
+                                                                    }
+                                                                  } else if (ind == 4) {
+                                                                    if(finalmaplist[ind].values.elementAt(index) + 1 <= Utils.getMaxResourceAndMaxLevel(snapshot.data[0]["townHallLevel"], snapshot.data[1])[finalmaplist[ind].keys.elementAt(index).substring(0, finalmaplist[ind].keys.elementAt(index).lastIndexOf('-'))]) {
+                                                                      newdata[finalmaplist[ind].keys.elementAt(index)] = finalmaplist[ind].values.elementAt(index) + 1;
+                                                                      updateResources(newdata);
+                                                                    }
+                                                                  }
+                                                                },
+                                                                icon: const Icon(Icons.add, color: Colors.lightGreen)
+                                                            ),
+                                                            IconButton(
+                                                                style: ButtonStyle(
+                                                                    backgroundColor: WidgetStateProperty.all(Colors.white24),
+                                                                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                                                        RoundedRectangleBorder(
+                                                                            borderRadius: BorderRadius.circular(15.0),
+                                                                            side: BorderSide(color: Colors.white24)
+                                                                        )
+                                                                    )
+                                                                ),
+                                                                onPressed: (){
+                                                                  Map<String, dynamic> newdata = finalmaplist[ind];
+                                                                  if(ind == 0) {
+                                                                    if(Utils.canWallBeIncreased(snapshot.data[0]["townHallLevel"], snapshot.data[1], int.parse(finalmaplist[ind].keys.elementAt(index).substring(5, finalmaplist[ind].keys.elementAt(index).length)))) {
+                                                                      updateWalls(Utils.rearrangeWalls(newdata, finalmaplist[ind].keys.elementAt(index), finalmaplist[ind].values.elementAt(index), finalmaplist[ind].values.elementAt(index)));
+                                                                    }
+                                                                  } else if (ind == 1) {
+                                                                    newdata[finalmaplist[ind].keys.elementAt(index)] = Utils.getMaxDefensesAndMaxLevel(snapshot.data[0]["townHallLevel"], snapshot.data[1])[finalmaplist[ind].keys.elementAt(index).substring(0, finalmaplist[ind].keys.elementAt(index).lastIndexOf('-'))];
+                                                                    updateDefenses(newdata);
+                                                                  } else if (ind == 2) {
+                                                                    newdata[finalmaplist[ind].keys.elementAt(index)] = Utils.getMaxTrapsAndMaxLevel(snapshot.data[0]["townHallLevel"], snapshot.data[1])[finalmaplist[ind].keys.elementAt(index).substring(0, finalmaplist[ind].keys.elementAt(index).lastIndexOf('-'))];
+                                                                    updateTraps(newdata);
+                                                                  } else if (ind == 3) {
+                                                                    newdata[finalmaplist[ind].keys.elementAt(index)] = Utils.getMaxArmyAndMaxLevel(snapshot.data[0]["townHallLevel"], snapshot.data[1])[finalmaplist[ind].keys.elementAt(index).substring(0, finalmaplist[ind].keys.elementAt(index).lastIndexOf('-'))];
+                                                                    updateArmyBuildings(newdata);
+                                                                  } else if (ind == 4) {
+                                                                    newdata[finalmaplist[ind].keys.elementAt(index)] = Utils.getMaxResourceAndMaxLevel(snapshot.data[0]["townHallLevel"], snapshot.data[1])[finalmaplist[ind].keys.elementAt(index).substring(0, finalmaplist[ind].keys.elementAt(index).lastIndexOf('-'))];
+                                                                    updateResources(newdata);
+                                                                  }
+                                                                },
+                                                                icon: const Icon(Icons.double_arrow, color: Colors.orangeAccent)
+                                                            )
+                                                          ],
+                                                        ) : const SizedBox(width: 50),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          );
+                                        }
                                     ),
                                   ),
-                                ),
-                              );
-                            }
+                                ]
+                              ),
+                            ),
+                          ),
                         ),
                       ),
-                      const SizedBox(height: 20)
+                      const SizedBox(height: 10)
                     ],
                   );
                 }
@@ -464,103 +509,155 @@ class _DetailPageState extends State<DetailPage> {
           return ListView.builder(
             itemCount: titles.length,
             itemBuilder: (context, ind) {
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  ind == 0 && normaltroops.isNotEmpty || ind == 1 && siegemachines.isNotEmpty || ind == 2 && supertroops.isNotEmpty || ind == 3 && buildertroops.isNotEmpty? Text(titles[ind], style: const TextStyle(
-                      color: Colors.white,
-                      fontFamily: "Poppins",
-                      fontSize: 30)
-                  ) : SizedBox(width: 5),
-                  Container(
-                    child: Wrap(
-                        spacing: 5.0,
-                        runSpacing: 5.0,
-                        children: List.generate(finallist[ind].length, (index) {
-                          return Padding(
-                            padding: const EdgeInsets.all(3.0),
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(20),
-                              child: Container(
-                                width: 120,
-                                color: finallist[ind][index]["level"] ==
-                                    finallist[ind][index]["maxLevel"] ? Color(
-                                    0xFF532D1F) : Colors.black,
-                                child: GridTile(
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(5.0),
-                                    child: Column(
-                                      mainAxisAlignment: MainAxisAlignment
-                                          .start,
-                                      children: [
-                                        AutoSizeText(
-                                            finallist[ind][index]["name"],
-                                            style: const TextStyle(
-                                                color: Colors.white,
-                                                fontFamily: "Poppins",
-                                                fontSize: 15),
-                                            maxLines: 1
+              return ClipRRect(
+                borderRadius: BorderRadius.circular(20),
+                child: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.black),
+                      gradient: LinearGradient(
+                        begin: Alignment.centerLeft,
+                        end: Alignment.centerRight,
+                        colors: [Colors.black, const Color(0xff17191A)],
+                      ),
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(3.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          ind == 0 && normaltroops.isNotEmpty || ind == 1 && siegemachines.isNotEmpty || ind == 2 && supertroops.isNotEmpty || ind == 3 && buildertroops.isNotEmpty? Padding(
+                            padding: const EdgeInsets.only(left: 8.0, top: 5.0),
+                            child: Text(titles[ind], style: const TextStyle(
+                                color: Colors.white,
+                                fontFamily: "Poppins",
+                                fontSize: 30)
+                            ),
+                          ) : SizedBox(width: 5),
+                          Container(
+                            child: Wrap(
+                                spacing: 5.0,
+                                runSpacing: 5.0,
+                                children: List.generate(finallist[ind].length, (index) {
+                                  return Padding(
+                                    padding: const EdgeInsets.all(3.0),
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(20),
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                          color: Colors.black,
+                                          border: finallist[ind][index]["level"] ==
+                                              finallist[ind][index]["maxLevel"] ? Border.all(color: Color(
+                                              0xFF532D1F), width: 3) : null,
+                                          borderRadius: BorderRadius.circular(20),
                                         ),
-                                        Row(
-                                          mainAxisAlignment: MainAxisAlignment
-                                              .spaceEvenly,
-                                          children: [
-                                            Utils.getTroopImage(
-                                                finallist[ind][index]["name"],
-                                                finallist[ind][index]["village"]),
-                                            Text(
-                                                (finallist[ind][index]["level"])
-                                                    .toString(),
-                                                style: const TextStyle(
-                                                    color: Colors.white,
-                                                    fontFamily: "Poppins",
-                                                    fontSize: 35)),
-                                          ],
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.only(
-                                              left: 10.0),
-                                          child: Column(
-                                            mainAxisAlignment: MainAxisAlignment
-                                                .start,
-                                            crossAxisAlignment: CrossAxisAlignment
-                                                .start,
-                                            children: [
-                                              Text(
-                                                  "Max: ${finallist[ind][index]["maxLevel"]}",
-                                                  style: const TextStyle(
-                                                      color: Colors.white,
-                                                      fontFamily: "Poppins",
-                                                      fontSize: 10)),
-                                              Row(
-                                                children: [
-                                                  Icon(Icons.access_time,
-                                                      color: Colors.white,
-                                                      size: 14),
-                                                  SizedBox(width: 5),
-                                                  Text("1d 12h",
-                                                      style: const TextStyle(
-                                                          color: Colors.white,
-                                                          fontFamily: "Poppins",
-                                                          fontSize: 10)),
-                                                ],
-                                              )
-                                            ],
+                                        width: 110,
+                                        child: GridTile(
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(5.0),
+                                            child: Column(
+                                              mainAxisAlignment: MainAxisAlignment
+                                                  .start,
+                                              children: [
+                                                AutoSizeText(
+                                                    finallist[ind][index]["name"],
+                                                    style: const TextStyle(
+                                                        color: Colors.white,
+                                                        fontFamily: "Poppins",
+                                                        fontSize: 15),
+                                                    maxLines: 1
+                                                ),
+                                                Row(
+                                                  mainAxisAlignment: MainAxisAlignment
+                                                      .spaceEvenly,
+                                                  children: [
+                                                    Utils.getTroopImage(
+                                                        finallist[ind][index]["name"],
+                                                        finallist[ind][index]["village"]),
+                                                    Text(
+                                                        (finallist[ind][index]["level"])
+                                                            .toString(),
+                                                        style: const TextStyle(
+                                                            color: Colors.white,
+                                                            fontFamily: "Poppins",
+                                                            fontSize: 35)),
+                                                  ],
+                                                ),
+                                                Padding(
+                                                  padding: const EdgeInsets.only(left: 10.0),
+                                                  child: Column(
+                                                    mainAxisAlignment: MainAxisAlignment
+                                                        .start,
+                                                    crossAxisAlignment: CrossAxisAlignment
+                                                        .start,
+                                                    children: [
+                                                      SizedBox(height: 5),
+                                                      ClipRRect(
+                                                        borderRadius: BorderRadius.circular(20),
+                                                        child: Container(
+                                                          color: const Color(0xff541513),
+                                                          child: Padding(
+                                                            padding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 5.0),
+                                                            child: Text(
+                                                                "Max: ${finallist[ind][index]["maxLevel"]}",
+                                                                style: const TextStyle(
+                                                                    color: Colors.redAccent,
+                                                                    fontFamily: "Poppins",
+                                                                    fontSize: 10)
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      SizedBox(height: 5),
+                                                      Row(
+                                                        children: [
+                                                          ClipRRect(
+                                                            borderRadius: BorderRadius.circular(20),
+                                                            child: Container(
+                                                              color: const Color(
+                                                                  0xff132054),
+                                                              child: Padding(
+                                                                padding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 5.0),
+                                                                child: Row(
+                                                                  children: [
+                                                                    Icon(Icons.access_time,
+                                                                        color: const Color(0xff216AF3),
+                                                                        size: 14),
+                                                                    SizedBox(width: 5),
+                                                                    Text("1d 12h",
+                                                                        style: const TextStyle(
+                                                                            color: const Color(0xff216AF3),
+                                                                            fontFamily: "Poppins",
+                                                                            fontSize: 10)),
+                                                                  ],
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
                                           ),
                                         ),
-                                      ],
+                                      ),
                                     ),
-                                  ),
-                                ),
+                                  );
+                                }
                               ),
                             ),
-                          );
-                        }
+                          ),
+                          SizedBox(height: 20)
+                        ],
                       ),
                     ),
                   ),
-                  SizedBox(height: 20)
-                ],
+                ),
               );
             }
           );
@@ -585,68 +682,100 @@ class _DetailPageState extends State<DetailPage> {
         builder: (context, AsyncSnapshot snapshot) {
           if(snapshot.hasData) {
             List finallist = Utils.getSpells(snapshot.data);
-            return Wrap(
-                spacing: 5.0,
-                runSpacing: 5.0,
-                children: List.generate(finallist.length, (index) {
-                  return Padding(
-                    padding: const EdgeInsets.all(3.0),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(20),
-                      child: Container(
-                        width: 120,
-                        color: finallist[index]["level"] == finallist[index]["maxLevel"]? Color(
-                            0xFF532D1F): Colors.black,
-                        child: GridTile(
-                          child: Padding(
-                            padding: const EdgeInsets.all(5.0),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                AutoSizeText(
-                                    finallist[index]["name"],
-                                    style: const TextStyle(color: Colors.white, fontFamily: "Poppins", fontSize: 15),
-                                    maxLines: 1
-                                ),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    Utils.getTroopImage(finallist[index]["name"], finallist[index]["village"]),
-                                    Text((finallist[index]["level"]).toString(), style: const TextStyle(color: Colors.white,
-                                        fontFamily: "Poppins",
-                                        fontSize: 35)),
-                                  ],
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 10.0),
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+            return SingleChildScrollView(
+              child: Wrap(
+                  spacing: 5.0,
+                  runSpacing: 5.0,
+                  children: List.generate(finallist.length, (index) {
+                    return Padding(
+                      padding: const EdgeInsets.all(3.0),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(20),
+                        child: Container(
+                          width: 120,
+                          decoration: BoxDecoration(
+                            color: Colors.black,
+                            border: finallist[index]["level"] == finallist[index]["maxLevel"]? Border.all(color: Color(
+                                0xFF532D1F), width: 3) : null,
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          child: GridTile(
+                            child: Padding(
+                              padding: const EdgeInsets.all(5.0),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  AutoSizeText(
+                                      finallist[index]["name"],
+                                      style: const TextStyle(color: Colors.white, fontFamily: "Poppins", fontSize: 15),
+                                      maxLines: 1
+                                  ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                     children: [
-                                      Text("Max: ${finallist[index]["maxLevel"]}", style: const TextStyle(color: Colors.white,
+                                      Utils.getTroopImage(finallist[index]["name"], finallist[index]["village"]),
+                                      Text((finallist[index]["level"]).toString(), style: const TextStyle(color: Colors.white,
                                           fontFamily: "Poppins",
-                                          fontSize: 10)),
-                                      Row(
-                                        children: [
-                                          Icon(Icons.access_time, color: Colors.white, size: 14),
-                                          SizedBox(width: 5),
-                                          Text("1d 12h", style: const TextStyle(color: Colors.white,
-                                              fontFamily: "Poppins",
-                                              fontSize: 10)),
-                                        ],
-                                      )
+                                          fontSize: 35)),
                                     ],
                                   ),
-                                ),
-                              ],
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 10.0),
+                                    child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        SizedBox(height: 5),
+                                        ClipRRect(
+                                          borderRadius: BorderRadius.circular(20),
+                                          child: Container(
+                                            color: const Color(0xff541513),
+                                            child: Padding(
+                                              padding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 5.0),
+                                              child: Text("Max: ${finallist[index]["maxLevel"]}", style: const TextStyle(color: Colors.white70,
+                                                  fontFamily: "Poppins",
+                                                  fontSize: 10)
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        SizedBox(height: 5),
+                                        Row(
+                                          children: [
+                                            ClipRRect(
+                                              borderRadius: BorderRadius.circular(20),
+                                              child: Container(
+                                                color: const Color(
+                                                    0xff132054),
+                                                child: Padding(
+                                                  padding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 5.0),
+                                                  child: Row(
+                                                    children: [
+                                                      Icon(Icons.access_time, color: Colors.white70, size: 14),
+                                                      SizedBox(width: 5),
+                                                      Text("1d 12h", style: const TextStyle(color: Colors.white70,
+                                                          fontFamily: "Poppins",
+                                                          fontSize: 10)),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         ),
                       ),
-                    ),
-                  );
-                }
-              )
+                    );
+                  }
+                )
+              ),
             );
           } else {
             return ListView.builder(

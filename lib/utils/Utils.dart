@@ -22,7 +22,7 @@ Image getTroopImage(String name, String village) {
   if(name == "Healer") return Image.asset(healer, scale: 3.5);
   if(name == "Dragon") return Image.asset(dragon, scale: 3.5);
   if(name == "P.E.K.K.A") return Image.asset(pekka, scale: 3.5);
-  if(name == "Baby Dragon" && village == "home") return Image.asset(baby_dragon, scale: 3);
+  if(name == "Baby Dragon" && village == "home") return Image.asset(baby_dragon, scale: 3.5);
   if(name == "Miner") return Image.asset(miner, scale: 3.5);
   if(name == "Electro Dragon") return Image.asset(electro_dragon, scale: 3.5);
   if(name == "Yeti") return Image.asset(yeti, scale: 3.5);
@@ -111,6 +111,7 @@ Image getTroopImage(String name, String village) {
   if(name == "Recall Spell") return Image.asset(recall_spell, scale: 2.5);
   if(name == "Overgrowth Spell") return Image.asset(overgrowth_spell, scale: 2.5);
   if(name == "Revive Spell") return Image.asset(revive_spell, scale: 2.5);
+  if(name == "Ice Block Spell") return Image.asset(ice_block_spell, scale: 4);
 
   if(name == "Barbarian King") return Image.asset(barbarianKing, scale: 1.5);
   if(name == "Archer Queen") return Image.asset(archerQueen, scale: 1.5);

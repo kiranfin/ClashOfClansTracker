@@ -105,6 +105,7 @@ const rage_spell = 'lib/utils/img/spells/Rage_Spell.webp';
 const recall_spell = 'lib/utils/img/spells/Recall_Spell.webp';
 const overgrowth_spell = 'lib/utils/img/spells/Overgrowth_Spell.webp';
 const revive_spell = 'lib/utils/img/spells/Revive_Spell.webp';
+const ice_block_spell = 'lib/utils/img/spells/Ice_Block_Spell.webp';
 
 //Pets
 const lassi = 'lib/utils/img/troops/L.A.S.S.I.webp';
