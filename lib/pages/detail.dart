@@ -1800,7 +1800,7 @@ class _DetailPageState extends State<DetailPage> {
                           hoursTextLong: ":",
                           minutesTextLong: ":",
                           secondsTextLong: "",
-                          style: const TextStyle(color: Colors.white, fontFamily: "Poppins", fontSize: 20),
+                          style: const TextStyle(color: Colors.white70, fontFamily: "Poppins", fontSize: 20),
                         ) : null,
                       ],
                     ),

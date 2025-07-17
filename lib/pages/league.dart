@@ -86,22 +86,44 @@ class _LeaguePageState extends State<LeaguePage> {
                                               ),
                                             ],
                                           ),
-                                          Text(
-                                            "Attack Wins: ${snapshot.data[0]["attackWins"]}",
-                                            style: const TextStyle(
-                                              color: Colors.white,
-                                              fontFamily: "Poppins",
-                                              fontSize: 15,
+                                          SizedBox(height: 10),
+                                          Row(
+                                            children: [
+                                              Image.asset(warin, scale: 3),
+                                              SizedBox(width: 5),
+                                              Text(
+                                                "Attack Wins: ${snapshot.data[0]["attackWins"]}",
+                                                style: const TextStyle(
+                                                  color: Colors.white70,
+                                                  fontFamily: "Poppins",
+                                                  fontSize: 15,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          SizedBox(
+                                            width: 150,
+                                            child: Divider(
+                                              height: 10,
+                                              thickness: 1,
+                                              color: Colors.white10,
+                                              indent: 20,
+                                              endIndent: 20,
                                             ),
                                           ),
-                                          SizedBox(height: 5),
-                                          Text(
-                                            "Defense Wins: ${snapshot.data[0]["defenseWins"]}",
-                                            style: const TextStyle(
-                                              color: Colors.white,
-                                              fontFamily: "Poppins",
-                                              fontSize: 15,
-                                            ),
+                                          Row(
+                                            children: [
+                                              Image.asset(warout, scale: 3),
+                                              SizedBox(width: 5),
+                                              Text(
+                                                "Defense Wins: ${snapshot.data[0]["defenseWins"]}",
+                                                style: const TextStyle(
+                                                  color: Colors.white70,
+                                                  fontFamily: "Poppins",
+                                                  fontSize: 15,
+                                                ),
+                                              ),
+                                            ],
                                           ),
                                         ],
                                       ),
@@ -180,29 +202,43 @@ class _LeaguePageState extends State<LeaguePage> {
                                           ),
                                           Row(
                                             children: [
-                                              Icon(Icons.access_time_outlined, color: Colors.white, size: 20),
+                                              Icon(Icons.access_time_outlined, color: Colors.white70, size: 20),
                                               SizedBox(width: 5),
                                               Text("${index == 0? "${DateTime.now().year}-${(DateTime.now().month).toString().padLeft(2, "0")}" : index == 1? (snapshot.data[0]["legendStatistics"]["previousSeason"]!=null? snapshot.data[0]["legendStatistics"]["previousSeason"]["id"] : "-") : (snapshot.data[0]["legendStatistics"]["bestSeason"]!=null? snapshot.data[0]["legendStatistics"]["bestSeason"]["id"] : "-")}",
                                                 style: const TextStyle(
-                                                  color: Colors.white,
+                                                  color: Colors.white70,
                                                   fontFamily: "Poppins",
                                                   fontSize: 15,
                                                 ),
                                               ),
                                             ],
                                           ),
+                                          Divider(
+                                            height: 10,
+                                            thickness: 1,
+                                            color: Colors.white10,
+                                            indent: 20,
+                                            endIndent: 20,
+                                          ),
                                           Row(
                                             children: [
-                                              Icon(Icons.tag, color: Colors.white, size: 20),
+                                              Icon(Icons.tag, color: Colors.white70, size: 20),
                                               SizedBox(width: 5),
                                               Text("${index == 0? (snapshot.data[0]["legendStatistics"]["currentSeason"]!=null?snapshot.data[0]["legendStatistics"]["currentSeason"]["rank"]: "-") : index == 1? (snapshot.data[0]["legendStatistics"]["previousSeason"]!=null? snapshot.data[0]["legendStatistics"]["previousSeason"]["rank"] : "-") : (snapshot.data[0]["legendStatistics"]["bestSeason"]!=null? snapshot.data[0]["legendStatistics"]["bestSeason"]["rank"]: "-")}",
                                                 style: const TextStyle(
-                                                  color: Colors.white,
+                                                  color: Colors.white70,
                                                   fontFamily: "Poppins",
                                                   fontSize: 15,
                                                 ),
                                               ),
                                             ],
+                                          ),
+                                          Divider(
+                                            height: 10,
+                                            thickness: 1,
+                                            color: Colors.white10,
+                                            indent: 20,
+                                            endIndent: 20,
                                           ),
                                           Row(
                                             children: [
@@ -214,7 +250,7 @@ class _LeaguePageState extends State<LeaguePage> {
                                               SizedBox(width: 5),
                                               Text("${index == 0? (snapshot.data[0]["legendStatistics"]["currentSeason"]!=null?snapshot.data[0]["legendStatistics"]["currentSeason"]["trophies"] : "-") : index == 1? (snapshot.data[0]["legendStatistics"]["previousSeason"]!=null? snapshot.data[0]["legendStatistics"]["previousSeason"]["trophies"] : "-") : (snapshot.data[0]["legendStatistics"]["bestSeason"]!=null? snapshot.data[0]["legendStatistics"]["bestSeason"]["trophies"]: "-")}",
                                                 style: const TextStyle(
-                                                  color: Colors.white,
+                                                  color: Colors.white70,
                                                   fontFamily: "Poppins",
                                                   fontSize: 15,
                                                 ),
@@ -326,10 +362,10 @@ class _LeaguePageState extends State<LeaguePage> {
                                           hoursTextLong: ":",
                                           minutesTextLong: ":",
                                           secondsTextLong: "",
-                                          style: const TextStyle(color: Colors.white, fontFamily: "Poppins",fontSize: 20),
+                                          style: const TextStyle(color: Colors.white70, fontFamily: "Poppins",fontSize: 20),
                                         ) : Text("-",
                                             style: const TextStyle(
-                                              color: Colors.white,
+                                              color: Colors.white70,
                                               fontFamily: "Poppins",
                                               fontSize: 20,
                                             ),
@@ -405,7 +441,7 @@ class _LeaguePageState extends State<LeaguePage> {
                                           children: [
                                             snapshot.data[3].isEmpty? Text("Clan Log private",
                                             style: const TextStyle(
-                                              color: Colors.white,
+                                              color: Colors.white70,
                                               fontFamily: "Poppins",
                                               fontSize: 25,
                                               ),
@@ -419,7 +455,7 @@ class _LeaguePageState extends State<LeaguePage> {
                                             hoursTextLong: ":",
                                             minutesTextLong: ":",
                                             secondsTextLong: "",
-                                            style: const TextStyle(color: Colors.white, fontFamily: "Poppins", fontSize: 20),
+                                            style: const TextStyle(color: Colors.white70, fontFamily: "Poppins", fontSize: 20),
                                             ) : null,
                                           ],
                                         ),
@@ -427,7 +463,7 @@ class _LeaguePageState extends State<LeaguePage> {
                                           children: [
                                             Text("${snapshot.data[3]["teamSize"]} vs. ${snapshot.data[3]["teamSize"]}",
                                               style: const TextStyle(
-                                                color: Colors.white,
+                                                color: Colors.white70,
                                                 fontFamily: "Poppins",
                                                 fontSize: 20,
                                               ),

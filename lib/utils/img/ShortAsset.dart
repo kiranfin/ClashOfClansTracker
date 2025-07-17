@@ -211,6 +211,9 @@ const two_star = 'lib/utils/img/2_Stars.webp';
 const three_star = 'lib/utils/img/3_Stars.webp';
 const exp = 'lib/utils/img/XP.webp';
 const star = 'lib/utils/img/Star.webp';
+const clock = 'lib/utils/img/Clock.png';
+const warin = 'lib/utils/img/WarInPreference.png';
+const warout = 'lib/utils/img/WarOutPreference.png';
 const whitestar = 'lib/utils/img/White_Star.png';
 const whitestarempty = 'lib/utils/img/White_Star_Empty.png';
 const capital_gold = 'lib/utils/img/CapitalGold.webp';
@@ -246,5 +249,3 @@ const district_hall2 = 'lib/utils/img/clan_capital_buildings/District_Hall2.webp
 const district_hall3 = 'lib/utils/img/clan_capital_buildings/District_Hall3.webp';
 const district_hall4 = 'lib/utils/img/clan_capital_buildings/District_Hall4.webp';
 const district_hall5 = 'lib/utils/img/clan_capital_buildings/District_Hall5.webp';
-
-const buildings = 'lib/utils/buildings.json';

@@ -158,7 +158,7 @@ class _HomePageState extends State<HomePage> {
                                         ovsnap.data[0], ovsnap.data[1], ovsnap.data[2], ovsnap.data[3]) * 100)
                                         .toStringAsFixed(1)}%",
                                         style: const TextStyle(
-                                            color: Colors.white,
+                                            color: Colors.white70,
                                             fontFamily: "Poppins",
                                             fontSize: 15)),
                                   ],
@@ -231,7 +231,7 @@ class _HomePageState extends State<HomePage> {
                                                   .toStringAsFixed(
                                                   1)}%",
                                                   style: const TextStyle(
-                                                      color: Colors.white,
+                                                      color: Colors.white70,
                                                       fontFamily: "Poppins",
                                                       fontSize: 15)),
                                             ],
@@ -299,7 +299,7 @@ class _HomePageState extends State<HomePage> {
                                               Text("${(DataProvider.awaitTroopsPercent(ovsnap.data[0], ovsnap.data[2]) * 100)
                                                   .toStringAsFixed(1)}%",
                                                   style: const TextStyle(
-                                                      color: Colors.white,
+                                                      color: Colors.white70,
                                                       fontFamily: "Poppins",
                                                       fontSize: 15)),
                                             ],
@@ -367,7 +367,7 @@ class _HomePageState extends State<HomePage> {
                                               Text("${(DataProvider.awaitSpellsPercent(ovsnap.data[0], ovsnap.data[2]) * 100)
                                                   .toStringAsFixed(1)}%",
                                                   style: const TextStyle(
-                                                      color: Colors.white,
+                                                      color: Colors.white70,
                                                       fontFamily: "Poppins",
                                                       fontSize: 15)),
                                             ],
@@ -442,7 +442,7 @@ class _HomePageState extends State<HomePage> {
                                               Text("${(DataProvider.awaitHeroesPercent(ovsnap.data[0], ovsnap.data[2]) * 100)
                                                   .toStringAsFixed(1)}%",
                                                   style: const TextStyle(
-                                                      color: Colors.white,
+                                                      color: Colors.white70,
                                                       fontFamily: "Poppins",
                                                       fontSize: 15)),
                                             ],
@@ -510,7 +510,7 @@ class _HomePageState extends State<HomePage> {
                                               Text("${(DataProvider.awaitEquipmentPercent(ovsnap.data[0], ovsnap.data[3]) * 100)
                                                   .toStringAsFixed(1)}%",
                                                   style: const TextStyle(
-                                                      color: Colors.white,
+                                                      color: Colors.white70,
                                                       fontFamily: "Poppins",
                                                       fontSize: 15)),
                                             ],
@@ -578,7 +578,7 @@ class _HomePageState extends State<HomePage> {
                                               Text("${(DataProvider.awaitAchievementsPercent(ovsnap.data[0]) * 100)
                                                   .toStringAsFixed(1)}%",
                                                   style: const TextStyle(
-                                                      color: Colors.white,
+                                                      color: Colors.white70,
                                                       fontFamily: "Poppins",
                                                       fontSize: 15)),
                                             ],

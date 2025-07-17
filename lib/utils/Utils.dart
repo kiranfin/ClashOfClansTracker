@@ -781,7 +781,7 @@ Widget getFirstClan(Map<String, dynamic> map) {
       ?map["clan"] !=null && map["state"] != "notInWar"? SizedBox(height: 10) : null,
       AutoSizeText(map["clan"] !=null && map["state"] != "notInWar"? map["clan"]["name"] : "-",
         style: const TextStyle(
-          color: Colors.white,
+          color: Colors.white70,
           fontFamily: "Poppins",
           fontSize: 20,
         ),
@@ -790,36 +790,72 @@ Widget getFirstClan(Map<String, dynamic> map) {
       ?map["clan"] !=null && map["state"] != "notInWar"? Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Image.asset(star, scale: 1.5),
-          SizedBox(width: 5),
-          Text("${map["clan"]["stars"]}",
-            style: const TextStyle(
-              color: Colors.white,
-              fontFamily: "Poppins",
-              fontSize: 15,
-            )
+          ClipRRect(
+            borderRadius: BorderRadius.circular(20),
+            child: Container(
+              color: const Color(0xff665d10),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 5.0),
+                child: Row(
+                  children: [
+                    Image.asset(star, scale: 1.5),
+                    SizedBox(width: 5),
+                    Text("${map["clan"]["stars"]}",
+                      style: const TextStyle(
+                        color: Colors.yellow,
+                        fontFamily: "Poppins",
+                        fontSize: 15,
+                      )
+                    ),
+                  ],
+                ),
+              ),
+            ),
           ),
           SizedBox(width: 15),
-          Icon(Icons.percent, color: Colors.white, size: 20),
-          SizedBox(width: 2),
-          Text("${map["clan"]["destructionPercentage"].toStringAsFixed(2)}",
-            style: const TextStyle(
-              color: Colors.white,
-              fontFamily: "Poppins",
-              fontSize: 15,
-            )
+          ClipRRect(
+            borderRadius: BorderRadius.circular(20),
+            child: Container(
+              color: const Color(0xff103757),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 5.0),
+                child: Row(
+                  children: [
+                    Icon(Icons.percent, color: Colors.blueAccent, size: 20),
+                    SizedBox(width: 2),
+                    Text("${map["clan"]["destructionPercentage"].toStringAsFixed(2)}",
+                      style: const TextStyle(
+                        color: Colors.blueAccent,
+                        fontFamily: "Poppins",
+                        fontSize: 15,
+                      )
+                    )
+                  ],
+                ),
+              ),
+            ),
           )
         ],
       ) : null,
+      ?map["clan"] !=null && map["state"] != "notInWar"? SizedBox(height: 5) : null,
       ?map["clan"] !=null && map["state"] != "notInWar"? Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text("Attacks: ${map["clan"]["attacks"]}",
-            style: const TextStyle(
-              color: Colors.white,
-              fontFamily: "Poppins",
-              fontSize: 15,
-            )
+          ClipRRect(
+            borderRadius: BorderRadius.circular(20),
+            child: Container(
+              color: const Color(0xff12470a),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 5.0),
+                child: Text("Attacks: ${map["clan"]["attacks"]}",
+                  style: const TextStyle(
+                    color: Colors.green,
+                    fontFamily: "Poppins",
+                    fontSize: 15,
+                  )
+                ),
+              ),
+            ),
           )
         ],
       ) : null,
@@ -835,7 +871,7 @@ Widget getOpponentClan(Map<String, dynamic> map) {
       ?map["opponent"] !=null && map["state"] != "notInWar"? SizedBox(height: 10) : null,
       AutoSizeText(map["opponent"] !=null && map["state"] != "notInWar"? map["opponent"]["name"] : "-",
         style: const TextStyle(
-          color: Colors.white,
+          color: Colors.white70,
           fontFamily: "Poppins",
           fontSize: 20,
         ),
@@ -844,36 +880,72 @@ Widget getOpponentClan(Map<String, dynamic> map) {
       ?map["opponent"] !=null && map["state"] != "notInWar"? Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Image.asset(star, scale: 1.5),
-          SizedBox(width: 5),
-          Text("${map["opponent"]["stars"]}",
-            style: const TextStyle(
-              color: Colors.white,
-              fontFamily: "Poppins",
-              fontSize: 15,
-            )
+          ClipRRect(
+            borderRadius: BorderRadius.circular(20),
+            child: Container(
+              color: const Color(0xff665d10),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 5.0),
+                child: Row(
+                  children: [
+                    Image.asset(star, scale: 1.5),
+                    SizedBox(width: 5),
+                    Text("${map["opponent"]["stars"]}",
+                      style: const TextStyle(
+                        color: Colors.yellow,
+                        fontFamily: "Poppins",
+                        fontSize: 15,
+                      )
+                    ),
+                  ],
+                ),
+              ),
+            ),
           ),
           SizedBox(width: 12),
-          Icon(Icons.percent, color: Colors.white, size: 20),
-          SizedBox(width: 2),
-          Text("${map["opponent"]["destructionPercentage"].toStringAsFixed(2)}",
-            style: const TextStyle(
-              color: Colors.white,
-              fontFamily: "Poppins",
-              fontSize: 15,
-            )
+          ClipRRect(
+            borderRadius: BorderRadius.circular(20),
+            child: Container(
+              color: const Color(0xff103757),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 5.0),
+                child: Row(
+                  children: [
+                    Icon(Icons.percent, color: Colors.blueAccent, size: 20),
+                    SizedBox(width: 2),
+                    Text("${map["opponent"]["destructionPercentage"].toStringAsFixed(2)}",
+                      style: const TextStyle(
+                        color: Colors.blueAccent,
+                        fontFamily: "Poppins",
+                        fontSize: 15,
+                      )
+                    )
+                  ],
+                ),
+              ),
+            ),
           )
         ],
       ) : null,
+      ?map["opponent"] !=null && map["state"] != "notInWar"? SizedBox(height: 5) : null,
       ?map["opponent"] !=null && map["state"] != "notInWar"? Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text("Attacks: ${map["opponent"]["attacks"]}",
-            style: const TextStyle(
-              color: Colors.white,
-              fontFamily: "Poppins",
-              fontSize: 15,
-            )
+          ClipRRect(
+            borderRadius: BorderRadius.circular(20),
+            child: Container(
+              color: const Color(0xff12470a),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 5.0),
+                child: Text("Attacks: ${map["opponent"]["attacks"]}",
+                  style: const TextStyle(
+                    color: Colors.green,
+                    fontFamily: "Poppins",
+                    fontSize: 15,
+                  )
+                ),
+              ),
+            ),
           )
         ],
       ) : null,
@@ -888,9 +960,9 @@ Text getStateText(String text) {
 }
 
 Text getClanWarStateText(String text) {
-  if(text == "preparation") return Text("Vorbereitung", style: const TextStyle(color: Colors.white, fontFamily: "Poppins", fontSize: 20));
-  if(text == "inWar") return Text("Endet in", style: const TextStyle(color: Colors.white, fontFamily: "Poppins", fontSize: 20));
-  return Text("War vorbei", style: const TextStyle(color: Colors.white, fontFamily: "Poppins", fontSize: 20));
+  if(text == "preparation") return Text("Vorbereitung", style: const TextStyle(color: Colors.white70, fontFamily: "Poppins", fontSize: 20));
+  if(text == "inWar") return Text("Endet in", style: const TextStyle(color: Colors.white70, fontFamily: "Poppins", fontSize: 20));
+  return Text("War vorbei", style: const TextStyle(color: Colors.white70, fontFamily: "Poppins", fontSize: 20));
 }
 
 Row getClanWarStars(Map<String, dynamic> map) {
