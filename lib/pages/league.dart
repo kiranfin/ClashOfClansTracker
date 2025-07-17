@@ -25,7 +25,7 @@ class _LeaguePageState extends State<LeaguePage> {
           gradient: LinearGradient(
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
-              colors: [/*Color(0xFF1C2952)*/Color(0xFF171717), /*Color(0xFF101E6B)*/Color(0xFF171717)]
+              colors: [/*Color(0xFF1C2952)*/Color(0xFF09090B), /*Color(0xFF101E6B)*/Color(0xFF0E1011)]
           )
       ),
       child: Scaffold(
@@ -47,7 +47,15 @@ class _LeaguePageState extends State<LeaguePage> {
                         ClipRRect(
                           borderRadius: BorderRadius.circular(20),
                           child: Container(
-                            color: Colors.black,
+                            decoration: BoxDecoration(
+                              border: Border.all(color: Colors.black),
+                              gradient: LinearGradient(
+                                begin: Alignment.topLeft,
+                                end: Alignment.bottomRight,
+                                colors: [Colors.black, const Color(0xff121415)],
+                              ),
+                              borderRadius: BorderRadius.circular(30),
+                            ),
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Column(
@@ -148,7 +156,15 @@ class _LeaguePageState extends State<LeaguePage> {
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(20),
                                   child: Container(
-                                    color: Colors.black,
+                                    decoration: BoxDecoration(
+                                      border: Border.all(color: Colors.black),
+                                      gradient: LinearGradient(
+                                        begin: Alignment.topLeft,
+                                        end: Alignment.bottomRight,
+                                        colors: [Colors.black, const Color(0xff121415)],
+                                      ),
+                                      borderRadius: BorderRadius.circular(30),
+                                    ),
                                       child: Padding(
                                       padding: const EdgeInsets.all(8.0),
                                       child: Column(
@@ -218,7 +234,15 @@ class _LeaguePageState extends State<LeaguePage> {
                         ?snapshot.data[0]["builderBaseLeague"] != null? ClipRRect(
                           borderRadius: BorderRadius.circular(20),
                           child: Container(
-                            color: Colors.black,
+                            decoration: BoxDecoration(
+                              border: Border.all(color: Colors.black),
+                                gradient: LinearGradient(
+                                  begin: Alignment.topLeft,
+                                  end: Alignment.bottomRight,
+                                  colors: [Colors.black, const Color(0xff121415)],
+                                ),
+                              borderRadius: BorderRadius.circular(30),
+                            ),
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Row(
@@ -255,307 +279,351 @@ class _LeaguePageState extends State<LeaguePage> {
                           ),
                         ) : null,
                         ?snapshot.data[2]["state"] != null? SizedBox(height: 20): null,
-                        ?snapshot.data[2]["state"] != null? Text("Current CWL",
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontFamily: "Poppins",
-                            fontSize: 25,
+                        ?snapshot.data[2]["state"] != null? Container(
+                          decoration: BoxDecoration(
+                            border: Border.all(color: Colors.black),
+                            gradient: LinearGradient(
+                              begin: Alignment.topLeft,
+                              end: Alignment.bottomRight,
+                              colors: [Colors.black, const Color(0xff121415)],
+                            ),
+                            borderRadius: BorderRadius.circular(30),
                           ),
-                        ) : null,
-                        ?snapshot.data[2]["state"] != null? SizedBox(height: 5) : null,
-                        ?snapshot.data[2]["state"] != null? ElevatedButton(
-                          style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all(
-                            Colors.black),
-                            shape: MaterialStateProperty.all<
-                              RoundedRectangleBorder>(
-                              RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(30.0),
-                              )
-                            )
-                          ),
-                          onPressed: () {
-                            Navigator.pushNamed(context, "/detail", arguments: ArgumentClass("cwl", {}));
-                          },
-                          child: Container(
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Utils.getStateText(snapshot.data[2]["state"]),
-                                      SizedBox(width: 5),
-                                      (snapshot.data[2]["state"] == "preparation" || snapshot.data[2]["state"] == "inWar" || snapshot.data[2]["state"] == "warEnded") && (snapshot.data[4].isNotEmpty)? CountDownText(
-                                        due: snapshot.data[2]["state"] == "preparation"? DateTime.parse(snapshot.data[2]["startTime"]) : snapshot.data[2]["state"] == "inWar"? DateTime.parse(snapshot.data[2]["endTime"]) : DateTime.parse(snapshot.data[4]["startTime"]),
-                                        finishedText: "-",
-                                        showLabel: true,
-                                        longDateName: true,
-                                        hoursTextLong: ":",
-                                        minutesTextLong: ":",
-                                        secondsTextLong: "",
-                                        style: const TextStyle(color: Colors.white, fontFamily: "Poppins",fontSize: 20),
-                                      ) : Text("-",
-                                          style: const TextStyle(
-                                            color: Colors.white,
-                                            fontFamily: "Poppins",
-                                            fontSize: 20,
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.transparent,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(30),
+                              ),
+                            ),
+                            onPressed: () {
+                              Navigator.pushNamed(context, "/detail", arguments: ArgumentClass("cwl", {}));
+                            },
+                            child: Container(
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text("Current CWL",
+                                      style: const TextStyle(
+                                        color: Colors.white,
+                                        fontFamily: "Poppins",
+                                        fontSize: 25,
+                                      ),
+                                    ),
+                                    SizedBox(height: 5),
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        Utils.getStateText(snapshot.data[2]["state"]),
+                                        SizedBox(width: 5),
+                                        (snapshot.data[2]["state"] == "preparation" || snapshot.data[2]["state"] == "inWar" || snapshot.data[2]["state"] == "warEnded") && (snapshot.data[4].isNotEmpty)? CountDownText(
+                                          due: snapshot.data[2]["state"] == "preparation"? DateTime.parse(snapshot.data[2]["startTime"]) : snapshot.data[2]["state"] == "inWar"? DateTime.parse(snapshot.data[2]["endTime"]) : DateTime.parse(snapshot.data[4]["startTime"]),
+                                          finishedText: "-",
+                                          showLabel: true,
+                                          longDateName: true,
+                                          hoursTextLong: ":",
+                                          minutesTextLong: ":",
+                                          secondsTextLong: "",
+                                          style: const TextStyle(color: Colors.white, fontFamily: "Poppins",fontSize: 20),
+                                        ) : Text("-",
+                                            style: const TextStyle(
+                                              color: Colors.white,
+                                              fontFamily: "Poppins",
+                                              fontSize: 20,
+                                            ),
+                                          ),
+                                      ],
+                                    ),
+                                    SizedBox(height: 5),
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Flexible(flex: 5, child: Utils.getFirstClan(snapshot.data[2])),
+                                        Flexible(
+                                          flex: 2,
+                                          child: Image.asset(
+                                            'lib/utils/img/CWLIcon.png',
+                                            fit: BoxFit.cover,
+                                            scale: 2.5,
                                           ),
                                         ),
-                                    ],
-                                  ),
-                                  SizedBox(height: 5),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Flexible(flex: 5, child: Utils.getFirstClan(snapshot.data[2])),
-                                      Flexible(
-                                        flex: 2,
-                                        child: Image.asset(
-                                          'lib/utils/img/CWLIcon.png',
-                                          fit: BoxFit.cover,
-                                          scale: 2.5,
-                                        ),
-                                      ),
-                                      Flexible(flex: 5, child: Utils.getOpponentClan(snapshot.data[2])),
-                                    ]
-                                  ),
-                                ],
+                                        Flexible(flex: 5, child: Utils.getOpponentClan(snapshot.data[2])),
+                                      ]
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                           ),
                         ) : null,
                         ?snapshot.data[3]["state"] != null? SizedBox(height: 20) : null,
-                        ?snapshot.data[3]["state"] != null? Text("Current Clan War",
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontFamily: "Poppins",
-                            fontSize: 25,
+                        ?snapshot.data[3]["state"] != null? Container(
+                          decoration: BoxDecoration(
+                            border: Border.all(color: Colors.black),
+                            gradient: LinearGradient(
+                              begin: Alignment.topLeft,
+                              end: Alignment.bottomRight,
+                              colors: [Colors.black, const Color(0xff121415)],
+                            ),
+                            borderRadius: BorderRadius.circular(30),
                           ),
-                        ) : null,
-                        ?snapshot.data[3]["state"] != null? SizedBox(height: 5) : null,
-                        ?snapshot.data[3]["state"] != null? ElevatedButton(
-                          style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all(
-                            Colors.black),
-                            shape: MaterialStateProperty.all<
-                              RoundedRectangleBorder>(
-                                RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(30.0),
-                              )
-                            )
-                          ),
-                          onPressed: () {
-                            Navigator.pushNamed(context, "/detail", arguments: ArgumentClass("clanwar", snapshot.data[3]));
-                          },
-                          child: Container(
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: [
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.transparent,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(30),
+                              ),
+                            ),
+                            onPressed: () {
+                              Navigator.pushNamed(context, "/detail", arguments: ArgumentClass("clanwar", snapshot.data[3]));
+                            },
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 10.0),
+                                  child: Text("Current Clan War",
+                                    style: const TextStyle(
+                                      color: Colors.white,
+                                      fontFamily: "Poppins",
+                                      fontSize: 25,
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(height: 5),
+                                Padding(
+                                  padding: const EdgeInsets.only(bottom: 8.0),
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
                                     Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                       children: [
-                                        snapshot.data[3].isEmpty? Text("Clan Log private",
-                                        style: const TextStyle(
-                                          color: Colors.white,
-                                          fontFamily: "Poppins",
-                                          fontSize: 25,
-                                          ),
-                                        ) : Utils.getClanWarStateText(snapshot.data[3]["state"]),
-                                        SizedBox(width: 5),
-                                        ?snapshot.data[3]["state"] == "preparation" || snapshot.data[3]["state"] == "inWar"? CountDownText(
-                                        due: DateTime.parse(snapshot.data[3]["state"] == "preparation"? snapshot.data[3]["startTime"] : snapshot.data[3]["endTime"]),
-                                        finishedText: "War vorbei!",
-                                        showLabel: true,
-                                        longDateName: true,
-                                        hoursTextLong: ":",
-                                        minutesTextLong: ":",
-                                        secondsTextLong: "",
-                                        style: const TextStyle(color: Colors.white, fontFamily: "Poppins", fontSize: 20),
+                                        Row(
+                                          children: [
+                                            snapshot.data[3].isEmpty? Text("Clan Log private",
+                                            style: const TextStyle(
+                                              color: Colors.white,
+                                              fontFamily: "Poppins",
+                                              fontSize: 25,
+                                              ),
+                                            ) : Utils.getClanWarStateText(snapshot.data[3]["state"]),
+                                            SizedBox(width: 5),
+                                            ?snapshot.data[3]["state"] == "preparation" || snapshot.data[3]["state"] == "inWar"? CountDownText(
+                                            due: DateTime.parse(snapshot.data[3]["state"] == "preparation"? snapshot.data[3]["startTime"] : snapshot.data[3]["endTime"]),
+                                            finishedText: "War vorbei!",
+                                            showLabel: true,
+                                            longDateName: true,
+                                            hoursTextLong: ":",
+                                            minutesTextLong: ":",
+                                            secondsTextLong: "",
+                                            style: const TextStyle(color: Colors.white, fontFamily: "Poppins", fontSize: 20),
+                                            ) : null,
+                                          ],
+                                        ),
+                                        ?snapshot.data[3]["state"] != "notInWar"? Row(
+                                          children: [
+                                            Text("${snapshot.data[3]["teamSize"]} vs. ${snapshot.data[3]["teamSize"]}",
+                                              style: const TextStyle(
+                                                color: Colors.white,
+                                                fontFamily: "Poppins",
+                                                fontSize: 20,
+                                              ),
+                                            ),
+                                          ],
                                         ) : null,
                                       ],
                                     ),
-                                    ?snapshot.data[3]["state"] != "notInWar"? Row(
+                                    SizedBox(height: 5),
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceAround,
                                       children: [
-                                        Text("${snapshot.data[3]["teamSize"]} vs. ${snapshot.data[3]["teamSize"]}",
-                                          style: const TextStyle(
-                                            color: Colors.white,
-                                            fontFamily: "Poppins",
-                                            fontSize: 20,
-                                          ),
-                                        ),
-                                      ],
-                                    ) : null,
+                                        Flexible(flex: 5, child: Utils.getFirstClan(snapshot.data[3])),
+                                        Flexible(flex: 2, child: Image.asset(
+                                        'lib/utils/img/CWLIcon.png',
+                                        fit: BoxFit.cover,
+                                        scale: 2.5,
+                                        )),
+                                        Flexible(flex: 5, child: Utils.getOpponentClan(snapshot.data[3])),
+                                      ]
+                                    ),
                                   ],
-                                ),
-                                SizedBox(height: 5),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                  children: [
-                                    Flexible(flex: 5, child: Utils.getFirstClan(snapshot.data[3])),
-                                    Flexible(flex: 2, child: Image.asset(
-                                    'lib/utils/img/CWLIcon.png',
-                                    fit: BoxFit.cover,
-                                    scale: 2.5,
-                                    )),
-                                    Flexible(flex: 5, child: Utils.getOpponentClan(snapshot.data[3])),
-                                  ]
+                                  ),
                                 ),
                               ],
-                              ),
                             ),
                           ),
                         ) : null,
                         ?snapshot.data[5]["items"].isNotEmpty? SizedBox(height: 20) : null,
-                        ?snapshot.data[5]["items"].isNotEmpty? Text("Clan War Log",
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontFamily: "Poppins",
-                            fontSize: 25,
+                        ?snapshot.data[5]["items"].isNotEmpty? ClipRRect(
+                          borderRadius: BorderRadius.circular(30),
+                          child: Container(
+                              decoration: BoxDecoration(
+                                border: Border.all(color: Colors.black),
+                                gradient: LinearGradient(
+                                  begin: Alignment.topLeft,
+                                  end: Alignment.bottomRight,
+                                  colors: [Colors.black, const Color(0xff121415)],
+                                ),
+                                borderRadius: BorderRadius.circular(30),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text("Clan War Log",
+                                      style: const TextStyle(
+                                        color: Colors.white,
+                                        fontFamily: "Poppins",
+                                        fontSize: 25,
+                                      ),
+                                    ),
+                                    SizedBox(height: 5),
+                                    ListView.builder(
+                                      physics: NeverScrollableScrollPhysics(),
+                                      shrinkWrap: true,
+                                      itemCount: 4,
+                                      itemBuilder: (BuildContext context, int index) {
+                                        List<dynamic> clanwars = Utils.filterClanWars(snapshot.data[5]["items"]);
+                                        return ClipRRect(
+                                          borderRadius: BorderRadius.circular(20),
+                                          child: Container(
+                                            margin: EdgeInsets.symmetric(vertical: 2),
+                                            width: MediaQuery.of(context).size.width - 2 * 20,
+                                            color: clanwars[index]["result"] == "win"? const Color(0xff1b3317) : clanwars[index]["result"] == "lose"? const Color(0xff2b0e0e) : Colors.black,
+                                            child: Padding(
+                                              padding: const EdgeInsets.all(8.0),
+                                              child: Column(
+                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                children: [
+                                                  Row(
+                                                    mainAxisAlignment: MainAxisAlignment.center,
+                                                    children: [
+                                                      Text("${clanwars[index]["teamSize"]} vs. ${clanwars[index]["teamSize"]}", style: const TextStyle(
+                                                        color: Colors.white,
+                                                        fontFamily: "Poppins",
+                                                        fontSize: 15)
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  Row(
+                                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                    children: [
+                                                      Flexible(
+                                                        flex: 5,
+                                                        child: Column(
+                                                          mainAxisAlignment: MainAxisAlignment.end,
+                                                          children: [
+                                                            Row(
+                                                              mainAxisAlignment: MainAxisAlignment.end,
+                                                              children: [
+                                                                AutoSizeText(clanwars[index]["clan"]["name"], style: const TextStyle(
+                                                                  color: Colors.white,
+                                                                  fontFamily: "Poppins",
+                                                                  fontSize: 12),
+                                                                  maxLines: 1,
+                                                                ),
+                                                                SizedBox(width: 5),
+                                                                Image.network(clanwars[index]["clan"]["badgeUrls"]["small"], scale: 2),
+                                                              ],
+                                                            ),
+                                                            Row(
+                                                              mainAxisAlignment: MainAxisAlignment.end,
+                                                              children: [
+                                                                Text("${clanwars[index]["clan"]["stars"]}", style: const TextStyle(
+                                                                  color: Colors.white,
+                                                                  fontFamily: "Poppins",
+                                                                  fontSize: 15)
+                                                                ),
+                                                                SizedBox(width: 2),
+                                                                Image.asset(whitestar, scale: 6),
+                                                              ],
+                                                            )
+                                                          ],
+                                                        ),
+                                                      ),
+                                                      Flexible(
+                                                        flex: 2,
+                                                        child: Image.asset(
+                                                          'lib/utils/img/CWLIcon.png',
+                                                          fit: BoxFit.cover,
+                                                          scale: 4,
+                                                        ),
+                                                      ),
+                                                      Flexible(
+                                                        flex: 5,
+                                                        child: Column(
+                                                          mainAxisAlignment: MainAxisAlignment.start,
+                                                          children: [
+                                                            Row(
+                                                              children: [
+                                                                Image.network(clanwars[index]["opponent"]["badgeUrls"]["small"], scale: 2),
+                                                                SizedBox(width: 5),
+                                                                AutoSizeText(clanwars[index]["opponent"]["name"], style: const TextStyle(
+                                                                  color: Colors.white,
+                                                                  fontFamily: "Poppins",
+                                                                  fontSize: 12),
+                                                                  maxLines: 1,
+                                                                ),
+                                                              ],
+                                                            ),
+                                                            Row(
+                                                              children: [
+                                                                Image.asset(whitestar, scale: 6),
+                                                                SizedBox(width: 2),
+                                                                Text("${clanwars[index]["opponent"]["stars"]}", style: const TextStyle(
+                                                                  color: Colors.white,
+                                                                  fontFamily: "Poppins",
+                                                                  fontSize: 15)
+                                                                ),
+                                                              ],
+                                                            )
+                                                          ],
+                                                        ),
+                                                      )
+                                                    ],
+                                                  ),
+                                                ],
+                                              )
+                                            )
+                                          )
+                                        );
+                                      }
+                                    ),
+                                    ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor: Colors.black,
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(30),
+                                        ),
+                                      ),
+                                      onPressed: () {
+                                        Navigator.pushNamed(context, "/detail", arguments: ArgumentClass("clanwarlog", {}));
+                                      },
+                                      child: Container(
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Column(
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: [
+                                              Text("See all", style: const TextStyle(
+                                                color: Colors.white,
+                                                fontFamily: "Poppins",
+                                                fontSize: 15)
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ]
+                                ),
+                              ),
                           ),
                         ) : null,
-                        ?snapshot.data[5]["items"].isNotEmpty? SizedBox(height: 5) : null,
-                        ?snapshot.data[5]["items"].isNotEmpty? ListView.builder(
-                          physics: NeverScrollableScrollPhysics(),
-                          shrinkWrap: true,
-                          itemCount: 4,
-                          itemBuilder: (BuildContext context, int index) {
-                            List<dynamic> clanwars = Utils.filterClanWars(snapshot.data[5]["items"]);
-                            return ClipRRect(
-                              borderRadius: BorderRadius.circular(20),
-                              child: Container(
-                                margin: EdgeInsets.symmetric(vertical: 2),
-                                width: MediaQuery.of(context).size.width - 2 * 20,
-                                color: clanwars[index]["result"] == "win"? const Color(0xff1b3317) : clanwars[index]["result"] == "lose"? const Color(0xff2b0e0e) : Colors.black,
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Row(
-                                        mainAxisAlignment: MainAxisAlignment.center,
-                                        children: [
-                                          Text("${clanwars[index]["teamSize"]} vs. ${clanwars[index]["teamSize"]}", style: const TextStyle(
-                                            color: Colors.white,
-                                            fontFamily: "Poppins",
-                                            fontSize: 15)
-                                          ),
-                                        ],
-                                      ),
-                                      Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Flexible(
-                                            flex: 5,
-                                            child: Column(
-                                              mainAxisAlignment: MainAxisAlignment.end,
-                                              children: [
-                                                Row(
-                                                  mainAxisAlignment: MainAxisAlignment.end,
-                                                  children: [
-                                                    AutoSizeText(clanwars[index]["clan"]["name"], style: const TextStyle(
-                                                      color: Colors.white,
-                                                      fontFamily: "Poppins",
-                                                      fontSize: 12),
-                                                      maxLines: 1,
-                                                    ),
-                                                    SizedBox(width: 5),
-                                                    Image.network(clanwars[index]["clan"]["badgeUrls"]["small"], scale: 2),
-                                                  ],
-                                                ),
-                                                Row(
-                                                  mainAxisAlignment: MainAxisAlignment.end,
-                                                  children: [
-                                                    Text("${clanwars[index]["clan"]["stars"]}", style: const TextStyle(
-                                                      color: Colors.white,
-                                                      fontFamily: "Poppins",
-                                                      fontSize: 15)
-                                                    ),
-                                                    SizedBox(width: 2),
-                                                    Image.asset(whitestar, scale: 6),
-                                                  ],
-                                                )
-                                              ],
-                                            ),
-                                          ),
-                                          Flexible(
-                                            flex: 2,
-                                            child: Image.asset(
-                                              'lib/utils/img/CWLIcon.png',
-                                              fit: BoxFit.cover,
-                                              scale: 4,
-                                            ),
-                                          ),
-                                          Flexible(
-                                            flex: 5,
-                                            child: Column(
-                                              mainAxisAlignment: MainAxisAlignment.start,
-                                              children: [
-                                                Row(
-                                                  children: [
-                                                    Image.network(clanwars[index]["opponent"]["badgeUrls"]["small"], scale: 2),
-                                                    SizedBox(width: 5),
-                                                    AutoSizeText(clanwars[index]["opponent"]["name"], style: const TextStyle(
-                                                      color: Colors.white,
-                                                      fontFamily: "Poppins",
-                                                      fontSize: 12),
-                                                      maxLines: 1,
-                                                    ),
-                                                  ],
-                                                ),
-                                                Row(
-                                                  children: [
-                                                    Image.asset(whitestar, scale: 6),
-                                                    SizedBox(width: 2),
-                                                    Text("${clanwars[index]["opponent"]["stars"]}", style: const TextStyle(
-                                                      color: Colors.white,
-                                                      fontFamily: "Poppins",
-                                                      fontSize: 15)
-                                                    ),
-                                                  ],
-                                                )
-                                              ],
-                                            ),
-                                          )
-                                        ],
-                                      ),
-                                    ],
-                                  )
-                                )
-                              )
-                            );
-                        }) : null,
-                        SizedBox(height: 3),
-                        ElevatedButton(
-                          style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all(Colors.black),
-                          shape: MaterialStateProperty.all<RoundedRectangleBorder>(RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)))
-                          ),
-                          onPressed: () {
-                            Navigator.pushNamed(context, "/detail", arguments: ArgumentClass("clanwarlog", {}));
-                          },
-                          child: Container(
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text("See all", style: const TextStyle(
-                                    color: Colors.white,
-                                    fontFamily: "Poppins",
-                                    fontSize: 15)
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
                       ],
                     );
                   } else {
@@ -646,35 +714,117 @@ class _LeaguePageState extends State<LeaguePage> {
                         ),
                       ),
                       SizedBox(height: 20),
-                      Text("Current CWL",
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontFamily: "Poppins",
-                          fontSize: 25,
+                      Container(
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.black),
+                          gradient: LinearGradient(
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                            colors: [Colors.black, const Color(0xff121415)],
+                          ),
+                          borderRadius: BorderRadius.circular(30),
+                        ),
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.transparent,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(30),
+                            ),
+                          ),
+                          onPressed: () {
+
+                          },
+                          child: Container(
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text("Current CWL",
+                                    style: const TextStyle(
+                                      color: Colors.white,
+                                      fontFamily: "Poppins",
+                                      fontSize: 25,
+                                    ),
+                                  ),
+                                  SizedBox(height: 5),
+                                  ClipRRect(borderRadius: BorderRadius.circular(10),child: Shimmer(child: Container(width: 150, height: 20))),
+                                  SizedBox(height: 5),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                    children: [
+                                      Flexible(
+                                      flex: 5,
+                                        child: Column(
+                                          children: [
+                                            ClipRRect(borderRadius: BorderRadius.circular(10),child: Shimmer(child: Container(width: 60, height: 60))),
+                                            ClipRRect(borderRadius: BorderRadius.circular(10),child: Shimmer(child: Container(width: 120, height: 20))),
+                                          ],
+                                        ),
+                                      ),
+                                      Flexible(flex: 2, child: Image.asset(
+                                        'lib/utils/img/CWLIcon.png',
+                                        fit: BoxFit.cover,
+                                        scale: 2.5,
+                                      )),
+                                      Flexible(
+                                        flex: 5,
+                                        child: Column(
+                                          children: [
+                                            ClipRRect(borderRadius: BorderRadius.circular(10),child: Shimmer(child: Container(width: 60, height: 60))),
+                                            ClipRRect(borderRadius: BorderRadius.circular(10),child: Shimmer(child: Container(width: 120, height: 20))),
+                                          ],
+                                        ),
+                                      ),
+                                    ]
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
                         ),
                       ),
-                      SizedBox(height: 5),
-                      ElevatedButton(
-                        style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all(Colors.black),
-                          shape: MaterialStateProperty.all<RoundedRectangleBorder>(RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)))
+                      SizedBox(height: 20),
+                      Container(
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.black),
+                          gradient: LinearGradient(
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                            colors: [Colors.black, const Color(0xff121415)],
+                          ),
+                          borderRadius: BorderRadius.circular(30),
                         ),
-                        onPressed: () {
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.transparent,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(30),
+                            ),
+                          ),
+                          onPressed: () {
 
-                        },
-                        child: Container(
+                          },
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
+                                Text("Current Clan War",
+                                  style: const TextStyle(
+                                    color: Colors.white,
+                                    fontFamily: "Poppins",
+                                    fontSize: 25,
+                                  ),
+                                ),
+                                SizedBox(height: 5),
                                 ClipRRect(borderRadius: BorderRadius.circular(10),child: Shimmer(child: Container(width: 150, height: 20))),
                                 SizedBox(height: 5),
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                                   children: [
                                     Flexible(
-                                    flex: 5,
+                                      flex: 5,
                                       child: Column(
                                         children: [
                                           ClipRRect(borderRadius: BorderRadius.circular(10),child: Shimmer(child: Container(width: 60, height: 60))),
@@ -700,67 +850,76 @@ class _LeaguePageState extends State<LeaguePage> {
                                 ),
                               ],
                             ),
-                          ),
+                            ),
                         ),
                       ),
                       SizedBox(height: 20),
-                      Text("Current Clan War",
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontFamily: "Poppins",
-                          fontSize: 25,
-                        ),
-                      ),
-                      SizedBox(height: 5),
-                      ElevatedButton(
-                        style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all(Colors.black),
-                        shape: MaterialStateProperty.all<RoundedRectangleBorder>(RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)))
-                        ),
-                        onPressed: () {
-
-                        },
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(30),
                         child: Container(
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              ClipRRect(borderRadius: BorderRadius.circular(10),child: Shimmer(child: Container(width: 150, height: 20))),
-                              SizedBox(height: 5),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                children: [
-                                  Flexible(
-                                    flex: 5,
-                                    child: Column(
-                                      children: [
-                                        ClipRRect(borderRadius: BorderRadius.circular(10),child: Shimmer(child: Container(width: 60, height: 60))),
-                                        ClipRRect(borderRadius: BorderRadius.circular(10),child: Shimmer(child: Container(width: 120, height: 20))),
-                                      ],
-                                    ),
-                                  ),
-                                  Flexible(flex: 2, child: Image.asset(
-                                    'lib/utils/img/CWLIcon.png',
-                                    fit: BoxFit.cover,
-                                    scale: 2.5,
-                                  )),
-                                  Flexible(
-                                    flex: 5,
-                                    child: Column(
-                                      children: [
-                                        ClipRRect(borderRadius: BorderRadius.circular(10),child: Shimmer(child: Container(width: 60, height: 60))),
-                                        ClipRRect(borderRadius: BorderRadius.circular(10),child: Shimmer(child: Container(width: 120, height: 20))),
-                                      ],
-                                    ),
-                                  ),
-                                ]
-                              ),
-                            ],
+                          decoration: BoxDecoration(
+                          border: Border.all(color: Colors.black),
+                            gradient: LinearGradient(
+                              begin: Alignment.topLeft,
+                              end: Alignment.bottomRight,
+                              colors: [Colors.black, const Color(0xff121415)],
+                            ),
+                          borderRadius: BorderRadius.circular(30),
                           ),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text("Clan War Log",
+                                  style: const TextStyle(
+                                    color: Colors.white,
+                                    fontFamily: "Poppins",
+                                    fontSize: 25,
+                                  ),
+                                ),
+                                SizedBox(height: 5),
+                                ListView.builder(
+                                  physics: NeverScrollableScrollPhysics(),
+                                  shrinkWrap: true,
+                                  itemCount: 4,
+                                  itemBuilder: (BuildContext context, int index) {
+                                    return ListTile(
+                                      title: Shimmer(child: Container(width: 50, height: 15, color: Colors.black45)),
+                                    );
+                                  }
+                                ),
+                                ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: Colors.black,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(30),
+                                    ),
+                                  ),
+                                  onPressed: () {
+
+                                  },
+                                  child: Container(
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          Text("See all", style: const TextStyle(
+                                            color: Colors.white,
+                                            fontFamily: "Poppins",
+                                            fontSize: 15)
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ]
+                            ),
                           ),
                         ),
-                      ),
+                      )
                     ],
                   );
                   }
