@@ -181,7 +181,7 @@ class _DetailPageState extends State<DetailPage> {
                               gradient: LinearGradient(
                                 begin: Alignment.centerLeft,
                                 end: Alignment.centerRight,
-                                colors: [Colors.black, const Color(0xff17191A)],
+                                colors: [Colors.black.withValues(alpha: 0.8), Colors.black.withValues(alpha: 0.6)],
                               ),
                               borderRadius: BorderRadius.circular(30),
                             ),
@@ -519,7 +519,7 @@ class _DetailPageState extends State<DetailPage> {
                       gradient: LinearGradient(
                         begin: Alignment.centerLeft,
                         end: Alignment.centerRight,
-                        colors: [Colors.black, const Color(0xff17191A)],
+                        colors: [Colors.black.withValues(alpha: 0.8), Colors.black.withValues(alpha: 0.6)],
                       ),
                       borderRadius: BorderRadius.circular(30),
                     ),
@@ -547,10 +547,7 @@ class _DetailPageState extends State<DetailPage> {
                                       borderRadius: BorderRadius.circular(20),
                                       child: Container(
                                         decoration: BoxDecoration(
-                                          color: Colors.black,
-                                          border: finallist[ind][index]["level"] ==
-                                              finallist[ind][index]["maxLevel"] ? Border.all(color: Color(
-                                              0xFF532D1F), width: 3) : null,
+                                          color: const Color(0xff101010),
                                           borderRadius: BorderRadius.circular(20),
                                         ),
                                         width: 110,
@@ -576,13 +573,50 @@ class _DetailPageState extends State<DetailPage> {
                                                     Utils.getTroopImage(
                                                         finallist[ind][index]["name"],
                                                         finallist[ind][index]["village"]),
-                                                    Text(
-                                                        (finallist[ind][index]["level"])
-                                                            .toString(),
-                                                        style: const TextStyle(
-                                                            color: Colors.white,
-                                                            fontFamily: "Poppins",
-                                                            fontSize: 35)),
+                                                    finallist[ind][index]["level"] !=
+                                                        finallist[ind][index]["maxLevel"]? ClipRRect(
+                                                      borderRadius: BorderRadius.circular(8),
+                                                      child: Container(
+                                                        decoration: BoxDecoration(
+                                                          border: Border.all(color: Colors.white10, width: 2),
+                                                          borderRadius: BorderRadius.circular(8),
+                                                          color: Colors.black,
+                                                        ),
+                                                        child: Padding(
+                                                          padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                                                          child: Text(
+                                                              (finallist[ind][index]["level"])
+                                                                  .toString(),
+                                                              style: const TextStyle(
+                                                                  color: Colors.white,
+                                                                  fontFamily: "Poppins",
+                                                                  fontSize: 25)),
+                                                        ),
+                                                      ),
+                                                    ) : ClipRRect(
+                                                      borderRadius: BorderRadius.circular(8),
+                                                      child: Container(
+                                                        decoration: BoxDecoration(
+                                                          border: Border.all(color: const Color(0xffD7993E), width: 2),
+                                                          borderRadius: BorderRadius.circular(8),
+                                                          color: const Color(0xffFABD51),
+                                                        ),
+                                                        child: Shimmer(
+                                                          color: Colors.white,
+                                                          child: Padding(
+                                                            padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                                                            child: Text(
+                                                                (finallist[ind][index]["level"])
+                                                                    .toString(),
+                                                                style: const TextStyle(
+                                                                    color: Colors.white,
+                                                                    shadows: [Shadow(color: Colors.black, offset: Offset(0, 1.5))],
+                                                                    fontFamily: "Poppins",
+                                                                    fontSize: 25)),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
                                                   ],
                                                 ),
                                                 Padding(
@@ -597,13 +631,15 @@ class _DetailPageState extends State<DetailPage> {
                                                       ClipRRect(
                                                         borderRadius: BorderRadius.circular(20),
                                                         child: Container(
-                                                          color: const Color(0xff541513),
+                                                          color: const Color(
+                                                              0xff355413),
                                                           child: Padding(
                                                             padding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 5.0),
                                                             child: Text(
-                                                                "Max: ${finallist[ind][index]["maxLevel"]}",
+                                                                "Costs: ${finallist[ind][index]["maxLevel"]}",
                                                                 style: const TextStyle(
-                                                                    color: Colors.redAccent,
+                                                                    color: Color(
+                                                                        0xff82cf43),
                                                                     fontFamily: "Poppins",
                                                                     fontSize: 10)
                                                             ),
@@ -652,7 +688,6 @@ class _DetailPageState extends State<DetailPage> {
                               ),
                             ),
                           ),
-                          SizedBox(height: 20)
                         ],
                       ),
                     ),
@@ -695,8 +730,6 @@ class _DetailPageState extends State<DetailPage> {
                           width: 120,
                           decoration: BoxDecoration(
                             color: Colors.black,
-                            border: finallist[index]["level"] == finallist[index]["maxLevel"]? Border.all(color: Color(
-                                0xFF532D1F), width: 3) : null,
                             borderRadius: BorderRadius.circular(20),
                           ),
                           child: GridTile(
@@ -714,9 +747,49 @@ class _DetailPageState extends State<DetailPage> {
                                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                     children: [
                                       Utils.getTroopImage(finallist[index]["name"], finallist[index]["village"]),
-                                      Text((finallist[index]["level"]).toString(), style: const TextStyle(color: Colors.white,
-                                          fontFamily: "Poppins",
-                                          fontSize: 35)),
+                                      finallist[index]["level"] != finallist[index]["maxLevel"]? ClipRRect(
+                                        borderRadius: BorderRadius.circular(8),
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                            border: Border.all(color: Colors.white10, width: 2),
+                                            borderRadius: BorderRadius.circular(8),
+                                            color: Colors.black,
+                                          ),
+                                          child: Padding(
+                                            padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                                            child: Text(
+                                                (finallist[index]["level"])
+                                                    .toString(),
+                                                style: const TextStyle(
+                                                    color: Colors.white,
+                                                    fontFamily: "Poppins",
+                                                    fontSize: 25)),
+                                          ),
+                                        ),
+                                      ) : ClipRRect(
+                                        borderRadius: BorderRadius.circular(8),
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                            border: Border.all(color: const Color(0xffD7993E), width: 2),
+                                            borderRadius: BorderRadius.circular(8),
+                                            color: const Color(0xffFABD51),
+                                          ),
+                                          child: Shimmer(
+                                            color: Colors.white,
+                                            child: Padding(
+                                              padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                                              child: Text(
+                                                  (finallist[index]["level"])
+                                                      .toString(),
+                                                  style: const TextStyle(
+                                                      color: Colors.white,
+                                                      shadows: [Shadow(color: Colors.black, offset: Offset(0, 1.5))],
+                                                      fontFamily: "Poppins",
+                                                      fontSize: 25)),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
                                     ],
                                   ),
                                   Padding(
@@ -762,7 +835,7 @@ class _DetailPageState extends State<DetailPage> {
                                               ),
                                             ),
                                           ],
-                                        )
+                                        ),
                                       ],
                                     ),
                                   ),
@@ -808,186 +881,331 @@ class _DetailPageState extends State<DetailPage> {
             return ListView.builder(
               itemCount: titles.length,
               itemBuilder: (context, ind) {
-                return Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    ind == 0 && heroes.isNotEmpty || ind == 1 && bhheroes.isNotEmpty || ind == 2 && pets.isNotEmpty? Text(titles[ind], style: const TextStyle(
-                        color: Colors.white,
-                        fontFamily: "Poppins",
-                        fontSize: 30)) : SizedBox(width: 5),
-                        Wrap(
-                        spacing: 5.0,
-                        runSpacing: 5.0,
-                        children: List.generate(finallist[ind].length, (index) {
-                          return Padding(
-                            padding: const EdgeInsets.all(3.0),
-                            child: Utils.isPet(finallist[ind][index]["name"]) && pets.isNotEmpty?
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(20),
-                              child: Container(
-                                width: 120,
-                                color: finallist[ind][index]["level"] ==
-                                    finallist[ind][index]["maxLevel"] ? Color(
-                                    0xFF532D1F) : Colors.black,
-                                child: GridTile(
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(5.0),
-                                    child: Column(
-                                      mainAxisAlignment: MainAxisAlignment.start,
-                                      children: [
-                                        AutoSizeText(
-                                            finallist[ind][index]["name"],
-                                            style: const TextStyle(color: Colors.white, fontFamily: "Poppins", fontSize: 15),
-                                            maxLines: 1
+                return ClipRRect(
+                  borderRadius: BorderRadius.circular(20),
+                  child: Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.black),
+                        gradient: LinearGradient(
+                          begin: Alignment.centerLeft,
+                          end: Alignment.centerRight,
+                          colors: [Colors.black.withValues(alpha: 0.8), Colors.black.withValues(alpha: 0.6)],
+                        ),
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(3.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            ind == 0 && heroes.isNotEmpty || ind == 1 && bhheroes.isNotEmpty || ind == 2 && pets.isNotEmpty? Padding(
+                              padding: const EdgeInsets.only(left: 8.0, top: 5.0),
+                              child: Text(titles[ind], style: const TextStyle(
+                                  color: Colors.white,
+                                  fontFamily: "Poppins",
+                                  fontSize: 30)),
+                            ) : SizedBox(width: 5),
+                                Wrap(
+                                spacing: 5.0,
+                                runSpacing: 5.0,
+                                children: List.generate(finallist[ind].length, (index) {
+                                  return Padding(
+                                    padding: const EdgeInsets.all(3.0),
+                                    child: Utils.isPet(finallist[ind][index]["name"]) && pets.isNotEmpty?
+                                    ClipRRect(
+                                      borderRadius: BorderRadius.circular(20),
+                                      child: Container(
+                                        width: 110,
+                                        decoration: BoxDecoration(
+                                          color: const Color(0xff101010),
+                                          borderRadius: BorderRadius.circular(20),
                                         ),
-                                        Row(
-                                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                          children: [
-                                            Utils.getTroopImage(finallist[ind][index]["name"], finallist[ind][index]["village"]),
-                                            Text((finallist[ind][index]["level"]).toString(), style: const TextStyle(color: Colors.white,
-                                                fontFamily: "Poppins",
-                                                fontSize: 35)),
-                                          ],
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.only(left: 10.0),
-                                          child: Column(
-                                            mainAxisAlignment: MainAxisAlignment.start,
-                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                            children: [
-                                              Text("Max: ${finallist[ind][index]["maxLevel"]}", style: const TextStyle(color: Colors.white,
-                                                  fontFamily: "Poppins",
-                                                  fontSize: 10)),
-                                              Row(
-                                                children: [
-                                                  Icon(Icons.access_time, color: Colors.white, size: 14),
-                                                  SizedBox(width: 5),
-                                                  Text("1d 12h", style: const TextStyle(color: Colors.white,
-                                                      fontFamily: "Poppins",
-                                                      fontSize: 10)),
-                                                ],
-                                              )
-                                            ],
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            )
-                            : ind == 0 && heroes.isNotEmpty || ind == 1 && bhheroes.isNotEmpty? ClipRRect(
-                              borderRadius: BorderRadius.circular(20),
-                              child: Container(
-                                width: 180,
-                                color: finallist[ind][index]["level"] ==
-                                    finallist[ind][index]["maxLevel"] ? Color(
-                                    0xFF532D1F) : Colors.black,
-                                child: GridTile(
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(5.0),
-                                    child: Column(
-                                      mainAxisAlignment: MainAxisAlignment
-                                          .start,
-                                      children: [
-                                        AutoSizeText(
-                                            finallist[ind][index]["name"],
-                                            style: const TextStyle(
-                                                color: Colors.white,
-                                                fontFamily: "Poppins",
-                                                fontSize: 20),
-                                            maxLines: 1
-                                        ),
-                                        Row(
-                                          mainAxisAlignment: MainAxisAlignment
-                                              .spaceEvenly,
-                                          children: [
-                                            Utils.getTroopImage(
-                                                finallist[ind][index]["name"],
-                                                finallist[ind][index]["village"]),
-                                            Text((finallist[ind][index]["level"])
-                                                .toString(),
-                                                style: const TextStyle(
-                                                    color: Colors.white,
-                                                    fontFamily: "Poppins",
-                                                    fontSize: 35)),
-                                          ],
-                                        ),
-                                        SizedBox(height: 5),
-                                        Padding(
-                                          padding: const EdgeInsets.only(
-                                              left: 15.0, right: 15.0),
-                                          child: Row(
-                                            mainAxisAlignment: MainAxisAlignment
-                                                .spaceBetween,
-                                            children: [
-                                              Column(
-                                                mainAxisAlignment: MainAxisAlignment
-                                                    .start,
-                                                crossAxisAlignment: CrossAxisAlignment
-                                                    .start,
-                                                children: [
-                                                  Text(
-                                                      "Max: ${finallist[ind][index]["maxLevel"]}",
-                                                      style: const TextStyle(
+                                        child: GridTile(
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(5.0),
+                                            child: Column(
+                                              mainAxisAlignment: MainAxisAlignment.start,
+                                              children: [
+                                                AutoSizeText(
+                                                    finallist[ind][index]["name"],
+                                                    style: const TextStyle(color: Colors.white, fontFamily: "Poppins", fontSize: 15),
+                                                    maxLines: 1
+                                                ),
+                                                Row(
+                                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                                  children: [
+                                                    Utils.getTroopImage(finallist[ind][index]["name"], finallist[ind][index]["village"]),
+                                                    finallist[ind][index]["level"] != finallist[ind][index]["maxLevel"]? ClipRRect(
+                                                      borderRadius: BorderRadius.circular(8),
+                                                      child: Container(
+                                                        decoration: BoxDecoration(
+                                                          border: Border.all(color: Colors.white10, width: 2),
+                                                          borderRadius: BorderRadius.circular(8),
+                                                          color: Colors.black,
+                                                        ),
+                                                        child: Padding(
+                                                          padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                                                          child: Text(
+                                                              (finallist[ind][index]["level"])
+                                                                  .toString(),
+                                                              style: const TextStyle(
+                                                                  color: Colors.white,
+                                                                  fontFamily: "Poppins",
+                                                                  fontSize: 25)),
+                                                        ),
+                                                      ),
+                                                    ) : ClipRRect(
+                                                      borderRadius: BorderRadius.circular(8),
+                                                      child: Container(
+                                                        decoration: BoxDecoration(
+                                                          border: Border.all(color: const Color(0xffD7993E), width: 2),
+                                                          borderRadius: BorderRadius.circular(8),
+                                                          color: const Color(0xffFABD51),
+                                                        ),
+                                                        child: Shimmer(
                                                           color: Colors.white,
-                                                          fontFamily: "Poppins",
-                                                          fontSize: 15)),
-                                                  Row(
+                                                          child: Padding(
+                                                            padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                                                            child: Text(
+                                                                (finallist[ind][index]["level"])
+                                                                    .toString(),
+                                                                style: const TextStyle(
+                                                                    color: Colors.white,
+                                                                    shadows: [Shadow(color: Colors.black, offset: Offset(0, 1.5))],
+                                                                    fontFamily: "Poppins",
+                                                                    fontSize: 25)),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                                Padding(
+                                                  padding: const EdgeInsets.only(left: 10.0),
+                                                  child: Column(
+                                                    mainAxisAlignment: MainAxisAlignment.start,
+                                                    crossAxisAlignment: CrossAxisAlignment.start,
                                                     children: [
-                                                      Icon(Icons.access_time,
-                                                          color: Colors.white,
-                                                          size: 14),
-                                                      SizedBox(width: 5),
-                                                      Text("1d 12h",
-                                                          style: const TextStyle(
-                                                              color: Colors
-                                                                  .white,
-                                                              fontFamily: "Poppins",
-                                                              fontSize: 15)),
-                                                    ],
-                                                  )
-                                                ],
-                                              ),
-                                              finallist[ind][index]["equipment"] != null? Column(
-                                                mainAxisAlignment: MainAxisAlignment
-                                                    .start,
-                                                crossAxisAlignment: CrossAxisAlignment
-                                                    .end,
-                                                children: [
-                                                  Row(
-                                                    children: [
-                                                      Utils.isNormalHero(
-                                                          finallist[ind][index]["name"])
-                                                          ? Utils.getTroopImage(
-                                                          finallist[ind][index]["equipment"][0]["name"],
-                                                          finallist[ind][index]["equipment"][0]["village"])
-                                                          : Container(),
-                                                      Utils.isNormalHero(
-                                                          finallist[ind][index]["name"])
-                                                          ? Utils.getTroopImage(
-                                                          finallist[ind][index]["equipment"][1]["name"],
-                                                          finallist[ind][index]["equipment"][1]["village"])
-                                                          : Container(),
+                                                      SizedBox(height: 5),
+                                                      ClipRRect(
+                                                        borderRadius: BorderRadius.circular(20),
+                                                        child: Container(
+                                                          color: const Color(0xff541513),
+                                                          child: Padding(
+                                                            padding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 5.0),
+                                                            child: Text("Max: ${finallist[ind][index]["maxLevel"]}", style: const TextStyle(color: Colors.white70,
+                                                                fontFamily: "Poppins",
+                                                                fontSize: 10)
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      SizedBox(height: 5),
+                                                      Row(
+                                                        children: [
+                                                          ClipRRect(
+                                                            borderRadius: BorderRadius.circular(20),
+                                                            child: Container(
+                                                              color: const Color(
+                                                                  0xff132054),
+                                                              child: Padding(
+                                                                padding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 5.0),
+                                                                child: Row(
+                                                                  children: [
+                                                                    Icon(Icons.access_time, color: Colors.white70, size: 14),
+                                                                    SizedBox(width: 5),
+                                                                    Text("1d 12h", style: const TextStyle(color: Colors.white70,
+                                                                        fontFamily: "Poppins",
+                                                                        fontSize: 10)),
+                                                                  ],
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
                                                     ],
                                                   ),
-                                                ],
-                                              ) : SizedBox(width: 5)
-                                            ],
+                                                ),
+                                              ],
+                                            ),
                                           ),
                                         ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
+                                      ),
+                                    )
+                                    : ind == 0 && heroes.isNotEmpty || ind == 1 && bhheroes.isNotEmpty? ClipRRect(
+                                      borderRadius: BorderRadius.circular(20),
+                                      child: Container(
+                                        width: 170,
+                                        decoration: BoxDecoration(
+                                          color: const Color(0xff101010),
+                                          borderRadius: BorderRadius.circular(20),
+                                        ),
+                                        child: GridTile(
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(5.0),
+                                            child: Column(
+                                              mainAxisAlignment: MainAxisAlignment
+                                                  .start,
+                                              children: [
+                                                AutoSizeText(
+                                                    finallist[ind][index]["name"],
+                                                    style: const TextStyle(
+                                                        color: Colors.white,
+                                                        fontFamily: "Poppins",
+                                                        fontSize: 20),
+                                                    maxLines: 1
+                                                ),
+                                                Row(
+                                                  mainAxisAlignment: MainAxisAlignment
+                                                      .spaceEvenly,
+                                                  children: [
+                                                    Utils.getTroopImage(
+                                                        finallist[ind][index]["name"],
+                                                        finallist[ind][index]["village"]),
+                                                    Column(
+                                                      children: [
+                                                        finallist[ind][index]["level"] != finallist[ind][index]["maxLevel"]? ClipRRect(
+                                                          borderRadius: BorderRadius.circular(8),
+                                                          child: Container(
+                                                            decoration: BoxDecoration(
+                                                              border: Border.all(color: Colors.white10, width: 2),
+                                                              borderRadius: BorderRadius.circular(8),
+                                                              color: Colors.black,
+                                                            ),
+                                                            child: Padding(
+                                                              padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                                                              child: Text(
+                                                                  (finallist[ind][index]["level"])
+                                                                      .toString(),
+                                                                  style: const TextStyle(
+                                                                      color: Colors.white,
+                                                                      fontFamily: "Poppins",
+                                                                      fontSize: 25)),
+                                                            ),
+                                                          ),
+                                                        ) : ClipRRect(
+                                                          borderRadius: BorderRadius.circular(8),
+                                                          child: Container(
+                                                            decoration: BoxDecoration(
+                                                              border: Border.all(color: const Color(0xffD7993E), width: 2),
+                                                              borderRadius: BorderRadius.circular(8),
+                                                              color: const Color(0xffFABD51),
+                                                            ),
+                                                            child: Shimmer(
+                                                              color: Colors.white,
+                                                              child: Padding(
+                                                                padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                                                                child: Text(
+                                                                    (finallist[ind][index]["level"])
+                                                                        .toString(),
+                                                                    style: const TextStyle(
+                                                                        color: Colors.white,
+                                                                        shadows: [Shadow(color: Colors.black, offset: Offset(0, 1.5))],
+                                                                        fontFamily: "Poppins",
+                                                                        fontSize: 25)),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        SizedBox(height: 5),
+                                                        ?finallist[ind][index]["equipment"] != null? Column(
+                                                          mainAxisAlignment: MainAxisAlignment
+                                                                  .start,
+                                                          crossAxisAlignment: CrossAxisAlignment
+                                                              .end,
+                                                          children: [
+                                                            Row(
+                                                              children: [
+                                                                Utils.isNormalHero(
+                                                                finallist[ind][index]["name"]) ? Utils.getTroopImage(
+                                                                    finallist[ind][index]["equipment"][0]["name"],
+                                                                    finallist[ind][index]["equipment"][0]["village"])
+                                                                    : Container(),
+                                                                Utils.isNormalHero(
+                                                                    finallist[ind][index]["name"])
+                                                                    ? Utils.getTroopImage(
+                                                                    finallist[ind][index]["equipment"][1]["name"],
+                                                                    finallist[ind][index]["equipment"][1]["village"])
+                                                                    : Container(),
+                                                              ],
+                                                            ),
+                                                          ],
+                                                        ) : null
+                                                      ],
+                                                    ),
+                                                  ],
+                                                ),
+                                                SizedBox(height: 5),
+                                                Padding(
+                                                  padding: const EdgeInsets.only(
+                                                      left: 15.0, right: 15.0),
+                                                  child: Row(
+                                                    mainAxisAlignment: MainAxisAlignment
+                                                        .spaceBetween,
+                                                    children: [
+                                                      Column(
+                                                        mainAxisAlignment: MainAxisAlignment
+                                                            .start,
+                                                        crossAxisAlignment: CrossAxisAlignment
+                                                            .start,
+                                                        children: [
+                                                          SizedBox(height: 5),
+                                                          ClipRRect(
+                                                            borderRadius: BorderRadius.circular(20),
+                                                            child: Container(
+                                                              color: const Color(0xff541513),
+                                                              child: Padding(
+                                                                padding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 5.0),
+                                                                child: Text("Max: ${finallist[ind][index]["maxLevel"]}", style: const TextStyle(color: Colors.white70,
+                                                                    fontFamily: "Poppins",
+                                                                    fontSize: 10)
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                          SizedBox(height: 5),
+                                                          ClipRRect(
+                                                            borderRadius: BorderRadius.circular(20),
+                                                            child: Container(
+                                                              color: const Color(
+                                                                  0xff132054),
+                                                              child: Padding(
+                                                                padding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 5.0),
+                                                                child: Row(
+                                                                  children: [
+                                                                    Icon(Icons.access_time, color: Colors.white70, size: 14),
+                                                                    SizedBox(width: 5),
+                                                                    Text("1d 12h", style: const TextStyle(color: Colors.white70,
+                                                                        fontFamily: "Poppins",
+                                                                        fontSize: 10)),
+                                                                  ],
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      )
+                                                    ],
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ) : SizedBox(height: 5),
+                                  );
+                                }
                               ),
-                            ) : SizedBox(height: 5),
-                          );
-                        }
+                            ),
+                          ]
+                        ),
                       ),
                     ),
-                    SizedBox(height: 20)
-                  ]
+                  ),
                 );
               }
             );
@@ -1020,129 +1238,196 @@ class _DetailPageState extends State<DetailPage> {
             return ListView.builder(
               itemCount: titles.length,
               itemBuilder: (context, ind) {
-                return Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(titles[ind], style: const TextStyle(
-                        color: Colors.white,
-                        fontFamily: "Poppins",
-                        fontSize: 30)
-                    ),
-                    Container(
-                      child: Wrap(
-                          spacing: 5.0,
-                          runSpacing: 5.0,
-                          children: List.generate(finallist[ind].length, (index) {
-                            return Padding(
-                              padding: const EdgeInsets.all(3.0),
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(20),
-                                child: Container(
-                                  width: 120,
-                                  color: finallist[ind][index]["level"] ==
-                                      finallist[ind][index]["maxLevel"] ? Color(
-                                      0xFF532D1F) : Colors.black,
-                                  child: GridTile(
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(5.0),
-                                      child: Column(
-                                        mainAxisAlignment: MainAxisAlignment
-                                            .start,
-                                        children: [
-                                          AutoSizeText(
-                                              finallist[ind][index]["name"],
-                                              style: const TextStyle(
-                                                  color: Colors.white,
-                                                  fontFamily: "Poppins",
-                                                  fontSize: 15),
-                                              maxLines: 1
+                return ClipRRect(
+                  borderRadius: BorderRadius.circular(20),
+                  child: Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.black),
+                        gradient: LinearGradient(
+                          begin: Alignment.centerLeft,
+                          end: Alignment.centerRight,
+                          colors: [Colors.black.withValues(alpha: 0.8), Colors.black.withValues(alpha: 0.6)],
+                        ),
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(3.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(left: 8.0, top: 5.0),
+                              child: Text(titles[ind], style: const TextStyle(
+                                  color: Colors.white,
+                                  fontFamily: "Poppins",
+                                  fontSize: 30)
+                              ),
+                            ),
+                            Container(
+                              child: Wrap(
+                                  spacing: 5.0,
+                                  runSpacing: 5.0,
+                                  children: List.generate(finallist[ind].length, (index) {
+                                    return Padding(
+                                      padding: const EdgeInsets.all(3.0),
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(20),
+                                        child: Container(
+                                          width: 110,
+                                          decoration: BoxDecoration(
+                                            color: const Color(0xff101010),
+                                            borderRadius: BorderRadius.circular(20),
                                           ),
-                                          Row(
-                                            mainAxisAlignment: MainAxisAlignment
-                                                .spaceEvenly,
-                                            children: [
-                                              Utils.getTroopImage(
-                                                  finallist[ind][index]["name"],
-                                                  finallist[ind][index]["village"]),
-                                              Text((finallist[ind][index]["level"])
-                                                  .toString(),
-                                                  style: const TextStyle(
-                                                      color: Colors.white,
-                                                      fontFamily: "Poppins",
-                                                      fontSize: 35)),
-                                            ],
-                                          ),
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                                left: 5.0),
-                                            child: Column(
-                                              mainAxisAlignment: MainAxisAlignment
-                                                  .start,
-                                              crossAxisAlignment: CrossAxisAlignment
-                                                  .start,
-                                              children: [
-                                                Text(
-                                                    "Max: ${finallist[ind][index]["maxLevel"]}",
-                                                    style: const TextStyle(
-                                                        color: Colors.white,
-                                                        fontFamily: "Poppins",
-                                                        fontSize: 10)),
-                                                Row(
-                                                  children: [
-                                                    Image.asset(
-                                                        shiny_ore, scale: 10),
-                                                    SizedBox(width: 2),
-                                                    Text(Utils
-                                                        .getNextShiny(
-                                                        finallist[ind][index])
-                                                        .toString(),
-                                                        style: const TextStyle(
+                                          child: GridTile(
+                                            child: Padding(
+                                              padding: const EdgeInsets.all(5.0),
+                                              child: Column(
+                                                mainAxisAlignment: MainAxisAlignment
+                                                    .start,
+                                                children: [
+                                                  AutoSizeText(
+                                                      finallist[ind][index]["name"],
+                                                      style: const TextStyle(
+                                                          color: Colors.white,
+                                                          fontFamily: "Poppins",
+                                                          fontSize: 15),
+                                                      maxLines: 1
+                                                  ),
+                                                  Row(
+                                                    mainAxisAlignment: MainAxisAlignment
+                                                        .spaceEvenly,
+                                                    children: [
+                                                      Utils.getTroopImage(
+                                                          finallist[ind][index]["name"],
+                                                          finallist[ind][index]["village"]),
+                                                      finallist[ind][index]["level"] != finallist[ind][index]["maxLevel"]? ClipRRect(
+                                                        borderRadius: BorderRadius.circular(8),
+                                                        child: Container(
+                                                          decoration: BoxDecoration(
+                                                            border: Border.all(color: Colors.white10, width: 2),
+                                                            borderRadius: BorderRadius.circular(8),
+                                                            color: Colors.black,
+                                                          ),
+                                                          child: Padding(
+                                                            padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                                                            child: Text(
+                                                                (finallist[ind][index]["level"])
+                                                                    .toString(),
+                                                                style: const TextStyle(
+                                                                    color: Colors.white,
+                                                                    fontFamily: "Poppins",
+                                                                    fontSize: 25)),
+                                                          ),
+                                                        ),
+                                                      ) : ClipRRect(
+                                                        borderRadius: BorderRadius.circular(8),
+                                                        child: Container(
+                                                          decoration: BoxDecoration(
+                                                            border: Border.all(color: const Color(0xffD7993E), width: 2),
+                                                            borderRadius: BorderRadius.circular(8),
+                                                            color: const Color(0xffFABD51),
+                                                          ),
+                                                          child: Shimmer(
                                                             color: Colors.white,
-                                                            fontFamily: "Poppins",
-                                                            fontSize: 10)),
-                                                    SizedBox(width: 3),
-                                                    Image.asset(
-                                                        glowy_ore, scale: 10),
-                                                    SizedBox(width: 2),
-                                                    Text(Utils
-                                                        .getNextGlowy(
-                                                        finallist[ind][index])
-                                                        .toString(),
-                                                        style: const TextStyle(
-                                                            color: Colors.white,
-                                                            fontFamily: "Poppins",
-                                                            fontSize: 10)),
-                                                    SizedBox(width: 3),
-                                                    Image.asset(
-                                                        starry_ore, scale: 10),
-                                                    SizedBox(width: 2),
-                                                    Text(Utils
-                                                        .getNextStarry(
-                                                        finallist[ind][index])
-                                                        .toString(),
-                                                        style: const TextStyle(
-                                                            color: Colors.white,
-                                                            fontFamily: "Poppins",
-                                                            fontSize: 10)),
-                                                    SizedBox(width: 3),
-                                                  ],
-                                                )
-                                              ],
+                                                            child: Padding(
+                                                              padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                                                              child: Text(
+                                                                  (finallist[ind][index]["level"])
+                                                                      .toString(),
+                                                                  style: const TextStyle(
+                                                                      color: Colors.white,
+                                                                      shadows: [Shadow(color: Colors.black, offset: Offset(0, 1.5))],
+                                                                      fontFamily: "Poppins",
+                                                                      fontSize: 25)),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  Padding(
+                                                    padding: const EdgeInsets.only(
+                                                        left: 5.0),
+                                                    child: Column(
+                                                      mainAxisAlignment: MainAxisAlignment
+                                                          .start,
+                                                      crossAxisAlignment: CrossAxisAlignment
+                                                          .start,
+                                                      children: [
+                                                        Text(
+                                                            "Max: ${finallist[ind][index]["maxLevel"]}",
+                                                            style: const TextStyle(
+                                                                color: Colors.white,
+                                                                fontFamily: "Poppins",
+                                                                fontSize: 10)),
+                                                        Row(
+                                                          children: [
+                                                            Image.asset(
+                                                                shiny_ore, scale: 10),
+                                                            SizedBox(width: 2),
+                                                            Text(Utils
+                                                                .getNextShiny(
+                                                                finallist[ind][index])
+                                                                .toString(),
+                                                                style: const TextStyle(
+                                                                    color: Colors.white,
+                                                                    fontFamily: "Poppins",
+                                                                    fontSize: 10)),
+                                                          ],
+                                                        ),
+                                                        SizedBox(height: 3),
+                                                        Row(
+                                                          children: [
+                                                            Image.asset(
+                                                                glowy_ore, scale: 10),
+                                                            SizedBox(width: 2),
+                                                            Text(Utils
+                                                                .getNextGlowy(
+                                                                finallist[ind][index])
+                                                                .toString(),
+                                                                style: const TextStyle(
+                                                                    color: Colors.white,
+                                                                    fontFamily: "Poppins",
+                                                                    fontSize: 10)),
+                                                          ],
+                                                        ),
+                                                        SizedBox(height: 3),
+                                                        Row(
+                                                          children: [
+                                                            Image.asset(
+                                                                starry_ore, scale: 10),
+                                                            SizedBox(width: 2),
+                                                            Text(Utils
+                                                                .getNextStarry(
+                                                                finallist[ind][index])
+                                                                .toString(),
+                                                                style: const TextStyle(
+                                                                    color: Colors.white,
+                                                                    fontFamily: "Poppins",
+                                                                    fontSize: 10)),
+                                                          ],
+                                                        )
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
                                             ),
                                           ),
-                                        ],
+                                        ),
                                       ),
-                                    ),
-                                  ),
-                                ),
+                                    );
+                                  }
+                                )
                               ),
-                            );
-                          }
-                        )
+                            ),
+                          ],
+                        ),
                       ),
                     ),
-                    SizedBox(height: 20)
-                  ],
+                  ),
                 );
               }
             );

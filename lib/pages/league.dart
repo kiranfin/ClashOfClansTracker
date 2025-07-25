@@ -52,7 +52,7 @@ class _LeaguePageState extends State<LeaguePage> {
                               gradient: LinearGradient(
                                 begin: Alignment.topLeft,
                                 end: Alignment.bottomRight,
-                                colors: [Colors.black, const Color(0xff121415)],
+                                colors: [Colors.black.withValues(alpha: 0.8), Colors.black.withValues(alpha: 0.6)],
                               ),
                               borderRadius: BorderRadius.circular(30),
                             ),
@@ -183,7 +183,7 @@ class _LeaguePageState extends State<LeaguePage> {
                                       gradient: LinearGradient(
                                         begin: Alignment.topLeft,
                                         end: Alignment.bottomRight,
-                                        colors: [Colors.black, const Color(0xff121415)],
+                                        colors: [Colors.black.withValues(alpha: 0.8), Colors.black.withValues(alpha: 0.6)],
                                       ),
                                       borderRadius: BorderRadius.circular(30),
                                     ),
@@ -275,7 +275,7 @@ class _LeaguePageState extends State<LeaguePage> {
                                 gradient: LinearGradient(
                                   begin: Alignment.topLeft,
                                   end: Alignment.bottomRight,
-                                  colors: [Colors.black, const Color(0xff121415)],
+                                  colors: [Colors.black.withValues(alpha: 0.8), Colors.black.withValues(alpha: 0.6)],
                                 ),
                               borderRadius: BorderRadius.circular(30),
                             ),
@@ -321,7 +321,7 @@ class _LeaguePageState extends State<LeaguePage> {
                             gradient: LinearGradient(
                               begin: Alignment.topLeft,
                               end: Alignment.bottomRight,
-                              colors: [Colors.black, const Color(0xff121415)],
+                  colors: [Colors.black.withValues(alpha: 0.8), Colors.black.withValues(alpha: 0.6)],
                             ),
                             borderRadius: BorderRadius.circular(30),
                           ),
@@ -401,7 +401,7 @@ class _LeaguePageState extends State<LeaguePage> {
                             gradient: LinearGradient(
                               begin: Alignment.topLeft,
                               end: Alignment.bottomRight,
-                              colors: [Colors.black, const Color(0xff121415)],
+                              colors: [Colors.black.withValues(alpha: 0.8), Colors.black.withValues(alpha: 0.6)],
                             ),
                             borderRadius: BorderRadius.circular(30),
                           ),
@@ -501,7 +501,7 @@ class _LeaguePageState extends State<LeaguePage> {
                                 gradient: LinearGradient(
                                   begin: Alignment.topLeft,
                                   end: Alignment.bottomRight,
-                                  colors: [Colors.black, const Color(0xff121415)],
+                                  colors: [Colors.black.withValues(alpha: 0.8), Colors.black.withValues(alpha: 0.6)],
                                 ),
                                 borderRadius: BorderRadius.circular(30),
                               ),
@@ -756,7 +756,7 @@ class _LeaguePageState extends State<LeaguePage> {
                           gradient: LinearGradient(
                             begin: Alignment.topLeft,
                             end: Alignment.bottomRight,
-                            colors: [Colors.black, const Color(0xff121415)],
+                            colors: [Colors.black.withValues(alpha: 0.8), Colors.black.withValues(alpha: 0.6)],
                           ),
                           borderRadius: BorderRadius.circular(30),
                         ),
@@ -827,7 +827,7 @@ class _LeaguePageState extends State<LeaguePage> {
                           gradient: LinearGradient(
                             begin: Alignment.topLeft,
                             end: Alignment.bottomRight,
-                            colors: [Colors.black, const Color(0xff121415)],
+                            colors: [Colors.black.withValues(alpha: 0.8), Colors.black.withValues(alpha: 0.6)],
                           ),
                           borderRadius: BorderRadius.circular(30),
                         ),
@@ -898,7 +898,7 @@ class _LeaguePageState extends State<LeaguePage> {
                             gradient: LinearGradient(
                               begin: Alignment.topLeft,
                               end: Alignment.bottomRight,
-                              colors: [Colors.black, const Color(0xff121415)],
+                              colors: [Colors.black.withValues(alpha: 0.8), Colors.black.withValues(alpha: 0.6)],
                             ),
                           borderRadius: BorderRadius.circular(30),
                           ),

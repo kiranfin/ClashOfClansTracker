@@ -57,7 +57,7 @@ class _HomePageState extends State<HomePage> {
                               gradient: LinearGradient(
                                 begin: Alignment.topLeft,
                                 end: Alignment.bottomRight,
-                                colors: [Colors.black, const Color(0xff121415)],
+                                colors: [Colors.black.withValues(alpha: 0.8), Colors.black.withValues(alpha: 0.6)],
                               ),
                               borderRadius: BorderRadius.circular(30),
                             ),
@@ -195,7 +195,7 @@ class _HomePageState extends State<HomePage> {
                                     gradient: LinearGradient(
                                       begin: Alignment.topLeft,
                                       end: Alignment.bottomRight,
-                                      colors: [Colors.black, const Color(0xff17191A)],
+                                      colors: [Colors.black.withValues(alpha: 0.8), Colors.black.withValues(alpha: 0.6)],
                                     ),
                                     borderRadius: BorderRadius.circular(30),
                                   ),
@@ -264,7 +264,7 @@ class _HomePageState extends State<HomePage> {
                                     gradient: LinearGradient(
                                       begin: Alignment.topLeft,
                                       end: Alignment.bottomRight,
-                                      colors: [Colors.black, const Color(0xff17191A)],
+                                      colors: [Colors.black.withValues(alpha: 0.8), Colors.black.withValues(alpha: 0.6)],
                                     ),
                                     borderRadius: BorderRadius.circular(30),
                                   ),
@@ -332,7 +332,7 @@ class _HomePageState extends State<HomePage> {
                                     gradient: LinearGradient(
                                       begin: Alignment.topLeft,
                                       end: Alignment.bottomRight,
-                                      colors: [Colors.black, const Color(0xff17191A)],
+                                      colors: [Colors.black.withValues(alpha: 0.8), Colors.black.withValues(alpha: 0.6)],
                                     ),
                                     borderRadius: BorderRadius.circular(30),
                                   ),
@@ -407,7 +407,7 @@ class _HomePageState extends State<HomePage> {
                                     gradient: LinearGradient(
                                       begin: Alignment.topLeft,
                                       end: Alignment.bottomRight,
-                                      colors: [Colors.black, const Color(0xff17191A)],
+                                      colors: [Colors.black.withValues(alpha: 0.8), Colors.black.withValues(alpha: 0.6)],
                                     ),
                                     borderRadius: BorderRadius.circular(30),
                                   ),
@@ -475,7 +475,7 @@ class _HomePageState extends State<HomePage> {
                                     gradient: LinearGradient(
                                       begin: Alignment.topLeft,
                                       end: Alignment.bottomRight,
-                                      colors: [Colors.black, const Color(0xff17191A)],
+                                      colors: [Colors.black.withValues(alpha: 0.8), Colors.black.withValues(alpha: 0.6)],
                                     ),
                                     borderRadius: BorderRadius.circular(30),
                                   ),
@@ -543,7 +543,7 @@ class _HomePageState extends State<HomePage> {
                                     gradient: LinearGradient(
                                       begin: Alignment.topLeft,
                                       end: Alignment.bottomRight,
-                                      colors: [Colors.black, const Color(0xff17191A)],
+                                      colors: [Colors.black.withValues(alpha: 0.8), Colors.black.withValues(alpha: 0.6)],
                                     ),
                                     borderRadius: BorderRadius.circular(30),
                                   ),
@@ -622,7 +622,7 @@ class _HomePageState extends State<HomePage> {
                               gradient: LinearGradient(
                                 begin: Alignment.topLeft,
                                 end: Alignment.bottomRight,
-                                colors: [Colors.black, const Color(0xff17191A)],
+                                colors: [Colors.black.withValues(alpha: 0.8), Colors.black.withValues(alpha: 0.6)],
                               ),
                               borderRadius: BorderRadius.circular(30),
                             ),
@@ -783,7 +783,7 @@ class _HomePageState extends State<HomePage> {
                                     gradient: LinearGradient(
                                       begin: Alignment.topLeft,
                                       end: Alignment.bottomRight,
-                                      colors: [Colors.black, const Color(0xff17191A)],
+                                      colors: [Colors.black.withValues(alpha: 0.8), Colors.black.withValues(alpha: 0.6)],
                                     ),
                                     borderRadius: BorderRadius.circular(30),
                                   ),
@@ -828,7 +828,7 @@ class _HomePageState extends State<HomePage> {
                                     gradient: LinearGradient(
                                       begin: Alignment.topLeft,
                                       end: Alignment.bottomRight,
-                                      colors: [Colors.black, const Color(0xff17191A)],
+                                      colors: [Colors.black.withValues(alpha: 0.8), Colors.black.withValues(alpha: 0.6)],
                                     ),
                                     borderRadius: BorderRadius.circular(30),
                                   ),
@@ -874,7 +874,7 @@ class _HomePageState extends State<HomePage> {
                                     gradient: LinearGradient(
                                       begin: Alignment.topLeft,
                                       end: Alignment.bottomRight,
-                                      colors: [Colors.black, const Color(0xff17191A)],
+                                      colors: [Colors.black.withValues(alpha: 0.8), Colors.black.withValues(alpha: 0.6)],
                                     ),
                                     borderRadius: BorderRadius.circular(30),
                                   ),
@@ -928,7 +928,7 @@ class _HomePageState extends State<HomePage> {
                                     gradient: LinearGradient(
                                       begin: Alignment.topLeft,
                                       end: Alignment.bottomRight,
-                                      colors: [Colors.black, const Color(0xff17191A)],
+                                      colors: [Colors.black.withValues(alpha: 0.8), Colors.black.withValues(alpha: 0.6)],
                                     ),
                                     borderRadius: BorderRadius.circular(30),
                                   ),
@@ -974,7 +974,7 @@ class _HomePageState extends State<HomePage> {
                                     gradient: LinearGradient(
                                       begin: Alignment.topLeft,
                                       end: Alignment.bottomRight,
-                                      colors: [Colors.black, const Color(0xff17191A)],
+                                      colors: [Colors.black.withValues(alpha: 0.8), Colors.black.withValues(alpha: 0.6)],
                                     ),
                                     borderRadius: BorderRadius.circular(30),
                                   ),
@@ -1021,7 +1021,7 @@ class _HomePageState extends State<HomePage> {
                                     gradient: LinearGradient(
                                       begin: Alignment.topLeft,
                                       end: Alignment.bottomRight,
-                                      colors: [Colors.black, const Color(0xff17191A)],
+                                      colors: [Colors.black.withValues(alpha: 0.8), Colors.black.withValues(alpha: 0.6)],
                                     ),
                                     borderRadius: BorderRadius.circular(30),
                                   ),
