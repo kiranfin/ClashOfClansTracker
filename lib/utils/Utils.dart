@@ -782,7 +782,7 @@ Widget getFirstClan(Map<String, dynamic> map) {
       ?map["clan"] !=null && map["state"] != "notInWar"? SizedBox(height: 10) : null,
       AutoSizeText(map["clan"] !=null && map["state"] != "notInWar"? map["clan"]["name"] : "-",
         style: const TextStyle(
-          color: Colors.white70,
+          color: Colors.white54,
           fontFamily: "Poppins",
           fontSize: 20,
         ),
@@ -813,7 +813,7 @@ Widget getFirstClan(Map<String, dynamic> map) {
               ),
             ),
           ),
-          SizedBox(width: 15),
+          SizedBox(width: 10),
           ClipRRect(
             borderRadius: BorderRadius.circular(20),
             child: Container(
@@ -872,7 +872,7 @@ Widget getOpponentClan(Map<String, dynamic> map) {
       ?map["opponent"] !=null && map["state"] != "notInWar"? SizedBox(height: 10) : null,
       AutoSizeText(map["opponent"] !=null && map["state"] != "notInWar"? map["opponent"]["name"] : "-",
         style: const TextStyle(
-          color: Colors.white70,
+          color: Colors.white54,
           fontFamily: "Poppins",
           fontSize: 20,
         ),
@@ -903,7 +903,7 @@ Widget getOpponentClan(Map<String, dynamic> map) {
               ),
             ),
           ),
-          SizedBox(width: 12),
+          SizedBox(width: 10),
           ClipRRect(
             borderRadius: BorderRadius.circular(20),
             child: Container(
@@ -961,9 +961,9 @@ Text getStateText(String text) {
 }
 
 Text getClanWarStateText(String text) {
-  if(text == "preparation") return Text("Vorbereitung", style: const TextStyle(color: Colors.white70, fontFamily: "Poppins", fontSize: 20));
-  if(text == "inWar") return Text("Endet in", style: const TextStyle(color: Colors.white70, fontFamily: "Poppins", fontSize: 20));
-  return Text("War vorbei", style: const TextStyle(color: Colors.white70, fontFamily: "Poppins", fontSize: 20));
+  if(text == "preparation") return Text("Vorbereitung", style: const TextStyle(color: Colors.white54, fontFamily: "Poppins", fontSize: 20));
+  if(text == "inWar") return Text("Endet in", style: const TextStyle(color: Colors.white54, fontFamily: "Poppins", fontSize: 20));
+  return Text("War vorbei", style: const TextStyle(color: Colors.white54, fontFamily: "Poppins", fontSize: 20));
 }
 
 Row getClanWarStars(Map<String, dynamic> map) {
