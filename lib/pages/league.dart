@@ -63,6 +63,22 @@ class _LeaguePageState extends State<LeaguePage> {
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
                                   Row(
+                                    children: [
+                                      DataProvider.awaitLeagueIcon(snapshot.data[0]),
+                                      SizedBox(width: 5),
+                                      AutoSizeText(snapshot.data[0]["league"] != null? snapshot.data[0]["league"]["name"] : "Unranked",
+                                        style: const TextStyle(
+                                          color: Colors.white,
+                                          fontFamily: "Poppins",
+                                          fontSize: 25,
+                                        ),
+                                        maxLines: 1,
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(height: 10),
+                                  Row(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
@@ -72,21 +88,6 @@ class _LeaguePageState extends State<LeaguePage> {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
-                                          Row(
-                                            children: [
-                                              DataProvider.awaitLeagueIcon(snapshot.data[0]),
-                                              SizedBox(width: 5),
-                                              AutoSizeText(snapshot.data[0]["league"] != null? snapshot.data[0]["league"]["name"] : "Unranked",
-                                                style: const TextStyle(
-                                                  color: Colors.white,
-                                                  fontFamily: "Poppins",
-                                                  fontSize: 30,
-                                                ),
-                                                maxLines: 1,
-                                              ),
-                                            ],
-                                          ),
-                                          SizedBox(height: 10),
                                           Row(
                                             children: [
                                               Image.asset(warin, scale: 3),
@@ -102,7 +103,6 @@ class _LeaguePageState extends State<LeaguePage> {
                                             ],
                                           ),
                                           SizedBox(
-                                            width: 150,
                                             height: 10
                                           ),
                                           Row(
@@ -303,7 +303,7 @@ class _LeaguePageState extends State<LeaguePage> {
                             gradient: LinearGradient(
                               begin: Alignment.topLeft,
                               end: Alignment.bottomRight,
-                  colors: [Colors.black.withValues(alpha: 0.8), Colors.black.withValues(alpha: 0.6)],
+                              colors: [Colors.black.withValues(alpha: 0.8), Colors.black.withValues(alpha: 0.6)],
                             ),
                             borderRadius: BorderRadius.circular(30),
                           ),

@@ -1042,3 +1042,59 @@ List<dynamic> filterClanWarLeagueWars(List<dynamic> map){
   }
   return result;
 }
+
+String normalizeName(String name) {
+  return name.toLowerCase().replaceAll(" ", "_");
+}
+
+Widget getSpellCosts(Map<String, dynamic> maxdata, String name, int level) {
+  return ClipRRect(
+    borderRadius: BorderRadius.circular(20),
+    child: Container(
+      color: maxdata[normalizeName(name)]["upgradeResource"] == "elixir"? const Color(0xff651480) : maxdata[normalizeName(name)]["upgradeResource"] == "dark_elixir"? const Color(
+          0xff000000) : Colors.transparent,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 5.0),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Image.asset(maxdata[normalizeName(name)]["upgradeResource"] == "elixir"? elixir : dark_elixir, scale: 2.5),
+            SizedBox(width: 5),
+            Text("${maxdata[normalizeName(name)]["${level + 1}"] != null? maxdata[normalizeName(name)]["${level + 1}"]["upgradeCost"] : "-"}", style: const TextStyle(color: Colors.white,
+                fontFamily: "Poppins",
+                fontSize: 10)
+            ),
+          ],
+        ),
+      ),
+    ),
+  );
+}
+
+Widget getSpellTime(Map<String, dynamic> maxdata, String name, int level) {
+  return ClipRRect(
+    borderRadius: BorderRadius.circular(20),
+    child: Container(
+      color: const Color(
+          0xff132054),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 5.0),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(Icons.access_time, color: const Color(0xff216AF3), size: 14),
+            SizedBox(width: 5),
+            Text(maxdata[normalizeName(name)]["${level + 1}"] != null? parseSeconds(maxdata[normalizeName(name)]["${level + 1}"]["upgradeTime"]) : "-", style: const TextStyle(color: Colors.white,
+                fontFamily: "Poppins",
+                fontSize: 10)),
+          ],
+        ),
+      ),
+    ),
+  );
+}
+
+String parseSeconds(int seconds) {
+  Duration duration = Duration(seconds: seconds);
+  return "${duration.inDays > 0? "${duration.inDays}d" : ""}${duration.inHours.remainder(24) > 0? " ${duration.inHours.remainder(24)}h" : ""}${duration.inMinutes.remainder(60) > 0? " ${duration.inMinutes.remainder(60)}m" : ""}${duration.inSeconds.remainder(60) > 0? " ${duration.inSeconds.remainder(60)}s" : ""}";
+}

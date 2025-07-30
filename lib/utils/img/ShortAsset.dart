@@ -206,6 +206,9 @@ const dark_crown = 'lib/utils/img/equipment/Dark_Crown.webp';
 const shiny_ore = 'lib/utils/img/equipment/Shiny_Ore.webp';
 const glowy_ore = 'lib/utils/img/equipment/Glowy_Ore.webp';
 const starry_ore = 'lib/utils/img/equipment/Starry_Ore.webp';
+const gold = 'lib/utils/img/Gold.webp';
+const elixir = 'lib/utils/img/Elixir.webp';
+const dark_elixir = 'lib/utils/img/Dark_Elixir.webp';
 
 const one_star = 'lib/utils/img/1_Star.webp';
 const two_star = 'lib/utils/img/2_Stars.webp';

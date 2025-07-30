@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:clashofclanstracker/utils/img/ShortAsset.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -262,10 +263,10 @@ Image awaitClanWarLeagueIcon(String league, double scale) {
   return Image.asset(war_bronze1, scale: scale);
 }
 
-Text awaitPlayerName(Map<String, dynamic> userdata) {
+SizedBox awaitPlayerName(Map<String, dynamic> userdata) {
   //final data = awaitPlayerData(tag);
   //final userdata = await data;
-  return Text(userdata["name"], style: TextStyle(color: Colors.white, fontSize: 25));
+  return SizedBox(width: 150, child: AutoSizeText(userdata["name"], style: TextStyle(color: Colors.white, fontSize: 25), maxLines: 1));
 }
 
 Text awaitPlayerTrophies(Map<String, dynamic> userdata, double size) {
@@ -417,7 +418,7 @@ double awaitSpellsPercent(Map<String, dynamic> userdata, Map<String, dynamic> ma
   num max = 0;
   final maxspells = maxdata["spells"];
   maxspells.forEach((key, val) {
-    max += val;
+    max += val["maxlevel"];
   });
   num sum = 0;
   for (var spell in spells) {

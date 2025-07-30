@@ -3,7 +3,6 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:clashofclanstracker/utils/img/ShortAsset.dart';
 import 'package:date_count_down/date_count_down.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
 import 'package:simple_animation_progress_bar/simple_animation_progress_bar.dart';
 import '../provider/DataProvider.dart' as DataProvider;
@@ -712,10 +711,10 @@ class _DetailPageState extends State<DetailPage> {
 
   Widget getSpellDetail() {
     return FutureBuilder(
-        future: DataProvider.awaitSpells(userTag),
+        future: Future.wait([DataProvider.awaitSpells(userTag), DataProvider.awaitMaxTroops()]),
         builder: (context, AsyncSnapshot snapshot) {
           if(snapshot.hasData) {
-            List finallist = Utils.getSpells(snapshot.data);
+            List finallist = Utils.getSpells(snapshot.data[0]);
             return SingleChildScrollView(
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(20),
@@ -809,46 +808,16 @@ class _DetailPageState extends State<DetailPage> {
                                           ),
                                           Padding(
                                             padding: const EdgeInsets.only(left: 10.0),
-                                            child: Column(
-                                              mainAxisAlignment: MainAxisAlignment.start,
-                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                            child: Row(
                                               children: [
-                                                SizedBox(height: 5),
-                                                ClipRRect(
-                                                  borderRadius: BorderRadius.circular(20),
-                                                  child: Container(
-                                                    color: const Color(0xff541513),
-                                                    child: Padding(
-                                                      padding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 5.0),
-                                                      child: Text("Costs: ${finallist[index]["maxLevel"]}", style: const TextStyle(color: Colors.white,
-                                                          fontFamily: "Poppins",
-                                                          fontSize: 10)
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ),
-                                                SizedBox(height: 5),
-                                                Row(
+                                                Column(
+                                                  mainAxisAlignment: MainAxisAlignment.start,
+                                                  crossAxisAlignment: CrossAxisAlignment.start,
                                                   children: [
-                                                    ClipRRect(
-                                                      borderRadius: BorderRadius.circular(20),
-                                                      child: Container(
-                                                        color: const Color(
-                                                            0xff132054),
-                                                        child: Padding(
-                                                          padding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 5.0),
-                                                          child: Row(
-                                                            children: [
-                                                              Icon(Icons.access_time, color: const Color(0xff216AF3), size: 14),
-                                                              SizedBox(width: 5),
-                                                              Text("1d 12h", style: const TextStyle(color: Colors.white,
-                                                                  fontFamily: "Poppins",
-                                                                  fontSize: 10)),
-                                                            ],
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ),
+                                                    ?finallist[index]["level"] != finallist[index]["maxLevel"]? SizedBox(height: 5) : null,
+                                                    ?finallist[index]["level"] != finallist[index]["maxLevel"]? Utils.getSpellCosts(snapshot.data[1]["spells"], finallist[index]["name"], finallist[index]["level"]) : null,
+                                                    ?finallist[index]["level"] != finallist[index]["maxLevel"]? SizedBox(height: 5) : null,
+                                                    ?finallist[index]["level"] != finallist[index]["maxLevel"]? Utils.getSpellTime(snapshot.data[1]["spells"], finallist[index]["name"], finallist[index]["level"]) : null,
                                                   ],
                                                 ),
                                               ],
