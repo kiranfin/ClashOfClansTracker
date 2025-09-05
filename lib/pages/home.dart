@@ -152,14 +152,14 @@ class _HomePageState extends State<HomePage> {
                                     Text(
                                         "Overall", style: const TextStyle(
                                         color: Colors.white,
-                                        fontFamily: "Poppins",
+                                        fontFamily: "Inter",
                                         fontSize: 25)),
                                     Text("${(DataProvider.awaitOverallPercent(
                                         ovsnap.data[0], ovsnap.data[1], ovsnap.data[2], ovsnap.data[3]) * 100)
                                         .toStringAsFixed(1)}%",
                                         style: const TextStyle(
                                             color: Colors.white54,
-                                            fontFamily: "Poppins",
+                                            fontFamily: "Inter",
                                             fontSize: 15)),
                                   ],
                                 ),
@@ -218,7 +218,7 @@ class _HomePageState extends State<HomePage> {
                                             'Buildings',
                                             style: const TextStyle(
                                                 color: Colors.white,
-                                                fontFamily: "Poppins"),
+                                                fontFamily: "Inter"),
                                             maxLines: 1
                                         ),
                                         SizedBox(height: 5),
@@ -232,7 +232,7 @@ class _HomePageState extends State<HomePage> {
                                                   1)}%",
                                                   style: const TextStyle(
                                                       color: Colors.white54,
-                                                      fontFamily: "Poppins",
+                                                      fontFamily: "Inter",
                                                       fontSize: 15)),
                                             ],
                                           ),
@@ -287,7 +287,7 @@ class _HomePageState extends State<HomePage> {
                                             'Troops',
                                             style: const TextStyle(
                                                 color: Colors.white,
-                                                fontFamily: "Poppins"),
+                                                fontFamily: "Inter"),
                                             maxLines: 1
                                         ),
                                         SizedBox(height: 5),
@@ -300,7 +300,7 @@ class _HomePageState extends State<HomePage> {
                                                   .toStringAsFixed(1)}%",
                                                   style: const TextStyle(
                                                       color: Colors.white54,
-                                                      fontFamily: "Poppins",
+                                                      fontFamily: "Inter",
                                                       fontSize: 15)),
                                             ],
                                           ),
@@ -355,7 +355,7 @@ class _HomePageState extends State<HomePage> {
                                             'Spells',
                                             style: const TextStyle(
                                                 color: Colors.white,
-                                                fontFamily: "Poppins"),
+                                                fontFamily: "Inter"),
                                             maxLines: 1
                                         ),
                                         SizedBox(height: 5),
@@ -368,7 +368,7 @@ class _HomePageState extends State<HomePage> {
                                                   .toStringAsFixed(1)}%",
                                                   style: const TextStyle(
                                                       color: Colors.white54,
-                                                      fontFamily: "Poppins",
+                                                      fontFamily: "Inter",
                                                       fontSize: 15)),
                                             ],
                                           ),
@@ -430,7 +430,7 @@ class _HomePageState extends State<HomePage> {
                                             'Heroes',
                                             style: const TextStyle(
                                                 color: Colors.white,
-                                                fontFamily: "Poppins"),
+                                                fontFamily: "Inter"),
                                             maxLines: 1
                                         ),
                                         SizedBox(height: 5),
@@ -443,7 +443,7 @@ class _HomePageState extends State<HomePage> {
                                                   .toStringAsFixed(1)}%",
                                                   style: const TextStyle(
                                                       color: Colors.white54,
-                                                      fontFamily: "Poppins",
+                                                      fontFamily: "Inter",
                                                       fontSize: 15)),
                                             ],
                                           ),
@@ -498,7 +498,7 @@ class _HomePageState extends State<HomePage> {
                                             'Equipment',
                                             style: const TextStyle(
                                                 color: Colors.white,
-                                                fontFamily: "Poppins"),
+                                                fontFamily: "Inter"),
                                             maxLines: 1
                                         ),
                                         SizedBox(height: 5),
@@ -511,7 +511,7 @@ class _HomePageState extends State<HomePage> {
                                                   .toStringAsFixed(1)}%",
                                                   style: const TextStyle(
                                                       color: Colors.white54,
-                                                      fontFamily: "Poppins",
+                                                      fontFamily: "Inter",
                                                       fontSize: 15)),
                                             ],
                                           ),
@@ -566,7 +566,7 @@ class _HomePageState extends State<HomePage> {
                                             'Achievem.',
                                             style: const TextStyle(
                                                 color: Colors.white,
-                                                fontFamily: "Poppins"),
+                                                fontFamily: "Inter"),
                                             maxLines: 1
                                         ),
                                         SizedBox(height: 5),
@@ -579,7 +579,7 @@ class _HomePageState extends State<HomePage> {
                                                   .toStringAsFixed(1)}%",
                                                   style: const TextStyle(
                                                       color: Colors.white54,
-                                                      fontFamily: "Poppins",
+                                                      fontFamily: "Inter",
                                                       fontSize: 15)),
                                             ],
                                           ),
@@ -804,7 +804,7 @@ class _HomePageState extends State<HomePage> {
                                             'Buildings',
                                             style: const TextStyle(
                                                 color: Colors.white,
-                                                fontFamily: "Poppins"),
+                                                fontFamily: "Inter"),
                                             maxLines: 1
                                         ),
                                         SizedBox(height: 5),
@@ -849,7 +849,7 @@ class _HomePageState extends State<HomePage> {
                                             'Troops',
                                             style: const TextStyle(
                                                 color: Colors.white,
-                                                fontFamily: "Poppins"),
+                                                fontFamily: "Inter"),
                                             maxLines: 1
                                         ),
                                         SizedBox(height: 5),
@@ -895,7 +895,7 @@ class _HomePageState extends State<HomePage> {
                                             'Spells',
                                             style: const TextStyle(
                                                 color: Colors.white,
-                                                fontFamily: "Poppins"),
+                                                fontFamily: "Inter"),
                                             maxLines: 1
                                         ),
                                         SizedBox(height: 5),
@@ -949,7 +949,7 @@ class _HomePageState extends State<HomePage> {
                                             'Heros',
                                             style: const TextStyle(
                                                 color: Colors.white,
-                                                fontFamily: "Poppins"),
+                                                fontFamily: "Inter"),
                                             maxLines: 1
                                         ),
                                         SizedBox(height: 5),
@@ -995,7 +995,7 @@ class _HomePageState extends State<HomePage> {
                                             'Equipment',
                                             style: const TextStyle(
                                                 color: Colors.white,
-                                                fontFamily: "Poppins"),
+                                                fontFamily: "Inter"),
                                             maxLines: 1
                                         ),
                                         SizedBox(height: 5),
@@ -1042,7 +1042,7 @@ class _HomePageState extends State<HomePage> {
                                             'Achievem.',
                                             style: const TextStyle(
                                                 color: Colors.white,
-                                                fontFamily: "Poppins"),
+                                                fontFamily: "Inter"),
                                             maxLines: 1
                                         ),
                                         SizedBox(height: 5),

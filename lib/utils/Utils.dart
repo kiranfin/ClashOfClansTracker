@@ -447,7 +447,7 @@ bool isRoyalChampEquipment(String name) {
 Text getRole(String role) {
   return Text(role == "coLeader"? "Co-Leader" : role == "leader"? "Leader" : role == "elder"? "Elder" : "Member", style: const TextStyle(
       color: Colors.white,
-      fontFamily: "Poppins",
+      fontFamily: "Inter",
       fontSize: 15));
 }
 
@@ -792,7 +792,7 @@ Widget getFirstClan(Map<String, dynamic> map) {
       AutoSizeText(map["clan"] !=null && map["state"] != "notInWar"? map["clan"]["name"] : "-",
         style: const TextStyle(
           color: Colors.white54,
-          fontFamily: "Poppins",
+          fontFamily: "Inter",
           fontSize: 20,
         ),
         maxLines: 1,
@@ -813,7 +813,7 @@ Widget getFirstClan(Map<String, dynamic> map) {
                     Text("${map["clan"]["stars"]}",
                       style: const TextStyle(
                         color: Colors.yellow,
-                        fontFamily: "Poppins",
+                        fontFamily: "Inter",
                         fontSize: 15,
                       )
                     ),
@@ -836,7 +836,7 @@ Widget getFirstClan(Map<String, dynamic> map) {
                     Text("${map["clan"]["attacks"]}",
                         style: const TextStyle(
                           color: Colors.deepOrangeAccent,
-                          fontFamily: "Poppins",
+                          fontFamily: "Inter",
                           fontSize: 15,
                         )
                     ),
@@ -864,7 +864,7 @@ Widget getFirstClan(Map<String, dynamic> map) {
                     Text("${map["opponent"]["destructionPercentage"].toStringAsFixed(2)}",
                         style: const TextStyle(
                           color: Colors.blueAccent,
-                          fontFamily: "Poppins",
+                          fontFamily: "Inter",
                           fontSize: 15,
                         )
                     )
@@ -888,7 +888,7 @@ Widget getOpponentClan(Map<String, dynamic> map) {
       AutoSizeText(map["opponent"] !=null && map["state"] != "notInWar"? map["opponent"]["name"] : "-",
         style: const TextStyle(
           color: Colors.white54,
-          fontFamily: "Poppins",
+          fontFamily: "Inter",
           fontSize: 20,
         ),
         maxLines: 1,
@@ -909,7 +909,7 @@ Widget getOpponentClan(Map<String, dynamic> map) {
                     Text("${map["opponent"]["stars"]}",
                       style: const TextStyle(
                         color: Colors.yellow,
-                        fontFamily: "Poppins",
+                        fontFamily: "Inter",
                         fontSize: 15,
                       )
                     ),
@@ -932,7 +932,7 @@ Widget getOpponentClan(Map<String, dynamic> map) {
                     Text("${map["opponent"]["attacks"]}",
                         style: const TextStyle(
                           color: Colors.deepOrangeAccent,
-                          fontFamily: "Poppins",
+                          fontFamily: "Inter",
                           fontSize: 15,
                         )
                     ),
@@ -960,7 +960,7 @@ Widget getOpponentClan(Map<String, dynamic> map) {
                     Text("${map["opponent"]["destructionPercentage"].toStringAsFixed(2)}",
                         style: const TextStyle(
                           color: Colors.blueAccent,
-                          fontFamily: "Poppins",
+                          fontFamily: "Inter",
                           fontSize: 15,
                         )
                     )
@@ -976,15 +976,15 @@ Widget getOpponentClan(Map<String, dynamic> map) {
 }
 
 Text getStateText(String text) {
-  if(text == "preparation") return Text("Vorbereitung", style: const TextStyle(color: Colors.white54, fontFamily: "Poppins", fontSize: 20));
-  if(text == "inWar") return Text("Endet in", style: const TextStyle(color: Colors.white54, fontFamily: "Poppins", fontSize: 20));
-  return Text("Neue Runde in", style: const TextStyle(color: Colors.white54, fontFamily: "Poppins", fontSize: 20));
+  if(text == "preparation") return Text("Vorbereitung", style: const TextStyle(color: Colors.white54, fontFamily: "Inter", fontSize: 20));
+  if(text == "inWar") return Text("Endet in", style: const TextStyle(color: Colors.white54, fontFamily: "Inter", fontSize: 20));
+  return Text("Neue Runde in", style: const TextStyle(color: Colors.white54, fontFamily: "Inter", fontSize: 20));
 }
 
 Text getClanWarStateText(String text) {
-  if(text == "preparation") return Text("Vorbereitung", style: const TextStyle(color: Colors.white54, fontFamily: "Poppins", fontSize: 20));
-  if(text == "inWar") return Text("Endet in", style: const TextStyle(color: Colors.white54, fontFamily: "Poppins", fontSize: 20));
-  return Text("War vorbei", style: const TextStyle(color: Colors.white54, fontFamily: "Poppins", fontSize: 20));
+  if(text == "preparation") return Text("Vorbereitung", style: const TextStyle(color: Colors.white54, fontFamily: "Inter", fontSize: 20));
+  if(text == "inWar") return Text("Endet in", style: const TextStyle(color: Colors.white54, fontFamily: "Inter", fontSize: 20));
+  return Text("War vorbei", style: const TextStyle(color: Colors.white54, fontFamily: "Inter", fontSize: 20));
 }
 
 Row getClanWarStars(Map<String, dynamic> map) {
@@ -993,7 +993,7 @@ Row getClanWarStars(Map<String, dynamic> map) {
       for(int i = 0; i < (map["bestOpponentAttack"] != null? map["bestOpponentAttack"]["stars"] : 0); i++) Image.asset(whitestar, scale: 6),
       for(int i = 0; i < (3 - (map["bestOpponentAttack"] != null? map["bestOpponentAttack"]["stars"] : 0)); i++) Image.asset(whitestarempty, scale: 6),
       SizedBox(width: 5),
-      Text("${map["bestOpponentAttack"] != null? map["bestOpponentAttack"]["destructionPercentage"] : 0}%", style: const TextStyle(color: Colors.white, fontFamily: "Poppins", fontSize: 12))
+      Text("${map["bestOpponentAttack"] != null? map["bestOpponentAttack"]["destructionPercentage"] : 0}%", style: const TextStyle(color: Colors.white, fontFamily: "Inter", fontSize: 12))
     ],
   );
 }
@@ -1082,7 +1082,7 @@ Widget getSpellCosts(Map<String, dynamic> maxdata, String name, int level) {
             Image.asset(maxdata[normalizeName(name)]["upgradeResource"] == "elixir"? elixir : dark_elixir, scale: 2.5),
             SizedBox(width: 5),
             Text("${maxdata[normalizeName(name)]["${level + 1}"] != null? maxdata[normalizeName(name)]["${level + 1}"]["upgradeCost"] : "-"}", style: const TextStyle(color: Colors.white,
-                fontFamily: "Poppins",
+                fontFamily: "Inter",
                 fontSize: 10)
             ),
           ],
@@ -1106,7 +1106,7 @@ Widget getSpellTime(Map<String, dynamic> maxdata, String name, int level) {
             Icon(Icons.access_time, color: const Color(0xff216AF3), size: 14),
             SizedBox(width: 5),
             Text(maxdata[normalizeName(name)]["${level + 1}"] != null? parseSeconds(maxdata[normalizeName(name)]["${level + 1}"]["upgradeTime"]) : "-", style: const TextStyle(color: Colors.white,
-                fontFamily: "Poppins",
+                fontFamily: "Inter",
                 fontSize: 10)),
           ],
         ),
@@ -1129,7 +1129,7 @@ Widget getTroopCosts(Map<String, dynamic> maxdata, String name, int level) {
             Image.asset(maxdata[normalizeName(name)]["upgradeResource"] == "elixir"? elixir : dark_elixir, scale: 2.5),
             SizedBox(width: 5),
             Text("${maxdata[normalizeName(name)]["${level + 1}"] != null? maxdata[normalizeName(name)]["${level + 1}"]["upgradeCost"] : "-"}", style: const TextStyle(color: Colors.white,
-                fontFamily: "Poppins",
+                fontFamily: "Inter",
                 fontSize: 10)
             ),
           ],
@@ -1153,7 +1153,7 @@ Widget getTroopTime(Map<String, dynamic> maxdata, String name, int level) {
             Icon(Icons.access_time, color: const Color(0xff216AF3), size: 14),
             SizedBox(width: 5),
             Text(maxdata[normalizeName(name)]["${level + 1}"] != null? parseSeconds(maxdata[normalizeName(name)]["${level + 1}"]["upgradeTime"]) : "-", style: const TextStyle(color: Colors.white,
-                fontFamily: "Poppins",
+                fontFamily: "Inter",
                 fontSize: 10)),
           ],
         ),

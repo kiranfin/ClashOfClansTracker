@@ -69,7 +69,7 @@ class _LeaguePageState extends State<LeaguePage> {
                                       AutoSizeText(snapshot.data[0]["league"] != null? snapshot.data[0]["league"]["name"] : "Unranked",
                                         style: const TextStyle(
                                           color: Colors.white,
-                                          fontFamily: "Poppins",
+                                          fontFamily: "Inter",
                                           fontSize: 25,
                                         ),
                                         maxLines: 1,
@@ -98,7 +98,7 @@ class _LeaguePageState extends State<LeaguePage> {
                                                     "Attack Wins: ${snapshot.data[0]["attackWins"]}",
                                                     style: const TextStyle(
                                                       color: Colors.white54,
-                                                      fontFamily: "Poppins",
+                                                      fontFamily: "Inter",
                                                       fontSize: 15,
                                                     ),
                                                   ),
@@ -107,7 +107,7 @@ class _LeaguePageState extends State<LeaguePage> {
                                                     "Defense Wins: ${snapshot.data[0]["defenseWins"]}",
                                                     style: const TextStyle(
                                                       color: Colors.white54,
-                                                      fontFamily: "Poppins",
+                                                      fontFamily: "Inter",
                                                       fontSize: 15,
                                                     ),
                                                   ),
@@ -185,7 +185,7 @@ class _LeaguePageState extends State<LeaguePage> {
                                           AutoSizeText(index == 0? "Current" : index == 1? "Previous" : "Best",
                                             style: const TextStyle(
                                               color: Colors.white,
-                                              fontFamily: "Poppins",
+                                              fontFamily: "Inter",
                                               fontSize: 20,
                                             ),
                                             maxLines: 1,
@@ -197,7 +197,7 @@ class _LeaguePageState extends State<LeaguePage> {
                                               Text("${index == 0? "${DateTime.now().year}-${(DateTime.now().month).toString().padLeft(2, "0")}" : index == 1? (snapshot.data[0]["legendStatistics"]["previousSeason"]!=null? snapshot.data[0]["legendStatistics"]["previousSeason"]["id"] : "-") : (snapshot.data[0]["legendStatistics"]["bestSeason"]!=null? snapshot.data[0]["legendStatistics"]["bestSeason"]["id"] : "-")}",
                                                 style: const TextStyle(
                                                   color: Colors.white54,
-                                                  fontFamily: "Poppins",
+                                                  fontFamily: "Inter",
                                                   fontSize: 15,
                                                 ),
                                               ),
@@ -211,7 +211,7 @@ class _LeaguePageState extends State<LeaguePage> {
                                               Text("${index == 0? (snapshot.data[0]["legendStatistics"]["currentSeason"]!=null?snapshot.data[0]["legendStatistics"]["currentSeason"]["rank"]: "-") : index == 1? (snapshot.data[0]["legendStatistics"]["previousSeason"]!=null? snapshot.data[0]["legendStatistics"]["previousSeason"]["rank"] : "-") : (snapshot.data[0]["legendStatistics"]["bestSeason"]!=null? snapshot.data[0]["legendStatistics"]["bestSeason"]["rank"]: "-")}",
                                                 style: const TextStyle(
                                                   color: Colors.white54,
-                                                  fontFamily: "Poppins",
+                                                  fontFamily: "Inter",
                                                   fontSize: 15,
                                                 ),
                                               ),
@@ -229,7 +229,7 @@ class _LeaguePageState extends State<LeaguePage> {
                                               Text("${index == 0? (snapshot.data[0]["legendStatistics"]["currentSeason"]!=null?snapshot.data[0]["legendStatistics"]["currentSeason"]["trophies"] : "-") : index == 1? (snapshot.data[0]["legendStatistics"]["previousSeason"]!=null? snapshot.data[0]["legendStatistics"]["previousSeason"]["trophies"] : "-") : (snapshot.data[0]["legendStatistics"]["bestSeason"]!=null? snapshot.data[0]["legendStatistics"]["bestSeason"]["trophies"]: "-")}",
                                                 style: const TextStyle(
                                                   color: Colors.white54,
-                                                  fontFamily: "Poppins",
+                                                  fontFamily: "Inter",
                                                   fontSize: 15,
                                                 ),
                                               ),
@@ -269,7 +269,7 @@ class _LeaguePageState extends State<LeaguePage> {
                                       AutoSizeText(snapshot.data[0]["builderBaseLeague"] != null? snapshot.data[0]["builderBaseLeague"]["name"] : "Unranked",
                                         style: const TextStyle(
                                           color: Colors.white,
-                                          fontFamily: "Poppins",
+                                          fontFamily: "Inter",
                                           fontSize: 25,
                                         ),
                                         maxLines: 1,
@@ -322,7 +322,7 @@ class _LeaguePageState extends State<LeaguePage> {
                                     Text("Current CWL",
                                       style: const TextStyle(
                                         color: Colors.white,
-                                        fontFamily: "Poppins",
+                                        fontFamily: "Inter",
                                         fontSize: 25,
                                       ),
                                     ),
@@ -340,11 +340,11 @@ class _LeaguePageState extends State<LeaguePage> {
                                           hoursTextLong: ":",
                                           minutesTextLong: ":",
                                           secondsTextLong: "",
-                                          style: const TextStyle(color: Colors.white54, fontFamily: "Poppins",fontSize: 20),
+                                          style: const TextStyle(color: Colors.white54, fontFamily: "Inter",fontSize: 20),
                                         ) : Text("-",
                                             style: const TextStyle(
                                               color: Colors.white54,
-                                              fontFamily: "Poppins",
+                                              fontFamily: "Inter",
                                               fontSize: 20,
                                             ),
                                           ),
@@ -401,7 +401,7 @@ class _LeaguePageState extends State<LeaguePage> {
                                   child: Text("Current Clan War",
                                     style: const TextStyle(
                                       color: Colors.white,
-                                      fontFamily: "Poppins",
+                                      fontFamily: "Inter",
                                       fontSize: 25,
                                     ),
                                   ),
@@ -420,7 +420,7 @@ class _LeaguePageState extends State<LeaguePage> {
                                             snapshot.data[3].isEmpty? Text("Clan Log private",
                                             style: const TextStyle(
                                               color: Colors.white54,
-                                              fontFamily: "Poppins",
+                                              fontFamily: "Inter",
                                               fontSize: 25,
                                               ),
                                             ) : Utils.getClanWarStateText(snapshot.data[3]["state"]),
@@ -433,7 +433,7 @@ class _LeaguePageState extends State<LeaguePage> {
                                             hoursTextLong: ":",
                                             minutesTextLong: ":",
                                             secondsTextLong: "",
-                                            style: const TextStyle(color: Colors.white54, fontFamily: "Poppins", fontSize: 20),
+                                            style: const TextStyle(color: Colors.white54, fontFamily: "Inter", fontSize: 20),
                                             ) : null,
                                           ],
                                         ),
@@ -442,7 +442,7 @@ class _LeaguePageState extends State<LeaguePage> {
                                             Text("${snapshot.data[3]["teamSize"]} vs. ${snapshot.data[3]["teamSize"]}",
                                               style: const TextStyle(
                                                 color: Colors.white54,
-                                                fontFamily: "Poppins",
+                                                fontFamily: "Inter",
                                                 fontSize: 20,
                                               ),
                                             ),
@@ -491,7 +491,7 @@ class _LeaguePageState extends State<LeaguePage> {
                                     Text("Clan War Log",
                                       style: const TextStyle(
                                         color: Colors.white,
-                                        fontFamily: "Poppins",
+                                        fontFamily: "Inter",
                                         fontSize: 25,
                                       ),
                                     ),
@@ -518,7 +518,7 @@ class _LeaguePageState extends State<LeaguePage> {
                                                     children: [
                                                       Text("${clanwars[index]["teamSize"]} vs. ${clanwars[index]["teamSize"]}", style: const TextStyle(
                                                         color: Colors.white,
-                                                        fontFamily: "Poppins",
+                                                        fontFamily: "Inter",
                                                         fontSize: 15)
                                                       ),
                                                     ],
@@ -536,7 +536,7 @@ class _LeaguePageState extends State<LeaguePage> {
                                                               children: [
                                                                 AutoSizeText(clanwars[index]["clan"]["name"], style: const TextStyle(
                                                                   color: Colors.white,
-                                                                  fontFamily: "Poppins",
+                                                                  fontFamily: "Inter",
                                                                   fontSize: 12),
                                                                   maxLines: 1,
                                                                 ),
@@ -549,7 +549,7 @@ class _LeaguePageState extends State<LeaguePage> {
                                                               children: [
                                                                 Text("${clanwars[index]["clan"]["stars"]}", style: const TextStyle(
                                                                   color: Colors.white,
-                                                                  fontFamily: "Poppins",
+                                                                  fontFamily: "Inter",
                                                                   fontSize: 15)
                                                                 ),
                                                                 SizedBox(width: 2),
@@ -578,7 +578,7 @@ class _LeaguePageState extends State<LeaguePage> {
                                                                 SizedBox(width: 5),
                                                                 AutoSizeText(clanwars[index]["opponent"]["name"], style: const TextStyle(
                                                                   color: Colors.white,
-                                                                  fontFamily: "Poppins",
+                                                                  fontFamily: "Inter",
                                                                   fontSize: 12),
                                                                   maxLines: 1,
                                                                 ),
@@ -590,7 +590,7 @@ class _LeaguePageState extends State<LeaguePage> {
                                                                 SizedBox(width: 2),
                                                                 Text("${clanwars[index]["opponent"]["stars"]}", style: const TextStyle(
                                                                   color: Colors.white,
-                                                                  fontFamily: "Poppins",
+                                                                  fontFamily: "Inter",
                                                                   fontSize: 15)
                                                                 ),
                                                               ],
@@ -626,7 +626,7 @@ class _LeaguePageState extends State<LeaguePage> {
                                             children: [
                                               Text("See all", style: const TextStyle(
                                                 color: Colors.white,
-                                                fontFamily: "Poppins",
+                                                fontFamily: "Inter",
                                                 fontSize: 15)
                                               ),
                                             ],
@@ -758,7 +758,7 @@ class _LeaguePageState extends State<LeaguePage> {
                                   Text("Current CWL",
                                     style: const TextStyle(
                                       color: Colors.white,
-                                      fontFamily: "Poppins",
+                                      fontFamily: "Inter",
                                       fontSize: 25,
                                     ),
                                   ),
@@ -828,7 +828,7 @@ class _LeaguePageState extends State<LeaguePage> {
                                 Text("Current Clan War",
                                   style: const TextStyle(
                                     color: Colors.white,
-                                    fontFamily: "Poppins",
+                                    fontFamily: "Inter",
                                     fontSize: 25,
                                   ),
                                 ),
@@ -889,7 +889,7 @@ class _LeaguePageState extends State<LeaguePage> {
                                 Text("Clan War Log",
                                   style: const TextStyle(
                                     color: Colors.white,
-                                    fontFamily: "Poppins",
+                                    fontFamily: "Inter",
                                     fontSize: 25,
                                   ),
                                 ),
@@ -922,7 +922,7 @@ class _LeaguePageState extends State<LeaguePage> {
                                         children: [
                                           Text("See all", style: const TextStyle(
                                             color: Colors.white,
-                                            fontFamily: "Poppins",
+                                            fontFamily: "Inter",
                                             fontSize: 15)
                                           ),
                                         ],

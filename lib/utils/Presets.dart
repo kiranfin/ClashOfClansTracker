@@ -16,7 +16,7 @@ Widget getEditWallsDialog(BuildContext context, String inital) {
                 children: [
                   Text("Edit Walls", style: const TextStyle(
                       color: Colors.white,
-                      fontFamily: "Poppins",
+                      fontFamily: "Inter",
                       fontSize: 20)),
                 ],
               ),
@@ -45,7 +45,7 @@ Widget getEditWallsDialog(BuildContext context, String inital) {
                       },
                       child: Text("Ok", style: const TextStyle(
                           color: Colors.white,
-                          fontFamily: "Poppins",
+                          fontFamily: "Inter",
                           fontSize: 15))
                   ),
                 ],

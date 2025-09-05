@@ -266,25 +266,25 @@ Image awaitClanWarLeagueIcon(String league, double scale) {
 SizedBox awaitPlayerName(Map<String, dynamic> userdata) {
   //final data = awaitPlayerData(tag);
   //final userdata = await data;
-  return SizedBox(width: 150, child: AutoSizeText(userdata["name"], style: TextStyle(color: Colors.white, fontSize: 25), maxLines: 1));
+  return SizedBox(width: 150, child: AutoSizeText(userdata["name"], style: TextStyle(color: Colors.white, fontSize: 25, fontFamily: "Inter"), maxLines: 1));
 }
 
 Text awaitPlayerTrophies(Map<String, dynamic> userdata, double size) {
   //final data = awaitPlayerData(tag);
   //final userdata = await data;
-  return Text((userdata["trophies"]).toString(), style: TextStyle(color: Colors.white, fontSize: size));
+  return Text((userdata["trophies"]).toString(), style: TextStyle(color: Colors.white, fontSize: size, fontFamily: "Inter"));
 }
 
 Text awaitPlayerLegendTrophies(Map<String, dynamic> userdata, double size) {
   //final data = awaitPlayerData(tag);
   //final userdata = await data;
-  return Text((userdata["legendStatistics"] != null? userdata["legendStatistics"]["legendTrophies"] : 0).toString(), style: TextStyle(color: Colors.white, fontSize: size));
+  return Text((userdata["legendStatistics"] != null? userdata["legendStatistics"]["legendTrophies"] : 0).toString(), style: TextStyle(color: Colors.white, fontSize: size, fontFamily: "Inter"));
 }
 
 Text awaitPlayerBuilderTrophies(Map<String, dynamic> userdata, double size) {
   //final data = awaitPlayerData(tag);
   //final userdata = await data;
-  return Text((userdata["builderBaseTrophies"]).toString(), style: TextStyle(color: Colors.white, fontSize: size));
+  return Text((userdata["builderBaseTrophies"]).toString(), style: TextStyle(color: Colors.white, fontSize: size, fontFamily: "Inter"));
 }
 
 Image awaitClanIcon(Map<String, dynamic> userdata) {

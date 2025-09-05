@@ -104,6 +104,11 @@ flutter:
     - family: Clash
       fonts:
         - asset: lib/utils/font/Clash_Regular.otf
+    - family: Inter
+      fonts:
+        - asset: lib/utils/font/Inter-Regular.ttf
+        - asset: lib/utils/font/Inter-Italic.ttf
+        - asset: lib/utils/font/Inter-Bold.ttf
   #   - family: Trajan Pro
   #     fonts:
   #       - asset: fonts/TrajanPro.ttf
