@@ -78,7 +78,7 @@ class _LeaguePageState extends State<LeaguePage> {
                                   ),
                                   SizedBox(height: 10),
                                   Row(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.center,
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
@@ -90,32 +90,28 @@ class _LeaguePageState extends State<LeaguePage> {
                                         children: [
                                           Row(
                                             children: [
-                                              Image.asset(warin, scale: 3),
+                                              Image.asset(swords, scale: 2.5),
                                               SizedBox(width: 5),
-                                              Text(
-                                                "Attack Wins: ${snapshot.data[0]["attackWins"]}",
-                                                style: const TextStyle(
-                                                  color: Colors.white54,
-                                                  fontFamily: "Poppins",
-                                                  fontSize: 15,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                          SizedBox(
-                                            height: 10
-                                          ),
-                                          Row(
-                                            children: [
-                                              Image.asset(warout, scale: 3),
-                                              SizedBox(width: 5),
-                                              Text(
-                                                "Defense Wins: ${snapshot.data[0]["defenseWins"]}",
-                                                style: const TextStyle(
-                                                  color: Colors.white54,
-                                                  fontFamily: "Poppins",
-                                                  fontSize: 15,
-                                                ),
+                                              Column(
+                                                children: [
+                                                  Text(
+                                                    "Attack Wins: ${snapshot.data[0]["attackWins"]}",
+                                                    style: const TextStyle(
+                                                      color: Colors.white54,
+                                                      fontFamily: "Poppins",
+                                                      fontSize: 15,
+                                                    ),
+                                                  ),
+                                                  SizedBox(height: 5),
+                                                  Text(
+                                                    "Defense Wins: ${snapshot.data[0]["defenseWins"]}",
+                                                    style: const TextStyle(
+                                                      color: Colors.white54,
+                                                      fontFamily: "Poppins",
+                                                      fontSize: 15,
+                                                    ),
+                                                  ),
+                                                ],
                                               ),
                                             ],
                                           ),
@@ -332,7 +328,7 @@ class _LeaguePageState extends State<LeaguePage> {
                                     ),
                                     SizedBox(height: 5),
                                     Row(
-                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                       children: [
                                         Utils.getStateText(snapshot.data[2]["state"]),
                                         SizedBox(width: 5),
@@ -511,7 +507,7 @@ class _LeaguePageState extends State<LeaguePage> {
                                           child: Container(
                                             margin: EdgeInsets.symmetric(vertical: 2),
                                             width: MediaQuery.of(context).size.width - 2 * 20,
-                                            color: clanwars[index]["result"] == "win"? const Color(0xff1b3317) : clanwars[index]["result"] == "lose"? const Color(0xff2b0e0e) : Colors.black,
+                                            color: clanwars[index]["result"] == "win"? const Color(0xff1b3317) : clanwars[index]["result"] == "lose"? const Color(0xff2b0e0e) : const Color(0xff494949),
                                             child: Padding(
                                               padding: const EdgeInsets.all(8.0),
                                               child: Column(
@@ -611,6 +607,7 @@ class _LeaguePageState extends State<LeaguePage> {
                                         );
                                       }
                                     ),
+                                    SizedBox(height: 5),
                                     ElevatedButton(
                                       style: ElevatedButton.styleFrom(
                                         backgroundColor: Colors.black,

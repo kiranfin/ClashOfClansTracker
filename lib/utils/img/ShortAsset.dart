@@ -215,6 +215,7 @@ const two_star = 'lib/utils/img/2_Stars.webp';
 const three_star = 'lib/utils/img/3_Stars.webp';
 const exp = 'lib/utils/img/XP.webp';
 const star = 'lib/utils/img/Star.webp';
+const swords = 'lib/utils/img/Swords.png';
 const clock = 'lib/utils/img/Clock.png';
 const warin = 'lib/utils/img/WarInPreference.png';
 const warout = 'lib/utils/img/WarOutPreference.png';

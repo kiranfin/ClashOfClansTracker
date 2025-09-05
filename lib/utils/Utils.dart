@@ -166,7 +166,16 @@ List<dynamic> getNormalTroops(List<dynamic> list) {
 List<dynamic> getSuperTroops(List<dynamic> list) {
   List<dynamic> result = [];
   for(var element in list) {
-    if(isSuperTroop(element["name"])) result.add(element);
+    if(isSuperTroop(element["name"])) {
+      int level = element["level"];
+      for(var troop in list) {
+        if(troop["name"] == mapSuperTroopToTroop(element["name"]) && troop["village"] == "home") {
+          element["level"] = troop["level"];
+          element["maxLevel"] = troop["maxLevel"];
+        };
+      }
+      result.add(element);
+    }
   }
   return result;
 }
@@ -817,20 +826,20 @@ Widget getFirstClan(Map<String, dynamic> map) {
           ClipRRect(
             borderRadius: BorderRadius.circular(20),
             child: Container(
-              color: const Color(0xff103757),
+              color: const Color(0xff673916),
               child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 5.0),
                 child: Row(
                   children: [
-                    Icon(Icons.percent, color: Colors.blueAccent, size: 20),
-                    SizedBox(width: 2),
-                    Text("${map["clan"]["destructionPercentage"].toStringAsFixed(2)}",
-                      style: const TextStyle(
-                        color: Colors.blueAccent,
-                        fontFamily: "Poppins",
-                        fontSize: 15,
-                      )
-                    )
+                    Image.asset(swords, scale: 3.5),
+                    SizedBox(width: 5),
+                    Text("${map["clan"]["attacks"]}",
+                        style: const TextStyle(
+                          color: Colors.deepOrangeAccent,
+                          fontFamily: "Poppins",
+                          fontSize: 15,
+                        )
+                    ),
                   ],
                 ),
               ),
@@ -845,15 +854,21 @@ Widget getFirstClan(Map<String, dynamic> map) {
           ClipRRect(
             borderRadius: BorderRadius.circular(20),
             child: Container(
-              color: const Color(0xff12470a),
+              color: const Color(0xff103757),
               child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 5.0),
-                child: Text("Attacks: ${map["clan"]["attacks"]}",
-                  style: const TextStyle(
-                    color: Colors.green,
-                    fontFamily: "Poppins",
-                    fontSize: 15,
-                  )
+                child: Row(
+                  children: [
+                    Icon(Icons.percent, color: Colors.blueAccent, size: 20),
+                    SizedBox(width: 2),
+                    Text("${map["opponent"]["destructionPercentage"].toStringAsFixed(2)}",
+                        style: const TextStyle(
+                          color: Colors.blueAccent,
+                          fontFamily: "Poppins",
+                          fontSize: 15,
+                        )
+                    )
+                  ],
                 ),
               ),
             ),
@@ -907,20 +922,20 @@ Widget getOpponentClan(Map<String, dynamic> map) {
           ClipRRect(
             borderRadius: BorderRadius.circular(20),
             child: Container(
-              color: const Color(0xff103757),
+              color: const Color(0xff673916),
               child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 5.0),
                 child: Row(
                   children: [
-                    Icon(Icons.percent, color: Colors.blueAccent, size: 20),
-                    SizedBox(width: 2),
-                    Text("${map["opponent"]["destructionPercentage"].toStringAsFixed(2)}",
-                      style: const TextStyle(
-                        color: Colors.blueAccent,
-                        fontFamily: "Poppins",
-                        fontSize: 15,
-                      )
-                    )
+                    Image.asset(swords, scale: 3.5),
+                    SizedBox(width: 5),
+                    Text("${map["opponent"]["attacks"]}",
+                        style: const TextStyle(
+                          color: Colors.deepOrangeAccent,
+                          fontFamily: "Poppins",
+                          fontSize: 15,
+                        )
+                    ),
                   ],
                 ),
               ),
@@ -935,15 +950,21 @@ Widget getOpponentClan(Map<String, dynamic> map) {
           ClipRRect(
             borderRadius: BorderRadius.circular(20),
             child: Container(
-              color: const Color(0xff12470a),
+              color: const Color(0xff103757),
               child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 5.0),
-                child: Text("Attacks: ${map["opponent"]["attacks"]}",
-                  style: const TextStyle(
-                    color: Colors.green,
-                    fontFamily: "Poppins",
-                    fontSize: 15,
-                  )
+                child: Row(
+                  children: [
+                    Icon(Icons.percent, color: Colors.blueAccent, size: 20),
+                    SizedBox(width: 2),
+                    Text("${map["opponent"]["destructionPercentage"].toStringAsFixed(2)}",
+                        style: const TextStyle(
+                          color: Colors.blueAccent,
+                          fontFamily: "Poppins",
+                          fontSize: 15,
+                        )
+                    )
+                  ],
                 ),
               ),
             ),
@@ -955,9 +976,9 @@ Widget getOpponentClan(Map<String, dynamic> map) {
 }
 
 Text getStateText(String text) {
-  if(text == "preparation") return Text("Vorbereitung", style: const TextStyle(color: Colors.white, fontFamily: "Poppins", fontSize: 20));
-  if(text == "inWar") return Text("Endet in", style: const TextStyle(color: Colors.white, fontFamily: "Poppins", fontSize: 20));
-  return Text("Neue Runde in", style: const TextStyle(color: Colors.white, fontFamily: "Poppins", fontSize: 20));
+  if(text == "preparation") return Text("Vorbereitung", style: const TextStyle(color: Colors.white54, fontFamily: "Poppins", fontSize: 20));
+  if(text == "inWar") return Text("Endet in", style: const TextStyle(color: Colors.white54, fontFamily: "Poppins", fontSize: 20));
+  return Text("Neue Runde in", style: const TextStyle(color: Colors.white54, fontFamily: "Poppins", fontSize: 20));
 }
 
 Text getClanWarStateText(String text) {
@@ -1094,7 +1115,74 @@ Widget getSpellTime(Map<String, dynamic> maxdata, String name, int level) {
   );
 }
 
+Widget getTroopCosts(Map<String, dynamic> maxdata, String name, int level) {
+  return ClipRRect(
+    borderRadius: BorderRadius.circular(20),
+    child: Container(
+      color: maxdata[normalizeName(name)]["upgradeResource"] == "elixir"? const Color(0xff651480) : maxdata[normalizeName(name)]["upgradeResource"] == "dark_elixir"? const Color(
+          0xff000000) : Colors.transparent,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 5.0),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Image.asset(maxdata[normalizeName(name)]["upgradeResource"] == "elixir"? elixir : dark_elixir, scale: 2.5),
+            SizedBox(width: 5),
+            Text("${maxdata[normalizeName(name)]["${level + 1}"] != null? maxdata[normalizeName(name)]["${level + 1}"]["upgradeCost"] : "-"}", style: const TextStyle(color: Colors.white,
+                fontFamily: "Poppins",
+                fontSize: 10)
+            ),
+          ],
+        ),
+      ),
+    ),
+  );
+}
+
+Widget getTroopTime(Map<String, dynamic> maxdata, String name, int level) {
+  return ClipRRect(
+    borderRadius: BorderRadius.circular(20),
+    child: Container(
+      color: const Color(
+          0xff132054),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 5.0),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(Icons.access_time, color: const Color(0xff216AF3), size: 14),
+            SizedBox(width: 5),
+            Text(maxdata[normalizeName(name)]["${level + 1}"] != null? parseSeconds(maxdata[normalizeName(name)]["${level + 1}"]["upgradeTime"]) : "-", style: const TextStyle(color: Colors.white,
+                fontFamily: "Poppins",
+                fontSize: 10)),
+          ],
+        ),
+      ),
+    ),
+  );
+}
+
 String parseSeconds(int seconds) {
   Duration duration = Duration(seconds: seconds);
   return "${duration.inDays > 0? "${duration.inDays}d" : ""}${duration.inHours.remainder(24) > 0? " ${duration.inHours.remainder(24)}h" : ""}${duration.inMinutes.remainder(60) > 0? " ${duration.inMinutes.remainder(60)}m" : ""}${duration.inSeconds.remainder(60) > 0? " ${duration.inSeconds.remainder(60)}s" : ""}";
+}
+
+String mapSuperTroopToTroop(String name) {
+  if(name == "Super Barbarian") return "Barbarian";
+  if(name == "Super Archer") return "Archer";
+  if(name == "Super Giant") return "Giant";
+  if(name == "Sneaky Goblin") return "Goblin";
+  if(name == "Super Wall Breaker") return "Wall Breaker";
+  if(name == "Rocket Balloon") return "Balloon";
+  if(name == "Super Wizard") return "Wizard";
+  if(name == "Super Dragon") return "Dragon";
+  if(name == "Inferno Dragon") return "Baby Dragon";
+  if(name == "Super Minion") return "Minion";
+  if(name == "Super Valkyrie") return "Valkyrie";
+  if(name == "Super Witch") return "Witch";
+  if(name == "Ice Hound") return "Lava Hound";
+  if(name == "Super Bowler") return "Bowler";
+  if(name == "Super Miner") return "Miner";
+  if(name == "Super Hog Rider") return "Hog Rider";
+  return name;
 }

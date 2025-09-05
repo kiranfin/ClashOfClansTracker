@@ -101,7 +101,7 @@ Future<List<dynamic>> awaitExtClanWarLog(String tag) async {
   var player = await awaitPlayerData(tag);
   if(player["clan"] == null) return [];
   String clantag = player["clan"]["tag"].substring(1);
-  final url = Uri.parse('https://api.clashk.ing/war/%23$clantag/previous?timestamp_start=0&timestamp_end=9999999999&limit=30');
+  final url = Uri.parse('https://api.clashk.ing/war/%23$clantag/previous?timestamp_start=0&timestamp_end=9999999999&limit=20');
   final res = await http.get(url);
   final status = res.statusCode;
   final reason = res.reasonPhrase;
@@ -392,14 +392,16 @@ double awaitTroopsPercent(Map<String, dynamic> userdata, Map<String, dynamic> ma
   final troops = userdata["troops"];
   num max = 0;
   final maxtroops = maxdata["troops"];
+  maxtroops.forEach((key, val) {
+    max += val["maxlevel"];
+  });
   final maxbhtroops = maxdata["bhtroops"];
+  maxbhtroops.forEach((key, val) {
+    max += val["maxlevel"];
+  });
   final maxsiegemachines = maxdata["siege_machines"];
-  Map finalmap = {};
-  finalmap.addAll(maxtroops);
-  finalmap.addAll(maxbhtroops);
-  finalmap.addAll(maxsiegemachines);
-  finalmap.forEach((key, val) {
-    max += val;
+  maxsiegemachines.forEach((key, val) {
+    max += val["maxlevel"];
   });
   num sum = 0;
   for (var troop in troops) {

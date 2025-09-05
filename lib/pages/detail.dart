@@ -492,18 +492,18 @@ class _DetailPageState extends State<DetailPage> {
 
   Widget getTroopDetail() {
     return FutureBuilder(
-      future: DataProvider.awaitTroops(userTag),
+      future: Future.wait([DataProvider.awaitTroops(userTag), DataProvider.awaitMaxTroops()]),
       builder: (context, AsyncSnapshot snapshot) {
         if(snapshot.hasData) {
           List finallist = [];
           List titles = ["Troops", "Siege Machines", "Super Troops", "Builder Hall Troops"];
-          List normaltroops = Utils.getNormalTroops(snapshot.data);
+          List normaltroops = Utils.getNormalTroops(snapshot.data[0]);
           finallist.add(normaltroops);
-          List siegemachines = Utils.getSiegeMachines(snapshot.data);
+          List siegemachines = Utils.getSiegeMachines(snapshot.data[0]);
           finallist.add(siegemachines);
-          List supertroops = Utils.getSuperTroops(snapshot.data);
+          List supertroops = Utils.getSuperTroops(snapshot.data[0]);
           finallist.add(supertroops);
-          List buildertroops = Utils.getBuilderTroops(snapshot.data);
+          List buildertroops = Utils.getBuilderTroops(snapshot.data[0]);
           finallist.add(buildertroops);
           return ListView.builder(
             itemCount: titles.length,
@@ -539,6 +539,7 @@ class _DetailPageState extends State<DetailPage> {
                             child: Wrap(
                                 spacing: 5.0,
                                 runSpacing: 5.0,
+                                crossAxisAlignment: WrapCrossAlignment.center,
                                 children: List.generate(finallist[ind].length, (index) {
                                   return Padding(
                                     padding: const EdgeInsets.all(3.0),
@@ -620,56 +621,18 @@ class _DetailPageState extends State<DetailPage> {
                                                 ),
                                                 Padding(
                                                   padding: const EdgeInsets.only(left: 10.0),
-                                                  child: Column(
-                                                    mainAxisAlignment: MainAxisAlignment
-                                                        .start,
-                                                    crossAxisAlignment: CrossAxisAlignment
-                                                        .start,
+                                                  child: Row(
                                                     children: [
-                                                      SizedBox(height: 5),
-                                                      ClipRRect(
-                                                        borderRadius: BorderRadius.circular(20),
-                                                        child: Container(
-                                                          color: const Color(
-                                                              0xff355413),
-                                                          child: Padding(
-                                                            padding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 5.0),
-                                                            child: Text(
-                                                                "Costs: ${finallist[ind][index]["maxLevel"]}",
-                                                                style: const TextStyle(
-                                                                    color: Colors.white,
-                                                                    fontFamily: "Poppins",
-                                                                    fontSize: 10)
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                      SizedBox(height: 5),
-                                                      Row(
+                                                      Column(
+                                                        mainAxisAlignment: MainAxisAlignment
+                                                            .start,
+                                                        crossAxisAlignment: CrossAxisAlignment
+                                                            .start,
                                                         children: [
-                                                          ClipRRect(
-                                                            borderRadius: BorderRadius.circular(20),
-                                                            child: Container(
-                                                              color: const Color(
-                                                                  0xff132054),
-                                                              child: Padding(
-                                                                padding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 5.0),
-                                                                child: Row(
-                                                                  children: [
-                                                                    Icon(Icons.access_time,
-                                                                        color: const Color(0xff216AF3),
-                                                                        size: 14),
-                                                                    SizedBox(width: 5),
-                                                                    Text("1d 12h",
-                                                                        style: const TextStyle(
-                                                                            color: Colors.white,
-                                                                            fontFamily: "Poppins",
-                                                                            fontSize: 10)),
-                                                                  ],
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          ),
+                                                          ?finallist[ind][index]["maxLevel"] != finallist[ind][index]["level"]? SizedBox(height: 5) : null,
+                                                          ?finallist[ind][index]["maxLevel"] != finallist[ind][index]["level"]? Utils.getTroopCosts(Utils.isSiegeMachine(finallist[ind][index]["name"])? snapshot.data[1]["siege_machines"] : Utils.isBuilderTroop(finallist[ind][index]["name"])? snapshot.data[1]["bhtroops"] : snapshot.data[1]["troops"], Utils.isSuperTroop(finallist[ind][index]["name"])? Utils.mapSuperTroopToTroop(finallist[ind][index]["name"]) : finallist[ind][index]["name"], finallist[ind][index]["level"]) : null,
+                                                          ?finallist[ind][index]["maxLevel"] != finallist[ind][index]["level"]? SizedBox(height: 5) : null,
+                                                          ?finallist[ind][index]["maxLevel"] != finallist[ind][index]["level"]? Utils.getTroopTime(Utils.isSiegeMachine(finallist[ind][index]["name"])? snapshot.data[1]["siege_machines"] : Utils.isBuilderTroop(finallist[ind][index]["name"])? snapshot.data[1]["bhtroops"] : snapshot.data[1]["troops"], Utils.isSuperTroop(finallist[ind][index]["name"])? Utils.mapSuperTroopToTroop(finallist[ind][index]["name"]) : finallist[ind][index]["name"], finallist[ind][index]["level"]) : null
                                                         ],
                                                       ),
                                                     ],
@@ -735,6 +698,7 @@ class _DetailPageState extends State<DetailPage> {
                       child: Wrap(
                           spacing: 5.0,
                           runSpacing: 5.0,
+                          crossAxisAlignment: WrapCrossAlignment.center,
                           children: List.generate(finallist.length, (index) {
                             return Padding(
                               padding: const EdgeInsets.all(3.0),
@@ -2459,11 +2423,11 @@ class _DetailPageState extends State<DetailPage> {
 
   Widget getClanWarLogDetails() {
     return FutureBuilder(
-        future: Future.wait([DataProvider.awaitClanWarLog(userTag), DataProvider.awaitExtClanWarLog(userTag)]),
+        future: Future.wait([DataProvider.awaitClanWarLog(userTag)/*, DataProvider.awaitExtClanWarLog(userTag)*/]),
         builder: (context, AsyncSnapshot snapshot) {
           if(snapshot.hasData) {
             List<dynamic> clanwars = Utils.filterClanWars(snapshot.data[0]["items"]);
-            List<dynamic> clanwarsext = Utils.filterClanWars(snapshot.data[1]);
+            //List<dynamic> clanwarsext = Utils.filterClanWars(snapshot.data[1]["items"]);
             return SingleChildScrollView(
               child: ListView.builder(
                   physics: NeverScrollableScrollPhysics(),
@@ -2568,7 +2532,7 @@ class _DetailPageState extends State<DetailPage> {
                                         )
                                       ],
                                     ),
-                                    ?(index < 10 && clanwarsext[index]["clan"]["members"] != null)? Row(
+                                    /*?(index < 10 && clanwarsext[index]["clan"]["members"] != null)? Row(
                                       mainAxisAlignment: MainAxisAlignment.center,
                                       children: [
                                         TextButton(
@@ -2593,7 +2557,7 @@ class _DetailPageState extends State<DetailPage> {
                                           )
                                         )
                                       ],
-                                    ) : null,
+                                    ) : null,*/
                                   ],
                                 )
                             )
