@@ -1081,7 +1081,7 @@ Widget getSpellCosts(Map<String, dynamic> maxdata, String name, int level) {
           children: [
             Image.asset(maxdata[normalizeName(name)]["upgradeResource"] == "elixir"? elixir : dark_elixir, scale: 2.5),
             SizedBox(width: 5),
-            Text("${maxdata[normalizeName(name)]["${level + 1}"] != null? maxdata[normalizeName(name)]["${level + 1}"]["upgradeCost"] : "-"}", style: const TextStyle(color: Colors.white,
+            Text(maxdata[normalizeName(name)]["${level + 1}"] != null? maxdata[normalizeName(name)]["${level + 1}"]["upgradeCost"].toString().spaceNumbers() : "-", style: const TextStyle(color: Colors.white,
                 fontFamily: "Inter",
                 fontSize: 10)
             ),
@@ -1128,7 +1128,7 @@ Widget getTroopCosts(Map<String, dynamic> maxdata, String name, int level) {
           children: [
             Image.asset(maxdata[normalizeName(name)]["upgradeResource"] == "elixir"? elixir : dark_elixir, scale: 2.5),
             SizedBox(width: 5),
-            Text("${maxdata[normalizeName(name)]["${level + 1}"] != null? maxdata[normalizeName(name)]["${level + 1}"]["upgradeCost"] : "-"}", style: const TextStyle(color: Colors.white,
+            Text(maxdata[normalizeName(name)]["${level + 1}"] != null? maxdata[normalizeName(name)]["${level + 1}"]["upgradeCost"].toString().spaceNumbers() : "-", style: const TextStyle(color: Colors.white,
                 fontFamily: "Inter",
                 fontSize: 10)
             ),
@@ -1185,4 +1185,12 @@ String mapSuperTroopToTroop(String name) {
   if(name == "Super Miner") return "Miner";
   if(name == "Super Hog Rider") return "Hog Rider";
   return name;
+}
+
+extension StringNumberExtension on String {
+  String spaceNumbers() {
+    final result = this.replaceAllMapped(
+        RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'), (Match m) => '${m[1]} ');
+    return result;
+  }
 }

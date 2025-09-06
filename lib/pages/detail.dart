@@ -1306,7 +1306,7 @@ class _DetailPageState extends State<DetailPage> {
                                                   SizedBox(height: 5),
                                                   Wrap(
                                                     spacing: 2,
-                                                    runSpacing: 2,
+                                                    runSpacing: 5,
                                                     children: [
                                                       ?shiny != 0? ClipRRect(
                                                         borderRadius: BorderRadius.circular(20),
