@@ -152,6 +152,7 @@ Image getTroopImage(String name, String village) {
   if(name == "Rocket Spear") return Image.asset(rocket_spear, scale: 3.5);
   if(name == "Electro Boots") return Image.asset(electro_boots, scale: 3.5);
   if(name == "Dark Crown") return Image.asset(dark_crown, scale: 3.5);
+  if(name == "Heroic Torch") return Image.asset(heroic_torch, scale: 3.5);
   return Image.asset(defenseShield, scale: 3.5);
 }
 
@@ -437,7 +438,7 @@ bool isMinionPrinceEquipment(String name) {
 }
 
 bool isWardenEquipment(String name) {
-  return name == "Eternal Tome" || name == "Life Gem" || name == "Rage Gem" || name == "Healing Tome" || name == "Fireball" || name == "Lavaloon Puppet";
+  return name == "Eternal Tome" || name == "Life Gem" || name == "Rage Gem" || name == "Healing Tome" || name == "Fireball" || name == "Lavaloon Puppet" || name == "Heroic Torch";
 }
 
 bool isRoyalChampEquipment(String name) {
