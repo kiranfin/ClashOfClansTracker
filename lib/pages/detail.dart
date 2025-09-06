@@ -1615,389 +1615,318 @@ class _DetailPageState extends State<DetailPage> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text("Allgemein", style: const TextStyle(
-                      color: Colors.white,
-                      fontFamily: "Inter",
-                      fontSize: 25)
-                  ),
                   ClipRRect(
                     borderRadius: BorderRadius.circular(20),
-                    child: Container(
-                      color: Colors.black,
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(snapshot.data[0]["name"], style: const TextStyle(
-                                            color: Colors.white,
-                                            fontFamily: "Inter",
-                                            fontSize: 30)
-                                        ),
-                                      ],
-                                    ),
-                                    SizedBox(height: 5),
-                                    Row(
-                                      children: [
-                                        Image.asset(exp),
-                                        SizedBox(width: 5),
-                                        Text("Exp: ${snapshot.data[0]["expLevel"]}", style: const TextStyle(
-                                            color: Colors.white,
-                                            fontFamily: "Inter",
-                                            fontSize: 15)
-                                        )
-                                      ],
-                                    ),
-                                    SizedBox(height: 5),
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment
-                                          .start,
-                                      children: [
-                                        Image.asset('lib/utils/img/Trophy.png',
-                                            fit: BoxFit.cover, scale: 1.5),
-                                        SizedBox(width: 7),
-                                        Text("Best: ${snapshot.data[0]["bestTrophies"]}", style: const TextStyle(
-                                            color: Colors.white,
-                                            fontFamily: "Inter",
-                                            fontSize: 15)
-                                        )
-                                      ],
-                                    ),
-                                    SizedBox(height: 5),
-                                    Row(
-                                      children: [
-                                        DataProvider.awaitBuilderLeagueIcon(snapshot.data[0], 4),
-                                        SizedBox(width: 7),
-                                        Text("Best: ${snapshot.data[0]["bestBuilderBaseTrophies"]}", style: const TextStyle(
-                                            color: Colors.white,
-                                            fontFamily: "Inter",
-                                            fontSize: 15)
-                                        )
-                                      ],
-                                    ),
-                                    SizedBox(height: 5),
-                                    Row(
-                                      children: [
-                                        Image.asset(star, scale: 1.2),
-                                        SizedBox(width: 7),
-                                        Text("War Stars: ${snapshot.data[0]["warStars"]}", style: const TextStyle(
-                                            color: Colors.white,
-                                            fontFamily: "Inter",
-                                            fontSize: 15)
-                                        )
-                                      ],
-                                    ),
-                                    SizedBox(height: 5),
-                                    Row(
-                                      children: [
-                                        Image.asset(capital_gold, scale: 3.5),
-                                        SizedBox(width: 7),
-                                        Text("Clan Capital: ${snapshot.data[0]["clanCapitalContributions"]}", style: const TextStyle(
-                                            color: Colors.white,
-                                            fontFamily: "Inter",
-                                            fontSize: 15)
-                                        )
-                                      ],
-                                    )
-                                  ],
-                                ),
-                                Column(
-                                  children: [
-                                    Text(snapshot.data[0]["tag"], style: const TextStyle(
-                                        color: Colors.white,
-                                        fontFamily: "Inter",
-                                        fontSize: 15)
-                                    ),
-                                    SizedBox(height: 5),
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        DataProvider.awaitTownHallIcon(snapshot.data[0]["townHallLevel"], 3),
-                                        SizedBox(width: 5),
-                                        DataProvider.awaitBuilderHallIcon(snapshot.data[0]["builderHallLevel"], 2.5)
-                                      ],
-                                    ),
-                                    SizedBox(height: 5),
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(snapshot.data[0]["townHallLevel"].toString(), style: const TextStyle(
-                                            color: Colors.white,
-                                            fontFamily: "Inter",
-                                            fontSize: 15)
-                                        ),
-                                        SizedBox(width: 25),
-                                        Text(snapshot.data[0]["builderHallLevel"].toString(), style: const TextStyle(
-                                            color: Colors.white,
-                                            fontFamily: "Inter",
-                                            fontSize: 15)
-                                        ),
-                                      ],
-                                    )
-                                  ],
-                                )
-                              ],
-                            ),
-                          ],
+                    child: Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.black),
+                          gradient: LinearGradient(
+                            begin: Alignment.centerLeft,
+                            end: Alignment.centerRight,
+                            colors: [Colors.black.withValues(alpha: 0.8), Colors.black.withValues(alpha: 0.6)],
+                          ),
+                          borderRadius: BorderRadius.circular(30),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(snapshot.data[0]["name"], style: const TextStyle(
+                                              color: Colors.white,
+                                              fontFamily: "Inter",
+                                              fontSize: 30)
+                                          ),
+                                        ],
+                                      ),
+                                      SizedBox(height: 5),
+                                      Row(
+                                        children: [
+                                          Image.asset(exp),
+                                          SizedBox(width: 5),
+                                          Text("Exp: ${snapshot.data[0]["expLevel"]}", style: const TextStyle(
+                                              color: Colors.white,
+                                              fontFamily: "Inter",
+                                              fontSize: 15)
+                                          )
+                                        ],
+                                      ),
+                                      SizedBox(height: 5),
+                                      Row(
+                                        mainAxisAlignment: MainAxisAlignment
+                                            .start,
+                                        children: [
+                                          Image.asset('lib/utils/img/Trophy.png',
+                                              fit: BoxFit.cover, scale: 1.5),
+                                          SizedBox(width: 7),
+                                          Text("Best: ${snapshot.data[0]["bestTrophies"]}", style: const TextStyle(
+                                              color: Colors.white,
+                                              fontFamily: "Inter",
+                                              fontSize: 15)
+                                          )
+                                        ],
+                                      ),
+                                      SizedBox(height: 5),
+                                      Row(
+                                        children: [
+                                          DataProvider.awaitBuilderLeagueIcon(snapshot.data[0], 4),
+                                          SizedBox(width: 7),
+                                          Text("Best: ${snapshot.data[0]["bestBuilderBaseTrophies"]}", style: const TextStyle(
+                                              color: Colors.white,
+                                              fontFamily: "Inter",
+                                              fontSize: 15)
+                                          )
+                                        ],
+                                      ),
+                                      SizedBox(height: 5),
+                                      Row(
+                                        children: [
+                                          Image.asset(star, scale: 1.2),
+                                          SizedBox(width: 7),
+                                          Text("War Stars: ${snapshot.data[0]["warStars"]}", style: const TextStyle(
+                                              color: Colors.white,
+                                              fontFamily: "Inter",
+                                              fontSize: 15)
+                                          )
+                                        ],
+                                      ),
+                                      SizedBox(height: 5),
+                                      Row(
+                                        children: [
+                                          Image.asset(capital_gold, scale: 3.5),
+                                          SizedBox(width: 7),
+                                          Text("Clan Capital: ${snapshot.data[0]["clanCapitalContributions"]}", style: const TextStyle(
+                                              color: Colors.white,
+                                              fontFamily: "Inter",
+                                              fontSize: 15)
+                                          )
+                                        ],
+                                      )
+                                    ],
+                                  ),
+                                  Column(
+                                    children: [
+                                      Text(snapshot.data[0]["tag"], style: const TextStyle(
+                                          color: Colors.white,
+                                          fontFamily: "Inter",
+                                          fontSize: 15)
+                                      ),
+                                      SizedBox(height: 5),
+                                      Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          DataProvider.awaitTownHallIcon(snapshot.data[0]["townHallLevel"], 3),
+                                          SizedBox(width: 5),
+                                          DataProvider.awaitBuilderHallIcon(snapshot.data[0]["builderHallLevel"], 2.5)
+                                        ],
+                                      ),
+                                      SizedBox(height: 5),
+                                      Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(snapshot.data[0]["townHallLevel"].toString(), style: const TextStyle(
+                                              color: Colors.white,
+                                              fontFamily: "Inter",
+                                              fontSize: 15)
+                                          ),
+                                          SizedBox(width: 25),
+                                          Text(snapshot.data[0]["builderHallLevel"].toString(), style: const TextStyle(
+                                              color: Colors.white,
+                                              fontFamily: "Inter",
+                                              fontSize: 15)
+                                          ),
+                                        ],
+                                      )
+                                    ],
+                                  )
+                                ],
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),
                   ),
-                  snapshot.data[0]["clan"] != null? Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SizedBox(height: 20),
-                      Text("Clan", style: const TextStyle(
-                          color: Colors.white,
-                          fontFamily: "Inter",
-                          fontSize: 25)
-                      ),
-                      ClipRRect(
-                          borderRadius: BorderRadius.circular(20),
-                          child: Container(
-                              color: Colors.black,
-                              child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      mainAxisAlignment: MainAxisAlignment.start,
-                                      children: [
-                                        Row(
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Column(
-                                              crossAxisAlignment: CrossAxisAlignment.start,
-                                              children: [
-                                                Text(snapshot.data[0]["clan"]["name"], style: const TextStyle(
-                                                    color: Colors.white,
-                                                    fontFamily: "Inter",
-                                                    fontSize: 30)
-                                                ),
-                                                SizedBox(height: 5),
-                                                Row(
-                                                  children: [
-                                                    Icon(Icons.language, color: Colors.white),
-                                                    SizedBox(width: 5),
-                                                    Text(snapshot.data[1]["location"]["name"], style: const TextStyle(
-                                                        color: Colors.white,
-                                                        fontFamily: "Inter",
-                                                        fontSize: 15)
-                                                    ),
-                                                  ],
-                                                ),
-                                                SizedBox(height: 5),
-                                                Row(
-                                                  children: [
-                                                    Icon(Icons.person, color: Colors.white),
-                                                    SizedBox(width: 5),
-                                                    Text("Mitglieder: ${snapshot.data[1]["members"]}", style: const TextStyle(
-                                                        color: Colors.white,
-                                                        fontFamily: "Inter",
-                                                        fontSize: 15)
-                                                    ),
-                                                  ],
-                                                ),
-                                                SizedBox(height: 5),
-                                                Row(
-                                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                                  children: [
-                                                    Icon(Icons.sell, color: Colors.white),
-                                                    SizedBox(width: 5),
-                                                    snapshot.data[1]["labels"].length >= 1? Image.network(snapshot.data[1]["labels"][0]["iconUrls"]["small"], scale: 2) : Container(),
-                                                    snapshot.data[1]["labels"].length >= 2? Image.network(snapshot.data[1]["labels"][1]["iconUrls"]["small"], scale: 2) : Container(),
-                                                    snapshot.data[1]["labels"].length >= 3? Image.network(snapshot.data[1]["labels"][2]["iconUrls"]["small"], scale: 2) : Container(),
-                                                  ],
-                                                ),
-                                              ],
-                                            ),
-                                            Column(
-                                              children: [
-                                                Text(snapshot.data[0]["clan"]["tag"], style: const TextStyle(
-                                                    color: Colors.white,
-                                                    fontFamily: "Inter",
-                                                    fontSize: 15)
-                                                ),
-                                                Image.network(snapshot.data[0]["clan"]["badgeUrls"]["medium"], scale: 2),
-                                              ],
-                                            )
-                                          ],
-                                        ),
-                                        SizedBox(height: 5),
-                                        Row(
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          children: [
-                                            Icon(Icons.edit, color: Colors.white),
-                                            SizedBox(width: 5),
-                                            Container(
-                                              width: MediaQuery.of(context).size.width - 2 * 40,
-                                              child: Text(textWidthBasis: TextWidthBasis.parent, "${snapshot.data[1]["description"]}", style: const TextStyle(
+                  ?snapshot.data[0]["clan"] != null? ClipRRect(
+                    borderRadius: BorderRadius.circular(20),
+                    child: Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.black),
+                          gradient: LinearGradient(
+                            begin: Alignment.centerLeft,
+                            end: Alignment.centerRight,
+                            colors: [Colors.black.withValues(alpha: 0.8), Colors.black.withValues(alpha: 0.6)],
+                          ),
+                          borderRadius: BorderRadius.circular(30),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(3.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(left: 8.0, top: 5.0),
+                                child: Text("Clan", style: const TextStyle(
+                                    color: Colors.white,
+                                    fontFamily: "Inter",
+                                    fontSize: 30)
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Row(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Column(
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: [
+                                              Text(snapshot.data[0]["clan"]["name"], style: const TextStyle(
                                                   color: Colors.white,
                                                   fontFamily: "Inter",
-                                                  fontSize: 11)
+                                                  fontSize: 30)
                                               ),
-                                            ),
-                                          ],
-                                        ),
-                                        SizedBox(height: 5),
-                                        Row(
-                                          children: [
-                                            Icon(Icons.key, color: Colors.white),
-                                            SizedBox(width: 5),
-                                            Utils.getRole(snapshot.data[0]["role"])
-                                          ],
-                                        ),
-                                        SizedBox(height: 5),
-                                        Row(
-                                          children: [
-                                            Image.asset('lib/utils/img/Trophy.png',
-                                                fit: BoxFit.cover, scale: 1.5),
-                                            SizedBox(width: 7),
-                                            Text("${snapshot.data[1]["clanPoints"]}", style: const TextStyle(
-                                                color: Colors.white,
-                                                fontFamily: "Inter",
-                                                fontSize: 15)
-                                            ),
-                                            SizedBox(width: 10),
-                                            Image.asset('lib/utils/img/BuilderHallTrophy.png',
-                                                fit: BoxFit.cover, scale: 11.5),
-                                            SizedBox(width: 7),
-                                            Text("${snapshot.data[1]["clanBuilderBasePoints"]}", style: const TextStyle(
-                                                color: Colors.white,
-                                                fontFamily: "Inter",
-                                                fontSize: 15)
-                                            ),
-                                            SizedBox(width: 10),
-                                            Image.asset('lib/utils/img/TrophyC.webp',
-                                                fit: BoxFit.cover, scale: 1.5),
-                                            SizedBox(width: 7),
-                                            Text("${snapshot.data[1]["clanCapitalPoints"]}", style: const TextStyle(
-                                                color: Colors.white,
-                                                fontFamily: "Inter",
-                                                fontSize: 15)
-                                            ),
-                                          ],
-                                        ),
-                                        SizedBox(height: 5),
-                                        Row(
-                                          children: [
-                                            DataProvider.awaitClanWarLeagueIcon(snapshot.data[1]["warLeague"]["name"], 1.2),
-                                            SizedBox(width: 5),
-                                            Text("Wins: ${snapshot.data[1]["warWins"]} / Ties: ${snapshot.data[1]["warTies"]} / Losses: ${snapshot.data[1]["warLosses"]}", style: const TextStyle(
-                                                color: Colors.white,
-                                                fontFamily: "Inter",
-                                                fontSize: 15)
-                                            ),
-                                            SizedBox(width: 10),
-                                            Icon(Icons.local_fire_department, color: Colors.white),
-                                            Text("Streak: ${snapshot.data[1]["warWinStreak"]}", style: const TextStyle(
-                                                color: Colors.white,
-                                                fontFamily: "Inter",
-                                                fontSize: 15)
-                                            ),
-                                          ],
-                                        ),
-                                      ]
-                                  )
-                              )
-                          )
-                      ),
-                      SizedBox(height: 10),
-                      Wrap(
-                          spacing: 5.0,
-                          runSpacing: 5.0,
-                          children: List.generate(snapshot.data[1]["clanCapital"]["districts"].length, (index) {
-                            return ClipRRect(
-                                borderRadius: BorderRadius.circular(20),
-                                child: Container(
-                                    color: Colors.black,
-                                    child: Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: Row(
-                                          mainAxisSize: MainAxisSize.min,
-                                          children: [
-                                            index == 0? Utils.getCapitalHallImage(snapshot.data[1]["clanCapital"]["districts"][index]["districtHallLevel"]) : Utils.getDistrictHallImage(snapshot.data[1]["clanCapital"]["districts"][index]["districtHallLevel"]),
-                                            SizedBox(width: 5),
-                                            Text("${snapshot.data[1]["clanCapital"]["districts"][index]["name"]}: ${snapshot.data[1]["clanCapital"]["districts"][index]["districtHallLevel"]}", style: const TextStyle(
-                                                color: Colors.white,
-                                                fontFamily: "Inter",
-                                                fontSize: 15)
-                                            ),
-                                          ],
-                                        )
-                                    )
-                                )
-                            );
-                          }
-                          )
-                      ),
-                      SizedBox(height: 5),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          Text("Donations: In | Out", style: const TextStyle(
-                              color: Colors.white,
-                              fontFamily: "Inter",
-                              fontSize: 15)
-                          ),
-                        ],
-                      ),
-                      ListView.builder(
-                          shrinkWrap: true,
-                          physics: NeverScrollableScrollPhysics(),
-                          itemCount: snapshot.data[1]["memberList"].length,
-                          itemBuilder: (BuildContext context, int index) {
-                            return Padding(
-                              padding: const EdgeInsets.all(3.0),
-                              child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(20),
-                                  child: Container(
-                                      color: snapshot.data[1]["memberList"][index]["tag"] == snapshot.data[0]["tag"]? Colors.green.shade800 : Colors.black,
-                                      child: Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: Row(
-                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                            children: [
+                                              SizedBox(height: 5),
                                               Row(
                                                 children: [
-                                                  Text("${snapshot.data[1]["memberList"][index]["clanRank"]}.", style: const TextStyle(
-                                                      color: Colors.white,
-                                                      fontFamily: "Inter",
-                                                      fontSize: 15)
-                                                  ),
+                                                  Icon(Icons.language, color: Colors.white),
                                                   SizedBox(width: 5),
-                                                  Image.network(snapshot.data[1]["memberList"][index]["league"]["iconUrls"]["small"], scale: 3),
-                                                  SizedBox(width: 5),
-                                                  DataProvider.awaitTownHallIcon(snapshot.data[1]["memberList"][index]["townHallLevel"], 5),
-                                                  SizedBox(width: 5),
-                                                  Text("${snapshot.data[1]["memberList"][index]["trophies"]}", style: const TextStyle(
-                                                      color: Colors.white,
-                                                      fontFamily: "Inter",
-                                                      fontSize: 15)
-                                                  ),
-                                                  SizedBox(width: 5),
-                                                  Text("| ${snapshot.data[1]["memberList"][index]["name"]}", style: const TextStyle(
-                                                      color: Colors.white,
+                                                  Text(snapshot.data[1]["location"]["name"], style: const TextStyle(
+                                                      color: Colors.white54,
                                                       fontFamily: "Inter",
                                                       fontSize: 15)
                                                   ),
                                                 ],
                                               ),
+                                              SizedBox(height: 5),
                                               Row(
                                                 children: [
-                                                  Text("${snapshot.data[1]["memberList"][index]["donationsReceived"]} | ${snapshot.data[1]["memberList"][index]["donations"]}", style: const TextStyle(
+                                                  Icon(Icons.person, color: Colors.white),
+                                                  SizedBox(width: 5),
+                                                  Text("Mitglieder: ${snapshot.data[1]["members"]}", style: const TextStyle(
+                                                      color: Colors.white54,
+                                                      fontFamily: "Inter",
+                                                      fontSize: 15)
+                                                  ),
+                                                ],
+                                              ),
+                                              SizedBox(height: 5),
+                                              Row(
+                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                children: [
+                                                  Icon(Icons.sell, color: Colors.white),
+                                                  SizedBox(width: 5),
+                                                  snapshot.data[1]["labels"].length >= 1? Image.network(snapshot.data[1]["labels"][0]["iconUrls"]["small"], scale: 2) : Container(),
+                                                  snapshot.data[1]["labels"].length >= 2? Image.network(snapshot.data[1]["labels"][1]["iconUrls"]["small"], scale: 2) : Container(),
+                                                  snapshot.data[1]["labels"].length >= 3? Image.network(snapshot.data[1]["labels"][2]["iconUrls"]["small"], scale: 2) : Container(),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
+                                          Column(
+                                            children: [
+                                              Text(snapshot.data[0]["clan"]["tag"], style: const TextStyle(
+                                                  color: Colors.white,
+                                                  fontFamily: "Inter",
+                                                  fontSize: 15)
+                                              ),
+                                              Image.network(snapshot.data[0]["clan"]["badgeUrls"]["medium"], scale: 2),
+                                            ],
+                                          )
+                                        ],
+                                      ),
+                                      SizedBox(height: 5),
+                                      Row(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          Icon(Icons.edit, color: Colors.white),
+                                          SizedBox(width: 5),
+                                          SizedBox(width: 280,
+                                              child: Text(
+                                                  textWidthBasis: TextWidthBasis.parent, "${snapshot.data[1]["description"]}", style: const TextStyle(
+                                                  color: Colors.white54,
+                                                  fontFamily: "Inter",
+                                                  fontSize: 11)
+                                              )
+                                          )
+                                        ],
+                                      ),
+                                      SizedBox(height: 5),
+                                      Row(
+                                        children: [
+                                          Icon(Icons.key, color: Colors.white),
+                                          SizedBox(width: 5),
+                                          Utils.getRole(snapshot.data[0]["role"])
+                                        ],
+                                      ),
+                                      SizedBox(height: 5),
+                                      Row(
+                                        children: [
+                                          Image.asset('lib/utils/img/Trophy.png',
+                                              fit: BoxFit.cover, scale: 1.5),
+                                          SizedBox(width: 7),
+                                          Text("${snapshot.data[1]["clanPoints"]}", style: const TextStyle(
+                                              color: Colors.white54,
+                                              fontFamily: "Inter",
+                                              fontSize: 15)
+                                          ),
+                                          SizedBox(width: 10),
+                                          Image.asset('lib/utils/img/BuilderHallTrophy.png',
+                                              fit: BoxFit.cover, scale: 11.5),
+                                          SizedBox(width: 7),
+                                          Text("${snapshot.data[1]["clanBuilderBasePoints"]}", style: const TextStyle(
+                                              color: Colors.white54,
+                                              fontFamily: "Inter",
+                                              fontSize: 15)
+                                          ),
+                                          SizedBox(width: 10),
+                                          Image.asset('lib/utils/img/TrophyC.webp',
+                                              fit: BoxFit.cover, scale: 1.5),
+                                          SizedBox(width: 7),
+                                          Text("${snapshot.data[1]["clanCapitalPoints"]}", style: const TextStyle(
+                                              color: Colors.white54,
+                                              fontFamily: "Inter",
+                                              fontSize: 15)
+                                          ),
+                                        ],
+                                      ),
+                                      SizedBox(height: 5),
+                                      Row(
+                                        children: [
+                                          DataProvider.awaitClanWarLeagueIcon(snapshot.data[1]["warLeague"]["name"], 1.2),
+                                          SizedBox(width: 5),
+                                          Column(
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: [
+                                              Text("Wins: ${snapshot.data[1]["warWins"]} / Ties: ${snapshot.data[1]["warTies"]} / Losses: ${snapshot.data[1]["warLosses"]}", style: const TextStyle(
+                                                  color: Colors.white,
+                                                  fontFamily: "Inter",
+                                                  fontSize: 15)
+                                              ),
+                                              Row(
+                                                children: [
+                                                  Icon(Icons.local_fire_department, color: Colors.deepOrange),
+                                                  Text("Streak: ${snapshot.data[1]["warWinStreak"]}", style: const TextStyle(
                                                       color: Colors.white,
                                                       fontFamily: "Inter",
                                                       fontSize: 15)
@@ -2006,14 +1935,141 @@ class _DetailPageState extends State<DetailPage> {
                                               )
                                             ],
                                           )
-                                      )
+                                        ],
+                                      ),
+                                    ]
+                                ),
+                              ),
+                              SizedBox(height: 10),
+                              Wrap(
+                                  spacing: 5.0,
+                                  runSpacing: 5.0,
+                                  children: List.generate(snapshot.data[1]["clanCapital"]["districts"].length, (index) {
+                                    return ClipRRect(
+                                        borderRadius: BorderRadius.circular(20),
+                                        child: Container(
+                                            color: Colors.black,
+                                            child: Padding(
+                                                padding: const EdgeInsets.all(8.0),
+                                                child: Row(
+                                                  mainAxisSize: MainAxisSize.min,
+                                                  children: [
+                                                    index == 0? Utils.getCapitalHallImage(snapshot.data[1]["clanCapital"]["districts"][index]["districtHallLevel"]) : Utils.getDistrictHallImage(snapshot.data[1]["clanCapital"]["districts"][index]["districtHallLevel"]),
+                                                    SizedBox(width: 5),
+                                                    Column(
+                                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                                      children: [
+                                                        Text("${snapshot.data[1]["clanCapital"]["districts"][index]["name"]}", style: const TextStyle(
+                                                            color: Colors.white,
+                                                            fontFamily: "Inter",
+                                                            fontSize: 15)
+                                                        ),
+                                                        Text("Lvl: ${snapshot.data[1]["clanCapital"]["districts"][index]["districtHallLevel"]}", style: const TextStyle(
+                                                            color: Colors.white54,
+                                                            fontFamily: "Inter",
+                                                            fontSize: 15)
+                                                        ),
+                                                      ],
+                                                    )
+                                                  ],
+                                                )
+                                            )
+                                        )
+                                    );
+                                  }
                                   )
                               ),
-                            );
-                          }
-                      )
-                    ],
-                  ) : SizedBox(height: 5)
+                              SizedBox(height: 5),
+                              ListView.builder(
+                                  shrinkWrap: true,
+                                  physics: NeverScrollableScrollPhysics(),
+                                  itemCount: snapshot.data[1]["memberList"].length,
+                                  itemBuilder: (BuildContext context, int index) {
+                                    return Padding(
+                                      padding: const EdgeInsets.all(3.0),
+                                      child: ClipRRect(
+                                          borderRadius: BorderRadius.circular(20),
+                                          child: Container(
+                                              color: snapshot.data[1]["memberList"][index]["tag"] == snapshot.data[0]["tag"]? Colors.green.shade800 : Colors.black,
+                                              child: Padding(
+                                                  padding: const EdgeInsets.all(8.0),
+                                                  child: Row(
+                                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                    children: [
+                                                      Row(
+                                                        mainAxisAlignment: MainAxisAlignment.start,
+                                                        children: [
+                                                          Text("${snapshot.data[1]["memberList"][index]["clanRank"]}.", style: const TextStyle(
+                                                              color: Colors.white,
+                                                              fontFamily: "Inter",
+                                                              fontSize: 25)
+                                                          ),
+                                                          SizedBox(width: 5),
+                                                          Image.network(snapshot.data[1]["memberList"][index]["league"]["iconUrls"]["small"], scale: 2.5),
+                                                          SizedBox(width: 10),
+                                                          Column(
+                                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                                            children: [
+                                                              Row(
+                                                                children: [
+                                                                  Text("${snapshot.data[1]["memberList"][index]["name"]}", style: const TextStyle(
+                                                                      color: Colors.white,
+                                                                      fontFamily: "Inter",
+                                                                      fontSize: 15)
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                              Row(
+                                                                children: [
+                                                                  Icon(Icons.arrow_upward, size: 20, color: Colors.white),
+                                                                  SizedBox(width: 3),
+                                                                  Text("${snapshot.data[1]["memberList"][index]["donations"]}", style: const TextStyle(
+                                                                      color: Colors.white54,
+                                                                      fontFamily: "Inter",
+                                                                      fontSize: 15)
+                                                                  ),
+                                                                  SizedBox(width: 10),
+                                                                  Icon(Icons.arrow_downward, size: 20, color: Colors.white),
+                                                                  SizedBox(width: 3),
+                                                                  Text("${snapshot.data[1]["memberList"][index]["donationsReceived"]}", style: const TextStyle(
+                                                                      color: Colors.white54,
+                                                                      fontFamily: "Inter",
+                                                                      fontSize: 15)
+                                                                  ),
+                                                                ],
+                                                              )
+                                                            ],
+                                                          ),
+                                                        ],
+                                                      ),
+                                                      Row(
+                                                        children: [
+                                                          Image.asset('lib/utils/img/Trophy.png',
+                                                              fit: BoxFit.cover, scale: 2),
+                                                          SizedBox(width: 5),
+                                                          Text("${snapshot.data[1]["memberList"][index]["trophies"]}", style: const TextStyle(
+                                                              color: Colors.white54,
+                                                              fontFamily: "Inter",
+                                                              fontSize: 15)
+                                                          ),
+                                                          SizedBox(width: 5),
+                                                          DataProvider.awaitTownHallIcon(snapshot.data[1]["memberList"][index]["townHallLevel"], 4),
+                                                        ],
+                                                      )
+                                                    ],
+                                                  )
+                                              )
+                                          )
+                                      ),
+                                    );
+                                  }
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ) : null
                 ]
               ),
             );

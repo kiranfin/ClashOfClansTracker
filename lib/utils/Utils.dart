@@ -446,7 +446,7 @@ bool isRoyalChampEquipment(String name) {
 
 Text getRole(String role) {
   return Text(role == "coLeader"? "Co-Leader" : role == "leader"? "Leader" : role == "elder"? "Elder" : "Member", style: const TextStyle(
-      color: Colors.white,
+      color: Colors.white54,
       fontFamily: "Inter",
       fontSize: 15));
 }
