@@ -862,7 +862,7 @@ Widget getFirstClan(Map<String, dynamic> map) {
                   children: [
                     Icon(Icons.percent, color: Colors.blueAccent, size: 20),
                     SizedBox(width: 2),
-                    Text("${map["opponent"]["destructionPercentage"].toStringAsFixed(2)}",
+                    Text("${map["clan"]["destructionPercentage"].toStringAsFixed(2)}",
                         style: const TextStyle(
                           color: Colors.blueAccent,
                           fontFamily: "Inter",

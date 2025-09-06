@@ -19,6 +19,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
 
   String userTag = UserSP.getCurrentUser();
+  Map<String, dynamic> userMap = UserSP.getDecodedUserMap();
 
   @override
   Widget build(BuildContext context) {
@@ -42,6 +43,10 @@ class _HomePageState extends State<HomePage> {
                   future: Future.wait([DataProvider.awaitPlayerData(userTag), DataProvider.awaitBuildings(), DataProvider.awaitMaxTroops(), DataProvider.awaitMaxEquipment()]),
                   builder: (context, AsyncSnapshot ovsnap) {
                     if(ovsnap.hasData) {
+                      if(userMap.containsKey(userTag)) {
+                        userMap[userTag] = ovsnap.data[0]["name"];
+                        UserSP.setUserMap(userMap);
+                      }
                       return Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [

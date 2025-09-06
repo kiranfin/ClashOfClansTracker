@@ -131,9 +131,12 @@ class _StartScreenPageState extends State<StartScreenPage> {
                           onPressed: () {
                             if(valid) {
                               List<String> old = UserSP.getUser();
+                              Map<String, dynamic> oldmap = UserSP.getDecodedUserMap();
                               if (!old.contains(value!)) {
                                 old.add(value!);
+                                oldmap[value!] = "-";
                                 UserSP.setUsers(old);
+                                UserSP.setUserMap(oldmap);
                                 UserSP.setCurrentUser(value!);
                                 Navigator.popAndPushNamed(context, "/default");
                               }

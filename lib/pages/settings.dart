@@ -12,7 +12,8 @@ class SettingsPage extends StatefulWidget {
 
 class _SettingsPageState extends State<SettingsPage> {
 
-  final List<String> usermap = UserSP.getUser();
+  final List<String> user = UserSP.getUser();
+  final Map<String, dynamic> usermap = UserSP.getDecodedUserMap();
   String currentuser = UserSP.getCurrentUser();
 
   @override
@@ -65,14 +66,14 @@ class _SettingsPageState extends State<SettingsPage> {
                         iconSize: 24,
                         iconEnabledColor: Colors.white,
                       ),
-                      items: usermap
+                      items: user
                           .map<DropdownMenuItem<String>>(
                             (String user) => DropdownMenuItem<String>(
                           value: user,
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text("#$user", style: const TextStyle(
+                              Text(usermap[user], style: const TextStyle(
                                   color: Colors.white,
                                   fontFamily: "Poppins",
                                   fontSize: 15)),
@@ -80,10 +81,12 @@ class _SettingsPageState extends State<SettingsPage> {
                                   onPressed: () {
                                     setState(() {
                                       List<String> userlist = UserSP.getUser();
-                                      userlist.remove(user);
-                                      UserSP.setUsers(userlist);
-                                      if(UserSP.getCurrentUser() == user) UserSP.setCurrentUser(userlist[0]);
-                                      Navigator.popAndPushNamed(context, "/default");
+                                      if(userlist.length > 1) {
+                                        userlist.remove(user);
+                                        UserSP.setUsers(userlist);
+                                        if (UserSP.getCurrentUser() == user) UserSP.setCurrentUser(userlist[0]);
+                                        Navigator.popAndPushNamed(context, "/default");
+                                      }
                                     });
                                   },
                                   icon: Icon(Icons.delete, color: Colors.redAccent)
