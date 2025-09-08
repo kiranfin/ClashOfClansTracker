@@ -114,14 +114,17 @@ class _DefaultPageState extends State<DefaultPage> {
                 GButton(
                   icon: Icons.emoji_events,
                   text: "League",
+                  textStyle: TextStyle(fontFamily: "Inter", color: Colors.white),
                 ),
                 GButton(
                   icon: Icons.home,
                   text: "Start",
+                  textStyle: TextStyle(fontFamily: "Inter", color: Colors.white),
                 ),
                 GButton(
                   icon: Icons.settings,
                   text: "Einstellungen",
+                  textStyle: TextStyle(fontFamily: "Inter", color: Colors.white),
                 ),
               ],
             ),

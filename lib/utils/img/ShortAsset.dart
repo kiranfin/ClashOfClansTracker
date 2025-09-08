@@ -105,6 +105,7 @@ const rage_spell = 'lib/utils/img/spells/Rage_Spell.webp';
 const recall_spell = 'lib/utils/img/spells/Recall_Spell.webp';
 const overgrowth_spell = 'lib/utils/img/spells/Overgrowth_Spell.webp';
 const revive_spell = 'lib/utils/img/spells/Revive_Spell.webp';
+const ice_block_spell = 'lib/utils/img/spells/Ice_Block_Spell.webp';
 
 //Pets
 const lassi = 'lib/utils/img/troops/L.A.S.S.I.webp';
@@ -201,16 +202,24 @@ const haste_vial = 'lib/utils/img/equipment/Haste_Vial.webp';
 const rocket_spear = 'lib/utils/img/equipment/Rocket_Spear.webp';
 const electro_boots = 'lib/utils/img/equipment/Electro_Boots.webp';
 const dark_crown = 'lib/utils/img/equipment/Dark_Crown.webp';
+const heroic_torch = 'lib/utils/img/equipment/Heroic_Torch.webp';
 
 const shiny_ore = 'lib/utils/img/equipment/Shiny_Ore.webp';
 const glowy_ore = 'lib/utils/img/equipment/Glowy_Ore.webp';
 const starry_ore = 'lib/utils/img/equipment/Starry_Ore.webp';
+const gold = 'lib/utils/img/Gold.webp';
+const elixir = 'lib/utils/img/Elixir.webp';
+const dark_elixir = 'lib/utils/img/Dark_Elixir.webp';
 
 const one_star = 'lib/utils/img/1_Star.webp';
 const two_star = 'lib/utils/img/2_Stars.webp';
 const three_star = 'lib/utils/img/3_Stars.webp';
 const exp = 'lib/utils/img/XP.webp';
 const star = 'lib/utils/img/Star.webp';
+const swords = 'lib/utils/img/Swords.png';
+const clock = 'lib/utils/img/Clock.png';
+const warin = 'lib/utils/img/WarInPreference.png';
+const warout = 'lib/utils/img/WarOutPreference.png';
 const whitestar = 'lib/utils/img/White_Star.png';
 const whitestarempty = 'lib/utils/img/White_Star_Empty.png';
 const capital_gold = 'lib/utils/img/CapitalGold.webp';
@@ -246,5 +255,3 @@ const district_hall2 = 'lib/utils/img/clan_capital_buildings/District_Hall2.webp
 const district_hall3 = 'lib/utils/img/clan_capital_buildings/District_Hall3.webp';
 const district_hall4 = 'lib/utils/img/clan_capital_buildings/District_Hall4.webp';
 const district_hall5 = 'lib/utils/img/clan_capital_buildings/District_Hall5.webp';
-
-const buildings = 'lib/utils/buildings.json';

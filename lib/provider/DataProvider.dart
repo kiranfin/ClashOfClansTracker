@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:clashofclanstracker/utils/img/ShortAsset.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -100,7 +101,7 @@ Future<List<dynamic>> awaitExtClanWarLog(String tag) async {
   var player = await awaitPlayerData(tag);
   if(player["clan"] == null) return [];
   String clantag = player["clan"]["tag"].substring(1);
-  final url = Uri.parse('https://api.clashk.ing/war/%23$clantag/previous?timestamp_start=0&timestamp_end=9999999999&limit=30');
+  final url = Uri.parse('https://api.clashk.ing/war/%23$clantag/previous?timestamp_start=0&timestamp_end=9999999999&limit=20');
   final res = await http.get(url);
   final status = res.statusCode;
   final reason = res.reasonPhrase;
@@ -140,6 +141,14 @@ Future<Map<String, dynamic>> awaitMaxTroops() async {
 
 Future<Map<String, dynamic>> awaitMaxEquipment() async {
   final url = Uri.parse('${Utils.getBaseUrl()}retrieve/equipment');
+  final res = await http.get(url);
+  final status = res.statusCode;
+  if (status != 200) throw Exception('http.get error: statusCode= $status');
+  return jsonDecode(res.body) as Map<String, dynamic>;
+}
+
+Future<Map<String, dynamic>> awaitGameData() async {
+  final url = Uri.parse('${Utils.getBaseUrl()}retrieve/gamedata');
   final res = await http.get(url);
   final status = res.statusCode;
   if (status != 200) throw Exception('http.get error: statusCode= $status');
@@ -262,28 +271,28 @@ Image awaitClanWarLeagueIcon(String league, double scale) {
   return Image.asset(war_bronze1, scale: scale);
 }
 
-Text awaitPlayerName(Map<String, dynamic> userdata) {
+SizedBox awaitPlayerName(Map<String, dynamic> userdata) {
   //final data = awaitPlayerData(tag);
   //final userdata = await data;
-  return Text(userdata["name"], style: TextStyle(color: Colors.white, fontSize: 25));
+  return SizedBox(width: 150, child: AutoSizeText(userdata["name"], style: TextStyle(color: Colors.white, fontSize: 25, fontFamily: "Inter"), maxLines: 1));
 }
 
 Text awaitPlayerTrophies(Map<String, dynamic> userdata, double size) {
   //final data = awaitPlayerData(tag);
   //final userdata = await data;
-  return Text((userdata["trophies"]).toString(), style: TextStyle(color: Colors.white, fontSize: size));
+  return Text((userdata["trophies"]).toString(), style: TextStyle(color: Colors.white, fontSize: size, fontFamily: "Inter"));
 }
 
 Text awaitPlayerLegendTrophies(Map<String, dynamic> userdata, double size) {
   //final data = awaitPlayerData(tag);
   //final userdata = await data;
-  return Text((userdata["legendStatistics"] != null? userdata["legendStatistics"]["legendTrophies"] : 0).toString(), style: TextStyle(color: Colors.white, fontSize: size));
+  return Text((userdata["legendStatistics"] != null? userdata["legendStatistics"]["legendTrophies"] : 0).toString(), style: TextStyle(color: Colors.white, fontSize: size, fontFamily: "Inter"));
 }
 
 Text awaitPlayerBuilderTrophies(Map<String, dynamic> userdata, double size) {
   //final data = awaitPlayerData(tag);
   //final userdata = await data;
-  return Text((userdata["builderBaseTrophies"]).toString(), style: TextStyle(color: Colors.white, fontSize: size));
+  return Text((userdata["builderBaseTrophies"]).toString(), style: TextStyle(color: Colors.white, fontSize: size, fontFamily: "Inter"));
 }
 
 Image awaitClanIcon(Map<String, dynamic> userdata) {
@@ -333,9 +342,7 @@ double awaitBuildingsPercent(Map<String, dynamic> userdata, Map<String, dynamic>
   num max = 0;
   walls.forEach((key, val) {
     int add = int.parse(key.substring(key.lastIndexOf("-") + 1, key.length));
-    for(int i = 0; i < val; i++) {
-      sum += add;
-    }
+    sum += val * add;
   });
   defenses.forEach((key, val) {
     sum += val;
@@ -360,28 +367,18 @@ double awaitBuildingsPercent(Map<String, dynamic> userdata, Map<String, dynamic>
   final maxarmyslevel = maxdata["army"]["maxLevels"]["17"];
   final maxresourcescount = maxdata["resources"]["counts"]["17"];
   final maxresourceslevel = maxdata["resources"]["maxLevels"]["17"];
-  for(int i = 0; i < maxwallscount; i++) {
-    max += maxwallslevel;
-  }
+  max += maxwallslevel * maxwallscount;
   maxdefensescount.forEach((key, val){
-    for(int i = 0; i < val; i++) {
-      max += maxdefenseslevel[key];
-    }
+    max += maxdefenseslevel[key] * val;
   });
   maxtrapscount.forEach((key, val){
-    for(int i = 0; i < val; i++) {
-      max += maxtrapslevel[key];
-    }
+    max += maxtrapslevel[key] * val;
   });
   maxarmyscount.forEach((key, val){
-    for(int i = 0; i < val; i++) {
-      max += maxarmyslevel[key];
-    }
+    max += maxarmyslevel[key] * val;
   });
   maxresourcescount.forEach((key, val){
-    for(int i = 0; i < val; i++) {
-      max += maxresourceslevel[key];
-    }
+    max += maxresourceslevel[key] * val;
   });
   double res = max == 0? 0.0 : (sum / max) > 1? 1 : sum / max;
   return res;
@@ -391,14 +388,16 @@ double awaitTroopsPercent(Map<String, dynamic> userdata, Map<String, dynamic> ma
   final troops = userdata["troops"];
   num max = 0;
   final maxtroops = maxdata["troops"];
+  maxtroops.forEach((key, val) {
+    max += val["maxlevel"];
+  });
   final maxbhtroops = maxdata["bhtroops"];
+  maxbhtroops.forEach((key, val) {
+    max += val["maxlevel"];
+  });
   final maxsiegemachines = maxdata["siege_machines"];
-  Map finalmap = {};
-  finalmap.addAll(maxtroops);
-  finalmap.addAll(maxbhtroops);
-  finalmap.addAll(maxsiegemachines);
-  finalmap.forEach((key, val) {
-    max += val;
+  maxsiegemachines.forEach((key, val) {
+    max += val["maxlevel"];
   });
   num sum = 0;
   for (var troop in troops) {
@@ -411,13 +410,11 @@ double awaitTroopsPercent(Map<String, dynamic> userdata, Map<String, dynamic> ma
 }
 
 double awaitSpellsPercent(Map<String, dynamic> userdata, Map<String, dynamic> maxdata) {
-  //final data = awaitPlayerData(tag);
-  //final userdata = await data;
   final spells = userdata["spells"];
   num max = 0;
   final maxspells = maxdata["spells"];
   maxspells.forEach((key, val) {
-    max += val;
+    max += val["maxlevel"];
   });
   num sum = 0;
   for (var spell in spells) {
@@ -428,8 +425,6 @@ double awaitSpellsPercent(Map<String, dynamic> userdata, Map<String, dynamic> ma
 }
 
 double awaitHeroesPercent(Map<String, dynamic> userdata, Map<String, dynamic> maxdata) {
-  //final data = awaitPlayerData(tag);
-  //final userdata = await data;
   final heroes = userdata["heroes"];
   final troops = userdata["troops"];
   num max = 0;
@@ -455,8 +450,6 @@ double awaitHeroesPercent(Map<String, dynamic> userdata, Map<String, dynamic> ma
 }
 
 double awaitEquipmentPercent(Map<String, dynamic> userdata, Map<String, dynamic> maxdata) {
-  //final data = awaitPlayerData(tag);
-  //final userdata = await data;
   final equi = userdata["heroEquipment"];
   num max = 0;
   maxdata.forEach((key, val) {
@@ -473,8 +466,6 @@ double awaitEquipmentPercent(Map<String, dynamic> userdata, Map<String, dynamic>
 }
 
 double awaitAchievementsPercent(Map<String, dynamic> userdata) {
-  //final data = awaitPlayerData(tag);
-  //final userdata = await data;
   final quests = userdata["achievements"];
   num max = 0;
   num sum = 0;

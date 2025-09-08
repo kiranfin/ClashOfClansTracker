@@ -19,6 +19,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
 
   String userTag = UserSP.getCurrentUser();
+  Map<String, dynamic> userMap = UserSP.getDecodedUserMap();
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +31,7 @@ class _HomePageState extends State<HomePage> {
           gradient: LinearGradient(
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
-              colors: [/*Color(0xFF1C2952)*/Color(0xFF171717), /*Color(0xFF101E6B)*/Color(0xFF171717)]
+              colors: [/*Color(0xFF1C2952)*/Color(0xFF09090B), /*Color(0xFF101E6B)*/Color(0xFF0E1011)]
           )
       ),
       child: Scaffold(
@@ -42,6 +43,10 @@ class _HomePageState extends State<HomePage> {
                   future: Future.wait([DataProvider.awaitPlayerData(userTag), DataProvider.awaitBuildings(), DataProvider.awaitMaxTroops(), DataProvider.awaitMaxEquipment()]),
                   builder: (context, AsyncSnapshot ovsnap) {
                     if(ovsnap.hasData) {
+                      if(userMap.containsKey(userTag)) {
+                        userMap[userTag] = ovsnap.data[0]["name"];
+                        UserSP.setUserMap(userMap);
+                      }
                       return Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -52,16 +57,21 @@ class _HomePageState extends State<HomePage> {
                                 .of(context)
                                 .size
                                 .width - 2 * 20,
+                            decoration: BoxDecoration(
+                              border: Border.all(color: Colors.black),
+                              gradient: LinearGradient(
+                                begin: Alignment.topLeft,
+                                end: Alignment.bottomRight,
+                                colors: [Colors.black.withValues(alpha: 0.8), Colors.black.withValues(alpha: 0.6)],
+                              ),
+                              borderRadius: BorderRadius.circular(30),
+                            ),
                             child: ElevatedButton(
-                              style: ButtonStyle(
-                                  backgroundColor: MaterialStateProperty.all(
-                                      Colors.black),
-                                  shape: MaterialStateProperty.all<
-                                      RoundedRectangleBorder>(
-                                      RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(30.0),
-                                      )
-                                  )
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.transparent,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(30),
+                                ),
                               ),
                               onPressed: () {
                                 Navigator.pushNamed(
@@ -147,14 +157,14 @@ class _HomePageState extends State<HomePage> {
                                     Text(
                                         "Overall", style: const TextStyle(
                                         color: Colors.white,
-                                        fontFamily: "Poppins",
+                                        fontFamily: "Inter",
                                         fontSize: 25)),
                                     Text("${(DataProvider.awaitOverallPercent(
                                         ovsnap.data[0], ovsnap.data[1], ovsnap.data[2], ovsnap.data[3]) * 100)
                                         .toStringAsFixed(1)}%",
                                         style: const TextStyle(
-                                            color: Colors.white,
-                                            fontFamily: "Poppins",
+                                            color: Colors.white54,
+                                            fontFamily: "Inter",
                                             fontSize: 15)),
                                   ],
                                 ),
@@ -183,19 +193,23 @@ class _HomePageState extends State<HomePage> {
                             children: [
                               Flexible(
                                 child: Container(
-                                  margin: EdgeInsets.all(10),
+                                  margin: EdgeInsets.all(8),
                                   height: 120.0,
+                                  decoration: BoxDecoration(
+                                    border: Border.all(color: Colors.black),
+                                    gradient: LinearGradient(
+                                      begin: Alignment.topLeft,
+                                      end: Alignment.bottomRight,
+                                      colors: [Colors.black.withValues(alpha: 0.8), Colors.black.withValues(alpha: 0.6)],
+                                    ),
+                                    borderRadius: BorderRadius.circular(30),
+                                  ),
                                   child: ElevatedButton(
-                                    style: ButtonStyle(
-                                        backgroundColor: MaterialStateProperty.all(
-                                            Colors.black),
-                                        shape: MaterialStateProperty.all<
-                                            RoundedRectangleBorder>(
-                                            RoundedRectangleBorder(
-                                              borderRadius: BorderRadius.circular(
-                                                  30.0),
-                                            )
-                                        )
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: Colors.transparent,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(30),
+                                      ),
                                     ),
                                     onPressed: () async {
                                       await Navigator.pushNamed(
@@ -209,7 +223,7 @@ class _HomePageState extends State<HomePage> {
                                             'Buildings',
                                             style: const TextStyle(
                                                 color: Colors.white,
-                                                fontFamily: "Poppins"),
+                                                fontFamily: "Inter"),
                                             maxLines: 1
                                         ),
                                         SizedBox(height: 5),
@@ -222,8 +236,8 @@ class _HomePageState extends State<HomePage> {
                                                   .toStringAsFixed(
                                                   1)}%",
                                                   style: const TextStyle(
-                                                      color: Colors.white,
-                                                      fontFamily: "Poppins",
+                                                      color: Colors.white54,
+                                                      fontFamily: "Inter",
                                                       fontSize: 15)),
                                             ],
                                           ),
@@ -248,19 +262,23 @@ class _HomePageState extends State<HomePage> {
                               ),
                               Flexible(
                                 child: Container(
-                                  margin: EdgeInsets.all(10),
+                                  margin: EdgeInsets.all(8),
                                   height: 120.0,
+                                  decoration: BoxDecoration(
+                                    border: Border.all(color: Colors.black),
+                                    gradient: LinearGradient(
+                                      begin: Alignment.topLeft,
+                                      end: Alignment.bottomRight,
+                                      colors: [Colors.black.withValues(alpha: 0.8), Colors.black.withValues(alpha: 0.6)],
+                                    ),
+                                    borderRadius: BorderRadius.circular(30),
+                                  ),
                                   child: ElevatedButton(
-                                    style: ButtonStyle(
-                                        backgroundColor: MaterialStateProperty.all(
-                                            Colors.black),
-                                        shape: MaterialStateProperty.all<
-                                            RoundedRectangleBorder>(
-                                            RoundedRectangleBorder(
-                                              borderRadius: BorderRadius.circular(
-                                                  30.0),
-                                            )
-                                        )
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: Colors.transparent,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(30),
+                                      ),
                                     ),
                                     onPressed: () async {
                                       await Navigator.pushNamed(
@@ -274,7 +292,7 @@ class _HomePageState extends State<HomePage> {
                                             'Troops',
                                             style: const TextStyle(
                                                 color: Colors.white,
-                                                fontFamily: "Poppins"),
+                                                fontFamily: "Inter"),
                                             maxLines: 1
                                         ),
                                         SizedBox(height: 5),
@@ -286,8 +304,8 @@ class _HomePageState extends State<HomePage> {
                                               Text("${(DataProvider.awaitTroopsPercent(ovsnap.data[0], ovsnap.data[2]) * 100)
                                                   .toStringAsFixed(1)}%",
                                                   style: const TextStyle(
-                                                      color: Colors.white,
-                                                      fontFamily: "Poppins",
+                                                      color: Colors.white54,
+                                                      fontFamily: "Inter",
                                                       fontSize: 15)),
                                             ],
                                           ),
@@ -312,19 +330,23 @@ class _HomePageState extends State<HomePage> {
                               ),
                               Flexible(
                                 child: Container(
-                                  margin: EdgeInsets.all(10),
+                                  margin: EdgeInsets.all(8),
                                   height: 120.0,
+                                  decoration: BoxDecoration(
+                                    border: Border.all(color: Colors.black),
+                                    gradient: LinearGradient(
+                                      begin: Alignment.topLeft,
+                                      end: Alignment.bottomRight,
+                                      colors: [Colors.black.withValues(alpha: 0.8), Colors.black.withValues(alpha: 0.6)],
+                                    ),
+                                    borderRadius: BorderRadius.circular(30),
+                                  ),
                                   child: ElevatedButton(
-                                    style: ButtonStyle(
-                                        backgroundColor: MaterialStateProperty.all(
-                                            Colors.black),
-                                        shape: MaterialStateProperty.all<
-                                            RoundedRectangleBorder>(
-                                            RoundedRectangleBorder(
-                                              borderRadius: BorderRadius.circular(
-                                                  30.0),
-                                            )
-                                        )
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: Colors.transparent,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(30),
+                                      ),
                                     ),
                                     onPressed: () async {
                                       await Navigator.pushNamed(
@@ -338,7 +360,7 @@ class _HomePageState extends State<HomePage> {
                                             'Spells',
                                             style: const TextStyle(
                                                 color: Colors.white,
-                                                fontFamily: "Poppins"),
+                                                fontFamily: "Inter"),
                                             maxLines: 1
                                         ),
                                         SizedBox(height: 5),
@@ -350,8 +372,8 @@ class _HomePageState extends State<HomePage> {
                                               Text("${(DataProvider.awaitSpellsPercent(ovsnap.data[0], ovsnap.data[2]) * 100)
                                                   .toStringAsFixed(1)}%",
                                                   style: const TextStyle(
-                                                      color: Colors.white,
-                                                      fontFamily: "Poppins",
+                                                      color: Colors.white54,
+                                                      fontFamily: "Inter",
                                                       fontSize: 15)),
                                             ],
                                           ),
@@ -383,19 +405,23 @@ class _HomePageState extends State<HomePage> {
                             children: [
                               Flexible(
                                 child: Container(
-                                  margin: EdgeInsets.all(10),
+                                  margin: EdgeInsets.all(8),
                                   height: 120.0,
+                                  decoration: BoxDecoration(
+                                    border: Border.all(color: Colors.black),
+                                    gradient: LinearGradient(
+                                      begin: Alignment.topLeft,
+                                      end: Alignment.bottomRight,
+                                      colors: [Colors.black.withValues(alpha: 0.8), Colors.black.withValues(alpha: 0.6)],
+                                    ),
+                                    borderRadius: BorderRadius.circular(30),
+                                  ),
                                   child: ElevatedButton(
-                                    style: ButtonStyle(
-                                        backgroundColor: MaterialStateProperty.all(
-                                            Colors.black),
-                                        shape: MaterialStateProperty.all<
-                                            RoundedRectangleBorder>(
-                                            RoundedRectangleBorder(
-                                              borderRadius: BorderRadius.circular(
-                                                  30.0),
-                                            )
-                                        )
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: Colors.transparent,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(30),
+                                      ),
                                     ),
                                     onPressed: () async {
                                       await Navigator.pushNamed(
@@ -409,7 +435,7 @@ class _HomePageState extends State<HomePage> {
                                             'Heroes',
                                             style: const TextStyle(
                                                 color: Colors.white,
-                                                fontFamily: "Poppins"),
+                                                fontFamily: "Inter"),
                                             maxLines: 1
                                         ),
                                         SizedBox(height: 5),
@@ -421,8 +447,8 @@ class _HomePageState extends State<HomePage> {
                                               Text("${(DataProvider.awaitHeroesPercent(ovsnap.data[0], ovsnap.data[2]) * 100)
                                                   .toStringAsFixed(1)}%",
                                                   style: const TextStyle(
-                                                      color: Colors.white,
-                                                      fontFamily: "Poppins",
+                                                      color: Colors.white54,
+                                                      fontFamily: "Inter",
                                                       fontSize: 15)),
                                             ],
                                           ),
@@ -447,19 +473,23 @@ class _HomePageState extends State<HomePage> {
                               ),
                               Flexible(
                                 child: Container(
-                                  margin: EdgeInsets.all(10),
+                                  margin: EdgeInsets.all(8),
                                   height: 120.0,
+                                  decoration: BoxDecoration(
+                                    border: Border.all(color: Colors.black),
+                                    gradient: LinearGradient(
+                                      begin: Alignment.topLeft,
+                                      end: Alignment.bottomRight,
+                                      colors: [Colors.black.withValues(alpha: 0.8), Colors.black.withValues(alpha: 0.6)],
+                                    ),
+                                    borderRadius: BorderRadius.circular(30),
+                                  ),
                                   child: ElevatedButton(
-                                    style: ButtonStyle(
-                                        backgroundColor: MaterialStateProperty.all(
-                                            Colors.black),
-                                        shape: MaterialStateProperty.all<
-                                            RoundedRectangleBorder>(
-                                            RoundedRectangleBorder(
-                                              borderRadius: BorderRadius.circular(
-                                                  30.0),
-                                            )
-                                        )
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: Colors.transparent,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(30),
+                                      ),
                                     ),
                                     onPressed: () async {
                                       await Navigator.pushNamed(context, "/detail",
@@ -473,7 +503,7 @@ class _HomePageState extends State<HomePage> {
                                             'Equipment',
                                             style: const TextStyle(
                                                 color: Colors.white,
-                                                fontFamily: "Poppins"),
+                                                fontFamily: "Inter"),
                                             maxLines: 1
                                         ),
                                         SizedBox(height: 5),
@@ -485,8 +515,8 @@ class _HomePageState extends State<HomePage> {
                                               Text("${(DataProvider.awaitEquipmentPercent(ovsnap.data[0], ovsnap.data[3]) * 100)
                                                   .toStringAsFixed(1)}%",
                                                   style: const TextStyle(
-                                                      color: Colors.white,
-                                                      fontFamily: "Poppins",
+                                                      color: Colors.white54,
+                                                      fontFamily: "Inter",
                                                       fontSize: 15)),
                                             ],
                                           ),
@@ -511,19 +541,23 @@ class _HomePageState extends State<HomePage> {
                               ),
                               Flexible(
                                 child: Container(
-                                  margin: EdgeInsets.all(10),
+                                  margin: EdgeInsets.all(8),
                                   height: 120.0,
+                                  decoration: BoxDecoration(
+                                    border: Border.all(color: Colors.black),
+                                    gradient: LinearGradient(
+                                      begin: Alignment.topLeft,
+                                      end: Alignment.bottomRight,
+                                      colors: [Colors.black.withValues(alpha: 0.8), Colors.black.withValues(alpha: 0.6)],
+                                    ),
+                                    borderRadius: BorderRadius.circular(30),
+                                  ),
                                   child: ElevatedButton(
-                                    style: ButtonStyle(
-                                        backgroundColor: MaterialStateProperty.all(
-                                            Colors.black),
-                                        shape: MaterialStateProperty.all<
-                                            RoundedRectangleBorder>(
-                                            RoundedRectangleBorder(
-                                              borderRadius: BorderRadius.circular(
-                                                  30.0),
-                                            )
-                                        )
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: Colors.transparent,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(30),
+                                      ),
                                     ),
                                     onPressed: () async {
                                       await Navigator.pushNamed(context, "/detail",
@@ -537,7 +571,7 @@ class _HomePageState extends State<HomePage> {
                                             'Achievem.',
                                             style: const TextStyle(
                                                 color: Colors.white,
-                                                fontFamily: "Poppins"),
+                                                fontFamily: "Inter"),
                                             maxLines: 1
                                         ),
                                         SizedBox(height: 5),
@@ -549,8 +583,8 @@ class _HomePageState extends State<HomePage> {
                                               Text("${(DataProvider.awaitAchievementsPercent(ovsnap.data[0]) * 100)
                                                   .toStringAsFixed(1)}%",
                                                   style: const TextStyle(
-                                                      color: Colors.white,
-                                                      fontFamily: "Poppins",
+                                                      color: Colors.white54,
+                                                      fontFamily: "Inter",
                                                       fontSize: 15)),
                                             ],
                                           ),
@@ -588,16 +622,21 @@ class _HomePageState extends State<HomePage> {
                                 .of(context)
                                 .size
                                 .width - 2 * 20,
+                            decoration: BoxDecoration(
+                              border: Border.all(color: Colors.black),
+                              gradient: LinearGradient(
+                                begin: Alignment.topLeft,
+                                end: Alignment.bottomRight,
+                                colors: [Colors.black.withValues(alpha: 0.8), Colors.black.withValues(alpha: 0.6)],
+                              ),
+                              borderRadius: BorderRadius.circular(30),
+                            ),
                             child: ElevatedButton(
-                              style: ButtonStyle(
-                                  backgroundColor: MaterialStateProperty.all(
-                                      Colors.black),
-                                  shape: MaterialStateProperty.all<
-                                      RoundedRectangleBorder>(
-                                      RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(30.0),
-                                      )
-                                  )
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.transparent,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(30),
+                                ),
                               ),
                               onPressed: () {},
                               child: Row(
@@ -744,17 +783,21 @@ class _HomePageState extends State<HomePage> {
                                 child: Container(
                                   margin: EdgeInsets.all(10),
                                   height: 120.0,
+                                  decoration: BoxDecoration(
+                                    border: Border.all(color: Colors.black),
+                                    gradient: LinearGradient(
+                                      begin: Alignment.topLeft,
+                                      end: Alignment.bottomRight,
+                                      colors: [Colors.black.withValues(alpha: 0.8), Colors.black.withValues(alpha: 0.6)],
+                                    ),
+                                    borderRadius: BorderRadius.circular(30),
+                                  ),
                                   child: ElevatedButton(
-                                    style: ButtonStyle(
-                                        backgroundColor: MaterialStateProperty.all(
-                                            Colors.black),
-                                        shape: MaterialStateProperty.all<
-                                            RoundedRectangleBorder>(
-                                            RoundedRectangleBorder(
-                                              borderRadius: BorderRadius.circular(
-                                                  30.0),
-                                            )
-                                        )
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: Colors.transparent,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(30),
+                                      ),
                                     ),
                                     onPressed: () {
 
@@ -766,7 +809,7 @@ class _HomePageState extends State<HomePage> {
                                             'Buildings',
                                             style: const TextStyle(
                                                 color: Colors.white,
-                                                fontFamily: "Poppins"),
+                                                fontFamily: "Inter"),
                                             maxLines: 1
                                         ),
                                         SizedBox(height: 5),
@@ -785,17 +828,21 @@ class _HomePageState extends State<HomePage> {
                                 child: Container(
                                   margin: EdgeInsets.all(10),
                                   height: 120.0,
+                                  decoration: BoxDecoration(
+                                    border: Border.all(color: Colors.black),
+                                    gradient: LinearGradient(
+                                      begin: Alignment.topLeft,
+                                      end: Alignment.bottomRight,
+                                      colors: [Colors.black.withValues(alpha: 0.8), Colors.black.withValues(alpha: 0.6)],
+                                    ),
+                                    borderRadius: BorderRadius.circular(30),
+                                  ),
                                   child: ElevatedButton(
-                                    style: ButtonStyle(
-                                        backgroundColor: MaterialStateProperty.all(
-                                            Colors.black),
-                                        shape: MaterialStateProperty.all<
-                                            RoundedRectangleBorder>(
-                                            RoundedRectangleBorder(
-                                              borderRadius: BorderRadius.circular(
-                                                  30.0),
-                                            )
-                                        )
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: Colors.transparent,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(30),
+                                      ),
                                     ),
                                     onPressed: () {
 
@@ -807,7 +854,7 @@ class _HomePageState extends State<HomePage> {
                                             'Troops',
                                             style: const TextStyle(
                                                 color: Colors.white,
-                                                fontFamily: "Poppins"),
+                                                fontFamily: "Inter"),
                                             maxLines: 1
                                         ),
                                         SizedBox(height: 5),
@@ -827,17 +874,21 @@ class _HomePageState extends State<HomePage> {
                                 child: Container(
                                   margin: EdgeInsets.all(10),
                                   height: 120.0,
+                                  decoration: BoxDecoration(
+                                    border: Border.all(color: Colors.black),
+                                    gradient: LinearGradient(
+                                      begin: Alignment.topLeft,
+                                      end: Alignment.bottomRight,
+                                      colors: [Colors.black.withValues(alpha: 0.8), Colors.black.withValues(alpha: 0.6)],
+                                    ),
+                                    borderRadius: BorderRadius.circular(30),
+                                  ),
                                   child: ElevatedButton(
-                                    style: ButtonStyle(
-                                        backgroundColor: MaterialStateProperty.all(
-                                            Colors.black),
-                                        shape: MaterialStateProperty.all<
-                                            RoundedRectangleBorder>(
-                                            RoundedRectangleBorder(
-                                              borderRadius: BorderRadius.circular(
-                                                  30.0),
-                                            )
-                                        )
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: Colors.transparent,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(30),
+                                      ),
                                     ),
                                     onPressed: () {
 
@@ -849,7 +900,7 @@ class _HomePageState extends State<HomePage> {
                                             'Spells',
                                             style: const TextStyle(
                                                 color: Colors.white,
-                                                fontFamily: "Poppins"),
+                                                fontFamily: "Inter"),
                                             maxLines: 1
                                         ),
                                         SizedBox(height: 5),
@@ -877,17 +928,21 @@ class _HomePageState extends State<HomePage> {
                                 child: Container(
                                   margin: EdgeInsets.all(10),
                                   height: 120.0,
+                                  decoration: BoxDecoration(
+                                    border: Border.all(color: Colors.black),
+                                    gradient: LinearGradient(
+                                      begin: Alignment.topLeft,
+                                      end: Alignment.bottomRight,
+                                      colors: [Colors.black.withValues(alpha: 0.8), Colors.black.withValues(alpha: 0.6)],
+                                    ),
+                                    borderRadius: BorderRadius.circular(30),
+                                  ),
                                   child: ElevatedButton(
-                                    style: ButtonStyle(
-                                        backgroundColor: MaterialStateProperty.all(
-                                            Colors.black),
-                                        shape: MaterialStateProperty.all<
-                                            RoundedRectangleBorder>(
-                                            RoundedRectangleBorder(
-                                              borderRadius: BorderRadius.circular(
-                                                  30.0),
-                                            )
-                                        )
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: Colors.transparent,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(30),
+                                      ),
                                     ),
                                     onPressed: () {
 
@@ -899,7 +954,7 @@ class _HomePageState extends State<HomePage> {
                                             'Heros',
                                             style: const TextStyle(
                                                 color: Colors.white,
-                                                fontFamily: "Poppins"),
+                                                fontFamily: "Inter"),
                                             maxLines: 1
                                         ),
                                         SizedBox(height: 5),
@@ -919,17 +974,21 @@ class _HomePageState extends State<HomePage> {
                                 child: Container(
                                   margin: EdgeInsets.all(10),
                                   height: 120.0,
+                                  decoration: BoxDecoration(
+                                    border: Border.all(color: Colors.black),
+                                    gradient: LinearGradient(
+                                      begin: Alignment.topLeft,
+                                      end: Alignment.bottomRight,
+                                      colors: [Colors.black.withValues(alpha: 0.8), Colors.black.withValues(alpha: 0.6)],
+                                    ),
+                                    borderRadius: BorderRadius.circular(30),
+                                  ),
                                   child: ElevatedButton(
-                                    style: ButtonStyle(
-                                        backgroundColor: MaterialStateProperty.all(
-                                            Colors.black),
-                                        shape: MaterialStateProperty.all<
-                                            RoundedRectangleBorder>(
-                                            RoundedRectangleBorder(
-                                              borderRadius: BorderRadius.circular(
-                                                  30.0),
-                                            )
-                                        )
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: Colors.transparent,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(30),
+                                      ),
                                     ),
                                     onPressed: () {
 
@@ -941,7 +1000,7 @@ class _HomePageState extends State<HomePage> {
                                             'Equipment',
                                             style: const TextStyle(
                                                 color: Colors.white,
-                                                fontFamily: "Poppins"),
+                                                fontFamily: "Inter"),
                                             maxLines: 1
                                         ),
                                         SizedBox(height: 5),
@@ -962,17 +1021,21 @@ class _HomePageState extends State<HomePage> {
                                 child: Container(
                                   margin: EdgeInsets.all(10),
                                   height: 120.0,
+                                  decoration: BoxDecoration(
+                                    border: Border.all(color: Colors.black),
+                                    gradient: LinearGradient(
+                                      begin: Alignment.topLeft,
+                                      end: Alignment.bottomRight,
+                                      colors: [Colors.black.withValues(alpha: 0.8), Colors.black.withValues(alpha: 0.6)],
+                                    ),
+                                    borderRadius: BorderRadius.circular(30),
+                                  ),
                                   child: ElevatedButton(
-                                    style: ButtonStyle(
-                                        backgroundColor: MaterialStateProperty.all(
-                                            Colors.black),
-                                        shape: MaterialStateProperty.all<
-                                            RoundedRectangleBorder>(
-                                            RoundedRectangleBorder(
-                                              borderRadius: BorderRadius.circular(
-                                                  30.0),
-                                            )
-                                        )
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: Colors.transparent,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(30),
+                                      ),
                                     ),
                                     onPressed: () {
 
@@ -984,7 +1047,7 @@ class _HomePageState extends State<HomePage> {
                                             'Achievem.',
                                             style: const TextStyle(
                                                 color: Colors.white,
-                                                fontFamily: "Poppins"),
+                                                fontFamily: "Inter"),
                                             maxLines: 1
                                         ),
                                         SizedBox(height: 5),

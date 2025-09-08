@@ -12,8 +12,10 @@ class SettingsPage extends StatefulWidget {
 
 class _SettingsPageState extends State<SettingsPage> {
 
-  final List<String> usermap = UserSP.getUser();
+  final List<String> user = UserSP.getUser();
+  final Map<String, dynamic> usermap = UserSP.getDecodedUserMap();
   String currentuser = UserSP.getCurrentUser();
+  bool darktheme = UserSP.getDarkTheme();
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +24,7 @@ class _SettingsPageState extends State<SettingsPage> {
           gradient: LinearGradient(
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
-              colors: [/*Color(0xFF1C2952)*/Color(0xFF171717), /*Color(0xFF101E6B)*/Color(0xFF171717)]
+              colors: [/*Color(0xFF1C2952)*/Color(0xFF09090B), /*Color(0xFF101E6B)*/Color(0xFF0E1011)]
           )
       ),
       child: Scaffold(
@@ -33,11 +35,32 @@ class _SettingsPageState extends State<SettingsPage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  SegmentedButton(
+                      segments: [
+                        ButtonSegment(icon: Icon(Icons.sunny, color: Colors.white), label: Text("Light", style: TextStyle(
+                            color: !darktheme? Colors.black: Colors.white,
+                            fontFamily: "Inter",
+                            fontSize: 15)), value: !darktheme
+                        ),
+                        ButtonSegment(icon: Icon(Icons.mode_night, color: Colors.white), label: Text("Dark", style: TextStyle(
+                            color: darktheme? Colors.black : Colors.white,
+                            fontFamily: "Inter",
+                            fontSize: 15)), value: darktheme
+                        ),
+                      ],
+                      onSelectionChanged: (Set<bool> newSelection) {
+                        setState(() {
+                          darktheme = newSelection.first;
+                          UserSP.setDarkTheme(darktheme);
+                        });
+                      },
+                      selected: {!darktheme}
+                  ),
                   Padding(
                     padding: const EdgeInsets.only(top: 10.0, left: 20),
                     child: Text("Account wechseln", style: const TextStyle(
                         color: Colors.white,
-                        fontFamily: "Poppins",
+                        fontFamily: "Inter",
                         fontSize: 25)),
                   ),
                   Container(
@@ -65,25 +88,27 @@ class _SettingsPageState extends State<SettingsPage> {
                         iconSize: 24,
                         iconEnabledColor: Colors.white,
                       ),
-                      items: usermap
+                      items: user
                           .map<DropdownMenuItem<String>>(
                             (String user) => DropdownMenuItem<String>(
                           value: user,
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text("#$user", style: const TextStyle(
+                              Text(usermap[user], style: const TextStyle(
                                   color: Colors.white,
-                                  fontFamily: "Poppins",
+                                  fontFamily: "Inter",
                                   fontSize: 15)),
                               IconButton(
                                   onPressed: () {
                                     setState(() {
                                       List<String> userlist = UserSP.getUser();
-                                      userlist.remove(user);
-                                      UserSP.setUsers(userlist);
-                                      if(UserSP.getCurrentUser() == user) UserSP.setCurrentUser(userlist[0]);
-                                      Navigator.popAndPushNamed(context, "/default");
+                                      if(userlist.length > 1) {
+                                        userlist.remove(user);
+                                        UserSP.setUsers(userlist);
+                                        if (UserSP.getCurrentUser() == user) UserSP.setCurrentUser(userlist[0]);
+                                        Navigator.popAndPushNamed(context, "/default");
+                                      }
                                     });
                                   },
                                   icon: Icon(Icons.delete, color: Colors.redAccent)
@@ -129,7 +154,7 @@ class _SettingsPageState extends State<SettingsPage> {
                         children: [
                           Text("Account hinzufügen", style: const TextStyle(
                               color: Colors.white,
-                              fontFamily: "Poppins",
+                              fontFamily: "Inter",
                               fontSize: 15)),
                           Icon(Icons.add, size: 25)
                         ],
