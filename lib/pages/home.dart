@@ -193,7 +193,7 @@ class _HomePageState extends State<HomePage> {
                             children: [
                               Flexible(
                                 child: Container(
-                                  margin: EdgeInsets.all(10),
+                                  margin: EdgeInsets.all(8),
                                   height: 120.0,
                                   decoration: BoxDecoration(
                                     border: Border.all(color: Colors.black),
@@ -262,7 +262,7 @@ class _HomePageState extends State<HomePage> {
                               ),
                               Flexible(
                                 child: Container(
-                                  margin: EdgeInsets.all(10),
+                                  margin: EdgeInsets.all(8),
                                   height: 120.0,
                                   decoration: BoxDecoration(
                                     border: Border.all(color: Colors.black),
@@ -330,7 +330,7 @@ class _HomePageState extends State<HomePage> {
                               ),
                               Flexible(
                                 child: Container(
-                                  margin: EdgeInsets.all(10),
+                                  margin: EdgeInsets.all(8),
                                   height: 120.0,
                                   decoration: BoxDecoration(
                                     border: Border.all(color: Colors.black),
@@ -405,7 +405,7 @@ class _HomePageState extends State<HomePage> {
                             children: [
                               Flexible(
                                 child: Container(
-                                  margin: EdgeInsets.all(10),
+                                  margin: EdgeInsets.all(8),
                                   height: 120.0,
                                   decoration: BoxDecoration(
                                     border: Border.all(color: Colors.black),
@@ -473,7 +473,7 @@ class _HomePageState extends State<HomePage> {
                               ),
                               Flexible(
                                 child: Container(
-                                  margin: EdgeInsets.all(10),
+                                  margin: EdgeInsets.all(8),
                                   height: 120.0,
                                   decoration: BoxDecoration(
                                     border: Border.all(color: Colors.black),
@@ -541,7 +541,7 @@ class _HomePageState extends State<HomePage> {
                               ),
                               Flexible(
                                 child: Container(
-                                  margin: EdgeInsets.all(10),
+                                  margin: EdgeInsets.all(8),
                                   height: 120.0,
                                   decoration: BoxDecoration(
                                     border: Border.all(color: Colors.black),

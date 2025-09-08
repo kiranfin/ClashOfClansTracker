@@ -342,9 +342,7 @@ double awaitBuildingsPercent(Map<String, dynamic> userdata, Map<String, dynamic>
   num max = 0;
   walls.forEach((key, val) {
     int add = int.parse(key.substring(key.lastIndexOf("-") + 1, key.length));
-    for(int i = 0; i < val; i++) {
-      sum += add;
-    }
+    sum += val * add;
   });
   defenses.forEach((key, val) {
     sum += val;
@@ -369,28 +367,18 @@ double awaitBuildingsPercent(Map<String, dynamic> userdata, Map<String, dynamic>
   final maxarmyslevel = maxdata["army"]["maxLevels"]["17"];
   final maxresourcescount = maxdata["resources"]["counts"]["17"];
   final maxresourceslevel = maxdata["resources"]["maxLevels"]["17"];
-  for(int i = 0; i < maxwallscount; i++) {
-    max += maxwallslevel;
-  }
+  max += maxwallslevel * maxwallscount;
   maxdefensescount.forEach((key, val){
-    for(int i = 0; i < val; i++) {
-      max += maxdefenseslevel[key];
-    }
+    max += maxdefenseslevel[key] * val;
   });
   maxtrapscount.forEach((key, val){
-    for(int i = 0; i < val; i++) {
-      max += maxtrapslevel[key];
-    }
+    max += maxtrapslevel[key] * val;
   });
   maxarmyscount.forEach((key, val){
-    for(int i = 0; i < val; i++) {
-      max += maxarmyslevel[key];
-    }
+    max += maxarmyslevel[key] * val;
   });
   maxresourcescount.forEach((key, val){
-    for(int i = 0; i < val; i++) {
-      max += maxresourceslevel[key];
-    }
+    max += maxresourceslevel[key] * val;
   });
   double res = max == 0? 0.0 : (sum / max) > 1? 1 : sum / max;
   return res;
@@ -422,8 +410,6 @@ double awaitTroopsPercent(Map<String, dynamic> userdata, Map<String, dynamic> ma
 }
 
 double awaitSpellsPercent(Map<String, dynamic> userdata, Map<String, dynamic> maxdata) {
-  //final data = awaitPlayerData(tag);
-  //final userdata = await data;
   final spells = userdata["spells"];
   num max = 0;
   final maxspells = maxdata["spells"];
@@ -439,8 +425,6 @@ double awaitSpellsPercent(Map<String, dynamic> userdata, Map<String, dynamic> ma
 }
 
 double awaitHeroesPercent(Map<String, dynamic> userdata, Map<String, dynamic> maxdata) {
-  //final data = awaitPlayerData(tag);
-  //final userdata = await data;
   final heroes = userdata["heroes"];
   final troops = userdata["troops"];
   num max = 0;
@@ -466,8 +450,6 @@ double awaitHeroesPercent(Map<String, dynamic> userdata, Map<String, dynamic> ma
 }
 
 double awaitEquipmentPercent(Map<String, dynamic> userdata, Map<String, dynamic> maxdata) {
-  //final data = awaitPlayerData(tag);
-  //final userdata = await data;
   final equi = userdata["heroEquipment"];
   num max = 0;
   maxdata.forEach((key, val) {
@@ -484,8 +466,6 @@ double awaitEquipmentPercent(Map<String, dynamic> userdata, Map<String, dynamic>
 }
 
 double awaitAchievementsPercent(Map<String, dynamic> userdata) {
-  //final data = awaitPlayerData(tag);
-  //final userdata = await data;
   final quests = userdata["achievements"];
   num max = 0;
   num sum = 0;

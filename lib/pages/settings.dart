@@ -23,7 +23,7 @@ class _SettingsPageState extends State<SettingsPage> {
           gradient: LinearGradient(
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
-              colors: [/*Color(0xFF1C2952)*/Color(0xFF171717), /*Color(0xFF101E6B)*/Color(0xFF171717)]
+              colors: [/*Color(0xFF1C2952)*/Color(0xFF09090B), /*Color(0xFF101E6B)*/Color(0xFF0E1011)]
           )
       ),
       child: Scaffold(

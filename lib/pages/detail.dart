@@ -265,10 +265,16 @@ class _DetailPageState extends State<DetailPage> {
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                     children: [
-                                      Text("Import Json", style: const TextStyle(
-                                          color: Colors.white,
-                                          fontFamily: "Inter",
-                                          fontSize: 20)
+                                      Row(
+                                        children: [
+                                          Icon(Icons.code, size: 20, color: Colors.deepOrangeAccent),
+                                          SizedBox(width: 5),
+                                          Text("Import Json", style: const TextStyle(
+                                              color: Colors.white,
+                                              fontFamily: "Inter",
+                                              fontSize: 20)
+                                          ),
+                                        ],
                                       ),
                                       ElevatedButton.icon(
                                         style: ElevatedButton.styleFrom(
@@ -683,12 +689,12 @@ class _DetailPageState extends State<DetailPage> {
                                           borderRadius: BorderRadius.circular(20),
                                         ),
                                         width: 110,
+                                        height: 125,
                                         child: GridTile(
                                           child: Padding(
                                             padding: const EdgeInsets.all(5.0),
                                             child: Column(
-                                              mainAxisAlignment: MainAxisAlignment
-                                                  .start,
+                                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                               children: [
                                                 AutoSizeText(
                                                     finallist[ind][index]["name"],
@@ -699,8 +705,7 @@ class _DetailPageState extends State<DetailPage> {
                                                     maxLines: 1
                                                 ),
                                                 Row(
-                                                  mainAxisAlignment: MainAxisAlignment
-                                                      .spaceEvenly,
+                                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                                   children: [
                                                     Utils.getTroopImage(
                                                         finallist[ind][index]["name"],
@@ -827,107 +832,121 @@ class _DetailPageState extends State<DetailPage> {
                     ),
                     child: Padding(
                       padding: const EdgeInsets.all(3.0),
-                      child: Wrap(
-                          spacing: 5.0,
-                          runSpacing: 5.0,
-                          crossAxisAlignment: WrapCrossAlignment.center,
-                          children: List.generate(finallist.length, (index) {
-                            return Padding(
-                              padding: const EdgeInsets.all(3.0),
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(20),
-                                child: Container(
-                                  width: 110,
-                                  decoration: BoxDecoration(
-                                    color: const Color(0xff101010),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(left: 8.0, top: 5.0),
+                            child: Text("Spells", style: const TextStyle(
+                                color: Colors.white,
+                                fontFamily: "Inter",
+                                fontSize: 30)
+                            ),
+                          ),
+                          Wrap(
+                              spacing: 5.0,
+                              runSpacing: 5.0,
+                              crossAxisAlignment: WrapCrossAlignment.center,
+                              children: List.generate(finallist.length, (index) {
+                                return Padding(
+                                  padding: const EdgeInsets.all(3.0),
+                                  child: ClipRRect(
                                     borderRadius: BorderRadius.circular(20),
-                                  ),
-                                  child: GridTile(
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(5.0),
-                                      child: Column(
-                                        mainAxisAlignment: MainAxisAlignment.start,
-                                        children: [
-                                          AutoSizeText(
-                                              finallist[index]["name"],
-                                              style: const TextStyle(color: Colors.white, fontFamily: "Inter", fontSize: 15),
-                                              maxLines: 1
-                                          ),
-                                          Row(
+                                    child: Container(
+                                      width: 110,
+                                      height: 125,
+                                      decoration: BoxDecoration(
+                                        color: const Color(0xff101010),
+                                        borderRadius: BorderRadius.circular(20),
+                                      ),
+                                      child: GridTile(
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(5.0),
+                                          child: Column(
                                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                             children: [
-                                              Utils.getTroopImage(finallist[index]["name"], finallist[index]["village"]),
-                                              finallist[index]["level"] != finallist[index]["maxLevel"]? ClipRRect(
-                                                borderRadius: BorderRadius.circular(8),
-                                                child: Container(
-                                                  decoration: BoxDecoration(
-                                                    border: Border.all(color: Colors.white10, width: 2),
+                                              AutoSizeText(
+                                                  finallist[index]["name"],
+                                                  style: const TextStyle(color: Colors.white, fontFamily: "Inter", fontSize: 15),
+                                                  maxLines: 1
+                                              ),
+                                              Row(
+                                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                                children: [
+                                                  Utils.getTroopImage(finallist[index]["name"], finallist[index]["village"]),
+                                                  finallist[index]["level"] != finallist[index]["maxLevel"]? ClipRRect(
                                                     borderRadius: BorderRadius.circular(8),
-                                                    color: Colors.black,
-                                                  ),
-                                                  child: Padding(
-                                                    padding: const EdgeInsets.symmetric(horizontal: 4.0),
-                                                    child: Text(
-                                                        (finallist[index]["level"])
-                                                            .toString(),
-                                                        style: const TextStyle(
-                                                            color: Colors.white,
-                                                            fontFamily: "Inter",
-                                                            fontSize: 25)),
-                                                  ),
-                                                ),
-                                              ) : ClipRRect(
-                                                borderRadius: BorderRadius.circular(8),
-                                                child: Container(
-                                                  decoration: BoxDecoration(
-                                                    border: Border.all(color: const Color(0xffD7993E), width: 2),
+                                                    child: Container(
+                                                      decoration: BoxDecoration(
+                                                        border: Border.all(color: Colors.white10, width: 2),
+                                                        borderRadius: BorderRadius.circular(8),
+                                                        color: Colors.black,
+                                                      ),
+                                                      child: Padding(
+                                                        padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                                                        child: Text(
+                                                            (finallist[index]["level"])
+                                                                .toString(),
+                                                            style: const TextStyle(
+                                                                color: Colors.white,
+                                                                fontFamily: "Inter",
+                                                                fontSize: 25)),
+                                                      ),
+                                                    ),
+                                                  ) : ClipRRect(
                                                     borderRadius: BorderRadius.circular(8),
-                                                    color: const Color(0xffFABD51),
-                                                  ),
-                                                  child: Shimmer(
-                                                    color: Colors.white,
-                                                    child: Padding(
-                                                      padding: const EdgeInsets.symmetric(horizontal: 4.0),
-                                                      child: Text(
-                                                          (finallist[index]["level"])
-                                                              .toString(),
-                                                          style: const TextStyle(
-                                                              color: Colors.white,
-                                                              shadows: [Shadow(color: Colors.black, offset: Offset(0, 1.5))],
-                                                              fontFamily: "Inter",
-                                                              fontSize: 25)),
+                                                    child: Container(
+                                                      decoration: BoxDecoration(
+                                                        border: Border.all(color: const Color(0xffD7993E), width: 2),
+                                                        borderRadius: BorderRadius.circular(8),
+                                                        color: const Color(0xffFABD51),
+                                                      ),
+                                                      child: Shimmer(
+                                                        color: Colors.white,
+                                                        child: Padding(
+                                                          padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                                                          child: Text(
+                                                              (finallist[index]["level"])
+                                                                  .toString(),
+                                                              style: const TextStyle(
+                                                                  color: Colors.white,
+                                                                  shadows: [Shadow(color: Colors.black, offset: Offset(0, 1.5))],
+                                                                  fontFamily: "Inter",
+                                                                  fontSize: 25)),
+                                                        ),
+                                                      ),
                                                     ),
                                                   ),
+                                                ],
+                                              ),
+                                              Padding(
+                                                padding: const EdgeInsets.only(left: 10.0),
+                                                child: Row(
+                                                  children: [
+                                                    Column(
+                                                      mainAxisAlignment: MainAxisAlignment.start,
+                                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                                      children: [
+                                                        ?finallist[index]["level"] != finallist[index]["maxLevel"]? SizedBox(height: 5) : null,
+                                                        ?finallist[index]["level"] != finallist[index]["maxLevel"]? Utils.getSpellCosts(snapshot.data[1]["spells"], finallist[index]["name"], finallist[index]["level"]) : null,
+                                                        ?finallist[index]["level"] != finallist[index]["maxLevel"]? SizedBox(height: 5) : null,
+                                                        ?finallist[index]["level"] != finallist[index]["maxLevel"]? Utils.getSpellTime(snapshot.data[1]["spells"], finallist[index]["name"], finallist[index]["level"]) : null,
+                                                      ],
+                                                    ),
+                                                  ],
                                                 ),
                                               ),
                                             ],
                                           ),
-                                          Padding(
-                                            padding: const EdgeInsets.only(left: 10.0),
-                                            child: Row(
-                                              children: [
-                                                Column(
-                                                  mainAxisAlignment: MainAxisAlignment.start,
-                                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                                  children: [
-                                                    ?finallist[index]["level"] != finallist[index]["maxLevel"]? SizedBox(height: 5) : null,
-                                                    ?finallist[index]["level"] != finallist[index]["maxLevel"]? Utils.getSpellCosts(snapshot.data[1]["spells"], finallist[index]["name"], finallist[index]["level"]) : null,
-                                                    ?finallist[index]["level"] != finallist[index]["maxLevel"]? SizedBox(height: 5) : null,
-                                                    ?finallist[index]["level"] != finallist[index]["maxLevel"]? Utils.getSpellTime(snapshot.data[1]["spells"], finallist[index]["name"], finallist[index]["level"]) : null,
-                                                  ],
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ],
+                                        ),
                                       ),
                                     ),
                                   ),
-                                ),
-                              ),
-                            );
-                          }
-                        )
+                                );
+                              }
+                            )
+                          ),
+                        ],
                       ),
                     ),
                   ),
@@ -1363,6 +1382,7 @@ class _DetailPageState extends State<DetailPage> {
                                         borderRadius: BorderRadius.circular(20),
                                         child: Container(
                                           width: 110,
+                                          height: 125,
                                           decoration: BoxDecoration(
                                             color: const Color(0xff101010),
                                             borderRadius: BorderRadius.circular(20),
@@ -1371,8 +1391,7 @@ class _DetailPageState extends State<DetailPage> {
                                             child: Padding(
                                               padding: const EdgeInsets.all(5.0),
                                               child: Column(
-                                                mainAxisAlignment: MainAxisAlignment
-                                                    .start,
+                                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                                 children: [
                                                   AutoSizeText(
                                                       finallist[ind][index]["name"],
