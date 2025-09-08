@@ -44,6 +44,88 @@ class _DetailPageState extends State<DetailPage> {
     resources = resourcesString != null? Map<String, dynamic>.from(jsonDecode(resourcesString)) : Utils.getDefaultResources(thlevel, buildings);
   }
 
+  void importJSONString(String json, Map<String, dynamic> gamedata){
+    Map<String, dynamic> decodedJson = jsonDecode(json);
+    Map<String, dynamic> tempwalls = {};
+    Map<String, dynamic> tempdefenses = {};
+    Map<String, dynamic> temptraps = {};
+    Map<String, dynamic> temparmy = {};
+    Map<String, dynamic> tempresources = {};
+
+    //buildings
+    Map<int, List<int>> bmap = {};
+    for(var element in decodedJson["buildings"]) {
+      //walls
+      if(element["data"] == 1000010) {
+        tempwalls["wall-${element["lvl"]}"] = element["cnt"];
+      } else {
+        //buildings
+        List<int> blist = bmap[element["data"]] ?? [];
+        if(element["cnt"] != null) {
+          for (int i = 0; i < element["cnt"]; i++) {
+            blist.add(element["lvl"]);
+          }
+        }
+        if(element["gear_up"] != null) {
+          for (int i = 0; i < element["gear_up"]; i++) {
+            blist.add(element["lvl"]);
+          }
+        }
+        if(element["timer"] != null) {
+          blist.add(element["lvl"]);
+        }
+        bmap[element["data"]] = blist;
+      }
+    }
+
+    Map<int, List<int>> tmap = {};
+    for(var element in decodedJson["traps"]) {
+      //traps
+      List<int> tlist = tmap[element["data"]] ?? [];
+      if(element["cnt"] != null) {
+        for (int i = 0; i < element["cnt"]; i++) {
+          tlist.add(element["lvl"]);
+        }
+      }
+      if(element["gear_up"] != null) {
+        for (int i = 0; i < element["gear_up"]; i++) {
+          tlist.add(element["lvl"]);
+        }
+      }
+      if(element["timer"] != null) {
+        tlist.add(element["lvl"]);
+      }
+      tmap[element["data"]] = tlist;
+    }
+
+    bmap.forEach((gamedataid, list) {
+      if(Utils.isGameDataDefenses(gamedataid)) {
+        for(int i = 0; i < list.length; i++) {
+          tempdefenses["${gamedata.keys.firstWhere((k) => gamedata[k] == gamedataid)}-$i"] = list[i];
+        }
+      } else if(Utils.isGameDataArmyBuilding(gamedataid)) {
+        for(int i = 0; i < list.length; i++) {
+          temparmy["${gamedata.keys.firstWhere((k) => gamedata[k] == gamedataid)}-$i"] = list[i];
+        }
+      } else if(Utils.isGameDataResource(gamedataid)) {
+        for(int i = 0; i < list.length; i++) {
+          tempresources["${gamedata.keys.firstWhere((k) => gamedata[k] == gamedataid)}-$i"] = list[i];
+        }
+      }
+    });
+
+    tmap.forEach((gamedataid, list) {
+      for(int i = 0; i < list.length; i++) {
+        temptraps["${gamedata.keys.firstWhere((k) => gamedata[k] == gamedataid)}-$i"] = list[i];
+      }
+    });
+    updateWalls(tempwalls);
+    updateDefenses(tempdefenses);
+    updateArmyBuildings(temparmy);
+    updateResources(tempresources);
+    updateTraps(temptraps);
+  }
+
   void updateWalls(Map<String, dynamic> newdata) async {
     setState(() {
       walls = newdata;
@@ -112,7 +194,7 @@ class _DetailPageState extends State<DetailPage> {
 
   Widget getBuildingDetail() {
     return FutureBuilder(
-        future: Future.wait([DataProvider.awaitPlayerData(userTag), DataProvider.awaitBuildings()]),
+        future: Future.wait([DataProvider.awaitPlayerData(userTag), DataProvider.awaitBuildings(), DataProvider.awaitGameData()]),
         builder: (context, AsyncSnapshot snapshot) {
           if(snapshot.hasData) {
             List titles = ["Walls", "Defense", "Traps", "Army", "Resources"];
@@ -133,41 +215,91 @@ class _DetailPageState extends State<DetailPage> {
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      ?ind == 0? ClipRRect(
-                        borderRadius: BorderRadius.circular(20),
-                        child: Container(
-                          width: MediaQuery
-                              .of(context)
-                              .size
-                              .width,
-                          color: Colors.black,
-                          child: GridTile(
-                            child: Padding(
-                              padding: const EdgeInsets.all(5.0),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  DataProvider.awaitTownHallIcon(snapshot.data[0]["townHallLevel"], 1.5),
-                                  SizedBox(width: 10),
-                                  Column(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                      ?ind == 0? Column(
+                        children: [
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(20),
+                            child: Container(
+                              width: MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width,
+                              color: Colors.black,
+                              child: GridTile(
+                                child: Padding(
+                                  padding: const EdgeInsets.all(5.0),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      Text("Townhall ${snapshot.data[0]["townHallLevel"]}", style: const TextStyle(
-                                          color: Colors.white,
-                                          fontFamily: "Inter",
-                                          fontSize: 30)),
-                                      snapshot.data[0]["townHallWeaponLevel"] != null? Text("Level ${snapshot.data[0]["townHallWeaponLevel"]}", style: const TextStyle(
-                                          color: Colors.white,
-                                          fontFamily: "Inter",
-                                          fontSize: 18)) : SizedBox(height: 5),
+                                      DataProvider.awaitTownHallIcon(snapshot.data[0]["townHallLevel"], 1.5),
+                                      SizedBox(width: 10),
+                                      Column(
+                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          Text("Townhall ${snapshot.data[0]["townHallLevel"]}", style: const TextStyle(
+                                              color: Colors.white,
+                                              fontFamily: "Inter",
+                                              fontSize: 30)),
+                                          snapshot.data[0]["townHallWeaponLevel"] != null? Text("Level ${snapshot.data[0]["townHallWeaponLevel"]}", style: const TextStyle(
+                                              color: Colors.white,
+                                              fontFamily: "Inter",
+                                              fontSize: 18)) : SizedBox(height: 5),
+                                        ],
+                                      )
                                     ],
-                                  )
-                                ],
+                                  ),
+                                ),
                               ),
                             ),
                           ),
-                        ),
+                          SizedBox(height: 20),
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(20),
+                            child: Container(
+                              width: MediaQuery.of(context).size.width,
+                              color: Colors.black,
+                              child: GridTile(
+                                child: Padding(
+                                  padding: const EdgeInsets.all(5.0),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      Text("Import Json", style: const TextStyle(
+                                          color: Colors.white,
+                                          fontFamily: "Inter",
+                                          fontSize: 20)
+                                      ),
+                                      ElevatedButton.icon(
+                                        style: ElevatedButton.styleFrom(
+                                          backgroundColor: Colors.white24,
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.circular(15),
+                                              side: BorderSide(color: Colors.white24)
+                                          ),
+                                        ),
+                                        onPressed: () async {
+                                          String newval = await showDialog(
+                                              context: context,
+                                              builder: (BuildContext context) {
+                                                return Presets.getImportJSONDialog(context, "");
+                                              }
+                                          );
+                                          importJSONString(newval, snapshot.data[2]);
+                                        },
+                                        icon: const Icon(Icons.upload, color: Colors.white),
+                                        label: const Text("Import", style: TextStyle(
+                                            color: Colors.white,
+                                            fontFamily: "Inter",
+                                            fontSize: 18)),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
                       ) : null,
                       ?ind == 0? const SizedBox(height: 20) : null,
                       ClipRRect(

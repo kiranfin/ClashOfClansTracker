@@ -1195,3 +1195,15 @@ extension StringNumberExtension on String {
     return result;
   }
 }
+
+bool isGameDataDefenses(int gamedata){
+  return gamedata == 1000089 || gamedata == 1000085 || gamedata == 1000084 || gamedata == 1000079 || gamedata == 1000077 || gamedata == 1000072 || gamedata == 1000067 || gamedata == 1000032 || gamedata == 1000028 || gamedata == 1000027 || gamedata == 1000021 || gamedata == 1000019 || gamedata == 1000015 || gamedata == 1000012 || gamedata == 1000011 || gamedata == 1000009 || gamedata == 1000008 || gamedata == 1000013;
+}
+
+bool isGameDataArmyBuilding(int gamedata){
+  return gamedata == 1000071 || gamedata == 1000070 || gamedata == 1000068 || gamedata == 1000059 || gamedata == 1000029 || gamedata == 1000026 || gamedata == 1000020 || gamedata == 1000007 || gamedata == 1000006 || gamedata == 1000000;
+}
+
+bool isGameDataResource(int gamedata){
+  return gamedata == 1000024 || gamedata == 1000023 || gamedata == 1000014 || gamedata == 1000005 || gamedata == 1000004 || gamedata == 1000003 || gamedata == 1000002 || gamedata == 1000064;
+}

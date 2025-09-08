@@ -147,6 +147,14 @@ Future<Map<String, dynamic>> awaitMaxEquipment() async {
   return jsonDecode(res.body) as Map<String, dynamic>;
 }
 
+Future<Map<String, dynamic>> awaitGameData() async {
+  final url = Uri.parse('${Utils.getBaseUrl()}retrieve/gamedata');
+  final res = await http.get(url);
+  final status = res.statusCode;
+  if (status != 200) throw Exception('http.get error: statusCode= $status');
+  return jsonDecode(res.body) as Map<String, dynamic>;
+}
+
 Image awaitTownHallIcon(int level, double scale) {
   if(level == 1) return Image.asset(th1, scale: scale);
   if(level == 2) return Image.asset(th2, scale: scale);
