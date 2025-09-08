@@ -15,6 +15,7 @@ class _SettingsPageState extends State<SettingsPage> {
   final List<String> user = UserSP.getUser();
   final Map<String, dynamic> usermap = UserSP.getDecodedUserMap();
   String currentuser = UserSP.getCurrentUser();
+  bool darktheme = UserSP.getDarkTheme();
 
   @override
   Widget build(BuildContext context) {
@@ -34,11 +35,32 @@ class _SettingsPageState extends State<SettingsPage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  SegmentedButton(
+                      segments: [
+                        ButtonSegment(icon: Icon(Icons.sunny, color: Colors.white), label: Text("Light", style: TextStyle(
+                            color: !darktheme? Colors.black: Colors.white,
+                            fontFamily: "Inter",
+                            fontSize: 15)), value: !darktheme
+                        ),
+                        ButtonSegment(icon: Icon(Icons.mode_night, color: Colors.white), label: Text("Dark", style: TextStyle(
+                            color: darktheme? Colors.black : Colors.white,
+                            fontFamily: "Inter",
+                            fontSize: 15)), value: darktheme
+                        ),
+                      ],
+                      onSelectionChanged: (Set<bool> newSelection) {
+                        setState(() {
+                          darktheme = newSelection.first;
+                          UserSP.setDarkTheme(darktheme);
+                        });
+                      },
+                      selected: {!darktheme}
+                  ),
                   Padding(
                     padding: const EdgeInsets.only(top: 10.0, left: 20),
                     child: Text("Account wechseln", style: const TextStyle(
                         color: Colors.white,
-                        fontFamily: "Poppins",
+                        fontFamily: "Inter",
                         fontSize: 25)),
                   ),
                   Container(
@@ -75,7 +97,7 @@ class _SettingsPageState extends State<SettingsPage> {
                             children: [
                               Text(usermap[user], style: const TextStyle(
                                   color: Colors.white,
-                                  fontFamily: "Poppins",
+                                  fontFamily: "Inter",
                                   fontSize: 15)),
                               IconButton(
                                   onPressed: () {
@@ -132,7 +154,7 @@ class _SettingsPageState extends State<SettingsPage> {
                         children: [
                           Text("Account hinzufügen", style: const TextStyle(
                               color: Colors.white,
-                              fontFamily: "Poppins",
+                              fontFamily: "Inter",
                               fontSize: 15)),
                           Icon(Icons.add, size: 25)
                         ],

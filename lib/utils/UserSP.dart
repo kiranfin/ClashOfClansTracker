@@ -13,6 +13,7 @@ class UserSP {
     String encodedMap = json.encode(usermap);
     return await _preferences.setString("usermap", encodedMap);
   }
+  static Future setDarkTheme(bool theme) async => await _preferences.setBool("darktheme", theme);
 
   static Future setUserWalls(String user, String walls) async => await _preferences.setString("userwalls$user", walls);
   static Future setUserDefenses(String user, String defenses) async => await _preferences.setString("userdefenses$user", defenses);
@@ -29,6 +30,7 @@ class UserSP {
     }
     return _preferences.getString("usermap")?? json.encode(defmap);
   }
+  static bool getDarkTheme() => _preferences.getBool("darktheme") ?? true;
 
   static Map<String, dynamic> getDecodedUserMap() {
     String usermap = getUserMap();
