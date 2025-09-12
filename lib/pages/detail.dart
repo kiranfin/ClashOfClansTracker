@@ -952,7 +952,7 @@ class _DetailPageState extends State<DetailPage> {
                         gradient: LinearGradient(
                           begin: Alignment.centerLeft,
                           end: Alignment.centerRight,
-                          colors: [Colors.black.withValues(alpha: 0.8), Colors.black.withValues(alpha: 0.6)],
+                          colors: [Theme.of(context).colorScheme.surfaceContainer, Theme.of(context).colorScheme.secondaryContainer],
                         ),
                         borderRadius: BorderRadius.circular(30),
                       ),
@@ -963,9 +963,7 @@ class _DetailPageState extends State<DetailPage> {
                           children: [
                             ind == 0 && heroes.isNotEmpty || ind == 1 && bhheroes.isNotEmpty || ind == 2 && pets.isNotEmpty? Padding(
                               padding: const EdgeInsets.only(left: 8.0, top: 5.0),
-                              child: Text(titles[ind], style: const TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 30)),
+                              child: Text(titles[ind], style: Theme.of(context).textTheme.displaySmall!.copyWith(color: Theme.of(context).colorScheme.surface)),
                             ) : SizedBox(width: 5),
                                 Wrap(
                                 spacing: 5.0,
@@ -978,19 +976,20 @@ class _DetailPageState extends State<DetailPage> {
                                       borderRadius: BorderRadius.circular(20),
                                       child: Container(
                                         width: 110,
+                                        height: 130,
                                         decoration: BoxDecoration(
-                                          color: const Color(0xff101010),
+                                          color: Theme.of(context).colorScheme.surfaceContainer,
                                           borderRadius: BorderRadius.circular(20),
                                         ),
                                         child: GridTile(
                                           child: Padding(
                                             padding: const EdgeInsets.all(5.0),
                                             child: Column(
-                                              mainAxisAlignment: MainAxisAlignment.start,
+                                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                               children: [
                                                 AutoSizeText(
                                                     finallist[ind][index]["name"],
-                                                    style: const TextStyle(color: Colors.white, fontSize: 15),
+                                                    style: Theme.of(context).textTheme.labelLarge!.copyWith(color: Theme.of(context).colorScheme.surface),
                                                     maxLines: 1
                                                 ),
                                                 Row(
@@ -1068,26 +1067,22 @@ class _DetailPageState extends State<DetailPage> {
                                       child: Container(
                                         width: 170,
                                         decoration: BoxDecoration(
-                                          color: const Color(0xff101010),
+                                          color: Theme.of(context).colorScheme.surfaceContainer,
                                           borderRadius: BorderRadius.circular(20),
                                         ),
                                         child: GridTile(
                                           child: Padding(
                                             padding: const EdgeInsets.all(5.0),
                                             child: Column(
-                                              mainAxisAlignment: MainAxisAlignment
-                                                  .start,
+                                              mainAxisAlignment: MainAxisAlignment.start,
                                               children: [
                                                 AutoSizeText(
                                                     finallist[ind][index]["name"],
-                                                    style: const TextStyle(
-                                                        color: Colors.white,
-                                                        fontSize: 20),
+                                                    style: Theme.of(context).textTheme.labelLarge!.copyWith(color: Theme.of(context).colorScheme.surface),
                                                     maxLines: 1
                                                 ),
                                                 Row(
-                                                  mainAxisAlignment: MainAxisAlignment
-                                                      .spaceEvenly,
+                                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                                   children: [
                                                     Utils.getTroopImage(
                                                         finallist[ind][index]["name"],
@@ -1204,7 +1199,7 @@ class _DetailPageState extends State<DetailPage> {
                 itemCount: 12,
                 itemBuilder: (BuildContext context, int index) {
                   return ListTile(
-                    title: Shimmer(child: Container(width: 50, height: 15, color: Colors.black45)),
+                    title: ClipRRect(borderRadius: BorderRadius.circular(10), child: Shimmer(color: Theme.of(context).colorScheme.surface, child: SizedBox(width: 50, height: 15))),
                   );
                 }
             );
@@ -1277,14 +1272,17 @@ class _DetailPageState extends State<DetailPage> {
                                             child: Padding(
                                               padding: const EdgeInsets.all(5.0),
                                               child: Column(
+                                                crossAxisAlignment: CrossAxisAlignment.start,
                                                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                                 children: [
-                                                  AutoSizeText(
-                                                      finallist[ind][index]["name"],
-                                                      style: const TextStyle(
-                                                          color: Colors.white,
-                                                          fontSize: 15),
-                                                      maxLines: 1
+                                                  Center(
+                                                    child: AutoSizeText(
+                                                        finallist[ind][index]["name"],
+                                                        style: const TextStyle(
+                                                            color: Colors.white,
+                                                            fontSize: 15),
+                                                        maxLines: 1
+                                                    ),
                                                   ),
                                                   SizedBox(height: 5),
                                                   Row(

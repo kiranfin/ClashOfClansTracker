@@ -801,13 +801,13 @@ class _LeaguePageState extends State<LeaguePage> {
                         borderRadius: BorderRadius.circular(30),
                         child: Container(
                           decoration: BoxDecoration(
-                          border: Border.all(color: Theme.of(context).colorScheme.primary),
+                            border: Border.all(color: Theme.of(context).colorScheme.primary),
                             gradient: LinearGradient(
                               begin: Alignment.topLeft,
                               end: Alignment.bottomRight,
                               colors: [Theme.of(context).colorScheme.surfaceContainer, Theme.of(context).colorScheme.secondaryContainer],
                             ),
-                          borderRadius: BorderRadius.circular(30),
+                            borderRadius: BorderRadius.circular(30),
                           ),
                           child: Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),

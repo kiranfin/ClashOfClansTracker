@@ -416,7 +416,7 @@ double awaitHeroesPercent(Map<String, dynamic> userdata, Map<String, dynamic> ma
   });
   final maxpets = maxdata["pets"];
   maxpets.forEach((key, val) {
-    max += val;
+    max += val["maxlevel"];
   });
   num sum = 0;
   for (var hero in heroes) {
