@@ -824,7 +824,7 @@ class _LeaguePageState extends State<LeaguePage> {
                                   itemCount: 4,
                                   itemBuilder: (BuildContext context, int index) {
                                     return ListTile(
-                                      title: ClipRRect(borderRadius: BorderRadius.circular(10),child: Shimmer(color: Theme.of(context).colorScheme.surface, child: SizedBox(width: 50, height: 15))),
+                                      title: ClipRRect(borderRadius: BorderRadius.circular(10), child: Shimmer(color: Theme.of(context).colorScheme.surface, child: SizedBox(width: 50, height: 15))),
                                     );
                                   }
                                 ),
