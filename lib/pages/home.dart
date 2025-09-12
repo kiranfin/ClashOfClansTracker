@@ -58,17 +58,18 @@ class _HomePageState extends State<HomePage> {
                                 .size
                                 .width - 2 * 20,
                             decoration: BoxDecoration(
-                              border: Border.all(color: Colors.black),
+                              border: Border.all(color: Theme.of(context).colorScheme.surfaceContainer),
                               gradient: LinearGradient(
                                 begin: Alignment.topLeft,
                                 end: Alignment.bottomRight,
-                                colors: [Colors.black.withValues(alpha: 0.8), Colors.black.withValues(alpha: 0.6)],
+                                colors: [Theme.of(context).colorScheme.surfaceContainer, Theme.of(context).colorScheme.secondaryContainer],
                               ),
                               borderRadius: BorderRadius.circular(30),
                             ),
                             child: ElevatedButton(
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: Colors.transparent,
+                                shadowColor: Colors.transparent,
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(30),
                                 ),
@@ -92,7 +93,7 @@ class _HomePageState extends State<HomePage> {
                                           children: [
                                             DataProvider.awaitLeagueIcon(ovsnap.data[0]),
                                             SizedBox(width: 5),
-                                            SizedBox(width: 150, child: AutoSizeText(ovsnap.data[0]["name"], style: Theme.of(context).textTheme.headlineLarge!.copyWith(color: Colors.white), maxLines: 1))
+                                            SizedBox(width: 150, child: AutoSizeText(ovsnap.data[0]["name"], style: Theme.of(context).textTheme.headlineLarge!.copyWith(color: Theme.of(context).colorScheme.surface), maxLines: 1))
                                           ],
                                         ),
                                         SizedBox(height: 10),
@@ -155,13 +156,11 @@ class _HomePageState extends State<HomePage> {
                                       .center,
                                   children: [
                                     Text(
-                                        "Overall", style: Theme.of(context).textTheme.titleLarge!.copyWith(color: Colors.white)),
+                                        "Overall", style: Theme.of(context).textTheme.titleLarge!.copyWith(color: Theme.of(context).colorScheme.surface)),
                                     Text("${(DataProvider.awaitOverallPercent(
                                         ovsnap.data[0], ovsnap.data[1], ovsnap.data[2], ovsnap.data[3]) * 100)
                                         .toStringAsFixed(1)}%",
-                                        style: const TextStyle(
-                                            color: Colors.white54,
-                                            fontSize: 15)),
+                                        style: Theme.of(context).textTheme.labelLarge!.copyWith(color: Theme.of(context).colorScheme.onSurface)),
                                   ],
                                 ),
                                 radius: 80,
@@ -170,7 +169,7 @@ class _HomePageState extends State<HomePage> {
                                     ovsnap.data[0], ovsnap.data[1], ovsnap.data[2], ovsnap.data[3]),
                                 circularStrokeCap: CircularStrokeCap
                                     .round,
-                                backgroundColor: Colors.white10,
+                                backgroundColor: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.1),
                                 rotateLinearGradient: true,
                                 linearGradient: LinearGradient(
                                     colors: [
@@ -192,17 +191,18 @@ class _HomePageState extends State<HomePage> {
                                   margin: EdgeInsets.all(8),
                                   height: 120.0,
                                   decoration: BoxDecoration(
-                                    border: Border.all(color: Colors.black),
+                                    border: Border.all(color: Theme.of(context).colorScheme.surfaceContainer),
                                     gradient: LinearGradient(
                                       begin: Alignment.topLeft,
                                       end: Alignment.bottomRight,
-                                      colors: [Colors.black.withValues(alpha: 0.8), Colors.black.withValues(alpha: 0.6)],
+                                      colors: [Theme.of(context).colorScheme.surfaceContainer, Theme.of(context).colorScheme.secondaryContainer],
                                     ),
                                     borderRadius: BorderRadius.circular(30),
                                   ),
                                   child: ElevatedButton(
                                     style: ElevatedButton.styleFrom(
                                       backgroundColor: Colors.transparent,
+                                      shadowColor: Colors.transparent,
                                       shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(30),
                                       ),
@@ -217,7 +217,7 @@ class _HomePageState extends State<HomePage> {
                                       children: [
                                         AutoSizeText(
                                             'Buildings',
-                                            style: Theme.of(context).textTheme.titleSmall!.copyWith(color: Colors.white),
+                                            style: Theme.of(context).textTheme.titleSmall!.copyWith(color: Theme.of(context).colorScheme.surface),
                                             maxLines: 1
                                         ),
                                         SizedBox(height: 5),
@@ -229,9 +229,7 @@ class _HomePageState extends State<HomePage> {
                                               Text("${(DataProvider.awaitBuildingsPercent(ovsnap.data[0], ovsnap.data[1]) * 100)
                                                   .toStringAsFixed(
                                                   1)}%",
-                                                  style: const TextStyle(
-                                                      color: Colors.white54,
-                                                      fontSize: 15)),
+                                                style: Theme.of(context).textTheme.labelLarge!.copyWith(color: Theme.of(context).colorScheme.onSurface)),
                                             ],
                                           ),
                                           radius: 40,
@@ -239,7 +237,7 @@ class _HomePageState extends State<HomePage> {
                                           percent: DataProvider.awaitBuildingsPercent(ovsnap.data[0], ovsnap.data[1]),
                                           circularStrokeCap: CircularStrokeCap
                                               .round,
-                                          backgroundColor: Colors.white10,
+                                          backgroundColor: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.1),
                                           rotateLinearGradient: true,
                                           linearGradient: LinearGradient(
                                               colors: [
@@ -258,17 +256,18 @@ class _HomePageState extends State<HomePage> {
                                   margin: EdgeInsets.all(8),
                                   height: 120.0,
                                   decoration: BoxDecoration(
-                                    border: Border.all(color: Colors.black),
+                                    border: Border.all(color: Theme.of(context).colorScheme.surfaceContainer),
                                     gradient: LinearGradient(
                                       begin: Alignment.topLeft,
                                       end: Alignment.bottomRight,
-                                      colors: [Colors.black.withValues(alpha: 0.8), Colors.black.withValues(alpha: 0.6)],
+                                      colors: [Theme.of(context).colorScheme.surfaceContainer, Theme.of(context).colorScheme.secondaryContainer],
                                     ),
                                     borderRadius: BorderRadius.circular(30),
                                   ),
                                   child: ElevatedButton(
                                     style: ElevatedButton.styleFrom(
                                       backgroundColor: Colors.transparent,
+                                      shadowColor: Colors.transparent,
                                       shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(30),
                                       ),
@@ -283,7 +282,7 @@ class _HomePageState extends State<HomePage> {
                                       children: [
                                         AutoSizeText(
                                             'Troops',
-                                            style: Theme.of(context).textTheme.titleSmall!.copyWith(color: Colors.white),
+                                            style: Theme.of(context).textTheme.titleSmall!.copyWith(color: Theme.of(context).colorScheme.surface),
                                             maxLines: 1
                                         ),
                                         SizedBox(height: 5),
@@ -294,9 +293,7 @@ class _HomePageState extends State<HomePage> {
                                             children: [
                                               Text("${(DataProvider.awaitTroopsPercent(ovsnap.data[0], ovsnap.data[2]) * 100)
                                                   .toStringAsFixed(1)}%",
-                                                  style: const TextStyle(
-                                                      color: Colors.white54,
-                                                      fontSize: 15)),
+                                                  style: Theme.of(context).textTheme.labelLarge!.copyWith(color: Theme.of(context).colorScheme.onSurface)),
                                             ],
                                           ),
                                           radius: 40,
@@ -304,7 +301,7 @@ class _HomePageState extends State<HomePage> {
                                           percent: DataProvider.awaitTroopsPercent(ovsnap.data[0], ovsnap.data[2]),
                                           circularStrokeCap: CircularStrokeCap
                                               .round,
-                                          backgroundColor: Colors.white10,
+                                          backgroundColor: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.1),
                                           rotateLinearGradient: true,
                                           linearGradient: LinearGradient(
                                               colors: [
@@ -323,17 +320,18 @@ class _HomePageState extends State<HomePage> {
                                   margin: EdgeInsets.all(8),
                                   height: 120.0,
                                   decoration: BoxDecoration(
-                                    border: Border.all(color: Colors.black),
+                                    border: Border.all(color: Theme.of(context).colorScheme.surfaceContainer),
                                     gradient: LinearGradient(
                                       begin: Alignment.topLeft,
                                       end: Alignment.bottomRight,
-                                      colors: [Colors.black.withValues(alpha: 0.8), Colors.black.withValues(alpha: 0.6)],
+                                      colors: [Theme.of(context).colorScheme.surfaceContainer, Theme.of(context).colorScheme.secondaryContainer],
                                     ),
                                     borderRadius: BorderRadius.circular(30),
                                   ),
                                   child: ElevatedButton(
                                     style: ElevatedButton.styleFrom(
                                       backgroundColor: Colors.transparent,
+                                      shadowColor: Colors.transparent,
                                       shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(30),
                                       ),
@@ -348,7 +346,7 @@ class _HomePageState extends State<HomePage> {
                                       children: [
                                         AutoSizeText(
                                             'Spells',
-                                            style: Theme.of(context).textTheme.titleSmall!.copyWith(color: Colors.white),
+                                            style: Theme.of(context).textTheme.titleSmall!.copyWith(color: Theme.of(context).colorScheme.surface),
                                             maxLines: 1
                                         ),
                                         SizedBox(height: 5),
@@ -359,9 +357,7 @@ class _HomePageState extends State<HomePage> {
                                             children: [
                                               Text("${(DataProvider.awaitSpellsPercent(ovsnap.data[0], ovsnap.data[2]) * 100)
                                                   .toStringAsFixed(1)}%",
-                                                  style: const TextStyle(
-                                                      color: Colors.white54,
-                                                      fontSize: 15)),
+                                                  style: Theme.of(context).textTheme.labelLarge!.copyWith(color: Theme.of(context).colorScheme.onSurface)),
                                             ],
                                           ),
                                           radius: 40,
@@ -369,7 +365,7 @@ class _HomePageState extends State<HomePage> {
                                           percent: DataProvider.awaitSpellsPercent(ovsnap.data[0], ovsnap.data[2]),
                                           circularStrokeCap: CircularStrokeCap
                                               .round,
-                                          backgroundColor: Colors.white10,
+                                          backgroundColor: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.1),
                                           rotateLinearGradient: true,
                                           linearGradient: LinearGradient(
                                               colors: [
@@ -395,17 +391,18 @@ class _HomePageState extends State<HomePage> {
                                   margin: EdgeInsets.all(8),
                                   height: 120.0,
                                   decoration: BoxDecoration(
-                                    border: Border.all(color: Colors.black),
+                                    border: Border.all(color: Theme.of(context).colorScheme.surfaceContainer),
                                     gradient: LinearGradient(
                                       begin: Alignment.topLeft,
                                       end: Alignment.bottomRight,
-                                      colors: [Colors.black.withValues(alpha: 0.8), Colors.black.withValues(alpha: 0.6)],
+                                      colors: [Theme.of(context).colorScheme.surfaceContainer, Theme.of(context).colorScheme.secondaryContainer],
                                     ),
                                     borderRadius: BorderRadius.circular(30),
                                   ),
                                   child: ElevatedButton(
                                     style: ElevatedButton.styleFrom(
                                       backgroundColor: Colors.transparent,
+                                      shadowColor: Colors.transparent,
                                       shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(30),
                                       ),
@@ -420,7 +417,7 @@ class _HomePageState extends State<HomePage> {
                                       children: [
                                         AutoSizeText(
                                             'Heroes',
-                                            style: Theme.of(context).textTheme.titleSmall!.copyWith(color: Colors.white),
+                                            style: Theme.of(context).textTheme.titleSmall!.copyWith(color: Theme.of(context).colorScheme.surface),
                                             maxLines: 1
                                         ),
                                         SizedBox(height: 5),
@@ -431,9 +428,7 @@ class _HomePageState extends State<HomePage> {
                                             children: [
                                               Text("${(DataProvider.awaitHeroesPercent(ovsnap.data[0], ovsnap.data[2]) * 100)
                                                   .toStringAsFixed(1)}%",
-                                                  style: const TextStyle(
-                                                      color: Colors.white54,
-                                                      fontSize: 15)),
+                                                  style: Theme.of(context).textTheme.labelLarge!.copyWith(color: Theme.of(context).colorScheme.onSurface)),
                                             ],
                                           ),
                                           radius: 40,
@@ -441,7 +436,7 @@ class _HomePageState extends State<HomePage> {
                                           percent: DataProvider.awaitHeroesPercent(ovsnap.data[0], ovsnap.data[2]),
                                           circularStrokeCap: CircularStrokeCap
                                               .round,
-                                          backgroundColor: Colors.white10,
+                                          backgroundColor: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.1),
                                           rotateLinearGradient: true,
                                           linearGradient: LinearGradient(
                                               colors: [
@@ -460,17 +455,18 @@ class _HomePageState extends State<HomePage> {
                                   margin: EdgeInsets.all(8),
                                   height: 120.0,
                                   decoration: BoxDecoration(
-                                    border: Border.all(color: Colors.black),
+                                    border: Border.all(color: Theme.of(context).colorScheme.surfaceContainer),
                                     gradient: LinearGradient(
                                       begin: Alignment.topLeft,
                                       end: Alignment.bottomRight,
-                                      colors: [Colors.black.withValues(alpha: 0.8), Colors.black.withValues(alpha: 0.6)],
+                                      colors: [Theme.of(context).colorScheme.surfaceContainer, Theme.of(context).colorScheme.secondaryContainer],
                                     ),
                                     borderRadius: BorderRadius.circular(30),
                                   ),
                                   child: ElevatedButton(
                                     style: ElevatedButton.styleFrom(
                                       backgroundColor: Colors.transparent,
+                                      shadowColor: Colors.transparent,
                                       shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(30),
                                       ),
@@ -485,7 +481,7 @@ class _HomePageState extends State<HomePage> {
                                       children: [
                                         AutoSizeText(
                                             'Equipment',
-                                            style: Theme.of(context).textTheme.titleSmall!.copyWith(color: Colors.white),
+                                            style: Theme.of(context).textTheme.titleSmall!.copyWith(color: Theme.of(context).colorScheme.surface),
                                             maxLines: 1
                                         ),
                                         SizedBox(height: 5),
@@ -496,9 +492,7 @@ class _HomePageState extends State<HomePage> {
                                             children: [
                                               Text("${(DataProvider.awaitEquipmentPercent(ovsnap.data[0], ovsnap.data[3]) * 100)
                                                   .toStringAsFixed(1)}%",
-                                                  style: const TextStyle(
-                                                      color: Colors.white54,
-                                                      fontSize: 15)),
+                                                  style: Theme.of(context).textTheme.labelLarge!.copyWith(color: Theme.of(context).colorScheme.onSurface)),
                                             ],
                                           ),
                                           radius: 40,
@@ -506,7 +500,7 @@ class _HomePageState extends State<HomePage> {
                                           percent: DataProvider.awaitEquipmentPercent(ovsnap.data[0], ovsnap.data[3]),
                                           circularStrokeCap: CircularStrokeCap
                                               .round,
-                                          backgroundColor: Colors.white10,
+                                          backgroundColor: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.1),
                                           rotateLinearGradient: true,
                                           linearGradient: LinearGradient(
                                               colors: [
@@ -525,17 +519,18 @@ class _HomePageState extends State<HomePage> {
                                   margin: EdgeInsets.all(8),
                                   height: 120.0,
                                   decoration: BoxDecoration(
-                                    border: Border.all(color: Colors.black),
+                                    border: Border.all(color: Theme.of(context).colorScheme.surfaceContainer),
                                     gradient: LinearGradient(
                                       begin: Alignment.topLeft,
                                       end: Alignment.bottomRight,
-                                      colors: [Colors.black.withValues(alpha: 0.8), Colors.black.withValues(alpha: 0.6)],
+                                      colors: [Theme.of(context).colorScheme.surfaceContainer, Theme.of(context).colorScheme.secondaryContainer],
                                     ),
                                     borderRadius: BorderRadius.circular(30),
                                   ),
                                   child: ElevatedButton(
                                     style: ElevatedButton.styleFrom(
                                       backgroundColor: Colors.transparent,
+                                      shadowColor: Colors.transparent,
                                       shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(30),
                                       ),
@@ -550,7 +545,7 @@ class _HomePageState extends State<HomePage> {
                                       children: [
                                         AutoSizeText(
                                             'Achievem.',
-                                            style: Theme.of(context).textTheme.titleSmall!.copyWith(color: Colors.white),
+                                            style: Theme.of(context).textTheme.titleSmall!.copyWith(color: Theme.of(context).colorScheme.surface),
                                             maxLines: 1
                                         ),
                                         SizedBox(height: 5),
@@ -561,9 +556,7 @@ class _HomePageState extends State<HomePage> {
                                             children: [
                                               Text("${(DataProvider.awaitAchievementsPercent(ovsnap.data[0]) * 100)
                                                   .toStringAsFixed(1)}%",
-                                                  style: const TextStyle(
-                                                      color: Colors.white54,
-                                                      fontSize: 15)),
+                                                  style: Theme.of(context).textTheme.labelLarge!.copyWith(color: Theme.of(context).colorScheme.onSurface)),
                                             ],
                                           ),
                                           radius: 40,
@@ -571,7 +564,7 @@ class _HomePageState extends State<HomePage> {
                                           percent: DataProvider.awaitAchievementsPercent(ovsnap.data[0]),
                                           circularStrokeCap: CircularStrokeCap
                                               .round,
-                                          backgroundColor: Colors.white10,
+                                          backgroundColor: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.1),
                                           rotateLinearGradient: true,
                                           linearGradient: LinearGradient(
                                               colors: [
@@ -601,17 +594,18 @@ class _HomePageState extends State<HomePage> {
                                 .size
                                 .width - 2 * 20,
                             decoration: BoxDecoration(
-                              border: Border.all(color: Colors.black),
+                              border: Border.all(color: Theme.of(context).colorScheme.surfaceContainer),
                               gradient: LinearGradient(
                                 begin: Alignment.topLeft,
                                 end: Alignment.bottomRight,
-                                colors: [Colors.black.withValues(alpha: 0.8), Colors.black.withValues(alpha: 0.6)],
+                                colors: [Theme.of(context).colorScheme.surfaceContainer, Theme.of(context).colorScheme.secondaryContainer],
                               ),
                               borderRadius: BorderRadius.circular(30),
                             ),
                             child: ElevatedButton(
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: Colors.transparent,
+                                shadowColor: Colors.transparent,
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(30),
                                 ),
@@ -631,16 +625,17 @@ class _HomePageState extends State<HomePage> {
                                           ClipRRect(
                                               borderRadius: BorderRadius.circular(10),
                                               child: Shimmer(
-                                                  child: Container(width: 45, height: 45, color: Colors.black45))
+                                                  color: Theme.of(context).colorScheme.surface,
+                                                  child: SizedBox(width: 45, height: 45))
                                           ),
                                           SizedBox(width: 5),
                                           ClipRRect(
                                               borderRadius: BorderRadius.circular(10),
                                               child: Shimmer(
-                                                  child: Container(
+                                                  color: Theme.of(context).colorScheme.surface,
+                                                  child: SizedBox(
                                                       width: 100,
-                                                      height: 20,
-                                                      color: Colors.black45))
+                                                      height: 20))
                                           ),
                                         ],
                                       ),
@@ -655,10 +650,10 @@ class _HomePageState extends State<HomePage> {
                                           ClipRRect(
                                               borderRadius: BorderRadius.circular(10),
                                               child: Shimmer(
-                                                  child: Container(
+                                                  color: Theme.of(context).colorScheme.surface,
+                                                  child: SizedBox(
                                                       width: 40,
-                                                      height: 20,
-                                                      color: Colors.black45))
+                                                      height: 20))
                                           ),
                                           SizedBox(width: 7),
                                           Image.asset(legendTrophy, scale: 14),
@@ -666,10 +661,10 @@ class _HomePageState extends State<HomePage> {
                                           ClipRRect(
                                               borderRadius: BorderRadius.circular(10),
                                               child: Shimmer(
-                                                  child: Container(
+                                                  color: Theme.of(context).colorScheme.surface,
+                                                  child: SizedBox(
                                                       width: 40,
-                                                      height: 20,
-                                                      color: Colors.black45))
+                                                      height: 20))
                                           ),
                                         ],
                                       ),
@@ -681,19 +676,19 @@ class _HomePageState extends State<HomePage> {
                                           ClipRRect(
                                               borderRadius: BorderRadius.circular(10),
                                               child: Shimmer(
-                                                  child: Container(
+                                                  color: Theme.of(context).colorScheme.surface,
+                                                  child: SizedBox(
                                                       width: 20,
-                                                      height: 20,
-                                                      color: Colors.black45))
+                                                      height: 20))
                                           ),
                                           SizedBox(width: 7),
                                           ClipRRect(
                                               borderRadius: BorderRadius.circular(10),
                                               child: Shimmer(
-                                                  child: Container(
+                                                  color: Theme.of(context).colorScheme.surface,
+                                                  child: SizedBox(
                                                       width: 40,
-                                                      height: 20,
-                                                      color: Colors.black45))
+                                                      height: 20))
                                           ),
                                         ],
                                       ),
@@ -705,10 +700,10 @@ class _HomePageState extends State<HomePage> {
                                     children: [
                                       ClipRRect(
                                           borderRadius: BorderRadius.circular(10),
-                                          child: Shimmer(child: Container(
+                                          child: Shimmer(
+                                              color: Theme.of(context).colorScheme.surface,child: SizedBox(
                                               width: 45,
-                                              height: 45,
-                                              color: Colors.black45))
+                                              height: 45))
                                       ),
                                       Row(
                                         mainAxisAlignment: MainAxisAlignment.end,
@@ -716,19 +711,19 @@ class _HomePageState extends State<HomePage> {
                                           ClipRRect(
                                               borderRadius: BorderRadius.circular(10),
                                               child: Shimmer(
-                                                  child: Container(
+                                                  color: Theme.of(context).colorScheme.surface,
+                                                  child: SizedBox(
                                                       width: 45,
-                                                      height: 45,
-                                                      color: Colors.black45))
+                                                      height: 45))
                                           ),
                                           SizedBox(width: 10),
                                           ClipRRect(
                                               borderRadius: BorderRadius.circular(10),
                                               child: Shimmer(
-                                                  child: Container(
+                                                  color: Theme.of(context).colorScheme.surface,
+                                                  child: SizedBox(
                                                       width: 45,
-                                                      height: 45,
-                                                      color: Colors.black45))
+                                                      height: 45))
                                           ),
                                         ],
                                       )
@@ -744,10 +739,11 @@ class _HomePageState extends State<HomePage> {
                             children: [
                               ClipRRect(
                                   borderRadius: BorderRadius.circular(10),
-                                  child: Shimmer(child: Container(
+                                  child: Shimmer(
+                                      color: Theme.of(context).colorScheme.surface,
+                                      child: SizedBox(
                                       width: 150,
-                                      height: 150,
-                                      color: Colors.black45))
+                                      height: 150))
                               ),
                             ],
                           ),
@@ -762,17 +758,18 @@ class _HomePageState extends State<HomePage> {
                                   margin: EdgeInsets.all(10),
                                   height: 120.0,
                                   decoration: BoxDecoration(
-                                    border: Border.all(color: Colors.black),
+                                    border: Border.all(color: Theme.of(context).colorScheme.surfaceContainer),
                                     gradient: LinearGradient(
                                       begin: Alignment.topLeft,
                                       end: Alignment.bottomRight,
-                                      colors: [Colors.black.withValues(alpha: 0.8), Colors.black.withValues(alpha: 0.6)],
+                                      colors: [Theme.of(context).colorScheme.surfaceContainer, Theme.of(context).colorScheme.secondaryContainer],
                                     ),
                                     borderRadius: BorderRadius.circular(30),
                                   ),
                                   child: ElevatedButton(
                                     style: ElevatedButton.styleFrom(
                                       backgroundColor: Colors.transparent,
+                                      shadowColor: Colors.transparent,
                                       shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(30),
                                       ),
@@ -785,17 +782,18 @@ class _HomePageState extends State<HomePage> {
                                       children: [
                                         AutoSizeText(
                                             'Buildings',
-                                            style: const TextStyle(
-                                                color: Colors.white),
+                                            style: Theme.of(context).textTheme.titleSmall!.copyWith(color: Theme.of(context).colorScheme.surface),
                                             maxLines: 1
                                         ),
                                         SizedBox(height: 5),
                                         ClipRRect(
                                             borderRadius: BorderRadius.circular(10),
-                                            child: Shimmer(child: Container(
+                                            child: Shimmer(
+                                                color: Theme.of(context).colorScheme.surface,
+                                                child: SizedBox(
                                                 width: 110,
-                                                height: 80,
-                                                color: Colors.black45))),
+                                                height: 80)
+                                            )),
                                       ],
                                     ),
                                   ),
@@ -806,17 +804,18 @@ class _HomePageState extends State<HomePage> {
                                   margin: EdgeInsets.all(10),
                                   height: 120.0,
                                   decoration: BoxDecoration(
-                                    border: Border.all(color: Colors.black),
+                                    border: Border.all(color: Theme.of(context).colorScheme.surfaceContainer),
                                     gradient: LinearGradient(
                                       begin: Alignment.topLeft,
                                       end: Alignment.bottomRight,
-                                      colors: [Colors.black.withValues(alpha: 0.8), Colors.black.withValues(alpha: 0.6)],
+                                      colors: [Theme.of(context).colorScheme.surfaceContainer, Theme.of(context).colorScheme.secondaryContainer],
                                     ),
                                     borderRadius: BorderRadius.circular(30),
                                   ),
                                   child: ElevatedButton(
                                     style: ElevatedButton.styleFrom(
                                       backgroundColor: Colors.transparent,
+                                      shadowColor: Colors.transparent,
                                       shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(30),
                                       ),
@@ -829,17 +828,16 @@ class _HomePageState extends State<HomePage> {
                                       children: [
                                         AutoSizeText(
                                             'Troops',
-                                            style: const TextStyle(
-                                                color: Colors.white),
+                                            style: Theme.of(context).textTheme.titleSmall!.copyWith(color: Theme.of(context).colorScheme.surface),
                                             maxLines: 1
                                         ),
                                         SizedBox(height: 5),
                                         ClipRRect(
                                             borderRadius: BorderRadius.circular(10),
-                                            child: Shimmer(child: Container(
+                                            child: Shimmer(
+                                                color: Theme.of(context).colorScheme.surface,child: SizedBox(
                                                 width: 110,
-                                                height: 80,
-                                                color: Colors.black45))
+                                                height: 80))
                                         ),
                                       ],
                                     ),
@@ -851,17 +849,18 @@ class _HomePageState extends State<HomePage> {
                                   margin: EdgeInsets.all(10),
                                   height: 120.0,
                                   decoration: BoxDecoration(
-                                    border: Border.all(color: Colors.black),
+                                    border: Border.all(color: Theme.of(context).colorScheme.surfaceContainer),
                                     gradient: LinearGradient(
                                       begin: Alignment.topLeft,
                                       end: Alignment.bottomRight,
-                                      colors: [Colors.black.withValues(alpha: 0.8), Colors.black.withValues(alpha: 0.6)],
+                                      colors: [Theme.of(context).colorScheme.surfaceContainer, Theme.of(context).colorScheme.secondaryContainer],
                                     ),
                                     borderRadius: BorderRadius.circular(30),
                                   ),
                                   child: ElevatedButton(
                                     style: ElevatedButton.styleFrom(
                                       backgroundColor: Colors.transparent,
+                                      shadowColor: Colors.transparent,
                                       shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(30),
                                       ),
@@ -874,18 +873,18 @@ class _HomePageState extends State<HomePage> {
                                       children: [
                                         AutoSizeText(
                                             'Spells',
-                                            style: const TextStyle(
-                                                color: Colors.white),
+                                            style: Theme.of(context).textTheme.titleSmall!.copyWith(color: Theme.of(context).colorScheme.surface),
                                             maxLines: 1
                                         ),
                                         SizedBox(height: 5),
                                         ClipRRect(
                                             borderRadius: BorderRadius
                                                 .circular(10),
-                                            child: Shimmer(child: Container(
+                                            child: Shimmer(
+                                                color: Theme.of(context).colorScheme.surface,
+                                                child: SizedBox(
                                                 width: 110,
-                                                height: 80,
-                                                color: Colors.black45))
+                                                height: 80))
                                         ),
                                       ],
                                     ),
@@ -904,17 +903,18 @@ class _HomePageState extends State<HomePage> {
                                   margin: EdgeInsets.all(10),
                                   height: 120.0,
                                   decoration: BoxDecoration(
-                                    border: Border.all(color: Colors.black),
+                                    border: Border.all(color: Theme.of(context).colorScheme.surfaceContainer),
                                     gradient: LinearGradient(
                                       begin: Alignment.topLeft,
                                       end: Alignment.bottomRight,
-                                      colors: [Colors.black.withValues(alpha: 0.8), Colors.black.withValues(alpha: 0.6)],
+                                      colors: [Theme.of(context).colorScheme.surfaceContainer, Theme.of(context).colorScheme.secondaryContainer],
                                     ),
                                     borderRadius: BorderRadius.circular(30),
                                   ),
                                   child: ElevatedButton(
                                     style: ElevatedButton.styleFrom(
                                       backgroundColor: Colors.transparent,
+                                      shadowColor: Colors.transparent,
                                       shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(30),
                                       ),
@@ -927,17 +927,17 @@ class _HomePageState extends State<HomePage> {
                                       children: [
                                         AutoSizeText(
                                             'Heros',
-                                            style: const TextStyle(
-                                                color: Colors.white),
+                                            style: Theme.of(context).textTheme.titleSmall!.copyWith(color: Theme.of(context).colorScheme.surface),
                                             maxLines: 1
                                         ),
                                         SizedBox(height: 5),
                                         ClipRRect(
                                             borderRadius: BorderRadius.circular(10),
-                                            child: Shimmer(child: Container(
+                                            child: Shimmer(
+                                                color: Theme.of(context).colorScheme.surface,
+                                                child: SizedBox(
                                                 width: 110,
-                                                height: 80,
-                                                color: Colors.black45))
+                                                height: 80))
                                         ),
                                       ],
                                     ),
@@ -949,17 +949,18 @@ class _HomePageState extends State<HomePage> {
                                   margin: EdgeInsets.all(10),
                                   height: 120.0,
                                   decoration: BoxDecoration(
-                                    border: Border.all(color: Colors.black),
+                                    border: Border.all(color: Theme.of(context).colorScheme.surfaceContainer),
                                     gradient: LinearGradient(
                                       begin: Alignment.topLeft,
                                       end: Alignment.bottomRight,
-                                      colors: [Colors.black.withValues(alpha: 0.8), Colors.black.withValues(alpha: 0.6)],
+                                      colors: [Theme.of(context).colorScheme.surfaceContainer, Theme.of(context).colorScheme.secondaryContainer],
                                     ),
                                     borderRadius: BorderRadius.circular(30),
                                   ),
                                   child: ElevatedButton(
                                     style: ElevatedButton.styleFrom(
                                       backgroundColor: Colors.transparent,
+                                      shadowColor: Colors.transparent,
                                       shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(30),
                                       ),
@@ -972,18 +973,17 @@ class _HomePageState extends State<HomePage> {
                                       children: [
                                         AutoSizeText(
                                             'Equipment',
-                                            style: const TextStyle(
-                                                color: Colors.white),
+                                            style: Theme.of(context).textTheme.titleSmall!.copyWith(color: Theme.of(context).colorScheme.surface),
                                             maxLines: 1
                                         ),
                                         SizedBox(height: 5),
                                         ClipRRect(
-                                            borderRadius: BorderRadius
-                                                .circular(10),
-                                            child: Shimmer(child: Container(
+                                            borderRadius: BorderRadius.circular(10),
+                                            child: Shimmer(
+                                                color: Theme.of(context).colorScheme.surface,
+                                                child: SizedBox(
                                                 width: 110,
-                                                height: 80,
-                                                color: Colors.black45))
+                                                height: 80))
                                         ),
                                       ],
                                     ),
@@ -995,17 +995,18 @@ class _HomePageState extends State<HomePage> {
                                   margin: EdgeInsets.all(10),
                                   height: 120.0,
                                   decoration: BoxDecoration(
-                                    border: Border.all(color: Colors.black),
+                                    border: Border.all(color: Theme.of(context).colorScheme.surfaceContainer),
                                     gradient: LinearGradient(
                                       begin: Alignment.topLeft,
                                       end: Alignment.bottomRight,
-                                      colors: [Colors.black.withValues(alpha: 0.8), Colors.black.withValues(alpha: 0.6)],
+                                      colors: [Theme.of(context).colorScheme.surfaceContainer, Theme.of(context).colorScheme.secondaryContainer],
                                     ),
                                     borderRadius: BorderRadius.circular(30),
                                   ),
                                   child: ElevatedButton(
                                     style: ElevatedButton.styleFrom(
                                       backgroundColor: Colors.transparent,
+                                      shadowColor: Colors.transparent,
                                       shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(30),
                                       ),
@@ -1018,18 +1019,17 @@ class _HomePageState extends State<HomePage> {
                                       children: [
                                         AutoSizeText(
                                             'Achievem.',
-                                            style: const TextStyle(
-                                                color: Colors.white),
+                                            style: Theme.of(context).textTheme.titleSmall!.copyWith(color: Theme.of(context).colorScheme.surface),
                                             maxLines: 1
                                         ),
                                         SizedBox(height: 5),
                                         ClipRRect(
-                                            borderRadius: BorderRadius
-                                                .circular(10),
-                                            child: Shimmer(child: Container(
+                                            borderRadius: BorderRadius.circular(10),
+                                            child: Shimmer(
+                                            color: Theme.of(context).colorScheme.surface,
+                                                child: SizedBox(
                                                 width: 110,
-                                                height: 80,
-                                                color: Colors.black45))
+                                                height: 80))
                                         ),
                                       ],
                                     ),
