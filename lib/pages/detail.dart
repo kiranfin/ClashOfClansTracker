@@ -165,11 +165,11 @@ class _DetailPageState extends State<DetailPage> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
           gradient: LinearGradient(
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
-              colors: [/*Color(0xFF1C2952)*/Color(0xFF09090B), /*Color(0xFF101E6B)*/Color(0xFF0E1011)]
+              colors: [Theme.of(context).colorScheme.primary, Theme.of(context).colorScheme.secondary]
           )
       ),
       child: Scaffold(
@@ -224,7 +224,7 @@ class _DetailPageState extends State<DetailPage> {
                                   .of(context)
                                   .size
                                   .width,
-                              color: Colors.black,
+                              color: Theme.of(context).colorScheme.surfaceContainer,
                               child: GridTile(
                                 child: Padding(
                                   padding: const EdgeInsets.all(5.0),
@@ -237,8 +237,8 @@ class _DetailPageState extends State<DetailPage> {
                                         mainAxisAlignment: MainAxisAlignment.start,
                                         crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
-                                          Text("Townhall ${snapshot.data[0]["townHallLevel"]}", style: Theme.of(context).textTheme.displaySmall!.copyWith(color: Colors.white)),
-                                          ?snapshot.data[0]["townHallWeaponLevel"] != null? Text("Level ${snapshot.data[0]["townHallWeaponLevel"]}", style: Theme.of(context).textTheme.labelLarge!.copyWith(color: Colors.white)) : null,
+                                          Text("Townhall ${snapshot.data[0]["townHallLevel"]}", style: Theme.of(context).textTheme.displaySmall!.copyWith(color: Theme.of(context).colorScheme.surface)),
+                                          ?snapshot.data[0]["townHallWeaponLevel"] != null? Text("Level ${snapshot.data[0]["townHallWeaponLevel"]}", style: Theme.of(context).textTheme.labelLarge!.copyWith(color: Theme.of(context).colorScheme.surface)) : null,
                                         ],
                                       )
                                     ],
@@ -252,7 +252,7 @@ class _DetailPageState extends State<DetailPage> {
                             borderRadius: BorderRadius.circular(20),
                             child: Container(
                               width: MediaQuery.of(context).size.width,
-                              color: Colors.black,
+                              color: Theme.of(context).colorScheme.surfaceContainer,
                               child: GridTile(
                                 child: Padding(
                                   padding: const EdgeInsets.all(5.0),
@@ -263,16 +263,16 @@ class _DetailPageState extends State<DetailPage> {
                                         children: [
                                           Icon(Icons.code, size: 20, color: Colors.deepOrangeAccent),
                                           SizedBox(width: 5),
-                                          Text("Import Json", style: Theme.of(context).textTheme.titleMedium!.copyWith(color: Colors.white),
+                                          Text("Import Json", style: Theme.of(context).textTheme.titleMedium!.copyWith(color: Theme.of(context).colorScheme.surface),
                                           ),
                                         ],
                                       ),
                                       ElevatedButton.icon(
                                         style: ElevatedButton.styleFrom(
-                                          backgroundColor: Colors.white24,
+                                          backgroundColor: Theme.of(context).colorScheme.tertiary.withValues(alpha: 0.3),
+                                          shadowColor: Colors.transparent,
                                           shape: RoundedRectangleBorder(
-                                              borderRadius: BorderRadius.circular(15),
-                                              side: BorderSide(color: Colors.white24)
+                                            borderRadius: BorderRadius.circular(15),
                                           ),
                                         ),
                                         onPressed: () async {
@@ -284,9 +284,9 @@ class _DetailPageState extends State<DetailPage> {
                                           );
                                           importJSONString(newval, snapshot.data[2]);
                                         },
-                                        icon: const Icon(Icons.upload, color: Colors.white),
-                                        label: const Text("Import", style: TextStyle(
-                                            color: Colors.white,
+                                        icon: Icon(Icons.upload, color: Theme.of(context).colorScheme.surface),
+                                        label: Text("Import", style: TextStyle(
+                                            color: Theme.of(context).colorScheme.surface,
                                             fontSize: 18)),
                                       )
                                     ],
@@ -304,11 +304,10 @@ class _DetailPageState extends State<DetailPage> {
                           padding: const EdgeInsets.all(8.0),
                           child: Container(
                             decoration: BoxDecoration(
-                              border: Border.all(color: Colors.black),
                               gradient: LinearGradient(
                                 begin: Alignment.centerLeft,
                                 end: Alignment.centerRight,
-                                colors: [Colors.black.withValues(alpha: 0.8), Colors.black.withValues(alpha: 0.6)],
+                                colors: [Theme.of(context).colorScheme.surfaceContainer, Theme.of(context).colorScheme.secondaryContainer],
                               ),
                               borderRadius: BorderRadius.circular(30),
                             ),
@@ -319,14 +318,14 @@ class _DetailPageState extends State<DetailPage> {
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Text(titles[ind], style: Theme.of(context).textTheme.displaySmall!.copyWith(color: Colors.white),
+                                      Text(titles[ind], style: Theme.of(context).textTheme.displaySmall!.copyWith(color: Theme.of(context).colorScheme.surface),
                                       ),
                                       ElevatedButton.icon(
                                         style: ElevatedButton.styleFrom(
-                                          backgroundColor: Colors.white24,
+                                          backgroundColor: Theme.of(context).colorScheme.tertiary.withValues(alpha: 0.3),
+                                          shadowColor: Colors.transparent,
                                           shape: RoundedRectangleBorder(
                                             borderRadius: BorderRadius.circular(15),
-                                            side: BorderSide(color: Colors.white24)
                                           ),
                                         ),
                                         onPressed: () {
@@ -358,8 +357,8 @@ class _DetailPageState extends State<DetailPage> {
                                           }
                                         },
                                         icon: const Icon(Icons.skip_next, color: Colors.orangeAccent),
-                                        label: const Text("Max", style: TextStyle(
-                                            color: Colors.white,
+                                        label: Text("Max", style: TextStyle(
+                                            color: Theme.of(context).colorScheme.surface,
                                             fontSize: 18)),
                                       ),
                                     ],
@@ -375,13 +374,12 @@ class _DetailPageState extends State<DetailPage> {
                                             child: ClipRRect(
                                               borderRadius: BorderRadius.circular(20),
                                               child: Container(
-                                                color: Colors.black,
+                                                color: Theme.of(context).colorScheme.surfaceContainer,
                                                 child: GridTile(
                                                   child: Padding(
                                                     padding: const EdgeInsets.all(5.0),
                                                     child: Row(
-                                                      mainAxisAlignment: MainAxisAlignment
-                                                          .spaceBetween,
+                                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                       children: [
                                                         Flexible(
                                                           flex: 3,
@@ -398,12 +396,12 @@ class _DetailPageState extends State<DetailPage> {
                                                                 children: [
                                                                   AutoSizeText(
                                                                       "Level ${finalmaplist[ind].keys.elementAt(index).substring(5, finalmaplist[ind].keys.elementAt(index).length)}",
-                                                                      style: Theme.of(context).textTheme.labelLarge!.copyWith(color: Colors.white),
+                                                                      style: Theme.of(context).textTheme.labelLarge!.copyWith(color: Theme.of(context).colorScheme.surface),
                                                                       maxLines: 1
                                                                   ),
                                                                   AutoSizeText(
                                                                       "${Utils.getTownHallWeapon(snapshot.data[0]["townHallLevel"]) != finalmaplist[ind].keys.elementAt(index).substring(0, finalmaplist[ind].keys.elementAt(index).lastIndexOf('-'))? finalmaplist[ind].values.elementAt(index) : snapshot.data[0]["townHallWeaponLevel"]}",
-                                                                      style: Theme.of(context).textTheme.labelLarge!.copyWith(color: Colors.white54),
+                                                                      style: Theme.of(context).textTheme.labelLarge!.copyWith(color: Theme.of(context).colorScheme.onSurface),
                                                                       maxLines: 1
                                                                   )
                                                                 ],
@@ -413,17 +411,17 @@ class _DetailPageState extends State<DetailPage> {
                                                                   children: [
                                                                     AutoSizeText(
                                                                       finalmaplist[ind].keys.elementAt(index).substring(0, finalmaplist[ind].keys.elementAt(index).lastIndexOf('-')),
-                                                                      style: Theme.of(context).textTheme.labelLarge!.copyWith(color: Colors.white),
+                                                                      style: Theme.of(context).textTheme.labelLarge!.copyWith(color: Theme.of(context).colorScheme.surface),
                                                                     ),
                                                                     ClipRRect(
                                                                       borderRadius: BorderRadius.circular(20),
                                                                       child: Container(
-                                                                      color: const Color(0xff542f13),
+                                                                      color: Colors.deepOrangeAccent.withValues(alpha: 0.3),
                                                                         child: Padding(
                                                                           padding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 5.0),
                                                                           child: AutoSizeText(
                                                                             "Lvl ${Utils.getTownHallWeapon(snapshot.data[0]["townHallLevel"]) != finalmaplist[ind].keys.elementAt(index).substring(0, finalmaplist[ind].keys.elementAt(index).lastIndexOf('-'))? finalmaplist[ind].values.elementAt(index) : snapshot.data[0]["townHallWeaponLevel"]}",
-                                                                            style: Theme.of(context).textTheme.labelLarge!.copyWith(color: Colors.white70),
+                                                                            style: Theme.of(context).textTheme.labelLarge!.copyWith(color: Theme.of(context).colorScheme.onSurface),
                                                                           ),
                                                                         ),
                                                                       ),
@@ -438,11 +436,11 @@ class _DetailPageState extends State<DetailPage> {
                                                           children: [
                                                             ?ind == 0? IconButton(
                                                                 style: ButtonStyle(
-                                                                    backgroundColor: WidgetStateProperty.all(Colors.white24),
+                                                                    backgroundColor: WidgetStateProperty.all(Theme.of(context).colorScheme.tertiary.withValues(alpha: 0.3)),
                                                                     shape: WidgetStateProperty.all<RoundedRectangleBorder>(
                                                                         RoundedRectangleBorder(
                                                                             borderRadius: BorderRadius.circular(15.0),
-                                                                            side: BorderSide(color: Colors.white24)
+                                                                            side: BorderSide(color: Theme.of(context).colorScheme.tertiary.withValues(alpha: 0.3))
                                                                         )
                                                                     )
                                                                 ),
@@ -463,11 +461,11 @@ class _DetailPageState extends State<DetailPage> {
                                                             ) : null,
                                                             IconButton(
                                                                 style: ButtonStyle(
-                                                                    backgroundColor: WidgetStateProperty.all(Colors.white24),
+                                                                    backgroundColor: WidgetStateProperty.all(Theme.of(context).colorScheme.tertiary.withValues(alpha: 0.3)),
                                                                     shape: WidgetStateProperty.all<RoundedRectangleBorder>(
                                                                         RoundedRectangleBorder(
                                                                             borderRadius: BorderRadius.circular(15.0),
-                                                                            side: BorderSide(color: Colors.white24)
+                                                                            side: BorderSide(color: Theme.of(context).colorScheme.tertiary.withValues(alpha: 0.3))
                                                                         )
                                                                     )
                                                                 ),
@@ -496,11 +494,11 @@ class _DetailPageState extends State<DetailPage> {
                                                             ),
                                                             IconButton(
                                                                 style: ButtonStyle(
-                                                                    backgroundColor: WidgetStateProperty.all(Colors.white24),
+                                                                    backgroundColor: WidgetStateProperty.all(Theme.of(context).colorScheme.tertiary.withValues(alpha: 0.3)),
                                                                     shape: WidgetStateProperty.all<RoundedRectangleBorder>(
                                                                         RoundedRectangleBorder(
                                                                             borderRadius: BorderRadius.circular(15.0),
-                                                                            side: BorderSide(color: Colors.white24)
+                                                                            side: BorderSide(color: Theme.of(context).colorScheme.tertiary.withValues(alpha: 0.3))
                                                                         )
                                                                     )
                                                                 ),
@@ -536,11 +534,11 @@ class _DetailPageState extends State<DetailPage> {
                                                             ),
                                                             IconButton(
                                                                 style: ButtonStyle(
-                                                                    backgroundColor: WidgetStateProperty.all(Colors.white24),
+                                                                    backgroundColor: WidgetStateProperty.all(Theme.of(context).colorScheme.tertiary.withValues(alpha: 0.3)),
                                                                     shape: WidgetStateProperty.all<RoundedRectangleBorder>(
                                                                         RoundedRectangleBorder(
                                                                             borderRadius: BorderRadius.circular(15.0),
-                                                                            side: BorderSide(color: Colors.white24)
+                                                                            side: BorderSide(color: Theme.of(context).colorScheme.tertiary.withValues(alpha: 0.3))
                                                                         )
                                                                     )
                                                                 ),
