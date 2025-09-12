@@ -952,7 +952,7 @@ class _DetailPageState extends State<DetailPage> {
                         gradient: LinearGradient(
                           begin: Alignment.centerLeft,
                           end: Alignment.centerRight,
-                          colors: [Theme.of(context).colorScheme.surfaceContainer, Theme.of(context).colorScheme.secondaryContainer],
+                          colors: [Theme.of(context).colorScheme.primary, Theme.of(context).colorScheme.secondary]
                         ),
                         borderRadius: BorderRadius.circular(30),
                       ),
@@ -1229,11 +1229,10 @@ class _DetailPageState extends State<DetailPage> {
                     padding: const EdgeInsets.all(10.0),
                     child: Container(
                       decoration: BoxDecoration(
-                        border: Border.all(color: Colors.black),
                         gradient: LinearGradient(
                           begin: Alignment.centerLeft,
                           end: Alignment.centerRight,
-                          colors: [Colors.black.withValues(alpha: 0.8), Colors.black.withValues(alpha: 0.6)],
+                            colors: [Theme.of(context).colorScheme.primary, Theme.of(context).colorScheme.secondary]
                         ),
                         borderRadius: BorderRadius.circular(30),
                       ),
@@ -1244,9 +1243,7 @@ class _DetailPageState extends State<DetailPage> {
                           children: [
                             Padding(
                               padding: const EdgeInsets.only(left: 8.0, top: 5.0),
-                              child: Text(titles[ind], style: const TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 30)
+                              child: Text(titles[ind], style: Theme.of(context).textTheme.displaySmall!.copyWith(color: Theme.of(context).colorScheme.surface),
                               ),
                             ),
                             Container(
@@ -1265,7 +1262,7 @@ class _DetailPageState extends State<DetailPage> {
                                           width: 110,
                                           height: 125,
                                           decoration: BoxDecoration(
-                                            color: const Color(0xff101010),
+                                            color: Theme.of(context).colorScheme.surfaceContainer,
                                             borderRadius: BorderRadius.circular(20),
                                           ),
                                           child: GridTile(
@@ -1278,16 +1275,13 @@ class _DetailPageState extends State<DetailPage> {
                                                   Center(
                                                     child: AutoSizeText(
                                                         finallist[ind][index]["name"],
-                                                        style: const TextStyle(
-                                                            color: Colors.white,
-                                                            fontSize: 15),
+                                                        style: Theme.of(context).textTheme.labelLarge!.copyWith(color: Theme.of(context).colorScheme.surface),
                                                         maxLines: 1
                                                     ),
                                                   ),
                                                   SizedBox(height: 5),
                                                   Row(
-                                                    mainAxisAlignment: MainAxisAlignment
-                                                        .spaceEvenly,
+                                                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                                     children: [
                                                       Utils.getTroopImage(
                                                           finallist[ind][index]["name"],
@@ -1343,15 +1337,13 @@ class _DetailPageState extends State<DetailPage> {
                                                       ?shiny != 0? ClipRRect(
                                                         borderRadius: BorderRadius.circular(20),
                                                         child: Container(
-                                                          color: const Color(
-                                                              0xff134365),
+                                                          color: const Color(0xff134365),
                                                           child: Padding(
                                                             padding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 5.0),
                                                             child: Row(
                                                               mainAxisSize: MainAxisSize.min,
                                                               children: [
-                                                                Image.asset(
-                                                                    shiny_ore, scale: 10),
+                                                                Image.asset(shiny_ore, scale: 10),
                                                                 SizedBox(width: 2),
                                                                 Text(shiny.toString(),
                                                                     style: const TextStyle(
@@ -1372,8 +1364,7 @@ class _DetailPageState extends State<DetailPage> {
                                                             child: Row(
                                                               mainAxisSize: MainAxisSize.min,
                                                               children: [
-                                                                Image.asset(
-                                                                    glowy_ore, scale: 10),
+                                                                Image.asset(glowy_ore, scale: 10),
                                                                 SizedBox(width: 2),
                                                                 Text(glowy
                                                                     .toString(),
@@ -1395,8 +1386,7 @@ class _DetailPageState extends State<DetailPage> {
                                                             child: Row(
                                                               mainAxisSize: MainAxisSize.min,
                                                               children: [
-                                                                Image.asset(
-                                                                    starry_ore, scale: 10),
+                                                                Image.asset(starry_ore, scale: 10),
                                                                 SizedBox(width: 2),
                                                                 Text(starry.toString(),
                                                                     style: const TextStyle(
@@ -1433,7 +1423,7 @@ class _DetailPageState extends State<DetailPage> {
                 itemCount: 12,
                 itemBuilder: (BuildContext context, int index) {
                   return ListTile(
-                    title: Shimmer(child: Container(width: 50, height: 15, color: Colors.black45)),
+                    title: ClipRRect(borderRadius: BorderRadius.circular(10), child: Shimmer(color: Theme.of(context).colorScheme.surface, child: SizedBox(width: 50, height: 15))),
                   );
                 }
             );
