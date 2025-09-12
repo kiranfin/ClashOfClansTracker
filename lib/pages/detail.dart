@@ -929,7 +929,7 @@ class _DetailPageState extends State<DetailPage> {
 
   Widget getHeroesDetail() {
     return FutureBuilder(
-        future: Future.wait([DataProvider.awaitHeroes(userTag), DataProvider.awaitTroops(userTag)]),
+        future: Future.wait([DataProvider.awaitHeroes(userTag), DataProvider.awaitTroops(userTag), DataProvider.awaitMaxTroops()]),
         builder: (context, AsyncSnapshot snapshot) {
           if(snapshot.hasData) {
             List titles = ["Heroes", "Builder Hall Heroes", "Pets"];
@@ -949,7 +949,6 @@ class _DetailPageState extends State<DetailPage> {
                     padding: const EdgeInsets.all(10.0),
                     child: Container(
                       decoration: BoxDecoration(
-                        border: Border.all(color: Colors.black),
                         gradient: LinearGradient(
                           begin: Alignment.centerLeft,
                           end: Alignment.centerRight,
@@ -1043,44 +1042,16 @@ class _DetailPageState extends State<DetailPage> {
                                                 ),
                                                 Padding(
                                                   padding: const EdgeInsets.only(left: 10.0),
-                                                  child: Column(
-                                                    mainAxisAlignment: MainAxisAlignment.start,
-                                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                                  child: Row(
                                                     children: [
-                                                      SizedBox(height: 5),
-                                                      ClipRRect(
-                                                        borderRadius: BorderRadius.circular(20),
-                                                        child: Container(
-                                                          color: const Color(0xff541513),
-                                                          child: Padding(
-                                                            padding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 5.0),
-                                                            child: Text("Max: ${finallist[ind][index]["maxLevel"]}", style: const TextStyle(color: Colors.white,
-                                                                fontSize: 10)
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                      SizedBox(height: 5),
-                                                      Row(
+                                                      Column(
+                                                        mainAxisAlignment: MainAxisAlignment.start,
+                                                        crossAxisAlignment: CrossAxisAlignment.start,
                                                         children: [
-                                                          ClipRRect(
-                                                            borderRadius: BorderRadius.circular(20),
-                                                            child: Container(
-                                                              color: const Color(
-                                                                  0xff132054),
-                                                              child: Padding(
-                                                                padding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 5.0),
-                                                                child: Row(
-                                                                  children: [
-                                                                    Icon(Icons.access_time, color: const Color(0xff216AF3), size: 14),
-                                                                    SizedBox(width: 5),
-                                                                    Text("1d 12h", style: const TextStyle(color: Colors.white,
-                                                                        fontSize: 10)),
-                                                                  ],
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          ),
+                                                          ?finallist[ind][index]["level"] != finallist[ind][index]["maxLevel"]? SizedBox(height: 5) : null,
+                                                          ?finallist[ind][index]["level"] != finallist[ind][index]["maxLevel"]? Utils.getTroopCosts(snapshot.data[2]["pets"], finallist[ind][index]["name"], finallist[ind][index]["level"]) : null,
+                                                          ?finallist[ind][index]["level"] != finallist[ind][index]["maxLevel"]? SizedBox(height: 5) : null,
+                                                          ?finallist[ind][index]["level"] != finallist[ind][index]["maxLevel"]? Utils.getTroopTime(snapshot.data[2]["pets"], finallist[ind][index]["name"], finallist[ind][index]["level"]) : null,
                                                         ],
                                                       ),
                                                     ],
@@ -1194,52 +1165,19 @@ class _DetailPageState extends State<DetailPage> {
                                                 ),
                                                 SizedBox(height: 5),
                                                 Padding(
-                                                  padding: const EdgeInsets.only(
-                                                      left: 15.0, right: 15.0),
+                                                  padding: const EdgeInsets.only(left: 10.0),
                                                   child: Row(
-                                                    mainAxisAlignment: MainAxisAlignment
-                                                        .spaceBetween,
                                                     children: [
                                                       Column(
-                                                        mainAxisAlignment: MainAxisAlignment
-                                                            .start,
-                                                        crossAxisAlignment: CrossAxisAlignment
-                                                            .start,
+                                                        mainAxisAlignment: MainAxisAlignment.start,
+                                                        crossAxisAlignment: CrossAxisAlignment.start,
                                                         children: [
-                                                          SizedBox(height: 5),
-                                                          ClipRRect(
-                                                            borderRadius: BorderRadius.circular(20),
-                                                            child: Container(
-                                                              color: const Color(0xff541513),
-                                                              child: Padding(
-                                                                padding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 5.0),
-                                                                child: Text("Max: ${finallist[ind][index]["maxLevel"]}", style: const TextStyle(color: Colors.white,
-                                                                    fontSize: 10)
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          ),
-                                                          SizedBox(height: 5),
-                                                          ClipRRect(
-                                                            borderRadius: BorderRadius.circular(20),
-                                                            child: Container(
-                                                              color: const Color(
-                                                                  0xff132054),
-                                                              child: Padding(
-                                                                padding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 5.0),
-                                                                child: Row(
-                                                                  children: [
-                                                                    Icon(Icons.access_time, color: const Color(0xff216AF3), size: 14),
-                                                                    SizedBox(width: 5),
-                                                                    Text("1d 12h", style: const TextStyle(color: Colors.white,
-                                                                        fontSize: 10)),
-                                                                  ],
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          ),
+                                                          ?finallist[ind][index]["level"] != finallist[ind][index]["maxLevel"]? SizedBox(height: 5) : null,
+                                                          ?finallist[ind][index]["level"] != finallist[ind][index]["maxLevel"]? Utils.getTroopCosts(Utils.isNormalHero(finallist[ind][index]["name"])? snapshot.data[2]["heroes"] : snapshot.data[2]["bhheroes"], finallist[ind][index]["name"], finallist[ind][index]["level"]) : null,
+                                                          ?finallist[ind][index]["level"] != finallist[ind][index]["maxLevel"]? SizedBox(height: 5) : null,
+                                                          ?finallist[ind][index]["level"] != finallist[ind][index]["maxLevel"]? Utils.getTroopTime(Utils.isNormalHero(finallist[ind][index]["name"])? snapshot.data[2]["heroes"] : snapshot.data[2]["bhheroes"], finallist[ind][index]["name"], finallist[ind][index]["level"]) : null,
                                                         ],
-                                                      )
+                                                      ),
                                                     ],
                                                   ),
                                                 ),

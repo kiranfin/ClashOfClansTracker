@@ -1088,13 +1088,13 @@ Widget getTroopCosts(Map<String, dynamic> maxdata, String name, int level) {
     borderRadius: BorderRadius.circular(20),
     child: Container(
       color: maxdata[normalizeName(name)]["upgradeResource"] == "elixir"? const Color(0xff651480) : maxdata[normalizeName(name)]["upgradeResource"] == "dark_elixir"? const Color(
-          0xff000000) : Colors.transparent,
+          0xff000000) : maxdata[normalizeName(name)]["upgradeResource"] == "builder_elixir"? const Color(0xff3f0e50) : Colors.transparent,
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 5.0),
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Image.asset(maxdata[normalizeName(name)]["upgradeResource"] == "elixir"? elixir : dark_elixir, scale: 2.5),
+            Image.asset(maxdata[normalizeName(name)]["upgradeResource"] == "elixir"? elixir : maxdata[normalizeName(name)]["upgradeResource"] == "dark_elixir"? dark_elixir : builder_elixir, scale: 2.5),
             SizedBox(width: 5),
             Text(maxdata[normalizeName(name)]["${level + 1}"] != null? maxdata[normalizeName(name)]["${level + 1}"]["upgradeCost"].toString().spaceNumbers() : "-", style: const TextStyle(color: Colors.white,
                 fontSize: 10)
