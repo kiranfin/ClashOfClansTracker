@@ -117,7 +117,7 @@ class _HomePageState extends State<HomePage> {
                                           children: [
                                             DataProvider.awaitBuilderLeagueIcon(ovsnap.data[0], 4),
                                             SizedBox(width: 7),
-                                            DataProvider.awaitPlayerBuilderTrophies(ovsnap.data[0], 15),
+                                            DataProvider.awaitPlayerBuilderTrophies(ovsnap.data[0], 15, context),
                                           ],
                                         ),
                                       ],

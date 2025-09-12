@@ -106,7 +106,7 @@ class _DefaultPageState extends State<DefaultPage> {
               activeColor: Theme.of(context).colorScheme.surface,
               hoverColor: Colors.grey.shade900,
               gap: 8,
-              tabBackgroundColor: Colors.grey.shade900,
+              tabBackgroundColor: Theme.of(context).colorScheme.tertiary.withValues(alpha: 0.3),
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               padding: EdgeInsets.all(16),
               onTabChange: (index) {

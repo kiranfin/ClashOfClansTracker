@@ -272,15 +272,15 @@ Image awaitClanWarLeagueIcon(String league, double scale) {
 }
 
 Text awaitPlayerTrophies(Map<String, dynamic> userdata, double size, BuildContext context) {
-  return Text((userdata["trophies"]).toString(), style: Theme.of(context).textTheme.labelLarge!.copyWith(color: Theme.of(context).colorScheme.onSurface));
+  return Text((userdata["trophies"]).toString(), style: TextStyle(color: Theme.of(context).colorScheme.onSurface, fontSize: size));
 }
 
 Text awaitPlayerLegendTrophies(Map<String, dynamic> userdata, double size, BuildContext context) {
-  return Text((userdata["legendStatistics"] != null? userdata["legendStatistics"]["legendTrophies"] : 0).toString(), style: Theme.of(context).textTheme.labelLarge!.copyWith(color: Theme.of(context).colorScheme.onSurface));
+  return Text((userdata["legendStatistics"] != null? userdata["legendStatistics"]["legendTrophies"] : 0).toString(), style: TextStyle(color: Theme.of(context).colorScheme.onSurface, fontSize: size));
 }
 
-Text awaitPlayerBuilderTrophies(Map<String, dynamic> userdata, double size) {
-  return Text((userdata["builderBaseTrophies"]).toString(), style: TextStyle(color: Colors.white, fontSize: size, fontFamily: "Inter"));
+Text awaitPlayerBuilderTrophies(Map<String, dynamic> userdata, double size, BuildContext context) {
+  return Text((userdata["builderBaseTrophies"]).toString(), style: TextStyle(color: Theme.of(context).colorScheme.onSurface, fontSize: size));
 }
 
 Image awaitClanIcon(Map<String, dynamic> userdata) {

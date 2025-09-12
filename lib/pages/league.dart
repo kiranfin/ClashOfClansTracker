@@ -249,7 +249,7 @@ class _LeaguePageState extends State<LeaguePage> {
                                         scale: 12,
                                       ),
                                       SizedBox(width: 5),
-                                      DataProvider.awaitPlayerBuilderTrophies(snapshot.data[0], 20),
+                                      DataProvider.awaitPlayerBuilderTrophies(snapshot.data[0], 20, context),
                                     ],
                                   )
                                 ],
@@ -540,7 +540,8 @@ class _LeaguePageState extends State<LeaguePage> {
                                     SizedBox(height: 5),
                                     ElevatedButton(
                                       style: ElevatedButton.styleFrom(
-                                        backgroundColor: Theme.of(context).colorScheme.primary,
+                                        backgroundColor: Theme.of(context).colorScheme.tertiary.withValues(alpha: 0.3),
+                                        shadowColor: Colors.transparent,
                                         shape: RoundedRectangleBorder(
                                           borderRadius: BorderRadius.circular(30),
                                         ),
@@ -575,7 +576,7 @@ class _LeaguePageState extends State<LeaguePage> {
                         ClipRRect(
                           borderRadius: BorderRadius.circular(20),
                           child: Container(
-                            color: Theme.of(context).colorScheme.primary,
+                            color: Theme.of(context).colorScheme.surfaceContainer,
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Column(
@@ -594,14 +595,14 @@ class _LeaguePageState extends State<LeaguePage> {
                                         children: [
                                           Row(
                                             children: [
-                                              ClipRRect(borderRadius: BorderRadius.circular(10),child: Shimmer(child: Container(width: 50, height: 50))),
+                                              ClipRRect(borderRadius: BorderRadius.circular(10),child: Shimmer(color: Theme.of(context).colorScheme.surface, child: SizedBox(width: 50, height: 50))),
                                               SizedBox(width: 5),
-                                              ClipRRect(borderRadius: BorderRadius.circular(10),child: Shimmer(child: Container(width: 80, height: 30))),
+                                              ClipRRect(borderRadius: BorderRadius.circular(10),child: Shimmer(color: Theme.of(context).colorScheme.surface, child: SizedBox(width: 80, height: 30))),
                                             ],
                                           ),
-                                          ClipRRect(borderRadius: BorderRadius.circular(10),child: Shimmer(child: Container(width: 120, height: 20))),
+                                          ClipRRect(borderRadius: BorderRadius.circular(10),child: Shimmer(color: Theme.of(context).colorScheme.surface, child: SizedBox(width: 120, height: 20))),
                                           SizedBox(height: 5),
-                                          ClipRRect(borderRadius: BorderRadius.circular(10),child: Shimmer(child: Container(width: 120, height: 20))),
+                                          ClipRRect(borderRadius: BorderRadius.circular(10),child: Shimmer(color: Theme.of(context).colorScheme.surface, child: SizedBox(width: 120, height: 20))),
                                         ],
                                       ),
                                       Column(
@@ -612,9 +613,9 @@ class _LeaguePageState extends State<LeaguePage> {
                                         children: [
                                           Row(
                                             children: [
-                                              ClipRRect(borderRadius: BorderRadius.circular(10),child: Shimmer(child: Container(width: 20, height: 20))),
+                                              ClipRRect(borderRadius: BorderRadius.circular(10),child: Shimmer(color: Theme.of(context).colorScheme.surface, child: SizedBox(width: 20, height: 20))),
                                               SizedBox(width: 7),
-                                              ClipRRect(borderRadius: BorderRadius.circular(10),child: Shimmer(child: Container(width: 50, height: 20))),
+                                              ClipRRect(borderRadius: BorderRadius.circular(10),child: Shimmer(color: Theme.of(context).colorScheme.surface, child: SizedBox(width: 50, height: 20))),
                                             ],
                                           )
                                         ],
@@ -630,7 +631,7 @@ class _LeaguePageState extends State<LeaguePage> {
                       ClipRRect(
                         borderRadius: BorderRadius.circular(20),
                         child: Container(
-                          color: Theme.of(context).colorScheme.primary,
+                          color: Theme.of(context).colorScheme.surfaceContainer,
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Row(
@@ -638,16 +639,16 @@ class _LeaguePageState extends State<LeaguePage> {
                               children: [
                                 Row(
                                   children: [
-                                    ClipRRect(borderRadius: BorderRadius.circular(10),child: Shimmer(child: Container(width: 50, height: 50))),
+                                    ClipRRect(borderRadius: BorderRadius.circular(10),child: Shimmer(color: Theme.of(context).colorScheme.surface, child: SizedBox(width: 50, height: 50))),
                                     SizedBox(width: 7),
-                                    ClipRRect(borderRadius: BorderRadius.circular(10),child: Shimmer(child: Container(width: 100, height: 30))),
+                                    ClipRRect(borderRadius: BorderRadius.circular(10),child: Shimmer(color: Theme.of(context).colorScheme.surface, child: SizedBox(width: 100, height: 30))),
                                   ]
                                 ),
                                 Row(
                                   children: [
-                                    ClipRRect(borderRadius: BorderRadius.circular(10),child: Shimmer(child: Container(width: 20, height: 20))),
+                                    ClipRRect(borderRadius: BorderRadius.circular(10),child: Shimmer(color: Theme.of(context).colorScheme.surface, child: SizedBox(width: 20, height: 20))),
                                     SizedBox(width: 5),
-                                    ClipRRect(borderRadius: BorderRadius.circular(10),child: Shimmer(child: Container(width: 50, height: 20))),
+                                    ClipRRect(borderRadius: BorderRadius.circular(10),child: Shimmer(color: Theme.of(context).colorScheme.surface, child: SizedBox(width: 50, height: 20))),
                                   ],
                                 )
                               ],
@@ -669,6 +670,7 @@ class _LeaguePageState extends State<LeaguePage> {
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.transparent,
+                            shadowColor: Colors.transparent,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(30),
                             ),
@@ -686,7 +688,7 @@ class _LeaguePageState extends State<LeaguePage> {
                                     style: Theme.of(context).textTheme.headlineLarge!.copyWith(color: Theme.of(context).colorScheme.surface),
                                   ),
                                   SizedBox(height: 5),
-                                  ClipRRect(borderRadius: BorderRadius.circular(10),child: Shimmer(child: Container(width: 150, height: 20))),
+                                  ClipRRect(borderRadius: BorderRadius.circular(10),child: Shimmer(color: Theme.of(context).colorScheme.surface, child: SizedBox(width: 150, height: 20))),
                                   SizedBox(height: 5),
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -695,8 +697,9 @@ class _LeaguePageState extends State<LeaguePage> {
                                       flex: 5,
                                         child: Column(
                                           children: [
-                                            ClipRRect(borderRadius: BorderRadius.circular(10),child: Shimmer(child: SizedBox(width: 60, height: 60))),
-                                            ClipRRect(borderRadius: BorderRadius.circular(10),child: Shimmer(child: SizedBox(width: 120, height: 20))),
+                                            ClipRRect(borderRadius: BorderRadius.circular(10),child: Shimmer(color: Theme.of(context).colorScheme.surface, child: SizedBox(width: 60, height: 60))),
+                                            SizedBox(height: 5),
+                                            ClipRRect(borderRadius: BorderRadius.circular(10),child: Shimmer(color: Theme.of(context).colorScheme.surface, child: SizedBox(width: 120, height: 20))),
                                           ],
                                         ),
                                       ),
@@ -709,8 +712,9 @@ class _LeaguePageState extends State<LeaguePage> {
                                         flex: 5,
                                         child: Column(
                                           children: [
-                                            ClipRRect(borderRadius: BorderRadius.circular(10),child: Shimmer(child: SizedBox(width: 60, height: 60))),
-                                            ClipRRect(borderRadius: BorderRadius.circular(10),child: Shimmer(child: SizedBox(width: 120, height: 20))),
+                                            ClipRRect(borderRadius: BorderRadius.circular(10),child: Shimmer(color: Theme.of(context).colorScheme.surface, child: SizedBox(width: 60, height: 60))),
+                                            SizedBox(height: 5),
+                                            ClipRRect(borderRadius: BorderRadius.circular(10),child: Shimmer(color: Theme.of(context).colorScheme.surface, child: SizedBox(width: 120, height: 20))),
                                           ],
                                         ),
                                       ),
@@ -736,6 +740,7 @@ class _LeaguePageState extends State<LeaguePage> {
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.transparent,
+                            shadowColor: Colors.transparent,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(30),
                             ),
@@ -752,7 +757,7 @@ class _LeaguePageState extends State<LeaguePage> {
                                   style: Theme.of(context).textTheme.headlineLarge!.copyWith(color: Theme.of(context).colorScheme.surface),
                                 ),
                                 SizedBox(height: 5),
-                                ClipRRect(borderRadius: BorderRadius.circular(10),child: Shimmer(child: SizedBox(width: 150, height: 20))),
+                                ClipRRect(borderRadius: BorderRadius.circular(10),child: Shimmer(color: Theme.of(context).colorScheme.surface, child: SizedBox(width: 150, height: 20))),
                                 SizedBox(height: 5),
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -761,8 +766,9 @@ class _LeaguePageState extends State<LeaguePage> {
                                       flex: 5,
                                       child: Column(
                                         children: [
-                                          ClipRRect(borderRadius: BorderRadius.circular(10),child: Shimmer(child: SizedBox(width: 60, height: 60))),
-                                          ClipRRect(borderRadius: BorderRadius.circular(10),child: Shimmer(child: SizedBox(width: 120, height: 20))),
+                                          ClipRRect(borderRadius: BorderRadius.circular(10),child: Shimmer(color: Theme.of(context).colorScheme.surface, child: SizedBox(width: 60, height: 60))),
+                                          SizedBox(height: 5),
+                                          ClipRRect(borderRadius: BorderRadius.circular(10),child: Shimmer(color: Theme.of(context).colorScheme.surface, child: SizedBox(width: 120, height: 20))),
                                         ],
                                       ),
                                     ),
@@ -775,8 +781,9 @@ class _LeaguePageState extends State<LeaguePage> {
                                       flex: 5,
                                       child: Column(
                                         children: [
-                                          ClipRRect(borderRadius: BorderRadius.circular(10),child: Shimmer(child: SizedBox(width: 60, height: 60))),
-                                          ClipRRect(borderRadius: BorderRadius.circular(10),child: Shimmer(child: SizedBox(width: 120, height: 20))),
+                                          ClipRRect(borderRadius: BorderRadius.circular(10),child: Shimmer(color: Theme.of(context).colorScheme.surface, child: SizedBox(width: 60, height: 60))),
+                                          SizedBox(height: 5),
+                                          ClipRRect(borderRadius: BorderRadius.circular(10),child: Shimmer(color: Theme.of(context).colorScheme.surface, child: SizedBox(width: 120, height: 20))),
                                         ],
                                       ),
                                     ),
@@ -815,13 +822,14 @@ class _LeaguePageState extends State<LeaguePage> {
                                   itemCount: 4,
                                   itemBuilder: (BuildContext context, int index) {
                                     return ListTile(
-                                      title: Shimmer(child: Container(width: 50, height: 15, color: Colors.black45)),
+                                      title: ClipRRect(borderRadius: BorderRadius.circular(10),child: Shimmer(color: Theme.of(context).colorScheme.surface, child: SizedBox(width: 50, height: 15))),
                                     );
                                   }
                                 ),
                                 ElevatedButton(
                                   style: ElevatedButton.styleFrom(
-                                    backgroundColor: Theme.of(context).colorScheme.primary,
+                                    backgroundColor: Theme.of(context).colorScheme.tertiary.withValues(alpha: 0.3),
+                                    shadowColor: Colors.transparent,
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(30),
                                     ),
@@ -835,10 +843,7 @@ class _LeaguePageState extends State<LeaguePage> {
                                       child: Column(
                                         crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
-                                          Text("See all", style: TextStyle(
-                                            color: Theme.of(context).colorScheme.tertiary,
-                                            fontSize: 15)
-                                          ),
+                                          Text("See all", style: Theme.of(context).textTheme.labelLarge!.copyWith(color: Theme.of(context).colorScheme.tertiary)),
                                         ],
                                       ),
                                     ),
