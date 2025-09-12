@@ -177,7 +177,7 @@ class _DetailPageState extends State<DetailPage> {
           backgroundColor: Colors.transparent,
           leading: IconButton(onPressed: () {
             Navigator.pop(context);
-          }, icon: Icon(Icons.arrow_back, color: Colors.white)),
+          }, icon: Icon(Icons.arrow_back, color: Theme.of(context).colorScheme.tertiary)),
         ),
         body: SafeArea(
           child: Padding(
@@ -237,14 +237,8 @@ class _DetailPageState extends State<DetailPage> {
                                         mainAxisAlignment: MainAxisAlignment.start,
                                         crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
-                                          Text("Townhall ${snapshot.data[0]["townHallLevel"]}", style: const TextStyle(
-                                              color: Colors.white,
-                                              fontFamily: "Inter",
-                                              fontSize: 30)),
-                                          snapshot.data[0]["townHallWeaponLevel"] != null? Text("Level ${snapshot.data[0]["townHallWeaponLevel"]}", style: const TextStyle(
-                                              color: Colors.white,
-                                              fontFamily: "Inter",
-                                              fontSize: 18)) : SizedBox(height: 5),
+                                          Text("Townhall ${snapshot.data[0]["townHallLevel"]}", style: Theme.of(context).textTheme.displaySmall!.copyWith(color: Colors.white)),
+                                          ?snapshot.data[0]["townHallWeaponLevel"] != null? Text("Level ${snapshot.data[0]["townHallWeaponLevel"]}", style: Theme.of(context).textTheme.labelLarge!.copyWith(color: Colors.white)) : null,
                                         ],
                                       )
                                     ],
@@ -269,10 +263,7 @@ class _DetailPageState extends State<DetailPage> {
                                         children: [
                                           Icon(Icons.code, size: 20, color: Colors.deepOrangeAccent),
                                           SizedBox(width: 5),
-                                          Text("Import Json", style: const TextStyle(
-                                              color: Colors.white,
-                                              fontFamily: "Inter",
-                                              fontSize: 20)
+                                          Text("Import Json", style: Theme.of(context).textTheme.titleMedium!.copyWith(color: Colors.white),
                                           ),
                                         ],
                                       ),
@@ -296,7 +287,6 @@ class _DetailPageState extends State<DetailPage> {
                                         icon: const Icon(Icons.upload, color: Colors.white),
                                         label: const Text("Import", style: TextStyle(
                                             color: Colors.white,
-                                            fontFamily: "Inter",
                                             fontSize: 18)),
                                       )
                                     ],
@@ -329,10 +319,7 @@ class _DetailPageState extends State<DetailPage> {
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Text(titles[ind], style: const TextStyle(
-                                          color: Colors.white,
-                                          fontFamily: "Inter",
-                                          fontSize: 30)
+                                      Text(titles[ind], style: Theme.of(context).textTheme.displaySmall!.copyWith(color: Colors.white),
                                       ),
                                       ElevatedButton.icon(
                                         style: ElevatedButton.styleFrom(
@@ -373,7 +360,6 @@ class _DetailPageState extends State<DetailPage> {
                                         icon: const Icon(Icons.skip_next, color: Colors.orangeAccent),
                                         label: const Text("Max", style: TextStyle(
                                             color: Colors.white,
-                                            fontFamily: "Inter",
                                             fontSize: 18)),
                                       ),
                                     ],
@@ -412,18 +398,12 @@ class _DetailPageState extends State<DetailPage> {
                                                                 children: [
                                                                   AutoSizeText(
                                                                       "Level ${finalmaplist[ind].keys.elementAt(index).substring(5, finalmaplist[ind].keys.elementAt(index).length)}",
-                                                                      style: const TextStyle(
-                                                                          color: Colors.white,
-                                                                          fontFamily: "Inter",
-                                                                          fontSize: 15),
+                                                                      style: Theme.of(context).textTheme.labelLarge!.copyWith(color: Colors.white),
                                                                       maxLines: 1
                                                                   ),
                                                                   AutoSizeText(
                                                                       "${Utils.getTownHallWeapon(snapshot.data[0]["townHallLevel"]) != finalmaplist[ind].keys.elementAt(index).substring(0, finalmaplist[ind].keys.elementAt(index).lastIndexOf('-'))? finalmaplist[ind].values.elementAt(index) : snapshot.data[0]["townHallWeaponLevel"]}",
-                                                                      style: const TextStyle(
-                                                                          color: Colors.white,
-                                                                          fontFamily: "Inter",
-                                                                          fontSize: 15),
+                                                                      style: Theme.of(context).textTheme.labelLarge!.copyWith(color: Colors.white54),
                                                                       maxLines: 1
                                                                   )
                                                                 ],
@@ -433,9 +413,7 @@ class _DetailPageState extends State<DetailPage> {
                                                                   children: [
                                                                     AutoSizeText(
                                                                       finalmaplist[ind].keys.elementAt(index).substring(0, finalmaplist[ind].keys.elementAt(index).lastIndexOf('-')),
-                                                                      style: const TextStyle(
-                                                                          color: Colors.white,
-                                                                          fontFamily: "Inter", fontSize: 15),
+                                                                      style: Theme.of(context).textTheme.labelLarge!.copyWith(color: Colors.white),
                                                                     ),
                                                                     ClipRRect(
                                                                       borderRadius: BorderRadius.circular(20),
@@ -445,9 +423,7 @@ class _DetailPageState extends State<DetailPage> {
                                                                           padding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 5.0),
                                                                           child: AutoSizeText(
                                                                             "Lvl ${Utils.getTownHallWeapon(snapshot.data[0]["townHallLevel"]) != finalmaplist[ind].keys.elementAt(index).substring(0, finalmaplist[ind].keys.elementAt(index).lastIndexOf('-'))? finalmaplist[ind].values.elementAt(index) : snapshot.data[0]["townHallWeaponLevel"]}",
-                                                                            style: const TextStyle(
-                                                                            color: Colors.white70,
-                                                                            fontFamily: "Inter", fontSize: 15),
+                                                                            style: Theme.of(context).textTheme.labelLarge!.copyWith(color: Colors.white70),
                                                                           ),
                                                                         ),
                                                                       ),
@@ -463,7 +439,7 @@ class _DetailPageState extends State<DetailPage> {
                                                             ?ind == 0? IconButton(
                                                                 style: ButtonStyle(
                                                                     backgroundColor: WidgetStateProperty.all(Colors.white24),
-                                                                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                                                    shape: WidgetStateProperty.all<RoundedRectangleBorder>(
                                                                         RoundedRectangleBorder(
                                                                             borderRadius: BorderRadius.circular(15.0),
                                                                             side: BorderSide(color: Colors.white24)
@@ -488,7 +464,7 @@ class _DetailPageState extends State<DetailPage> {
                                                             IconButton(
                                                                 style: ButtonStyle(
                                                                     backgroundColor: WidgetStateProperty.all(Colors.white24),
-                                                                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                                                    shape: WidgetStateProperty.all<RoundedRectangleBorder>(
                                                                         RoundedRectangleBorder(
                                                                             borderRadius: BorderRadius.circular(15.0),
                                                                             side: BorderSide(color: Colors.white24)
@@ -521,7 +497,7 @@ class _DetailPageState extends State<DetailPage> {
                                                             IconButton(
                                                                 style: ButtonStyle(
                                                                     backgroundColor: WidgetStateProperty.all(Colors.white24),
-                                                                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                                                    shape: WidgetStateProperty.all<RoundedRectangleBorder>(
                                                                         RoundedRectangleBorder(
                                                                             borderRadius: BorderRadius.circular(15.0),
                                                                             side: BorderSide(color: Colors.white24)
@@ -561,7 +537,7 @@ class _DetailPageState extends State<DetailPage> {
                                                             IconButton(
                                                                 style: ButtonStyle(
                                                                     backgroundColor: WidgetStateProperty.all(Colors.white24),
-                                                                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                                                    shape: WidgetStateProperty.all<RoundedRectangleBorder>(
                                                                         RoundedRectangleBorder(
                                                                             borderRadius: BorderRadius.circular(15.0),
                                                                             side: BorderSide(color: Colors.white24)
@@ -669,7 +645,6 @@ class _DetailPageState extends State<DetailPage> {
                             padding: const EdgeInsets.only(left: 8.0, top: 5.0),
                             child: Text(titles[ind], style: const TextStyle(
                                 color: Colors.white,
-                                fontFamily: "Inter",
                                 fontSize: 30)
                             ),
                           ) : SizedBox(width: 5),
@@ -700,7 +675,6 @@ class _DetailPageState extends State<DetailPage> {
                                                     finallist[ind][index]["name"],
                                                     style: const TextStyle(
                                                         color: Colors.white,
-                                                        fontFamily: "Inter",
                                                         fontSize: 15),
                                                     maxLines: 1
                                                 ),
@@ -726,7 +700,6 @@ class _DetailPageState extends State<DetailPage> {
                                                                   .toString(),
                                                               style: const TextStyle(
                                                                   color: Colors.white,
-                                                                  fontFamily: "Inter",
                                                                   fontSize: 25)),
                                                         ),
                                                       ),
@@ -748,7 +721,6 @@ class _DetailPageState extends State<DetailPage> {
                                                                 style: const TextStyle(
                                                                     color: Colors.white,
                                                                     shadows: [Shadow(color: Colors.black, offset: Offset(0, 1.5))],
-                                                                    fontFamily: "Inter",
                                                                     fontSize: 25)),
                                                           ),
                                                         ),
@@ -839,7 +811,6 @@ class _DetailPageState extends State<DetailPage> {
                             padding: const EdgeInsets.only(left: 8.0, top: 5.0),
                             child: Text("Spells", style: const TextStyle(
                                 color: Colors.white,
-                                fontFamily: "Inter",
                                 fontSize: 30)
                             ),
                           ),
@@ -867,7 +838,7 @@ class _DetailPageState extends State<DetailPage> {
                                             children: [
                                               AutoSizeText(
                                                   finallist[index]["name"],
-                                                  style: const TextStyle(color: Colors.white, fontFamily: "Inter", fontSize: 15),
+                                                  style: const TextStyle(color: Colors.white, fontSize: 15),
                                                   maxLines: 1
                                               ),
                                               Row(
@@ -889,7 +860,6 @@ class _DetailPageState extends State<DetailPage> {
                                                                 .toString(),
                                                             style: const TextStyle(
                                                                 color: Colors.white,
-                                                                fontFamily: "Inter",
                                                                 fontSize: 25)),
                                                       ),
                                                     ),
@@ -911,7 +881,6 @@ class _DetailPageState extends State<DetailPage> {
                                                               style: const TextStyle(
                                                                   color: Colors.white,
                                                                   shadows: [Shadow(color: Colors.black, offset: Offset(0, 1.5))],
-                                                                  fontFamily: "Inter",
                                                                   fontSize: 25)),
                                                         ),
                                                       ),
@@ -1007,7 +976,6 @@ class _DetailPageState extends State<DetailPage> {
                               padding: const EdgeInsets.only(left: 8.0, top: 5.0),
                               child: Text(titles[ind], style: const TextStyle(
                                   color: Colors.white,
-                                  fontFamily: "Inter",
                                   fontSize: 30)),
                             ) : SizedBox(width: 5),
                                 Wrap(
@@ -1033,7 +1001,7 @@ class _DetailPageState extends State<DetailPage> {
                                               children: [
                                                 AutoSizeText(
                                                     finallist[ind][index]["name"],
-                                                    style: const TextStyle(color: Colors.white, fontFamily: "Inter", fontSize: 15),
+                                                    style: const TextStyle(color: Colors.white, fontSize: 15),
                                                     maxLines: 1
                                                 ),
                                                 Row(
@@ -1055,7 +1023,6 @@ class _DetailPageState extends State<DetailPage> {
                                                                   .toString(),
                                                               style: const TextStyle(
                                                                   color: Colors.white,
-                                                                  fontFamily: "Inter",
                                                                   fontSize: 25)),
                                                         ),
                                                       ),
@@ -1077,7 +1044,6 @@ class _DetailPageState extends State<DetailPage> {
                                                                 style: const TextStyle(
                                                                     color: Colors.white,
                                                                     shadows: [Shadow(color: Colors.black, offset: Offset(0, 1.5))],
-                                                                    fontFamily: "Inter",
                                                                     fontSize: 25)),
                                                           ),
                                                         ),
@@ -1099,7 +1065,6 @@ class _DetailPageState extends State<DetailPage> {
                                                           child: Padding(
                                                             padding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 5.0),
                                                             child: Text("Max: ${finallist[ind][index]["maxLevel"]}", style: const TextStyle(color: Colors.white,
-                                                                fontFamily: "Inter",
                                                                 fontSize: 10)
                                                             ),
                                                           ),
@@ -1120,7 +1085,6 @@ class _DetailPageState extends State<DetailPage> {
                                                                     Icon(Icons.access_time, color: const Color(0xff216AF3), size: 14),
                                                                     SizedBox(width: 5),
                                                                     Text("1d 12h", style: const TextStyle(color: Colors.white,
-                                                                        fontFamily: "Inter",
                                                                         fontSize: 10)),
                                                                   ],
                                                                 ),
@@ -1157,7 +1121,6 @@ class _DetailPageState extends State<DetailPage> {
                                                     finallist[ind][index]["name"],
                                                     style: const TextStyle(
                                                         color: Colors.white,
-                                                        fontFamily: "Inter",
                                                         fontSize: 20),
                                                     maxLines: 1
                                                 ),
@@ -1185,7 +1148,6 @@ class _DetailPageState extends State<DetailPage> {
                                                                       .toString(),
                                                                   style: const TextStyle(
                                                                       color: Colors.white,
-                                                                      fontFamily: "Inter",
                                                                       fontSize: 25)),
                                                             ),
                                                           ),
@@ -1207,7 +1169,6 @@ class _DetailPageState extends State<DetailPage> {
                                                                     style: const TextStyle(
                                                                         color: Colors.white,
                                                                         shadows: [Shadow(color: Colors.black, offset: Offset(0, 1.5))],
-                                                                        fontFamily: "Inter",
                                                                         fontSize: 25)),
                                                               ),
                                                             ),
@@ -1263,7 +1224,6 @@ class _DetailPageState extends State<DetailPage> {
                                                               child: Padding(
                                                                 padding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 5.0),
                                                                 child: Text("Max: ${finallist[ind][index]["maxLevel"]}", style: const TextStyle(color: Colors.white,
-                                                                    fontFamily: "Inter",
                                                                     fontSize: 10)
                                                                 ),
                                                               ),
@@ -1282,7 +1242,6 @@ class _DetailPageState extends State<DetailPage> {
                                                                     Icon(Icons.access_time, color: const Color(0xff216AF3), size: 14),
                                                                     SizedBox(width: 5),
                                                                     Text("1d 12h", style: const TextStyle(color: Colors.white,
-                                                                        fontFamily: "Inter",
                                                                         fontSize: 10)),
                                                                   ],
                                                                 ),
@@ -1364,7 +1323,6 @@ class _DetailPageState extends State<DetailPage> {
                               padding: const EdgeInsets.only(left: 8.0, top: 5.0),
                               child: Text(titles[ind], style: const TextStyle(
                                   color: Colors.white,
-                                  fontFamily: "Inter",
                                   fontSize: 30)
                               ),
                             ),
@@ -1397,7 +1355,6 @@ class _DetailPageState extends State<DetailPage> {
                                                       finallist[ind][index]["name"],
                                                       style: const TextStyle(
                                                           color: Colors.white,
-                                                          fontFamily: "Inter",
                                                           fontSize: 15),
                                                       maxLines: 1
                                                   ),
@@ -1424,7 +1381,6 @@ class _DetailPageState extends State<DetailPage> {
                                                                     .toString(),
                                                                 style: const TextStyle(
                                                                     color: Colors.white,
-                                                                    fontFamily: "Inter",
                                                                     fontSize: 25)),
                                                           ),
                                                         ),
@@ -1446,7 +1402,6 @@ class _DetailPageState extends State<DetailPage> {
                                                                   style: const TextStyle(
                                                                       color: Colors.white,
                                                                       shadows: [Shadow(color: Colors.black, offset: Offset(0, 1.5))],
-                                                                      fontFamily: "Inter",
                                                                       fontSize: 25)),
                                                             ),
                                                           ),
@@ -1475,7 +1430,6 @@ class _DetailPageState extends State<DetailPage> {
                                                                 Text(shiny.toString(),
                                                                     style: const TextStyle(
                                                                         color: Colors.white,
-                                                                        fontFamily: "Inter",
                                                                         fontSize: 10)),
                                                               ],
                                                             ),
@@ -1499,7 +1453,6 @@ class _DetailPageState extends State<DetailPage> {
                                                                     .toString(),
                                                                     style: const TextStyle(
                                                                         color: Colors.white,
-                                                                        fontFamily: "Inter",
                                                                         fontSize: 10)),
                                                               ],
                                                             ),
@@ -1522,7 +1475,6 @@ class _DetailPageState extends State<DetailPage> {
                                                                 Text(starry.toString(),
                                                                     style: const TextStyle(
                                                                         color: Colors.white,
-                                                                        fontFamily: "Inter",
                                                                         fontSize: 10)),
                                                               ],
                                                             ),
@@ -1601,7 +1553,6 @@ class _DetailPageState extends State<DetailPage> {
                               padding: const EdgeInsets.only(left: 8.0, top: 5.0),
                               child: Text(titles[ind], style: const TextStyle(
                                   color: Colors.white,
-                                  fontFamily: "Inter",
                                   fontSize: 30)
                               ),
                             ),
@@ -1638,7 +1589,6 @@ class _DetailPageState extends State<DetailPage> {
                                                             finallist[ind][index]["name"],
                                                             style: const TextStyle(
                                                                 color: Colors.white,
-                                                                fontFamily: "Inter",
                                                                 fontSize: 20),
                                                             maxLines: 1
                                                         ),
@@ -1660,7 +1610,6 @@ class _DetailPageState extends State<DetailPage> {
                                                             finallist[ind][index]["info"],
                                                             style: const TextStyle(
                                                                 color: Colors.white,
-                                                                fontFamily: "Inter",
                                                                 fontSize: 12),
                                                             maxLines: 3
                                                         ),
@@ -1709,7 +1658,6 @@ class _DetailPageState extends State<DetailPage> {
                                                               "%",
                                                           style: const TextStyle(
                                                               color: Colors.white,
-                                                              fontFamily: "Inter",
                                                               fontSize: 12),
                                                           maxLines: 1
                                                       ),
@@ -1719,7 +1667,6 @@ class _DetailPageState extends State<DetailPage> {
                                                       "${finallist[ind][index]["value"]}/${finallist[ind][index]["target"]}",
                                                       style: const TextStyle(
                                                           color: Colors.white,
-                                                          fontFamily: "Inter",
                                                           fontSize: 12),
                                                       maxLines: 1
                                                   ),
@@ -1799,7 +1746,6 @@ class _DetailPageState extends State<DetailPage> {
                                         children: [
                                           Text(snapshot.data[0]["name"], style: const TextStyle(
                                               color: Colors.white,
-                                              fontFamily: "Inter",
                                               fontSize: 30)
                                           ),
                                         ],
@@ -1811,7 +1757,6 @@ class _DetailPageState extends State<DetailPage> {
                                           SizedBox(width: 5),
                                           Text("Exp: ${snapshot.data[0]["expLevel"]}", style: const TextStyle(
                                               color: Colors.white,
-                                              fontFamily: "Inter",
                                               fontSize: 15)
                                           )
                                         ],
@@ -1826,7 +1771,6 @@ class _DetailPageState extends State<DetailPage> {
                                           SizedBox(width: 7),
                                           Text("Best: ${snapshot.data[0]["bestTrophies"]}", style: const TextStyle(
                                               color: Colors.white,
-                                              fontFamily: "Inter",
                                               fontSize: 15)
                                           )
                                         ],
@@ -1838,7 +1782,6 @@ class _DetailPageState extends State<DetailPage> {
                                           SizedBox(width: 7),
                                           Text("Best: ${snapshot.data[0]["bestBuilderBaseTrophies"]}", style: const TextStyle(
                                               color: Colors.white,
-                                              fontFamily: "Inter",
                                               fontSize: 15)
                                           )
                                         ],
@@ -1850,7 +1793,6 @@ class _DetailPageState extends State<DetailPage> {
                                           SizedBox(width: 7),
                                           Text("War Stars: ${snapshot.data[0]["warStars"]}", style: const TextStyle(
                                               color: Colors.white,
-                                              fontFamily: "Inter",
                                               fontSize: 15)
                                           )
                                         ],
@@ -1862,7 +1804,6 @@ class _DetailPageState extends State<DetailPage> {
                                           SizedBox(width: 7),
                                           Text("Clan Capital: ${snapshot.data[0]["clanCapitalContributions"]}", style: const TextStyle(
                                               color: Colors.white,
-                                              fontFamily: "Inter",
                                               fontSize: 15)
                                           )
                                         ],
@@ -1873,7 +1814,6 @@ class _DetailPageState extends State<DetailPage> {
                                     children: [
                                       Text(snapshot.data[0]["tag"], style: const TextStyle(
                                           color: Colors.white,
-                                          fontFamily: "Inter",
                                           fontSize: 15)
                                       ),
                                       SizedBox(height: 5),
@@ -1891,13 +1831,11 @@ class _DetailPageState extends State<DetailPage> {
                                         children: [
                                           Text(snapshot.data[0]["townHallLevel"].toString(), style: const TextStyle(
                                               color: Colors.white,
-                                              fontFamily: "Inter",
                                               fontSize: 15)
                                           ),
                                           SizedBox(width: 25),
                                           Text(snapshot.data[0]["builderHallLevel"].toString(), style: const TextStyle(
                                               color: Colors.white,
-                                              fontFamily: "Inter",
                                               fontSize: 15)
                                           ),
                                         ],
@@ -1935,7 +1873,6 @@ class _DetailPageState extends State<DetailPage> {
                                 padding: const EdgeInsets.only(left: 8.0, top: 5.0),
                                 child: Text("Clan", style: const TextStyle(
                                     color: Colors.white,
-                                    fontFamily: "Inter",
                                     fontSize: 30)
                                 ),
                               ),
@@ -1954,7 +1891,6 @@ class _DetailPageState extends State<DetailPage> {
                                             children: [
                                               Text(snapshot.data[0]["clan"]["name"], style: const TextStyle(
                                                   color: Colors.white,
-                                                  fontFamily: "Inter",
                                                   fontSize: 30)
                                               ),
                                               SizedBox(height: 5),
@@ -1964,7 +1900,6 @@ class _DetailPageState extends State<DetailPage> {
                                                   SizedBox(width: 5),
                                                   Text(snapshot.data[1]["location"]["name"], style: const TextStyle(
                                                       color: Colors.white54,
-                                                      fontFamily: "Inter",
                                                       fontSize: 15)
                                                   ),
                                                 ],
@@ -1976,7 +1911,6 @@ class _DetailPageState extends State<DetailPage> {
                                                   SizedBox(width: 5),
                                                   Text("Mitglieder: ${snapshot.data[1]["members"]}", style: const TextStyle(
                                                       color: Colors.white54,
-                                                      fontFamily: "Inter",
                                                       fontSize: 15)
                                                   ),
                                                 ],
@@ -1998,7 +1932,6 @@ class _DetailPageState extends State<DetailPage> {
                                             children: [
                                               Text(snapshot.data[0]["clan"]["tag"], style: const TextStyle(
                                                   color: Colors.white,
-                                                  fontFamily: "Inter",
                                                   fontSize: 15)
                                               ),
                                               Image.network(snapshot.data[0]["clan"]["badgeUrls"]["medium"], scale: 2),
@@ -2016,7 +1949,6 @@ class _DetailPageState extends State<DetailPage> {
                                               child: Text(
                                                   textWidthBasis: TextWidthBasis.parent, "${snapshot.data[1]["description"]}", style: const TextStyle(
                                                   color: Colors.white54,
-                                                  fontFamily: "Inter",
                                                   fontSize: 11)
                                               )
                                           )
@@ -2038,7 +1970,6 @@ class _DetailPageState extends State<DetailPage> {
                                           SizedBox(width: 7),
                                           Text("${snapshot.data[1]["clanPoints"]}", style: const TextStyle(
                                               color: Colors.white54,
-                                              fontFamily: "Inter",
                                               fontSize: 15)
                                           ),
                                           SizedBox(width: 10),
@@ -2047,7 +1978,6 @@ class _DetailPageState extends State<DetailPage> {
                                           SizedBox(width: 7),
                                           Text("${snapshot.data[1]["clanBuilderBasePoints"]}", style: const TextStyle(
                                               color: Colors.white54,
-                                              fontFamily: "Inter",
                                               fontSize: 15)
                                           ),
                                           SizedBox(width: 10),
@@ -2056,7 +1986,6 @@ class _DetailPageState extends State<DetailPage> {
                                           SizedBox(width: 7),
                                           Text("${snapshot.data[1]["clanCapitalPoints"]}", style: const TextStyle(
                                               color: Colors.white54,
-                                              fontFamily: "Inter",
                                               fontSize: 15)
                                           ),
                                         ],
@@ -2071,7 +2000,6 @@ class _DetailPageState extends State<DetailPage> {
                                             children: [
                                               Text("Wins: ${snapshot.data[1]["warWins"]} / Ties: ${snapshot.data[1]["warTies"]} / Losses: ${snapshot.data[1]["warLosses"]}", style: const TextStyle(
                                                   color: Colors.white,
-                                                  fontFamily: "Inter",
                                                   fontSize: 15)
                                               ),
                                               Row(
@@ -2079,7 +2007,6 @@ class _DetailPageState extends State<DetailPage> {
                                                   Icon(Icons.local_fire_department, color: Colors.deepOrange),
                                                   Text("Streak: ${snapshot.data[1]["warWinStreak"]}", style: const TextStyle(
                                                       color: Colors.white,
-                                                      fontFamily: "Inter",
                                                       fontSize: 15)
                                                   ),
                                                 ],
@@ -2112,12 +2039,10 @@ class _DetailPageState extends State<DetailPage> {
                                                       children: [
                                                         Text("${snapshot.data[1]["clanCapital"]["districts"][index]["name"]}", style: const TextStyle(
                                                             color: Colors.white,
-                                                            fontFamily: "Inter",
                                                             fontSize: 15)
                                                         ),
                                                         Text("Lvl: ${snapshot.data[1]["clanCapital"]["districts"][index]["districtHallLevel"]}", style: const TextStyle(
                                                             color: Colors.white54,
-                                                            fontFamily: "Inter",
                                                             fontSize: 15)
                                                         ),
                                                       ],
@@ -2152,7 +2077,6 @@ class _DetailPageState extends State<DetailPage> {
                                                         children: [
                                                           Text("${snapshot.data[1]["memberList"][index]["clanRank"]}.", style: const TextStyle(
                                                               color: Colors.white,
-                                                              fontFamily: "Inter",
                                                               fontSize: 25)
                                                           ),
                                                           SizedBox(width: 5),
@@ -2165,7 +2089,6 @@ class _DetailPageState extends State<DetailPage> {
                                                                 children: [
                                                                   Text("${snapshot.data[1]["memberList"][index]["name"]}", style: const TextStyle(
                                                                       color: Colors.white,
-                                                                      fontFamily: "Inter",
                                                                       fontSize: 15)
                                                                   ),
                                                                 ],
@@ -2176,7 +2099,6 @@ class _DetailPageState extends State<DetailPage> {
                                                                   SizedBox(width: 3),
                                                                   Text("${snapshot.data[1]["memberList"][index]["donations"]}", style: const TextStyle(
                                                                       color: Colors.white54,
-                                                                      fontFamily: "Inter",
                                                                       fontSize: 15)
                                                                   ),
                                                                   SizedBox(width: 10),
@@ -2184,7 +2106,6 @@ class _DetailPageState extends State<DetailPage> {
                                                                   SizedBox(width: 3),
                                                                   Text("${snapshot.data[1]["memberList"][index]["donationsReceived"]}", style: const TextStyle(
                                                                       color: Colors.white54,
-                                                                      fontFamily: "Inter",
                                                                       fontSize: 15)
                                                                   ),
                                                                 ],
@@ -2200,7 +2121,6 @@ class _DetailPageState extends State<DetailPage> {
                                                           SizedBox(width: 5),
                                                           Text("${snapshot.data[1]["memberList"][index]["trophies"]}", style: const TextStyle(
                                                               color: Colors.white54,
-                                                              fontFamily: "Inter",
                                                               fontSize: 15)
                                                           ),
                                                           SizedBox(width: 5),
@@ -2263,14 +2183,12 @@ class _DetailPageState extends State<DetailPage> {
                                 SizedBox(width: 5),
                                 Text(snapshot.data[1]["warLeague"]["name"], style: const TextStyle(
                                     color: Colors.white,
-                                    fontFamily: "Inter",
                                     fontSize: 30)
                                 ),
                               ],
                             ),
                             Text("${snapshot.data[0]["round1"][0]["teamSize"]} vs. ${snapshot.data[0]["round1"][0]["teamSize"]}", style: const TextStyle(
                                 color: Colors.white,
-                                fontFamily: "Inter",
                                 fontSize: 20)
                             ),
                           ],
@@ -2296,7 +2214,6 @@ class _DetailPageState extends State<DetailPage> {
                                         children: [
                                           Text("${index + 1}. ${ranking[index]["name"]}", style: const TextStyle(
                                               color: Colors.white,
-                                              fontFamily: "Inter",
                                               fontSize: 20)
                                           ),
                                           Row(
@@ -2305,13 +2222,11 @@ class _DetailPageState extends State<DetailPage> {
                                               SizedBox(width: 5),
                                               Text("${ranking[index]["stars"]}", style: const TextStyle(
                                                   color: Colors.white,
-                                                  fontFamily: "Inter",
                                                   fontSize: 15)
                                               ),
                                               SizedBox(width: 15),
                                               Text("${ranking[index]["percentage"].toStringAsFixed(0)}%", style: const TextStyle(
                                                   color: Colors.white,
-                                                  fontFamily: "Inter",
                                                   fontSize: 15)
                                               ),
                                             ],
@@ -2335,7 +2250,6 @@ class _DetailPageState extends State<DetailPage> {
                           children: [
                             ?snapshot.data[0]["round${ind + 1}"].length != 0? Text("Round ${ind + 1}", style: const TextStyle(
                                 color: Colors.white,
-                                fontFamily: "Inter",
                                 fontSize: 30)
                             ) : null,
                             SizedBox(height: 10),
@@ -2353,7 +2267,7 @@ class _DetailPageState extends State<DetailPage> {
                                         Row(
                                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                                           children: [
-                                            Flexible(flex: 5, child: Utils.getFirstClan(element)),
+                                            Flexible(flex: 5, child: Utils.getFirstClan(element, context)),
                                             Flexible(
                                               flex: 2,
                                               child: Image.asset(
@@ -2362,7 +2276,7 @@ class _DetailPageState extends State<DetailPage> {
                                                 scale: 2.5,
                                               ),
                                             ),
-                                            Flexible(flex: 5, child: Utils.getOpponentClan(element)),
+                                            Flexible(flex: 5, child: Utils.getOpponentClan(element, context)),
                                           ]
                                         ),
                                       ],
@@ -2407,7 +2321,7 @@ class _DetailPageState extends State<DetailPage> {
                         Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                        Utils.getClanWarStateText(war["state"]),
+                        Utils.getClanWarStateText(war["state"], context),
                         SizedBox(width: 5),
                         ?war["state"] == "preparation" || war["state"] == "inWar"? CountDownText(
                           due: DateTime.parse(war["state"] == "preparation"? war["startTime"] : war["endTime"]),
@@ -2417,20 +2331,20 @@ class _DetailPageState extends State<DetailPage> {
                           hoursTextLong: ":",
                           minutesTextLong: ":",
                           secondsTextLong: "",
-                          style: const TextStyle(color: Colors.white54, fontFamily: "Inter", fontSize: 20),
+                          style: Theme.of(context).textTheme.labelLarge!.copyWith(color: Theme.of(context).colorScheme.onSurface),
                         ) : null,
                       ],
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        Utils.getFirstClan(war),
+                        Utils.getFirstClan(war, context),
                         Image.asset(
                           'lib/utils/img/CWLIcon.png',
                           fit: BoxFit.cover,
                           scale: 2.5,
                         ),
-                        Utils.getOpponentClan(war),
+                        Utils.getOpponentClan(war, context),
                       ],
                     ),
                   ],
@@ -2477,7 +2391,6 @@ class _DetailPageState extends State<DetailPage> {
                                       Text("Attacks",
                                       style: const TextStyle(
                                       color: Colors.white,
-                                      fontFamily: "Inter",
                                       fontSize: 15
                                       ),
                                       ),
@@ -2490,7 +2403,6 @@ class _DetailPageState extends State<DetailPage> {
                                             Text("${war["opponent"]["members"].where((m) => m['tag'] == attack["defenderTag"]).toList()[0]["mapPosition"]}.",
                                               style: const TextStyle(
                                                 color: Colors.white,
-                                                fontFamily: "Inter",
                                                 fontSize: 15
                                               ),
                                             ),
@@ -2505,7 +2417,6 @@ class _DetailPageState extends State<DetailPage> {
                                               Text("${attack["destructionPercentage"]}%",
                                                 style: const TextStyle(
                                                   color: Colors.white,
-                                                  fontFamily: "Inter",
                                                   fontSize: 15
                                                 ),
                                               )
@@ -2520,7 +2431,6 @@ class _DetailPageState extends State<DetailPage> {
                               AutoSizeText("${member["mapPosition"]}. ${member["name"]}",
                                 style: const TextStyle(
                                   color: Colors.white,
-                                  fontFamily: "Inter",
                                   fontSize: 15
                                 ),
                                 maxLines: 1,
@@ -2558,7 +2468,6 @@ class _DetailPageState extends State<DetailPage> {
                                       Text("Attacks",
                                       style: const TextStyle(
                                       color: Colors.white,
-                                      fontFamily: "Inter",
                                       fontSize: 15
                                       ),
                                       ),
@@ -2571,7 +2480,6 @@ class _DetailPageState extends State<DetailPage> {
                                               Text("${war["clan"]["members"].where((m) => m['tag'] == attack["defenderTag"]).toList()[0]["mapPosition"]}.",
                                                 style: const TextStyle(
                                                   color: Colors.white,
-                                                  fontFamily: "Inter",
                                                   fontSize: 15
                                                 ),
                                               ),
@@ -2586,7 +2494,6 @@ class _DetailPageState extends State<DetailPage> {
                                               Text("${attack["destructionPercentage"]}%",
                                                 style: const TextStyle(
                                                   color: Colors.white,
-                                                  fontFamily: "Inter",
                                                   fontSize: 15
                                                 ),
                                               )
@@ -2611,7 +2518,6 @@ class _DetailPageState extends State<DetailPage> {
                               AutoSizeText("${member["mapPosition"]}. ${member["name"]}",
                                 style: const TextStyle(
                                   color: Colors.white,
-                                  fontFamily: "Inter",
                                   fontSize: 15
                                 ),
                                 maxLines: 1,
@@ -2660,7 +2566,6 @@ class _DetailPageState extends State<DetailPage> {
                                       children: [
                                         Text("${clanwars[index]["teamSize"]} vs. ${clanwars[index]["teamSize"]}", style: const TextStyle(
                                             color: Colors.white,
-                                            fontFamily: "Inter",
                                             fontSize: 15)
                                         ),
                                       ],
@@ -2678,7 +2583,6 @@ class _DetailPageState extends State<DetailPage> {
                                                 children: [
                                                   AutoSizeText(clanwars[index]["clan"]["name"], style: const TextStyle(
                                                       color: Colors.white,
-                                                      fontFamily: "Inter",
                                                       fontSize: 12),
                                                     maxLines: 1,
                                                   ),
@@ -2691,7 +2595,6 @@ class _DetailPageState extends State<DetailPage> {
                                                 children: [
                                                   Text("${clanwars[index]["clan"]["stars"]}", style: const TextStyle(
                                                       color: Colors.white,
-                                                      fontFamily: "Inter",
                                                       fontSize: 15)
                                                   ),
                                                   SizedBox(width: 2),
@@ -2720,7 +2623,6 @@ class _DetailPageState extends State<DetailPage> {
                                                   SizedBox(width: 5),
                                                   AutoSizeText(clanwars[index]["opponent"]["name"], style: const TextStyle(
                                                       color: Colors.white,
-                                                      fontFamily: "Inter",
                                                       fontSize: 12),
                                                     maxLines: 1,
                                                   ),
@@ -2732,7 +2634,6 @@ class _DetailPageState extends State<DetailPage> {
                                                   SizedBox(width: 2),
                                                   Text("${clanwars[index]["opponent"]["stars"]}", style: const TextStyle(
                                                       color: Colors.white,
-                                                      fontFamily: "Inter",
                                                       fontSize: 15)
                                                   ),
                                                 ],
@@ -2762,7 +2663,7 @@ class _DetailPageState extends State<DetailPage> {
                                           },
                                           child: Text("Details", style: const TextStyle(
                                             color: Colors.white,
-                                            fontFamily: "Inter",
+
                                             fontSize: 15)
                                           )
                                         )

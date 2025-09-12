@@ -20,11 +20,11 @@ class _SettingsPageState extends State<SettingsPage> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
           gradient: LinearGradient(
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
-              colors: [/*Color(0xFF1C2952)*/Color(0xFF09090B), /*Color(0xFF101E6B)*/Color(0xFF0E1011)]
+              colors: [Theme.of(context).colorScheme.primary, Theme.of(context).colorScheme.secondary]
           )
       ),
       child: Scaffold(
@@ -39,12 +39,10 @@ class _SettingsPageState extends State<SettingsPage> {
                       segments: [
                         ButtonSegment(icon: Icon(Icons.sunny, color: Colors.white), label: Text("Light", style: TextStyle(
                             color: !darktheme? Colors.black: Colors.white,
-                            fontFamily: "Inter",
                             fontSize: 15)), value: !darktheme
                         ),
                         ButtonSegment(icon: Icon(Icons.mode_night, color: Colors.white), label: Text("Dark", style: TextStyle(
                             color: darktheme? Colors.black : Colors.white,
-                            fontFamily: "Inter",
                             fontSize: 15)), value: darktheme
                         ),
                       ],
@@ -60,7 +58,6 @@ class _SettingsPageState extends State<SettingsPage> {
                     padding: const EdgeInsets.only(top: 10.0, left: 20),
                     child: Text("Account wechseln", style: const TextStyle(
                         color: Colors.white,
-                        fontFamily: "Inter",
                         fontSize: 25)),
                   ),
                   Container(
@@ -97,7 +94,6 @@ class _SettingsPageState extends State<SettingsPage> {
                             children: [
                               Text(usermap[user], style: const TextStyle(
                                   color: Colors.white,
-                                  fontFamily: "Inter",
                                   fontSize: 15)),
                               IconButton(
                                   onPressed: () {
@@ -154,7 +150,6 @@ class _SettingsPageState extends State<SettingsPage> {
                         children: [
                           Text("Account hinzufügen", style: const TextStyle(
                               color: Colors.white,
-                              fontFamily: "Inter",
                               fontSize: 15)),
                           Icon(Icons.add, size: 25)
                         ],

@@ -6,7 +6,9 @@ import 'package:clashofclanstracker/pages/league.dart';
 import 'package:clashofclanstracker/pages/settings.dart';
 import 'package:clashofclanstracker/pages/startscreen.dart';
 import 'package:clashofclanstracker/provider/DataProvider.dart' as DataProvider;
+import 'package:clashofclanstracker/theme.dart';
 import 'package:clashofclanstracker/utils/UserSP.dart';
+import 'package:color_hex/color_hex.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
@@ -23,11 +25,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themes = CoCTrackerThemes(colorSeed: UserSP.getAccentColor().convertToColor);
+    print(themes.colorSeed);
     return MaterialApp(
-      theme: ThemeData(
-        scaffoldBackgroundColor: Colors.transparent,
-        useMaterial3: true,
-      ),
+      theme: themes.light,
+      darkTheme: themes.dark,
       home: UserSP.getUser().isEmpty? StartScreenPage() : DefaultPage(1),
       debugShowCheckedModeBanner: false,
       onGenerateRoute: (settings) {
@@ -89,7 +91,7 @@ class _DefaultPageState extends State<DefaultPage> {
       bottomNavigationBar: Padding(
         padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewPadding.bottom),
         child: Container(
-          color: Colors.black,
+          color: Theme.of(context).colorScheme.primary,
           child: Padding(
             padding: const EdgeInsets.only(
                 left: 15,
@@ -99,9 +101,9 @@ class _DefaultPageState extends State<DefaultPage> {
             ),
             child: GNav(
               selectedIndex: 1,
-              color: Colors.white,
-              backgroundColor: Colors.black,
-              activeColor: Colors.white,
+              color: Theme.of(context).colorScheme.surface,
+              backgroundColor: Theme.of(context).colorScheme.primary,
+              activeColor: Theme.of(context).colorScheme.surface,
               hoverColor: Colors.grey.shade900,
               gap: 8,
               tabBackgroundColor: Colors.grey.shade900,
@@ -113,18 +115,24 @@ class _DefaultPageState extends State<DefaultPage> {
               tabs: [
                 GButton(
                   icon: Icons.emoji_events,
+                  iconColor: Theme.of(context).colorScheme.tertiary,
+                  iconActiveColor: Theme.of(context).colorScheme.tertiary,
                   text: "League",
-                  textStyle: TextStyle(fontFamily: "Inter", color: Colors.white),
+                  textStyle: TextStyle(color: Theme.of(context).colorScheme.tertiary),
                 ),
                 GButton(
                   icon: Icons.home,
+                  iconColor: Theme.of(context).colorScheme.tertiary,
+                  iconActiveColor: Theme.of(context).colorScheme.tertiary,
                   text: "Start",
-                  textStyle: TextStyle(fontFamily: "Inter", color: Colors.white),
+                  textStyle: TextStyle(color: Theme.of(context).colorScheme.tertiary),
                 ),
                 GButton(
                   icon: Icons.settings,
+                  iconColor: Theme.of(context).colorScheme.tertiary,
+                  iconActiveColor: Theme.of(context).colorScheme.tertiary,
                   text: "Einstellungen",
-                  textStyle: TextStyle(fontFamily: "Inter", color: Colors.white),
+                  textStyle: TextStyle(color: Theme.of(context).colorScheme.tertiary),
                 ),
               ],
             ),

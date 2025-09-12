@@ -27,11 +27,11 @@ class _HomePageState extends State<HomePage> {
       return StartScreenPage();
     }
     return Container(
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
           gradient: LinearGradient(
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
-              colors: [/*Color(0xFF1C2952)*/Color(0xFF09090B), /*Color(0xFF101E6B)*/Color(0xFF0E1011)]
+              colors: [Theme.of(context).colorScheme.primary, Theme.of(context).colorScheme.secondary]
           )
       ),
       child: Scaffold(
@@ -92,7 +92,7 @@ class _HomePageState extends State<HomePage> {
                                           children: [
                                             DataProvider.awaitLeagueIcon(ovsnap.data[0]),
                                             SizedBox(width: 5),
-                                            DataProvider.awaitPlayerName(ovsnap.data[0])
+                                            SizedBox(width: 150, child: AutoSizeText(ovsnap.data[0]["name"], style: Theme.of(context).textTheme.headlineLarge!.copyWith(color: Colors.white), maxLines: 1))
                                           ],
                                         ),
                                         SizedBox(height: 10),
@@ -103,11 +103,11 @@ class _HomePageState extends State<HomePage> {
                                             Image.asset('lib/utils/img/Trophy.png',
                                                 fit: BoxFit.cover, scale: 1.5),
                                             SizedBox(width: 7),
-                                            DataProvider.awaitPlayerTrophies(ovsnap.data[0], 15),
+                                            DataProvider.awaitPlayerTrophies(ovsnap.data[0], 15, context),
                                             SizedBox(width: 7),
                                             Image.asset(legendTrophy, scale: 14),
                                             SizedBox(width: 7),
-                                            DataProvider.awaitPlayerLegendTrophies(ovsnap.data[0], 15),
+                                            DataProvider.awaitPlayerLegendTrophies(ovsnap.data[0], 15, context),
                                           ],
                                         ),
                                         SizedBox(height: 10),
@@ -155,16 +155,12 @@ class _HomePageState extends State<HomePage> {
                                       .center,
                                   children: [
                                     Text(
-                                        "Overall", style: const TextStyle(
-                                        color: Colors.white,
-                                        fontFamily: "Inter",
-                                        fontSize: 25)),
+                                        "Overall", style: Theme.of(context).textTheme.titleLarge!.copyWith(color: Colors.white)),
                                     Text("${(DataProvider.awaitOverallPercent(
                                         ovsnap.data[0], ovsnap.data[1], ovsnap.data[2], ovsnap.data[3]) * 100)
                                         .toStringAsFixed(1)}%",
                                         style: const TextStyle(
                                             color: Colors.white54,
-                                            fontFamily: "Inter",
                                             fontSize: 15)),
                                   ],
                                 ),
@@ -221,9 +217,7 @@ class _HomePageState extends State<HomePage> {
                                       children: [
                                         AutoSizeText(
                                             'Buildings',
-                                            style: const TextStyle(
-                                                color: Colors.white,
-                                                fontFamily: "Inter"),
+                                            style: Theme.of(context).textTheme.titleSmall!.copyWith(color: Colors.white),
                                             maxLines: 1
                                         ),
                                         SizedBox(height: 5),
@@ -237,7 +231,6 @@ class _HomePageState extends State<HomePage> {
                                                   1)}%",
                                                   style: const TextStyle(
                                                       color: Colors.white54,
-                                                      fontFamily: "Inter",
                                                       fontSize: 15)),
                                             ],
                                           ),
@@ -290,9 +283,7 @@ class _HomePageState extends State<HomePage> {
                                       children: [
                                         AutoSizeText(
                                             'Troops',
-                                            style: const TextStyle(
-                                                color: Colors.white,
-                                                fontFamily: "Inter"),
+                                            style: Theme.of(context).textTheme.titleSmall!.copyWith(color: Colors.white),
                                             maxLines: 1
                                         ),
                                         SizedBox(height: 5),
@@ -305,7 +296,6 @@ class _HomePageState extends State<HomePage> {
                                                   .toStringAsFixed(1)}%",
                                                   style: const TextStyle(
                                                       color: Colors.white54,
-                                                      fontFamily: "Inter",
                                                       fontSize: 15)),
                                             ],
                                           ),
@@ -358,9 +348,7 @@ class _HomePageState extends State<HomePage> {
                                       children: [
                                         AutoSizeText(
                                             'Spells',
-                                            style: const TextStyle(
-                                                color: Colors.white,
-                                                fontFamily: "Inter"),
+                                            style: Theme.of(context).textTheme.titleSmall!.copyWith(color: Colors.white),
                                             maxLines: 1
                                         ),
                                         SizedBox(height: 5),
@@ -373,7 +361,6 @@ class _HomePageState extends State<HomePage> {
                                                   .toStringAsFixed(1)}%",
                                                   style: const TextStyle(
                                                       color: Colors.white54,
-                                                      fontFamily: "Inter",
                                                       fontSize: 15)),
                                             ],
                                           ),
@@ -433,9 +420,7 @@ class _HomePageState extends State<HomePage> {
                                       children: [
                                         AutoSizeText(
                                             'Heroes',
-                                            style: const TextStyle(
-                                                color: Colors.white,
-                                                fontFamily: "Inter"),
+                                            style: Theme.of(context).textTheme.titleSmall!.copyWith(color: Colors.white),
                                             maxLines: 1
                                         ),
                                         SizedBox(height: 5),
@@ -448,7 +433,6 @@ class _HomePageState extends State<HomePage> {
                                                   .toStringAsFixed(1)}%",
                                                   style: const TextStyle(
                                                       color: Colors.white54,
-                                                      fontFamily: "Inter",
                                                       fontSize: 15)),
                                             ],
                                           ),
@@ -501,9 +485,7 @@ class _HomePageState extends State<HomePage> {
                                       children: [
                                         AutoSizeText(
                                             'Equipment',
-                                            style: const TextStyle(
-                                                color: Colors.white,
-                                                fontFamily: "Inter"),
+                                            style: Theme.of(context).textTheme.titleSmall!.copyWith(color: Colors.white),
                                             maxLines: 1
                                         ),
                                         SizedBox(height: 5),
@@ -516,7 +498,6 @@ class _HomePageState extends State<HomePage> {
                                                   .toStringAsFixed(1)}%",
                                                   style: const TextStyle(
                                                       color: Colors.white54,
-                                                      fontFamily: "Inter",
                                                       fontSize: 15)),
                                             ],
                                           ),
@@ -569,9 +550,7 @@ class _HomePageState extends State<HomePage> {
                                       children: [
                                         AutoSizeText(
                                             'Achievem.',
-                                            style: const TextStyle(
-                                                color: Colors.white,
-                                                fontFamily: "Inter"),
+                                            style: Theme.of(context).textTheme.titleSmall!.copyWith(color: Colors.white),
                                             maxLines: 1
                                         ),
                                         SizedBox(height: 5),
@@ -584,7 +563,6 @@ class _HomePageState extends State<HomePage> {
                                                   .toStringAsFixed(1)}%",
                                                   style: const TextStyle(
                                                       color: Colors.white54,
-                                                      fontFamily: "Inter",
                                                       fontSize: 15)),
                                             ],
                                           ),
@@ -808,8 +786,7 @@ class _HomePageState extends State<HomePage> {
                                         AutoSizeText(
                                             'Buildings',
                                             style: const TextStyle(
-                                                color: Colors.white,
-                                                fontFamily: "Inter"),
+                                                color: Colors.white),
                                             maxLines: 1
                                         ),
                                         SizedBox(height: 5),
@@ -853,8 +830,7 @@ class _HomePageState extends State<HomePage> {
                                         AutoSizeText(
                                             'Troops',
                                             style: const TextStyle(
-                                                color: Colors.white,
-                                                fontFamily: "Inter"),
+                                                color: Colors.white),
                                             maxLines: 1
                                         ),
                                         SizedBox(height: 5),
@@ -899,8 +875,7 @@ class _HomePageState extends State<HomePage> {
                                         AutoSizeText(
                                             'Spells',
                                             style: const TextStyle(
-                                                color: Colors.white,
-                                                fontFamily: "Inter"),
+                                                color: Colors.white),
                                             maxLines: 1
                                         ),
                                         SizedBox(height: 5),
@@ -953,8 +928,7 @@ class _HomePageState extends State<HomePage> {
                                         AutoSizeText(
                                             'Heros',
                                             style: const TextStyle(
-                                                color: Colors.white,
-                                                fontFamily: "Inter"),
+                                                color: Colors.white),
                                             maxLines: 1
                                         ),
                                         SizedBox(height: 5),
@@ -999,8 +973,7 @@ class _HomePageState extends State<HomePage> {
                                         AutoSizeText(
                                             'Equipment',
                                             style: const TextStyle(
-                                                color: Colors.white,
-                                                fontFamily: "Inter"),
+                                                color: Colors.white),
                                             maxLines: 1
                                         ),
                                         SizedBox(height: 5),
@@ -1046,8 +1019,7 @@ class _HomePageState extends State<HomePage> {
                                         AutoSizeText(
                                             'Achievem.',
                                             style: const TextStyle(
-                                                color: Colors.white,
-                                                fontFamily: "Inter"),
+                                                color: Colors.white),
                                             maxLines: 1
                                         ),
                                         SizedBox(height: 5),

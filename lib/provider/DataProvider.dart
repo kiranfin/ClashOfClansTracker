@@ -271,33 +271,19 @@ Image awaitClanWarLeagueIcon(String league, double scale) {
   return Image.asset(war_bronze1, scale: scale);
 }
 
-SizedBox awaitPlayerName(Map<String, dynamic> userdata) {
-  //final data = awaitPlayerData(tag);
-  //final userdata = await data;
-  return SizedBox(width: 150, child: AutoSizeText(userdata["name"], style: TextStyle(color: Colors.white, fontSize: 25, fontFamily: "Inter"), maxLines: 1));
+Text awaitPlayerTrophies(Map<String, dynamic> userdata, double size, BuildContext context) {
+  return Text((userdata["trophies"]).toString(), style: Theme.of(context).textTheme.labelLarge!.copyWith(color: Theme.of(context).colorScheme.onSurface));
 }
 
-Text awaitPlayerTrophies(Map<String, dynamic> userdata, double size) {
-  //final data = awaitPlayerData(tag);
-  //final userdata = await data;
-  return Text((userdata["trophies"]).toString(), style: TextStyle(color: Colors.white, fontSize: size, fontFamily: "Inter"));
-}
-
-Text awaitPlayerLegendTrophies(Map<String, dynamic> userdata, double size) {
-  //final data = awaitPlayerData(tag);
-  //final userdata = await data;
-  return Text((userdata["legendStatistics"] != null? userdata["legendStatistics"]["legendTrophies"] : 0).toString(), style: TextStyle(color: Colors.white, fontSize: size, fontFamily: "Inter"));
+Text awaitPlayerLegendTrophies(Map<String, dynamic> userdata, double size, BuildContext context) {
+  return Text((userdata["legendStatistics"] != null? userdata["legendStatistics"]["legendTrophies"] : 0).toString(), style: Theme.of(context).textTheme.labelLarge!.copyWith(color: Theme.of(context).colorScheme.onSurface));
 }
 
 Text awaitPlayerBuilderTrophies(Map<String, dynamic> userdata, double size) {
-  //final data = awaitPlayerData(tag);
-  //final userdata = await data;
   return Text((userdata["builderBaseTrophies"]).toString(), style: TextStyle(color: Colors.white, fontSize: size, fontFamily: "Inter"));
 }
 
 Image awaitClanIcon(Map<String, dynamic> userdata) {
-  //final data = awaitPlayerData(tag);
-  //final userdata = await data;
   if(userdata["clan"] != null) {
     return Image.network(userdata["clan"]["badgeUrls"]["small"], scale: 1.2);
   } else {
@@ -306,14 +292,10 @@ Image awaitClanIcon(Map<String, dynamic> userdata) {
 }
 
 Text awaitClanTroopsOut(Map<String, dynamic> userdata)  {
-  //final data = awaitPlayerData(tag);
-  //final userdata = await data;
   return Text((userdata["donations"]).toString(), style: TextStyle(color: Colors.white, fontSize: 15));
 }
 
 Text awaitClanTroopsIn(Map<String, dynamic> userdata) {
-  //final data = awaitPlayerData(tag);
-  //final userdata = await data;
   return Text((userdata["donationsReceived"]).toString(), style: TextStyle(color: Colors.white, fontSize: 15));
 }
 
