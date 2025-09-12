@@ -793,6 +793,7 @@ Widget getFirstClan(Map<String, dynamic> map, BuildContext context) {
         style: Theme.of(context).textTheme.labelLarge!.copyWith(color: Theme.of(context).colorScheme.onSurface),
         maxLines: 1,
       ),
+      SizedBox(height: 5),
       ?map["clan"] !=null && map["state"] != "notInWar"? Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -873,6 +874,7 @@ Widget getOpponentClan(Map<String, dynamic> map, BuildContext context) {
         style: Theme.of(context).textTheme.labelLarge!.copyWith(color: Theme.of(context).colorScheme.onSurface),
         maxLines: 1,
       ),
+      SizedBox(height: 5),
       ?map["opponent"] !=null && map["state"] != "notInWar"? Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
