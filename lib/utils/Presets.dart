@@ -149,3 +149,89 @@ Widget getColorPickDialog(BuildContext context) {
     ],
   );
 }
+
+Widget getAccountSwitchDialog(BuildContext context) {
+  final List<String> user = UserSP.getUser();
+  final Map<String, dynamic> usermap = UserSP.getDecodedUserMap();
+  return DraggableScrollableSheet(
+    expand: false,
+    key: UniqueKey(),
+    initialChildSize: 0.7,
+    maxChildSize: 0.9,
+    minChildSize: .5,
+    builder: (context, controller) => Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(15.0),
+          child: Text('Acccount wechseln', style: Theme.of(context).textTheme.headlineSmall!.copyWith(color: Theme.of(context).colorScheme.surface)),
+        ),
+        Expanded(
+          child: ListView.builder(
+              itemCount: user.length,
+              itemBuilder: (BuildContext context, index) {
+                String currentuser = user[index];
+                return Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 2),
+                  child: ListTile(
+                    tileColor: Colors.black,
+                    onTap: () {
+                      currentuser = user[index];
+                      UserSP.setCurrentUser(currentuser);
+                      Navigator.pop(context, currentuser);
+                    },
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                    title: Text(usermap[currentuser], style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 15)),
+                    trailing: IconButton(
+                        onPressed: () {
+                          List<String> userlist = UserSP.getUser();
+                          if(userlist.length > 1) {
+                            userlist.remove(currentuser);
+                            UserSP.setUsers(userlist);
+                            if (UserSP.getCurrentUser() == currentuser) UserSP.setCurrentUser(userlist[0]);
+                            Navigator.popAndPushNamed(context, "/default");
+                          }
+                        },
+                        icon: Icon(Icons.delete, color: Colors.redAccent)
+                    ),
+                  ),
+                );
+              }
+          ),
+        ),
+      ],
+    ),
+  );
+
+
+
+    /*Column(
+      children: [
+        Text('Acccount wechseln', style: Theme.of(context).textTheme.displaySmall!.copyWith(color: Theme.of(context).colorScheme.surface)),
+        ListView.builder(
+            itemBuilder: (BuildContext context, index) {
+              String currentuser = user[index];
+              return ListTile(
+                title: Text(usermap[currentuser], style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 15)),
+                trailing: IconButton(
+                    onPressed: () {
+                      List<String> userlist = UserSP.getUser();
+                      if(userlist.length > 1) {
+                        userlist.remove(currentuser);
+                        UserSP.setUsers(userlist);
+                        if (UserSP.getCurrentUser() == currentuser) UserSP.setCurrentUser(userlist[0]);
+                        Navigator.popAndPushNamed(context, "/default");
+                      }
+                    },
+                    icon: Icon(Icons.delete, color: Colors.redAccent)
+                ),
+              );
+            }
+        ),
+      ]
+  );*/
+}

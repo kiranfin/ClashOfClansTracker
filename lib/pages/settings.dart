@@ -122,105 +122,50 @@ class _SettingsPageState extends State<SettingsPage> {
                       ),
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 10.0, left: 20),
-                    child: Text("Account wechseln", style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 25)),
-                  ),
-                  Container(
-                    margin: EdgeInsets.all(10),
-                    height: 60.0,
-                    width: MediaQuery.of(context).size.width - 2 * 20,
-                    child: DropdownButton2(
-                      isExpanded: true,
-                      buttonStyleData: ButtonStyleData(
-                          height: 60,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(30),
-                            color: Colors.black,
-                          ),
-                          padding: const EdgeInsets.only(left: 10, right: 25)
-                      ),
-                      dropdownStyleData: DropdownStyleData(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(30),
-                          color: Colors.black,
+                  SizedBox(height: 20),
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(20),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                          colors: [Theme.of(context).colorScheme.surfaceContainer, Theme.of(context).colorScheme.secondaryContainer],
                         ),
+                        borderRadius: BorderRadius.circular(30),
                       ),
-                      iconStyleData: const IconStyleData(
-                        icon: Icon(Icons.arrow_drop_down_outlined),
-                        iconSize: 24,
-                        iconEnabledColor: Colors.white,
-                      ),
-                      items: user
-                          .map<DropdownMenuItem<String>>(
-                            (String user) => DropdownMenuItem<String>(
-                          value: user,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(usermap[user], style: const TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 15)),
-                              IconButton(
-                                  onPressed: () {
-                                    setState(() {
-                                      List<String> userlist = UserSP.getUser();
-                                      if(userlist.length > 1) {
-                                        userlist.remove(user);
-                                        UserSP.setUsers(userlist);
-                                        if (UserSP.getCurrentUser() == user) UserSP.setCurrentUser(userlist[0]);
-                                        Navigator.popAndPushNamed(context, "/default");
-                                      }
-                                    });
-                                  },
-                                  icon: Icon(Icons.delete, color: Colors.redAccent)
-                              )
-                            ],
-                          ),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text("Account",
+                              style: Theme.of(context).textTheme.displaySmall!.copyWith(color: Theme.of(context).colorScheme.surface),
+                            ),
+                            ListTile(
+                              title: Text(usermap[currentuser]),
+                              trailing: const Icon(Icons.chevron_right_rounded),
+                              onTap: () async {
+                                String newuser = await showModalBottomSheet(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return Presets.getAccountSwitchDialog(context);
+                                    }
+                                );
+                                setState(() {
+                                  currentuser = newuser;
+                                });
+                              },
+                            ),
+                            ListTile(
+                              title: Text("Account hinzufügen"),
+                              trailing: const Icon(Icons.add),
+                              onTap: () async {
+                                Navigator.pushNamed(context, "/start");
+                              },
+                            ),
+                          ],
                         ),
-                      )
-                          .toList(),
-                      onChanged: (String? user) {
-                        setState(() {
-                            currentuser = user ?? currentuser;
-                            UserSP.setCurrentUser(currentuser);
-                          },
-                        );
-                      },
-                      underline: const SizedBox.shrink(),
-                      style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 20
-                      ),
-                      value: currentuser,
-                    ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.all(10),
-                    height: 60.0,
-                    width: MediaQuery.of(context).size.width - 2 * 20,
-                    child: ElevatedButton(
-                      style: ButtonStyle(
-                          backgroundColor: WidgetStateProperty.all(Colors.black),
-                          shape: WidgetStateProperty.all<RoundedRectangleBorder>(
-                              RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(30.0),
-                              )
-                          )
-                      ),
-                      onPressed: () {
-                        Navigator.pushNamed(context, "/start");
-                      },
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text("Account hinzufügen", style: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 15)),
-                          Icon(Icons.add, size: 25)
-                        ],
                       ),
                     ),
                   ),

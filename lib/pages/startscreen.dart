@@ -11,9 +11,9 @@ class StartScreenPage extends StatefulWidget {
 class _StartScreenPageState extends State<StartScreenPage> {
 
   final TextEditingController controller = TextEditingController();
-  String? errorText = null;
+  String? errorText;
   bool valid = false;
-  String? value = null;
+  String? value;
 
   @override
   Widget build(BuildContext context) {
@@ -62,9 +62,7 @@ class _StartScreenPageState extends State<StartScreenPage> {
                                 Icons.tag,
                                 color: Colors.grey,
                               ),
-                              SizedBox(
-                                width: 10,
-                              ),
+                              SizedBox(width: 10),
                               Expanded(
                                 child: TextFormField(
                                   controller: controller,
