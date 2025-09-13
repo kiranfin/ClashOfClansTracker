@@ -1,5 +1,7 @@
 import 'dart:ui';
 
+import 'package:clashofclanstracker/utils/UserSP.dart';
+import 'package:color_hex/color_hex.dart';
 import 'package:flutter/material.dart';
 
 class CoCTrackerThemes {
@@ -98,5 +100,26 @@ class CoCTrackerThemes {
     );
 
     return theme;
+  }
+}
+
+enum ThemeType {light, dark}
+
+class ThemeProvider with ChangeNotifier {
+  ThemeData _themeData = UserSP.getDarkTheme()? CoCTrackerThemes(colorSeed: UserSP.getAccentColor().convertToColor).dark : CoCTrackerThemes(colorSeed: UserSP.getAccentColor().convertToColor).light;
+
+  ThemeData get themeData => _themeData;
+
+  set themeData(ThemeData themeData) {
+    _themeData = themeData;
+    notifyListeners();
+  }
+
+  void setTheme(bool dark, Color color) {
+    if(dark) {
+      themeData = CoCTrackerThemes(colorSeed: color).dark;
+    } else {
+      themeData = CoCTrackerThemes(colorSeed: color).light;
+    }
   }
 }

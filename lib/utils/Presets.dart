@@ -1,5 +1,11 @@
+import 'package:color_hex/color_hex.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_colorpicker/flutter_colorpicker.dart';
+import 'package:provider/provider.dart';
+
+import '../theme.dart';
+import 'UserSP.dart' hide ThemeType;
 
 Widget getEditWallsDialog(BuildContext context, String inital) {
   String newval = inital;
@@ -110,5 +116,36 @@ Widget getImportJSONDialog(BuildContext context, String inital) {
         ),
       ),
     ),
+  );
+}
+
+Widget getColorPickDialog(BuildContext context) {
+  return AlertDialog(
+    title: Text('Accent color', style: Theme.of(context).textTheme.displaySmall!.copyWith(color: Theme.of(context).colorScheme.surface)),
+    content: SingleChildScrollView(
+      child: ColorPicker(
+        pickerColor: UserSP.getAccentColor().convertToColor,
+        onColorChanged: (newColor) {
+          UserSP.setAccentColor(newColor.convertToHex.hex!);
+          Provider.of<ThemeProvider>(context, listen: false).setTheme(UserSP.getDarkTheme(), UserSP.getAccentColor().convertToColor);
+        },
+        enableAlpha: false,
+        pickerAreaBorderRadius:
+        const BorderRadius.all(Radius.circular(8)),
+        labelTypes: const [],
+      ),
+    ),
+    actions: [
+      SizedBox(
+        width: double.infinity,
+        child: FilledButton(
+          style: FilledButton.styleFrom(
+            backgroundColor: Theme.of(context).colorScheme.tertiary.withValues(alpha: 0.3),
+          ),
+          onPressed: () => Navigator.pop(context),
+          child: Text('Done', style: Theme.of(context).textTheme.labelLarge!.copyWith(color: Theme.of(context).colorScheme.surface)),
+        ),
+      ),
+    ],
   );
 }

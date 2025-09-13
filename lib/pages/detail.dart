@@ -318,7 +318,10 @@ class _DetailPageState extends State<DetailPage> {
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Text(titles[ind], style: Theme.of(context).textTheme.displaySmall!.copyWith(color: Theme.of(context).colorScheme.surface),
+                                      Padding(
+                                        padding: const EdgeInsets.only(left: 8.0, top: 5.0),
+                                        child: Text(titles[ind], style: Theme.of(context).textTheme.displaySmall!.copyWith(color: Theme.of(context).colorScheme.surface),
+                                        ),
                                       ),
                                       ElevatedButton.icon(
                                         style: ElevatedButton.styleFrom(
@@ -374,7 +377,11 @@ class _DetailPageState extends State<DetailPage> {
                                             child: ClipRRect(
                                               borderRadius: BorderRadius.circular(20),
                                               child: Container(
-                                                color: Theme.of(context).colorScheme.surfaceContainer,
+                                                decoration: BoxDecoration(
+                                                  border: Border.all(color: Theme.of(context).colorScheme.surface.withValues(alpha: 0.05)),
+                                                  color: Theme.of(context).colorScheme.surfaceContainer,
+                                                  borderRadius: BorderRadius.circular(20),
+                                                ),
                                                 child: GridTile(
                                                   child: Padding(
                                                     padding: const EdgeInsets.all(5.0),
@@ -629,7 +636,7 @@ class _DetailPageState extends State<DetailPage> {
                       gradient: LinearGradient(
                         begin: Alignment.centerLeft,
                         end: Alignment.centerRight,
-                          colors: [Theme.of(context).colorScheme.primary, Theme.of(context).colorScheme.secondary]
+                          colors: [Theme.of(context).colorScheme.surfaceContainer, Theme.of(context).colorScheme.secondaryContainer]
                       ),
                       borderRadius: BorderRadius.circular(30),
                     ),
@@ -655,11 +662,12 @@ class _DetailPageState extends State<DetailPage> {
                                       borderRadius: BorderRadius.circular(20),
                                       child: Container(
                                         decoration: BoxDecoration(
+                                          border: Border.all(color: Theme.of(context).colorScheme.surface.withValues(alpha: 0.05)),
                                           color: Theme.of(context).colorScheme.surfaceContainer,
                                           borderRadius: BorderRadius.circular(20),
                                         ),
                                         width: 110,
-                                        height: 125,
+                                        height: 130,
                                         child: GridTile(
                                           child: Padding(
                                             padding: const EdgeInsets.all(5.0),
@@ -790,7 +798,7 @@ class _DetailPageState extends State<DetailPage> {
                       gradient: LinearGradient(
                         begin: Alignment.centerLeft,
                         end: Alignment.centerRight,
-                          colors: [Theme.of(context).colorScheme.primary, Theme.of(context).colorScheme.secondary]
+                          colors: [Theme.of(context).colorScheme.surfaceContainer, Theme.of(context).colorScheme.secondaryContainer]
                       ),
                       borderRadius: BorderRadius.circular(30),
                     ),
@@ -819,6 +827,7 @@ class _DetailPageState extends State<DetailPage> {
                                       decoration: BoxDecoration(
                                         color: Theme.of(context).colorScheme.surfaceContainer,
                                         borderRadius: BorderRadius.circular(20),
+                                        border: Border.all(color: Theme.of(context).colorScheme.surface.withValues(alpha: 0.05)),
                                       ),
                                       child: GridTile(
                                         child: Padding(
@@ -952,7 +961,7 @@ class _DetailPageState extends State<DetailPage> {
                         gradient: LinearGradient(
                           begin: Alignment.centerLeft,
                           end: Alignment.centerRight,
-                          colors: [Theme.of(context).colorScheme.primary, Theme.of(context).colorScheme.secondary]
+                          colors: [Theme.of(context).colorScheme.surfaceContainer, Theme.of(context).colorScheme.secondaryContainer]
                         ),
                         borderRadius: BorderRadius.circular(30),
                       ),
@@ -980,6 +989,7 @@ class _DetailPageState extends State<DetailPage> {
                                         decoration: BoxDecoration(
                                           color: Theme.of(context).colorScheme.surfaceContainer,
                                           borderRadius: BorderRadius.circular(20),
+                                          border: Border.all(color: Theme.of(context).colorScheme.surface.withValues(alpha: 0.05)),
                                         ),
                                         child: GridTile(
                                           child: Padding(
@@ -1069,6 +1079,7 @@ class _DetailPageState extends State<DetailPage> {
                                         decoration: BoxDecoration(
                                           color: Theme.of(context).colorScheme.surfaceContainer,
                                           borderRadius: BorderRadius.circular(20),
+                                          border: Border.all(color: Theme.of(context).colorScheme.surface.withValues(alpha: 0.05)),
                                         ),
                                         child: GridTile(
                                           child: Padding(
@@ -1232,7 +1243,7 @@ class _DetailPageState extends State<DetailPage> {
                         gradient: LinearGradient(
                           begin: Alignment.centerLeft,
                           end: Alignment.centerRight,
-                            colors: [Theme.of(context).colorScheme.primary, Theme.of(context).colorScheme.secondary]
+                            colors: [Theme.of(context).colorScheme.surfaceContainer, Theme.of(context).colorScheme.secondaryContainer]
                         ),
                         borderRadius: BorderRadius.circular(30),
                       ),
@@ -1260,10 +1271,11 @@ class _DetailPageState extends State<DetailPage> {
                                         borderRadius: BorderRadius.circular(20),
                                         child: Container(
                                           width: 110,
-                                          height: 125,
+                                          height: 130,
                                           decoration: BoxDecoration(
                                             color: Theme.of(context).colorScheme.surfaceContainer,
                                             borderRadius: BorderRadius.circular(20),
+                                            border: Border.all(color: Theme.of(context).colorScheme.surface.withValues(alpha: 0.05)),
                                           ),
                                           child: GridTile(
                                             child: Padding(
@@ -1455,7 +1467,7 @@ class _DetailPageState extends State<DetailPage> {
                         gradient: LinearGradient(
                           begin: Alignment.centerLeft,
                           end: Alignment.centerRight,
-                            colors: [Theme.of(context).colorScheme.primary, Theme.of(context).colorScheme.secondary]
+                            colors: [Theme.of(context).colorScheme.surfaceContainer, Theme.of(context).colorScheme.secondaryContainer]
                         ),
                         borderRadius: BorderRadius.circular(30),
                       ),
@@ -1482,6 +1494,7 @@ class _DetailPageState extends State<DetailPage> {
                                         borderRadius: BorderRadius.circular(20),
                                         child: Container(
                                           decoration: BoxDecoration(
+                                            border: Border.all(color: Theme.of(context).colorScheme.surface.withValues(alpha: 0.05)),
                                             color: Theme.of(context).colorScheme.surfaceContainer,
                                             borderRadius: BorderRadius.circular(20),
                                           ),
@@ -2009,7 +2022,7 @@ class _DetailPageState extends State<DetailPage> {
                 itemCount: 12,
                 itemBuilder: (BuildContext context, int index) {
                   return ListTile(
-                    title: Shimmer(child: Container(width: 50, height: 15, color: Colors.black45)),
+                    title: ClipRRect(borderRadius: BorderRadius.circular(10), child: Shimmer(color: Theme.of(context).colorScheme.surface, child: SizedBox(width: 50, height: 15))),
                   );
                 }
             );
@@ -2157,7 +2170,7 @@ class _DetailPageState extends State<DetailPage> {
                 itemCount: 12,
                 itemBuilder: (BuildContext context, int index) {
                   return ListTile(
-                    title: Shimmer(child: Container(width: 50, height: 15, color: Colors.black45)),
+                    title: ClipRRect(borderRadius: BorderRadius.circular(10), child: Shimmer(color: Theme.of(context).colorScheme.surface, child: SizedBox(width: 50, height: 15))),
                   );
                 }
             );
@@ -2405,143 +2418,175 @@ class _DetailPageState extends State<DetailPage> {
             List<dynamic> clanwars = Utils.filterClanWars(snapshot.data[0]["items"]);
             //List<dynamic> clanwarsext = Utils.filterClanWars(snapshot.data[1]["items"]);
             return SingleChildScrollView(
-              child: ListView.builder(
-                  physics: NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  itemCount: clanwars.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    return ClipRRect(
-                        borderRadius: BorderRadius.circular(20),
-                        child: Container(
-                            margin: EdgeInsets.symmetric(vertical: 2),
-                            width: MediaQuery.of(context).size.width - 2 * 20,
-                            color: clanwars[index]["result"] == "win"? const Color(0xff1b3317) : clanwars[index]["result"] == "lose"? const Color(0xff2b0e0e) : const Color(0xff494949),
-                            child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      children: [
-                                        Text("${clanwars[index]["teamSize"]} vs. ${clanwars[index]["teamSize"]}", style: const TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 15)
-                                        ),
-                                      ],
-                                    ),
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Flexible(
-                                          flex: 5,
-                                          child: Column(
-                                            mainAxisAlignment: MainAxisAlignment.end,
-                                            children: [
-                                              Row(
-                                                mainAxisAlignment: MainAxisAlignment.end,
-                                                children: [
-                                                  AutoSizeText(clanwars[index]["clan"]["name"], style: const TextStyle(
-                                                      color: Colors.white,
-                                                      fontSize: 12),
-                                                    maxLines: 1,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                child: Container(
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Theme.of(context).colorScheme.primary),
+                    gradient: LinearGradient(
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                      colors: [Theme.of(context).colorScheme.surfaceContainer, Theme.of(context).colorScheme.secondaryContainer],
+                    ),
+                    borderRadius: BorderRadius.circular(30),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text("Clan War Log",
+                          style: Theme.of(context).textTheme.headlineLarge!.copyWith(color: Theme.of(context).colorScheme.surface),
+                        ),
+                        SizedBox(height: 5),
+                        ListView.builder(
+                          physics: NeverScrollableScrollPhysics(),
+                          shrinkWrap: true,
+                          itemCount: clanwars.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            return ClipRRect(
+                                borderRadius: BorderRadius.circular(20),
+                                child: Container(
+                                    margin: EdgeInsets.symmetric(vertical: 2),
+                                    color: clanwars[index]["result"] == "win"? Colors.lightGreen.withValues(alpha: 0.7) : clanwars[index]["result"] == "lose"? Colors.redAccent.withValues(alpha: 0.7) : Theme.of(context).colorScheme.surface.withValues(alpha: Theme.of(context).brightness == Brightness.light? 0.2 : 0.6),
+                                    child: Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            Row(
+                                              mainAxisAlignment: MainAxisAlignment.center,
+                                              children: [
+                                                Text("${clanwars[index]["teamSize"]} vs. ${clanwars[index]["teamSize"]}", style: TextStyle(
+                                                    color: Theme.of(context).colorScheme.surface,
+                                                    fontSize: 15)
+                                                ),
+                                              ],
+                                            ),
+                                            Row(
+                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                              children: [
+                                                Flexible(
+                                                  flex: 5,
+                                                  child: Column(
+                                                    mainAxisAlignment: MainAxisAlignment.end,
+                                                    children: [
+                                                      Row(
+                                                        mainAxisAlignment: MainAxisAlignment.end,
+                                                        children: [
+                                                          SizedBox(
+                                                            width: (MediaQuery.of(context).size.width / 2) - 3 * 40,
+                                                            child: AutoSizeText(clanwars[index]["clan"]["name"], style: TextStyle(
+                                                                color: Theme.of(context).colorScheme.surface,
+                                                                fontSize: 12),
+                                                              maxLines: 1,
+                                                            ),
+                                                          ),
+                                                          SizedBox(width: 5),
+                                                          Image.network(clanwars[index]["clan"]["badgeUrls"]["small"], scale: 2),
+                                                        ],
+                                                      ),
+                                                      Row(
+                                                        mainAxisAlignment: MainAxisAlignment.end,
+                                                        children: [
+                                                          Text("${clanwars[index]["clan"]["stars"]}", style: TextStyle(
+                                                              color: Theme.of(context).colorScheme.surface,
+                                                              fontSize: 15)
+                                                          ),
+                                                          SizedBox(width: 2),
+                                                          Image.asset(whitestar, scale: 6),
+                                                        ],
+                                                      )
+                                                    ],
                                                   ),
-                                                  SizedBox(width: 5),
-                                                  Image.network(clanwars[index]["clan"]["badgeUrls"]["small"], scale: 2),
-                                                ],
-                                              ),
-                                              Row(
-                                                mainAxisAlignment: MainAxisAlignment.end,
-                                                children: [
-                                                  Text("${clanwars[index]["clan"]["stars"]}", style: const TextStyle(
-                                                      color: Colors.white,
-                                                      fontSize: 15)
+                                                ),
+                                                Flexible(
+                                                  flex: 2,
+                                                  child: Image.asset(
+                                                    'lib/utils/img/CWLIcon.png',
+                                                    fit: BoxFit.cover,
+                                                    scale: 4,
                                                   ),
-                                                  SizedBox(width: 2),
-                                                  Image.asset(whitestar, scale: 6),
-                                                ],
-                                              )
-                                            ],
-                                          ),
-                                        ),
-                                        Flexible(
-                                          flex: 2,
-                                          child: Image.asset(
-                                            'lib/utils/img/CWLIcon.png',
-                                            fit: BoxFit.cover,
-                                            scale: 4,
-                                          ),
-                                        ),
-                                        Flexible(
-                                          flex: 5,
-                                          child: Column(
-                                            mainAxisAlignment: MainAxisAlignment.start,
-                                            children: [
-                                              Row(
-                                                children: [
-                                                  Image.network(clanwars[index]["opponent"]["badgeUrls"]["small"], scale: 2),
-                                                  SizedBox(width: 5),
-                                                  AutoSizeText(clanwars[index]["opponent"]["name"], style: const TextStyle(
-                                                      color: Colors.white,
-                                                      fontSize: 12),
-                                                    maxLines: 1,
+                                                ),
+                                                Flexible(
+                                                  flex: 5,
+                                                  child: Column(
+                                                    mainAxisAlignment: MainAxisAlignment.start,
+                                                    children: [
+                                                      Row(
+                                                        children: [
+                                                          Image.network(clanwars[index]["opponent"]["badgeUrls"]["small"], scale: 2),
+                                                          SizedBox(width: 5),
+                                                          SizedBox(
+                                                            width: (MediaQuery.of(context).size.width / 2) - 3 * 40,
+                                                            child: AutoSizeText(clanwars[index]["opponent"]["name"], style: TextStyle(
+                                                                color: Theme.of(context).colorScheme.surface,
+                                                                fontSize: 12),
+                                                              maxLines: 1,
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                      Row(
+                                                        children: [
+                                                          Image.asset(whitestar, scale: 6),
+                                                          SizedBox(width: 2),
+                                                          Text("${clanwars[index]["opponent"]["stars"]}", style: TextStyle(
+                                                              color: Theme.of(context).colorScheme.surface,
+                                                              fontSize: 15)
+                                                          ),
+                                                        ],
+                                                      )
+                                                    ],
                                                   ),
-                                                ],
-                                              ),
-                                              Row(
-                                                children: [
-                                                  Image.asset(whitestar, scale: 6),
-                                                  SizedBox(width: 2),
-                                                  Text("${clanwars[index]["opponent"]["stars"]}", style: const TextStyle(
-                                                      color: Colors.white,
-                                                      fontSize: 15)
+                                                )
+                                              ],
+                                            ),
+                                            /*?(index < 10 && clanwarsext[index]["clan"]["members"] != null)? Row(
+                                              mainAxisAlignment: MainAxisAlignment.center,
+                                              children: [
+                                                TextButton(
+                                                  style: ButtonStyle(
+                                                      backgroundColor: MaterialStateProperty.all(
+                                                          Colors.black),
+                                                      shape: MaterialStateProperty.all<
+                                                          RoundedRectangleBorder>(
+                                                          RoundedRectangleBorder(
+                                                            borderRadius: BorderRadius.circular(
+                                                                30.0),
+                                                          )
+                                                      )
                                                   ),
-                                                ],
-                                              )
-                                            ],
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                    /*?(index < 10 && clanwarsext[index]["clan"]["members"] != null)? Row(
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      children: [
-                                        TextButton(
-                                          style: ButtonStyle(
-                                              backgroundColor: MaterialStateProperty.all(
-                                                  Colors.black),
-                                              shape: MaterialStateProperty.all<
-                                                  RoundedRectangleBorder>(
-                                                  RoundedRectangleBorder(
-                                                    borderRadius: BorderRadius.circular(
-                                                        30.0),
-                                                  )
-                                              )
-                                          ),
-                                          onPressed: (){
-                                            Navigator.pushNamed(context, "/detail", arguments: ArgumentClass("clanwar", clanwarsext[index]));
-                                          },
-                                          child: Text("Details", style: const TextStyle(
-                                            color: Colors.white,
+                                                  onPressed: (){
+                                                    Navigator.pushNamed(context, "/detail", arguments: ArgumentClass("clanwar", clanwarsext[index]));
+                                                  },
+                                                  child: Text("Details", style: const TextStyle(
+                                                    color: Colors.white,
 
-                                            fontSize: 15)
-                                          )
+                                                    fontSize: 15)
+                                                  )
+                                                )
+                                              ],
+                                            ) : null,*/
+                                          ],
                                         )
-                                      ],
-                                    ) : null,*/
-                                  ],
+                                    )
                                 )
-                            )
-                        )
-                    );
-                  }),
+                            );
+                          }
+                        ),
+                      ]
+                    ),
+                  ),
+                ),
+              ),
             );
           } else {
             return ListView.builder(
                 itemCount: 12,
                 itemBuilder: (BuildContext context, int index) {
                   return ListTile(
-                    title: Shimmer(child: Container(width: 50, height: 15, color: Colors.black45)),
+                    title: ClipRRect(borderRadius: BorderRadius.circular(10), child: Shimmer(color: Theme.of(context).colorScheme.surface, child: SizedBox(width: 50, height: 15))),
                   );
                 }
             );

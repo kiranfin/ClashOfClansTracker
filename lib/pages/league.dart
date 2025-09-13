@@ -450,7 +450,7 @@ class _LeaguePageState extends State<LeaguePage> {
                                           child: Container(
                                             margin: EdgeInsets.symmetric(vertical: 2),
                                             width: MediaQuery.of(context).size.width - 2 * 20,
-                                            color: clanwars[index]["result"] == "win"? Colors.transparent.withValues(alpha: 0.2, green: 0.7) : clanwars[index]["result"] == "lose"? Colors.transparent.withValues(alpha: 0.2, red: 0.7) : Theme.of(context).colorScheme.surface.withValues(alpha: 0.2),
+                                            color: clanwars[index]["result"] == "win"? Colors.lightGreen.withValues(alpha: 0.7) : clanwars[index]["result"] == "lose"? Colors.redAccent.withValues(alpha: 0.7) : Theme.of(context).colorScheme.surface.withValues(alpha: Theme.of(context).brightness == Brightness.light? 0.2 : 0.6),
                                             child: Padding(
                                               padding: const EdgeInsets.all(8.0),
                                               child: Column(
@@ -474,8 +474,11 @@ class _LeaguePageState extends State<LeaguePage> {
                                                             Row(
                                                               mainAxisAlignment: MainAxisAlignment.end,
                                                               children: [
-                                                                AutoSizeText(clanwars[index]["clan"]["name"], style: Theme.of(context).textTheme.titleSmall!.copyWith(color: Theme.of(context).colorScheme.surface),
-                                                                  maxLines: 1,
+                                                                SizedBox(
+                                                                  width: (MediaQuery.of(context).size.width / 2) - 3 * 40,
+                                                                  child: AutoSizeText(clanwars[index]["clan"]["name"], style: Theme.of(context).textTheme.titleSmall!.copyWith(color: Theme.of(context).colorScheme.surface),
+                                                                    maxLines: 1,
+                                                                  ),
                                                                 ),
                                                                 SizedBox(width: 5),
                                                                 Image.network(clanwars[index]["clan"]["badgeUrls"]["small"], scale: 2),
@@ -510,10 +513,13 @@ class _LeaguePageState extends State<LeaguePage> {
                                                               children: [
                                                                 Image.network(clanwars[index]["opponent"]["badgeUrls"]["small"], scale: 2),
                                                                 SizedBox(width: 5),
-                                                                AutoSizeText(clanwars[index]["opponent"]["name"], style: TextStyle(
-                                                                  color: Theme.of(context).colorScheme.surface,
-                                                                  fontSize: 12),
-                                                                  maxLines: 1,
+                                                                SizedBox(
+                                                                  width: (MediaQuery.of(context).size.width / 2) - 3 * 40,
+                                                                  child: AutoSizeText(clanwars[index]["opponent"]["name"], style: TextStyle(
+                                                                    color: Theme.of(context).colorScheme.surface,
+                                                                    fontSize: 12),
+                                                                    maxLines: 1,
+                                                                  ),
                                                                 ),
                                                               ],
                                                             ),

@@ -13,11 +13,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:provider/provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await UserSP.init();
-  runApp(const MyApp());
+  runApp(ChangeNotifierProvider(create: (BuildContext context) => ThemeProvider(),
+  child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -25,11 +27,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final themes = CoCTrackerThemes(colorSeed: UserSP.getAccentColor().convertToColor);
-    print(themes.colorSeed);
     return MaterialApp(
-      theme: themes.light,
-      darkTheme: themes.dark,
+      theme: Provider.of<ThemeProvider>(context).themeData,
       home: UserSP.getUser().isEmpty? StartScreenPage() : DefaultPage(1),
       debugShowCheckedModeBanner: false,
       onGenerateRoute: (settings) {
