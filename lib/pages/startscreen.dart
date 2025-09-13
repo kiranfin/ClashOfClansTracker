@@ -114,15 +114,13 @@ class _StartScreenPageState extends State<StartScreenPage> {
                         height: 50,
                         width: MediaQuery.of(context).size.width * 0.7,
                         child: ElevatedButton(
-                          style: ButtonStyle(
-                            backgroundColor: WidgetStateProperty.all(Theme.of(context).colorScheme.tertiary.withValues(alpha: 0.3)),
-                            shape: WidgetStateProperty.all<
-                              RoundedRectangleBorder>(
-                                RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(20.0),
-                                )
-                              )
-                            ),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Theme.of(context).colorScheme.tertiary.withValues(alpha: 0.3),
+                            shadowColor: Colors.transparent,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                          ),
                           onPressed: () {
                             if(valid) {
                               List<String> old = UserSP.getUser();

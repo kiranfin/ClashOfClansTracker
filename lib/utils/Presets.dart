@@ -121,7 +121,7 @@ Widget getImportJSONDialog(BuildContext context, String inital) {
 
 Widget getColorPickDialog(BuildContext context) {
   return AlertDialog(
-    title: Text('Accent color', style: Theme.of(context).textTheme.displaySmall!.copyWith(color: Theme.of(context).colorScheme.surface)),
+    title: Text('Accent Color', style: Theme.of(context).textTheme.displaySmall!.copyWith(color: Theme.of(context).colorScheme.surface)),
     content: SingleChildScrollView(
       child: ColorPicker(
         pickerColor: UserSP.getAccentColor().convertToColor,
@@ -174,16 +174,14 @@ Widget getAccountSwitchDialog(BuildContext context) {
                 return Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 2),
                   child: ListTile(
-                    tileColor: Colors.black,
+                    tileColor: UserSP.getCurrentUser() == currentuser? Theme.of(context).colorScheme.surface.withValues(alpha: 0.3): Theme.of(context).colorScheme.surface.withValues(alpha: 0.1),
                     onTap: () {
                       currentuser = user[index];
                       UserSP.setCurrentUser(currentuser);
                       Navigator.pop(context, currentuser);
                     },
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-                    title: Text(usermap[currentuser], style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 15)),
+                    title: Text(usermap[currentuser], style: Theme.of(context).textTheme.labelLarge!.copyWith(color: Theme.of(context).colorScheme.surface)),
                     trailing: IconButton(
                         onPressed: () {
                           List<String> userlist = UserSP.getUser();
