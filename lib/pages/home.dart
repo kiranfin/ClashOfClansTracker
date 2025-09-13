@@ -223,8 +223,7 @@ class _HomePageState extends State<HomePage> {
                                         SizedBox(height: 5),
                                         CircularPercentIndicator(
                                           center: Column(
-                                            mainAxisAlignment: MainAxisAlignment
-                                                .center,
+                                            mainAxisAlignment: MainAxisAlignment.center,
                                             children: [
                                               Text("${(DataProvider.awaitBuildingsPercent(ovsnap.data[0], ovsnap.data[1]) * 100)
                                                   .toStringAsFixed(

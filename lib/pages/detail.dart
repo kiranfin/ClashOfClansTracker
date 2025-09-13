@@ -1535,7 +1535,7 @@ class _DetailPageState extends State<DetailPage> {
                                                         width: 150,
                                                         height: 10,
                                                         direction: Axis.horizontal,
-                                                        backgroundColor: Colors.grey.shade800,
+                                                        backgroundColor: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.1),
                                                         foregroundColor: Colors.purple,
                                                         duration: const Duration(seconds: 3),
                                                         curve: Curves.fastLinearToSlowEaseIn,
@@ -1625,11 +1625,10 @@ class _DetailPageState extends State<DetailPage> {
                       padding: const EdgeInsets.all(10.0),
                       child: Container(
                         decoration: BoxDecoration(
-                          border: Border.all(color: Colors.black),
                           gradient: LinearGradient(
-                            begin: Alignment.centerLeft,
-                            end: Alignment.centerRight,
-                            colors: [Colors.black.withValues(alpha: 0.8), Colors.black.withValues(alpha: 0.6)],
+                              begin: Alignment.topLeft,
+                              end: Alignment.bottomRight,
+                              colors: [Theme.of(context).colorScheme.surfaceContainer, Theme.of(context).colorScheme.secondaryContainer]
                           ),
                           borderRadius: BorderRadius.circular(30),
                         ),
@@ -1650,9 +1649,7 @@ class _DetailPageState extends State<DetailPage> {
                                       Row(
                                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                         children: [
-                                          Text(snapshot.data[0]["name"], style: const TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 30)
+                                          Text(snapshot.data[0]["name"], style: Theme.of(context).textTheme.displaySmall!.copyWith(color: Theme.of(context).colorScheme.surface),
                                           ),
                                         ],
                                       ),
@@ -1661,9 +1658,7 @@ class _DetailPageState extends State<DetailPage> {
                                         children: [
                                           Image.asset(exp),
                                           SizedBox(width: 5),
-                                          Text("Exp: ${snapshot.data[0]["expLevel"]}", style: const TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 15)
+                                          Text("Exp: ${snapshot.data[0]["expLevel"]}", style: Theme.of(context).textTheme.labelLarge!.copyWith(color: Theme.of(context).colorScheme.surface),
                                           )
                                         ],
                                       ),
@@ -1675,9 +1670,7 @@ class _DetailPageState extends State<DetailPage> {
                                           Image.asset('lib/utils/img/Trophy.png',
                                               fit: BoxFit.cover, scale: 1.5),
                                           SizedBox(width: 7),
-                                          Text("Best: ${snapshot.data[0]["bestTrophies"]}", style: const TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 15)
+                                          Text("Best: ${snapshot.data[0]["bestTrophies"]}", style: Theme.of(context).textTheme.labelLarge!.copyWith(color: Theme.of(context).colorScheme.surface)
                                           )
                                         ],
                                       ),
@@ -1686,9 +1679,7 @@ class _DetailPageState extends State<DetailPage> {
                                         children: [
                                           DataProvider.awaitBuilderLeagueIcon(snapshot.data[0], 4),
                                           SizedBox(width: 7),
-                                          Text("Best: ${snapshot.data[0]["bestBuilderBaseTrophies"]}", style: const TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 15)
+                                          Text("Best: ${snapshot.data[0]["bestBuilderBaseTrophies"]}", style: Theme.of(context).textTheme.labelLarge!.copyWith(color: Theme.of(context).colorScheme.surface)
                                           )
                                         ],
                                       ),
@@ -1697,9 +1688,7 @@ class _DetailPageState extends State<DetailPage> {
                                         children: [
                                           Image.asset(star, scale: 1.2),
                                           SizedBox(width: 7),
-                                          Text("War Stars: ${snapshot.data[0]["warStars"]}", style: const TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 15)
+                                          Text("War Stars: ${snapshot.data[0]["warStars"]}", style: Theme.of(context).textTheme.labelLarge!.copyWith(color: Theme.of(context).colorScheme.surface)
                                           )
                                         ],
                                       ),
@@ -1708,9 +1697,7 @@ class _DetailPageState extends State<DetailPage> {
                                         children: [
                                           Image.asset(capital_gold, scale: 3.5),
                                           SizedBox(width: 7),
-                                          Text("Clan Capital: ${snapshot.data[0]["clanCapitalContributions"]}", style: const TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 15)
+                                          Text("Clan Capital: ${snapshot.data[0]["clanCapitalContributions"]}", style: Theme.of(context).textTheme.labelLarge!.copyWith(color: Theme.of(context).colorScheme.surface)
                                           )
                                         ],
                                       )
@@ -1718,9 +1705,7 @@ class _DetailPageState extends State<DetailPage> {
                                   ),
                                   Column(
                                     children: [
-                                      Text(snapshot.data[0]["tag"], style: const TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 15)
+                                      Text(snapshot.data[0]["tag"], style: Theme.of(context).textTheme.labelLarge!.copyWith(color: Theme.of(context).colorScheme.surface)
                                       ),
                                       SizedBox(height: 5),
                                       Row(
@@ -1735,14 +1720,10 @@ class _DetailPageState extends State<DetailPage> {
                                       Row(
                                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                         children: [
-                                          Text(snapshot.data[0]["townHallLevel"].toString(), style: const TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 15)
+                                          Text(snapshot.data[0]["townHallLevel"].toString(), style: Theme.of(context).textTheme.labelLarge!.copyWith(color: Theme.of(context).colorScheme.surface)
                                           ),
                                           SizedBox(width: 25),
-                                          Text(snapshot.data[0]["builderHallLevel"].toString(), style: const TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 15)
+                                          Text(snapshot.data[0]["builderHallLevel"].toString(), style: Theme.of(context).textTheme.labelLarge!.copyWith(color: Theme.of(context).colorScheme.surface)
                                           ),
                                         ],
                                       )
@@ -1762,11 +1743,10 @@ class _DetailPageState extends State<DetailPage> {
                       padding: const EdgeInsets.all(10.0),
                       child: Container(
                         decoration: BoxDecoration(
-                          border: Border.all(color: Colors.black),
                           gradient: LinearGradient(
-                            begin: Alignment.centerLeft,
-                            end: Alignment.centerRight,
-                            colors: [Colors.black.withValues(alpha: 0.8), Colors.black.withValues(alpha: 0.6)],
+                              begin: Alignment.topLeft,
+                              end: Alignment.bottomRight,
+                              colors: [Theme.of(context).colorScheme.surfaceContainer, Theme.of(context).colorScheme.secondaryContainer]
                           ),
                           borderRadius: BorderRadius.circular(30),
                         ),
@@ -1775,13 +1755,6 @@ class _DetailPageState extends State<DetailPage> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Padding(
-                                padding: const EdgeInsets.only(left: 8.0, top: 5.0),
-                                child: Text("Clan", style: const TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 30)
-                                ),
-                              ),
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: Column(
@@ -1795,29 +1768,22 @@ class _DetailPageState extends State<DetailPage> {
                                           Column(
                                             crossAxisAlignment: CrossAxisAlignment.start,
                                             children: [
-                                              Text(snapshot.data[0]["clan"]["name"], style: const TextStyle(
-                                                  color: Colors.white,
-                                                  fontSize: 30)
+                                              Text(snapshot.data[0]["clan"]["name"], style: Theme.of(context).textTheme.displaySmall!.copyWith(color: Theme.of(context).colorScheme.surface)
                                               ),
                                               SizedBox(height: 5),
                                               Row(
                                                 children: [
-                                                  Icon(Icons.language, color: Colors.white),
+                                                  Icon(Icons.language, color: Theme.of(context).colorScheme.surface),
                                                   SizedBox(width: 5),
-                                                  Text(snapshot.data[1]["location"]["name"], style: const TextStyle(
-                                                      color: Colors.white54,
-                                                      fontSize: 15)
-                                                  ),
+                                                  Text(snapshot.data[1]["location"]["name"], style: Theme.of(context).textTheme.labelLarge!.copyWith(color: Theme.of(context).colorScheme.onSurface)),
                                                 ],
                                               ),
                                               SizedBox(height: 5),
                                               Row(
                                                 children: [
-                                                  Icon(Icons.person, color: Colors.white),
+                                                  Icon(Icons.person, color: Theme.of(context).colorScheme.surface),
                                                   SizedBox(width: 5),
-                                                  Text("Mitglieder: ${snapshot.data[1]["members"]}", style: const TextStyle(
-                                                      color: Colors.white54,
-                                                      fontSize: 15)
+                                                  Text("Mitglieder: ${snapshot.data[1]["members"]}", style: Theme.of(context).textTheme.labelLarge!.copyWith(color: Theme.of(context).colorScheme.onSurface)
                                                   ),
                                                 ],
                                               ),
@@ -1825,7 +1791,7 @@ class _DetailPageState extends State<DetailPage> {
                                               Row(
                                                 crossAxisAlignment: CrossAxisAlignment.start,
                                                 children: [
-                                                  Icon(Icons.sell, color: Colors.white),
+                                                  Icon(Icons.sell, color: Theme.of(context).colorScheme.surface),
                                                   SizedBox(width: 5),
                                                   snapshot.data[1]["labels"].length >= 1? Image.network(snapshot.data[1]["labels"][0]["iconUrls"]["small"], scale: 2) : Container(),
                                                   snapshot.data[1]["labels"].length >= 2? Image.network(snapshot.data[1]["labels"][1]["iconUrls"]["small"], scale: 2) : Container(),
@@ -1836,9 +1802,7 @@ class _DetailPageState extends State<DetailPage> {
                                           ),
                                           Column(
                                             children: [
-                                              Text(snapshot.data[0]["clan"]["tag"], style: const TextStyle(
-                                                  color: Colors.white,
-                                                  fontSize: 15)
+                                              Text(snapshot.data[0]["clan"]["tag"], style: Theme.of(context).textTheme.labelLarge!.copyWith(color: Theme.of(context).colorScheme.onSurface)
                                               ),
                                               Image.network(snapshot.data[0]["clan"]["badgeUrls"]["medium"], scale: 2),
                                             ],
@@ -1849,12 +1813,12 @@ class _DetailPageState extends State<DetailPage> {
                                       Row(
                                         crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
-                                          Icon(Icons.edit, color: Colors.white),
+                                          Icon(Icons.edit, color: Theme.of(context).colorScheme.surface),
                                           SizedBox(width: 5),
                                           SizedBox(width: 280,
                                               child: Text(
-                                                  textWidthBasis: TextWidthBasis.parent, "${snapshot.data[1]["description"]}", style: const TextStyle(
-                                                  color: Colors.white54,
+                                                  textWidthBasis: TextWidthBasis.parent, "${snapshot.data[1]["description"]}", style: TextStyle(
+                                                  color: Theme.of(context).colorScheme.onSurface,
                                                   fontSize: 11)
                                               )
                                           )
@@ -1863,9 +1827,9 @@ class _DetailPageState extends State<DetailPage> {
                                       SizedBox(height: 5),
                                       Row(
                                         children: [
-                                          Icon(Icons.key, color: Colors.white),
+                                          Icon(Icons.key, color: Theme.of(context).colorScheme.surface),
                                           SizedBox(width: 5),
-                                          Utils.getRole(snapshot.data[0]["role"])
+                                          Utils.getRole(snapshot.data[0]["role"], context)
                                         ],
                                       ),
                                       SizedBox(height: 5),
@@ -1874,25 +1838,19 @@ class _DetailPageState extends State<DetailPage> {
                                           Image.asset('lib/utils/img/Trophy.png',
                                               fit: BoxFit.cover, scale: 1.5),
                                           SizedBox(width: 7),
-                                          Text("${snapshot.data[1]["clanPoints"]}", style: const TextStyle(
-                                              color: Colors.white54,
-                                              fontSize: 15)
+                                          Text("${snapshot.data[1]["clanPoints"]}", style: Theme.of(context).textTheme.labelLarge!.copyWith(color: Theme.of(context).colorScheme.onSurface)
                                           ),
                                           SizedBox(width: 10),
                                           Image.asset('lib/utils/img/BuilderHallTrophy.png',
                                               fit: BoxFit.cover, scale: 11.5),
                                           SizedBox(width: 7),
-                                          Text("${snapshot.data[1]["clanBuilderBasePoints"]}", style: const TextStyle(
-                                              color: Colors.white54,
-                                              fontSize: 15)
+                                          Text("${snapshot.data[1]["clanBuilderBasePoints"]}", style: Theme.of(context).textTheme.labelLarge!.copyWith(color: Theme.of(context).colorScheme.onSurface)
                                           ),
                                           SizedBox(width: 10),
                                           Image.asset('lib/utils/img/TrophyC.webp',
                                               fit: BoxFit.cover, scale: 1.5),
                                           SizedBox(width: 7),
-                                          Text("${snapshot.data[1]["clanCapitalPoints"]}", style: const TextStyle(
-                                              color: Colors.white54,
-                                              fontSize: 15)
+                                          Text("${snapshot.data[1]["clanCapitalPoints"]}", style: Theme.of(context).textTheme.labelLarge!.copyWith(color: Theme.of(context).colorScheme.onSurface)
                                           ),
                                         ],
                                       ),
@@ -1904,15 +1862,15 @@ class _DetailPageState extends State<DetailPage> {
                                           Column(
                                             crossAxisAlignment: CrossAxisAlignment.start,
                                             children: [
-                                              Text("Wins: ${snapshot.data[1]["warWins"]} / Ties: ${snapshot.data[1]["warTies"]} / Losses: ${snapshot.data[1]["warLosses"]}", style: const TextStyle(
-                                                  color: Colors.white,
+                                              Text("Wins: ${snapshot.data[1]["warWins"]} / Ties: ${snapshot.data[1]["warTies"]} / Losses: ${snapshot.data[1]["warLosses"]}", style: TextStyle(
+                                                  color: Theme.of(context).colorScheme.surface,
                                                   fontSize: 15)
                                               ),
                                               Row(
                                                 children: [
                                                   Icon(Icons.local_fire_department, color: Colors.deepOrange),
-                                                  Text("Streak: ${snapshot.data[1]["warWinStreak"]}", style: const TextStyle(
-                                                      color: Colors.white,
+                                                  Text("Streak: ${snapshot.data[1]["warWinStreak"]}", style: TextStyle(
+                                                      color: Theme.of(context).colorScheme.surface,
                                                       fontSize: 15)
                                                   ),
                                                 ],
@@ -1932,7 +1890,7 @@ class _DetailPageState extends State<DetailPage> {
                                     return ClipRRect(
                                         borderRadius: BorderRadius.circular(20),
                                         child: Container(
-                                            color: Colors.black,
+                                            color: Theme.of(context).colorScheme.surfaceContainer,
                                             child: Padding(
                                                 padding: const EdgeInsets.all(8.0),
                                                 child: Row(
@@ -1943,13 +1901,9 @@ class _DetailPageState extends State<DetailPage> {
                                                     Column(
                                                       crossAxisAlignment: CrossAxisAlignment.start,
                                                       children: [
-                                                        Text("${snapshot.data[1]["clanCapital"]["districts"][index]["name"]}", style: const TextStyle(
-                                                            color: Colors.white,
-                                                            fontSize: 15)
+                                                        Text("${snapshot.data[1]["clanCapital"]["districts"][index]["name"]}", style: Theme.of(context).textTheme.labelLarge!.copyWith(color: Theme.of(context).colorScheme.surface)
                                                         ),
-                                                        Text("Lvl: ${snapshot.data[1]["clanCapital"]["districts"][index]["districtHallLevel"]}", style: const TextStyle(
-                                                            color: Colors.white54,
-                                                            fontSize: 15)
+                                                        Text("Lvl: ${snapshot.data[1]["clanCapital"]["districts"][index]["districtHallLevel"]}", style: Theme.of(context).textTheme.labelLarge!.copyWith(color: Theme.of(context).colorScheme.onSurface)
                                                         ),
                                                       ],
                                                     )
@@ -1972,7 +1926,7 @@ class _DetailPageState extends State<DetailPage> {
                                       child: ClipRRect(
                                           borderRadius: BorderRadius.circular(20),
                                           child: Container(
-                                              color: snapshot.data[1]["memberList"][index]["tag"] == snapshot.data[0]["tag"]? Colors.green.shade800 : Colors.black,
+                                              color: snapshot.data[1]["memberList"][index]["tag"] == snapshot.data[0]["tag"]? Colors.lightGreen.withValues(alpha: 0.7) : Theme.of(context).colorScheme.surfaceContainer,
                                               child: Padding(
                                                   padding: const EdgeInsets.all(8.0),
                                                   child: Row(
@@ -1981,8 +1935,8 @@ class _DetailPageState extends State<DetailPage> {
                                                       Row(
                                                         mainAxisAlignment: MainAxisAlignment.start,
                                                         children: [
-                                                          Text("${snapshot.data[1]["memberList"][index]["clanRank"]}.", style: const TextStyle(
-                                                              color: Colors.white,
+                                                          Text("${snapshot.data[1]["memberList"][index]["clanRank"]}.", style: TextStyle(
+                                                              color: Theme.of(context).colorScheme.surface,
                                                               fontSize: 25)
                                                           ),
                                                           SizedBox(width: 5),
@@ -1993,25 +1947,25 @@ class _DetailPageState extends State<DetailPage> {
                                                             children: [
                                                               Row(
                                                                 children: [
-                                                                  Text("${snapshot.data[1]["memberList"][index]["name"]}", style: const TextStyle(
-                                                                      color: Colors.white,
+                                                                  Text("${snapshot.data[1]["memberList"][index]["name"]}", style: TextStyle(
+                                                                      color: Theme.of(context).colorScheme.surface,
                                                                       fontSize: 15)
                                                                   ),
                                                                 ],
                                                               ),
                                                               Row(
                                                                 children: [
-                                                                  Icon(Icons.arrow_upward, size: 20, color: Colors.white),
+                                                                  Icon(Icons.arrow_upward, size: 20, color: Theme.of(context).colorScheme.surface),
                                                                   SizedBox(width: 3),
-                                                                  Text("${snapshot.data[1]["memberList"][index]["donations"]}", style: const TextStyle(
-                                                                      color: Colors.white54,
+                                                                  Text("${snapshot.data[1]["memberList"][index]["donations"]}", style: TextStyle(
+                                                                      color: Theme.of(context).colorScheme.onSurface,
                                                                       fontSize: 15)
                                                                   ),
                                                                   SizedBox(width: 10),
-                                                                  Icon(Icons.arrow_downward, size: 20, color: Colors.white),
+                                                                  Icon(Icons.arrow_downward, size: 20, color: Theme.of(context).colorScheme.surface),
                                                                   SizedBox(width: 3),
-                                                                  Text("${snapshot.data[1]["memberList"][index]["donationsReceived"]}", style: const TextStyle(
-                                                                      color: Colors.white54,
+                                                                  Text("${snapshot.data[1]["memberList"][index]["donationsReceived"]}", style: TextStyle(
+                                                                      color: Theme.of(context).colorScheme.onSurface,
                                                                       fontSize: 15)
                                                                   ),
                                                                 ],
@@ -2025,8 +1979,8 @@ class _DetailPageState extends State<DetailPage> {
                                                           Image.asset('lib/utils/img/Trophy.png',
                                                               fit: BoxFit.cover, scale: 2),
                                                           SizedBox(width: 5),
-                                                          Text("${snapshot.data[1]["memberList"][index]["trophies"]}", style: const TextStyle(
-                                                              color: Colors.white54,
+                                                          Text("${snapshot.data[1]["memberList"][index]["trophies"]}", style: TextStyle(
+                                                              color: Theme.of(context).colorScheme.surface,
                                                               fontSize: 15)
                                                           ),
                                                           SizedBox(width: 5),

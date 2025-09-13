@@ -445,9 +445,9 @@ bool isRoyalChampEquipment(String name) {
   return name == "Royal Gem" || name == "Seeking Shield" || name == "Hog Rider Puppet" || name == "Haste Vial" || name == "Rocket Spear" || name == "Electro Boots";
 }
 
-Text getRole(String role) {
-  return Text(role == "coLeader"? "Co-Leader" : role == "leader"? "Leader" : role == "elder"? "Elder" : "Member", style: const TextStyle(
-      color: Colors.white54,
+Text getRole(String role, BuildContext context) {
+  return Text(role == "coLeader"? "Co-Leader" : role == "leader"? "Leader" : role == "elder"? "Elder" : "Member", style: TextStyle(
+      color: Theme.of(context).colorScheme.onSurface,
       fontSize: 15));
 }
 
