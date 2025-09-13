@@ -2044,7 +2044,7 @@ class _DetailPageState extends State<DetailPage> {
                     borderRadius: BorderRadius.circular(20),
                     child: Container(
                       width: MediaQuery.of(context).size.width - 2 * 10,
-                      color: Colors.black,
+                      color: Theme.of(context).colorScheme.surfaceContainer,
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Row(
@@ -2054,15 +2054,11 @@ class _DetailPageState extends State<DetailPage> {
                               children: [
                                 DataProvider.awaitClanWarLeagueIcon(snapshot.data[1]["warLeague"]["name"], 1),
                                 SizedBox(width: 5),
-                                Text(snapshot.data[1]["warLeague"]["name"], style: const TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 30)
+                                Text(snapshot.data[1]["warLeague"]["name"], style: Theme.of(context).textTheme.displaySmall!.copyWith(color: Theme.of(context).colorScheme.surface)
                                 ),
                               ],
                             ),
-                            Text("${snapshot.data[0]["round1"][0]["teamSize"]} vs. ${snapshot.data[0]["round1"][0]["teamSize"]}", style: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 20)
+                            Text("${snapshot.data[0]["round1"][0]["teamSize"]} vs. ${snapshot.data[0]["round1"][0]["teamSize"]}", style: Theme.of(context).textTheme.headlineSmall!.copyWith(color: Theme.of(context).colorScheme.surface)
                             ),
                           ],
                         ),
@@ -2079,28 +2075,21 @@ class _DetailPageState extends State<DetailPage> {
                           child: ClipRRect(
                               borderRadius: BorderRadius.circular(20),
                               child: Container(
-                                  color: Colors.black,
+                                  color: Theme.of(context).colorScheme.surfaceContainer,
                                   child: Padding(
                                       padding: const EdgeInsets.all(8.0),
                                       child: Row(
                                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                         children: [
-                                          Text("${index + 1}. ${ranking[index]["name"]}", style: const TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 20)
-                                          ),
+                                          Text("${index + 1}. ${ranking[index]["name"]}", style: Theme.of(context).textTheme.titleMedium!.copyWith(color: Theme.of(context).colorScheme.surface)),
                                           Row(
                                             children: [
                                               Image.asset(star, scale: 1.5),
                                               SizedBox(width: 5),
-                                              Text("${ranking[index]["stars"]}", style: const TextStyle(
-                                                  color: Colors.white,
-                                                  fontSize: 15)
+                                              Text("${ranking[index]["stars"]}", style: Theme.of(context).textTheme.labelLarge!.copyWith(color: Theme.of(context).colorScheme.surface)
                                               ),
                                               SizedBox(width: 15),
-                                              Text("${ranking[index]["percentage"].toStringAsFixed(0)}%", style: const TextStyle(
-                                                  color: Colors.white,
-                                                  fontSize: 15)
+                                              Text("${ranking[index]["percentage"].toStringAsFixed(0)}%", style: Theme.of(context).textTheme.labelLarge!.copyWith(color: Theme.of(context).colorScheme.surface)
                                               ),
                                             ],
                                           ),
@@ -2121,9 +2110,7 @@ class _DetailPageState extends State<DetailPage> {
                         return Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            ?snapshot.data[0]["round${ind + 1}"].length != 0? Text("Round ${ind + 1}", style: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 30)
+                            ?snapshot.data[0]["round${ind + 1}"].length != 0? Text("Round ${ind + 1}", style: Theme.of(context).textTheme.displaySmall!.copyWith(color: Theme.of(context).colorScheme.surface)
                             ) : null,
                             SizedBox(height: 10),
                             for(var element in snapshot.data[0]["round${ind + 1}"]) Padding(
@@ -2131,7 +2118,7 @@ class _DetailPageState extends State<DetailPage> {
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(20),
                                 child: Container(
-                                  color: Colors.black,
+                                  color: Theme.of(context).colorScheme.surfaceContainer,
                                   child: Padding(
                                     padding: const EdgeInsets.all(8.0),
                                     child: Column(
@@ -2186,7 +2173,14 @@ class _DetailPageState extends State<DetailPage> {
           ClipRRect(
             borderRadius: BorderRadius.circular(20),
             child: Container(
-              color: Colors.black,
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                    colors: [Theme.of(context).colorScheme.surfaceContainer, Theme.of(context).colorScheme.secondaryContainer]
+                ),
+                borderRadius: BorderRadius.circular(30),
+              ),
               child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Column(
@@ -2230,178 +2224,153 @@ class _DetailPageState extends State<DetailPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  for(var member in Utils.sortClanWarMembers(war["clan"]["members"])) Padding(
-                    padding: const EdgeInsets.only(bottom: 8.0),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(20),
-                      child: Container(
-                        width: (MediaQuery.of(context).size.width / 2) - 20,
-                        color: Colors.black,
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Utils.getClanWarStars(member),
-                                      Container(
-                                        height: 70,
-                                        child: DataProvider.awaitTownHallIcon(member["townhallLevel"], 2),
-                                      )
-                                    ],
-                                  ),
-                                  Column(
-                                    children: [
-                                      Text("Attacks",
-                                      style: const TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 15
-                                      ),
-                                      ),
-                                      for(var attack in member["attacks"]?? []) Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: [
-                                          Row(
-                                          mainAxisAlignment: MainAxisAlignment.start,
+              Flexible(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    for(var member in Utils.sortClanWarMembers(war["clan"]["members"])) Padding(
+                      padding: const EdgeInsets.only(bottom: 8.0),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(20),
+                        child: Container(
+                          color: Theme.of(context).colorScheme.surfaceContainer,
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Utils.getClanWarStars(member, context),
+                                        SizedBox(
+                                          height: 70,
+                                          child: DataProvider.awaitTownHallIcon(member["townhallLevel"], 2),
+                                        )
+                                      ],
+                                    ),
+                                    Column(
+                                      children: [
+                                        Image.asset(swords, scale: 3.5),
+                                        for(var attack in member["attacks"]?? []) Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
                                           children: [
-                                            Text("${war["opponent"]["members"].where((m) => m['tag'] == attack["defenderTag"]).toList()[0]["mapPosition"]}.",
-                                              style: const TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 15
-                                              ),
-                                            ),
-                                            SizedBox(width: 2),
-                                            for(int i = 0; i < attack["stars"]; i++) Image.asset(whitestar, scale: 6),
-                                            for(int j = 0; j < (3 - attack["stars"]); j++) Image.asset(whitestarempty, scale: 6),
-                                          ],
-                                          ),
-                                          Row(
+                                            Row(
+                                            mainAxisAlignment: MainAxisAlignment.start,
                                             children: [
-                                              SizedBox(width: 15),
-                                              Text("${attack["destructionPercentage"]}%",
-                                                style: const TextStyle(
-                                                  color: Colors.white,
-                                                  fontSize: 15
-                                                ),
-                                              )
-                                            ],
-                                          )
-                                        ],
-                                      ),
-                                    ],
-                                  )
-                                ],
-                              ),
-                              AutoSizeText("${member["mapPosition"]}. ${member["name"]}",
-                                style: const TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 15
-                                ),
-                                maxLines: 1,
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  for(var member in Utils.sortClanWarMembers(war["opponent"]["members"])) Padding(
-                    padding: const EdgeInsets.only(bottom: 8.0),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(20),
-                      child: Container(
-                        width: (MediaQuery.of(context).size.width / 2) - 20,
-                        color: Colors.black,
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Text("Attacks",
-                                      style: const TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 15
-                                      ),
-                                      ),
-                                      for(var attack in (member["attacks"] ?? [])) Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: [
-                                          Row(
-                                          mainAxisAlignment: MainAxisAlignment.start,
-                                            children: [
-                                              Text("${war["clan"]["members"].where((m) => m['tag'] == attack["defenderTag"]).toList()[0]["mapPosition"]}.",
-                                                style: const TextStyle(
-                                                  color: Colors.white,
-                                                  fontSize: 15
-                                                ),
+                                              Text("${war["opponent"]["members"].where((m) => m['tag'] == attack["defenderTag"]).toList()[0]["mapPosition"]}.",
+                                                  style: Theme.of(context).textTheme.labelLarge!.copyWith(color: Theme.of(context).colorScheme.surface)
                                               ),
                                               SizedBox(width: 2),
                                               for(int i = 0; i < attack["stars"]; i++) Image.asset(whitestar, scale: 6),
                                               for(int j = 0; j < (3 - attack["stars"]); j++) Image.asset(whitestarempty, scale: 6),
                                             ],
-                                          ),
-                                          Row(
-                                            children: [
-                                              SizedBox(width: 15),
-                                              Text("${attack["destructionPercentage"]}%",
-                                                style: const TextStyle(
-                                                  color: Colors.white,
-                                                  fontSize: 15
-                                                ),
-                                              )
-                                            ],
-                                          )
-                                        ],
-                                      )
-                                    ],
-                                  ),
-                                  Column(
-                                    crossAxisAlignment: CrossAxisAlignment.end,
-                                    children: [
-                                      Utils.getClanWarStars(member),
-                                      Container(
-                                        height: 70,
-                                        child: DataProvider.awaitTownHallIcon(member["townhallLevel"], 2),
-                                      ),
-                                    ],
-                                  )
-                                ],
-                              ),
-                              AutoSizeText("${member["mapPosition"]}. ${member["name"]}",
-                                style: const TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 15
+                                            ),
+                                            Row(
+                                              children: [
+                                                SizedBox(width: 15),
+                                                Text("${attack["destructionPercentage"]}%",
+                                                    style: Theme.of(context).textTheme.labelLarge!.copyWith(color: Theme.of(context).colorScheme.surface)
+                                                )
+                                              ],
+                                            )
+                                          ],
+                                        ),
+                                      ],
+                                    )
+                                  ],
                                 ),
-                                maxLines: 1,
-                              )
-                            ],
+                                AutoSizeText("${member["mapPosition"]}. ${member["name"]}",
+                                  style: Theme.of(context).textTheme.labelLarge!.copyWith(color: Theme.of(context).colorScheme.surface),
+                                  maxLines: 1,
+                                )
+                              ],
+                            ),
                           ),
                         ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
+              ),
+              SizedBox(width: 5),
+              Flexible(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    for(var member in Utils.sortClanWarMembers(war["opponent"]["members"])) Padding(
+                      padding: const EdgeInsets.only(bottom: 8.0),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(20),
+                        child: Container(
+                          color: Theme.of(context).colorScheme.surfaceContainer,
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Image.asset(swords, scale: 3.5),
+                                        for(var attack in (member["attacks"] ?? [])) Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            Row(
+                                            mainAxisAlignment: MainAxisAlignment.start,
+                                              children: [
+                                                Text("${war["clan"]["members"].where((m) => m['tag'] == attack["defenderTag"]).toList()[0]["mapPosition"]}.",
+                                                  style: Theme.of(context).textTheme.labelLarge!.copyWith(color: Theme.of(context).colorScheme.surface)
+                                                ),
+                                                SizedBox(width: 2),
+                                                for(int i = 0; i < attack["stars"]; i++) Image.asset(whitestar, scale: 6),
+                                                for(int j = 0; j < (3 - attack["stars"]); j++) Image.asset(whitestarempty, scale: 6),
+                                              ],
+                                            ),
+                                            Row(
+                                              children: [
+                                                SizedBox(width: 15),
+                                                Text("${attack["destructionPercentage"]}%",
+                                                  style: Theme.of(context).textTheme.labelLarge!.copyWith(color: Theme.of(context).colorScheme.surface)
+                                                )
+                                              ],
+                                            )
+                                          ],
+                                        )
+                                      ],
+                                    ),
+                                    Column(
+                                      crossAxisAlignment: CrossAxisAlignment.end,
+                                      children: [
+                                        Utils.getClanWarStars(member, context),
+                                        SizedBox(
+                                          height: 70,
+                                          child: DataProvider.awaitTownHallIcon(member["townhallLevel"], 2),
+                                        ),
+                                      ],
+                                    )
+                                  ],
+                                ),
+                                AutoSizeText("${member["mapPosition"]}. ${member["name"]}",
+                                  style: Theme.of(context).textTheme.labelLarge!.copyWith(color: Theme.of(context).colorScheme.surface),
+                                  maxLines: 1,
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ],
           ) : null,
@@ -2475,11 +2444,8 @@ class _DetailPageState extends State<DetailPage> {
                                                         mainAxisAlignment: MainAxisAlignment.end,
                                                         children: [
                                                           SizedBox(
-                                                            width: (MediaQuery.of(context).size.width / 2) - 3 * 40,
-                                                            child: AutoSizeText(clanwars[index]["clan"]["name"], style: TextStyle(
-                                                                color: Theme.of(context).colorScheme.surface,
-                                                                fontSize: 12),
-                                                              maxLines: 1,
+                                                            width: 80,
+                                                            child: AutoSizeText(clanwars[index]["clan"]["name"], style: Theme.of(context).textTheme.titleSmall!.copyWith(color: Theme.of(context).colorScheme.surface),
                                                             ),
                                                           ),
                                                           SizedBox(width: 5),
@@ -2518,11 +2484,8 @@ class _DetailPageState extends State<DetailPage> {
                                                           Image.network(clanwars[index]["opponent"]["badgeUrls"]["small"], scale: 2),
                                                           SizedBox(width: 5),
                                                           SizedBox(
-                                                            width: (MediaQuery.of(context).size.width / 2) - 3 * 40,
-                                                            child: AutoSizeText(clanwars[index]["opponent"]["name"], style: TextStyle(
-                                                                color: Theme.of(context).colorScheme.surface,
-                                                                fontSize: 12),
-                                                              maxLines: 1,
+                                                            width: 80,
+                                                            child: AutoSizeText(clanwars[index]["opponent"]["name"], style: Theme.of(context).textTheme.titleSmall!.copyWith(color: Theme.of(context).colorScheme.surface),
                                                             ),
                                                           ),
                                                         ],

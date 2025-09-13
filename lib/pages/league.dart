@@ -475,9 +475,8 @@ class _LeaguePageState extends State<LeaguePage> {
                                                               mainAxisAlignment: MainAxisAlignment.end,
                                                               children: [
                                                                 SizedBox(
-                                                                  width: (MediaQuery.of(context).size.width / 2) - 3 * 40,
+                                                                  width: 80,
                                                                   child: AutoSizeText(clanwars[index]["clan"]["name"], style: Theme.of(context).textTheme.titleSmall!.copyWith(color: Theme.of(context).colorScheme.surface),
-                                                                    maxLines: 1,
                                                                   ),
                                                                 ),
                                                                 SizedBox(width: 5),
@@ -514,11 +513,8 @@ class _LeaguePageState extends State<LeaguePage> {
                                                                 Image.network(clanwars[index]["opponent"]["badgeUrls"]["small"], scale: 2),
                                                                 SizedBox(width: 5),
                                                                 SizedBox(
-                                                                  width: (MediaQuery.of(context).size.width / 2) - 3 * 40,
-                                                                  child: AutoSizeText(clanwars[index]["opponent"]["name"], style: TextStyle(
-                                                                    color: Theme.of(context).colorScheme.surface,
-                                                                    fontSize: 12),
-                                                                    maxLines: 1,
+                                                                  width: 80,
+                                                                  child: AutoSizeText(clanwars[index]["opponent"]["name"], style: Theme.of(context).textTheme.titleSmall!.copyWith(color: Theme.of(context).colorScheme.surface),
                                                                   ),
                                                                 ),
                                                               ],

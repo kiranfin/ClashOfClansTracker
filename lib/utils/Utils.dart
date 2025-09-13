@@ -957,13 +957,13 @@ Text getClanWarStateText(String text, BuildContext context) {
   return Text("War vorbei", style: Theme.of(context).textTheme.labelLarge!.copyWith(color: Theme.of(context).colorScheme.onSurface));
 }
 
-Row getClanWarStars(Map<String, dynamic> map) {
+Row getClanWarStars(Map<String, dynamic> map, BuildContext context) {
   return Row(
     children: [
       for(int i = 0; i < (map["bestOpponentAttack"] != null? map["bestOpponentAttack"]["stars"] : 0); i++) Image.asset(whitestar, scale: 6),
       for(int i = 0; i < (3 - (map["bestOpponentAttack"] != null? map["bestOpponentAttack"]["stars"] : 0)); i++) Image.asset(whitestarempty, scale: 6),
       SizedBox(width: 5),
-      Text("${map["bestOpponentAttack"] != null? map["bestOpponentAttack"]["destructionPercentage"] : 0}%", style: const TextStyle(color: Colors.white, fontSize: 12))
+      Text("${map["bestOpponentAttack"] != null? map["bestOpponentAttack"]["destructionPercentage"] : 0}%", style: TextStyle(color: Theme.of(context).colorScheme.surface, fontSize: 12))
     ],
   );
 }
