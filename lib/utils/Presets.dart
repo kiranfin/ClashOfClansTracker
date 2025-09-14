@@ -185,34 +185,4 @@ Widget getAccountSwitchDialog(BuildContext context) {
       ),
     ),
   );
-
-
-
-    /*Column(
-      children: [
-        Text('Acccount wechseln', style: Theme.of(context).textTheme.displaySmall!.copyWith(color: Theme.of(context).colorScheme.surface)),
-        ListView.builder(
-            itemBuilder: (BuildContext context, index) {
-              String currentuser = user[index];
-              return ListTile(
-                title: Text(usermap[currentuser], style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 15)),
-                trailing: IconButton(
-                    onPressed: () {
-                      List<String> userlist = UserSP.getUser();
-                      if(userlist.length > 1) {
-                        userlist.remove(currentuser);
-                        UserSP.setUsers(userlist);
-                        if (UserSP.getCurrentUser() == currentuser) UserSP.setCurrentUser(userlist[0]);
-                        Navigator.popAndPushNamed(context, "/default");
-                      }
-                    },
-                    icon: Icon(Icons.delete, color: Colors.redAccent)
-                ),
-              );
-            }
-        ),
-      ]
-  );*/
 }
