@@ -146,15 +146,18 @@ class _SettingsPageState extends State<SettingsPage> {
                               title: Text(usermap[currentuser]),
                               trailing: const Icon(Icons.chevron_right_rounded),
                               onTap: () async {
-                                String newuser = await showModalBottomSheet(
+                                String? newuser = await showModalBottomSheet(
+                                    useSafeArea: true,
                                     context: context,
                                     builder: (BuildContext context) {
                                       return Presets.getAccountSwitchDialog(context);
                                     }
                                 );
-                                setState(() {
-                                  currentuser = newuser;
-                                });
+                                if(newuser != null) {
+                                  setState(() {
+                                    currentuser = newuser;
+                                  });
+                                }
                               },
                             ),
                             ListTile(
