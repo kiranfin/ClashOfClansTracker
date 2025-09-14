@@ -11,18 +11,18 @@ class StartScreenPage extends StatefulWidget {
 class _StartScreenPageState extends State<StartScreenPage> {
 
   final TextEditingController controller = TextEditingController();
-  String? errorText = null;
+  String? errorText;
   bool valid = false;
-  String? value = null;
+  String? value;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         gradient: LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
-          colors: [/*Color(0xFF1C2952)*/Color(0xFF171717), /*Color(0xFF101E6B)*/Color(0xFF171717)]
+            colors: [Theme.of(context).colorScheme.primary, Theme.of(context).colorScheme.secondary]
         )
       ),
       child: Scaffold(
@@ -30,7 +30,7 @@ class _StartScreenPageState extends State<StartScreenPage> {
           backgroundColor: Colors.transparent,
           leading: UserSP.getUser().isEmpty? Container() : IconButton(onPressed: () {
             Navigator.pop(context);
-          }, icon: Icon(Icons.arrow_back, color: Colors.white)),
+          }, icon: Icon(Icons.arrow_back, color: Theme.of(context).colorScheme.tertiary)),
         ),
         body: SafeArea(
           child: SingleChildScrollView(
@@ -39,13 +39,8 @@ class _StartScreenPageState extends State<StartScreenPage> {
                   padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 15.0),
                   child: Column(
                     children: [
-                      UserSP.getUser().isEmpty? Text("Welcome!", style: const TextStyle(color: Colors.white,
-                          fontFamily: "Poppins",
-                          fontSize: 35)) : Text(""),
-                      Text("Account hinzufügen", style: const TextStyle(color: Colors.white,
-                          fontFamily: "Poppins",
-                          fontSize: 20)
-                      ),
+                      UserSP.getUser().isEmpty? Text("Welcome!", style: TextStyle(color: Theme.of(context).colorScheme.surface, fontSize: 35)) : Text(""),
+                      Text("Account hinzufügen", style: Theme.of(context).textTheme.titleMedium!.copyWith(color: Theme.of(context).colorScheme.surface)),
                       SizedBox(height: 5),
                       Container(
                         width: MediaQuery.of(context).size.width * 0.7,
@@ -53,23 +48,23 @@ class _StartScreenPageState extends State<StartScreenPage> {
                         padding: EdgeInsets.all(MediaQuery.of(context).size.width * 0.03),
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(20),
-                            color: Colors.white,
+                            color: Theme.of(context).colorScheme.surface,
                             border: Border.all(color: Colors.grey)),
                         child: Center(
                           child: Row(
                             children: <Widget>[
-                              const Icon(
-                                Icons.tag,
-                                color: Colors.grey,
-                              ),
-                              SizedBox(
-                                width: 10,
-                              ),
+                              Icon(Icons.tag, color: Theme.of(context).colorScheme.primary),
+                              SizedBox(width: 10),
                               Expanded(
                                 child: TextFormField(
                                   controller: controller,
                                   keyboardType: TextInputType.emailAddress,
+                                  style: Theme.of(context).textTheme.labelLarge!.copyWith(color: Theme.of(context).colorScheme.primary),
                                   decoration: InputDecoration(
+                                    focusedBorder: InputBorder.none,
+                                    enabledBorder: InputBorder.none,
+                                    focusedErrorBorder: InputBorder.none,
+                                    hintStyle: Theme.of(context).textTheme.labelLarge!.copyWith(color: Theme.of(context).colorScheme.primary),
                                     errorText: errorText,
                                     hintText: "#P9V29R8RJ"
                                   ),
@@ -119,15 +114,13 @@ class _StartScreenPageState extends State<StartScreenPage> {
                         height: 50,
                         width: MediaQuery.of(context).size.width * 0.7,
                         child: ElevatedButton(
-                          style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all(Colors.black),
-                            shape: MaterialStateProperty.all<
-                              RoundedRectangleBorder>(
-                                RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(20.0),
-                                )
-                              )
-                            ),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Theme.of(context).colorScheme.tertiary.withValues(alpha: 0.3),
+                            shadowColor: Colors.transparent,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                          ),
                           onPressed: () {
                             if(valid) {
                               List<String> old = UserSP.getUser();
@@ -145,8 +138,7 @@ class _StartScreenPageState extends State<StartScreenPage> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
-                              Text("Hinzufügen", style: const TextStyle(color: Colors.white,
-                              fontFamily: "Poppins"))
+                              Text("Hinzufügen", style: Theme.of(context).textTheme.labelLarge!.copyWith(color: Theme.of(context).colorScheme.surface)),
                             ],
                           )
                         )

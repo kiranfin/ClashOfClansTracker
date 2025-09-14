@@ -14,6 +14,7 @@ class UserSP {
     return await _preferences.setString("usermap", encodedMap);
   }
   static Future setDarkTheme(bool theme) async => await _preferences.setBool("darktheme", theme);
+  static Future setAccentColor(String hex) async => await _preferences.setString("accentcolor", hex);
 
   static Future setUserWalls(String user, String walls) async => await _preferences.setString("userwalls$user", walls);
   static Future setUserDefenses(String user, String defenses) async => await _preferences.setString("userdefenses$user", defenses);
@@ -31,6 +32,7 @@ class UserSP {
     return _preferences.getString("usermap")?? json.encode(defmap);
   }
   static bool getDarkTheme() => _preferences.getBool("darktheme") ?? true;
+  static String getAccentColor() => _preferences.getString("accentcolor") ?? "#89e3fa";
 
   static Map<String, dynamic> getDecodedUserMap() {
     String usermap = getUserMap();
@@ -42,4 +44,11 @@ class UserSP {
   static String? getUserTraps(String user) => _preferences.getString("usertraps$user");
   static String? getUserArmyBuildings(String user) => _preferences.getString("userarmy$user");
   static String? getUserResourceBuildings(String user) => _preferences.getString("userresources$user");
+}
+
+const themeNames = ['Light', 'Dark'];
+
+enum ThemeType {
+  light,
+  dark,
 }
