@@ -276,13 +276,13 @@ class _DetailPageState extends State<DetailPage> {
                                           ),
                                         ),
                                         onPressed: () async {
-                                          String newval = await showDialog(
+                                          String? newval = await showDialog(
                                               context: context,
                                               builder: (BuildContext context) {
                                                 return Presets.getImportJSONDialog(context, "");
                                               }
                                           );
-                                          importJSONString(newval, snapshot.data[2]);
+                                          if(newval != null) importJSONString(newval, snapshot.data[2]);
                                         },
                                         icon: Icon(Icons.upload, color: Theme.of(context).colorScheme.surface),
                                         label: Text("Import", style: TextStyle(
@@ -454,14 +454,16 @@ class _DetailPageState extends State<DetailPage> {
                                                                 onPressed: () async {
                                                                   Map<String, dynamic> newdata = finalmaplist[ind];
                                                                   if(ind == 0) {
-                                                                    String newval = await showDialog(
-                                                                      context: context,
-                                                                      builder: (BuildContext context) {
-                                                                        return Presets.getEditWallsDialog(context, finalmaplist[ind].values.elementAt(index).toString());
-                                                                      }
+                                                                    String? newval = await showDialog(
+                                                                    context: context,
+                                                                    builder: (BuildContext context) {
+                                                                      return Presets.getEditWallsDialog(context, finalmaplist[ind].values.elementAt(index).toString());
+                                                                    }
                                                                     );
-                                                                    int intval = int.parse(newval);
-                                                                    updateWalls(Utils.editWalls(snapshot.data[1], newdata, finalmaplist[ind].keys.elementAt(index), finalmaplist[ind].values.elementAt(index), intval));
+                                                                    if(newval != null) {
+                                                                      int intval = int.parse(newval);
+                                                                      updateWalls(Utils.editWalls(snapshot.data[1], newdata, finalmaplist[ind].keys.elementAt(index), finalmaplist[ind].values.elementAt(index), intval));
+                                                                    }
                                                                   }
                                                                 },
                                                                 icon: const Icon(Icons.edit, color: Colors.blueAccent)
