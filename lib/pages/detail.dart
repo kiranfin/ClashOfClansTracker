@@ -650,50 +650,69 @@ class _DetailPageState extends State<DetailPage> {
                             child: Text(titles[ind], style: Theme.of(context).textTheme.displaySmall!.copyWith(color: Theme.of(context).colorScheme.surface)
                             ),
                           ) : SizedBox(width: 5),
-                          Container(
-                            child: Wrap(
-                                spacing: 5.0,
-                                runSpacing: 5.0,
-                                crossAxisAlignment: WrapCrossAlignment.center,
-                                children: List.generate(finallist[ind].length, (index) {
-                                  return Padding(
-                                    padding: const EdgeInsets.all(3.0),
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(20),
-                                      child: Container(
-                                        decoration: BoxDecoration(
-                                          border: Border.all(color: Theme.of(context).colorScheme.surface.withValues(alpha: 0.05)),
-                                          color: Theme.of(context).colorScheme.surfaceContainer,
-                                          borderRadius: BorderRadius.circular(20),
-                                        ),
-                                        width: 110,
-                                        height: 130,
-                                        child: GridTile(
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(5.0),
-                                            child: Column(
-                                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                              children: [
-                                                AutoSizeText(
-                                                    finallist[ind][index]["name"],
-                                                    style: Theme.of(context).textTheme.labelLarge!.copyWith(color: Theme.of(context).colorScheme.surface),
-                                                    maxLines: 1
-                                                ),
-                                                Row(
-                                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                                  children: [
-                                                    Utils.getTroopImage(
-                                                        finallist[ind][index]["name"],
-                                                        finallist[ind][index]["village"]),
-                                                    finallist[ind][index]["level"] !=
-                                                        finallist[ind][index]["maxLevel"]? ClipRRect(
-                                                      borderRadius: BorderRadius.circular(8),
-                                                      child: Container(
-                                                        decoration: BoxDecoration(
-                                                          border: Border.all(color: Colors.white10, width: 2),
-                                                          borderRadius: BorderRadius.circular(8),
-                                                          color: Colors.black,
-                                                        ),
+                          Wrap(
+                              spacing: 5.0,
+                              runSpacing: 5.0,
+                              crossAxisAlignment: WrapCrossAlignment.center,
+                              children: List.generate(finallist[ind].length, (index) {
+                                return Padding(
+                                  padding: const EdgeInsets.all(3.0),
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(20),
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        border: Border.all(color: Theme.of(context).colorScheme.surface.withValues(alpha: 0.05)),
+                                        color: Theme.of(context).colorScheme.surfaceContainer,
+                                        borderRadius: BorderRadius.circular(20),
+                                      ),
+                                      width: 110,
+                                      height: 130,
+                                      child: GridTile(
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(5.0),
+                                          child: Column(
+                                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                            children: [
+                                              AutoSizeText(
+                                                  finallist[ind][index]["name"],
+                                                  style: Theme.of(context).textTheme.labelLarge!.copyWith(color: Theme.of(context).colorScheme.surface),
+                                                  maxLines: 1
+                                              ),
+                                              Row(
+                                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                                children: [
+                                                  Utils.getTroopImage(
+                                                      finallist[ind][index]["name"],
+                                                      finallist[ind][index]["village"]),
+                                                  finallist[ind][index]["level"] !=
+                                                      finallist[ind][index]["maxLevel"]? ClipRRect(
+                                                    borderRadius: BorderRadius.circular(8),
+                                                    child: Container(
+                                                      decoration: BoxDecoration(
+                                                        border: Border.all(color: Colors.white10, width: 2),
+                                                        borderRadius: BorderRadius.circular(8),
+                                                        color: Colors.black,
+                                                      ),
+                                                      child: Padding(
+                                                        padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                                                        child: Text(
+                                                            (finallist[ind][index]["level"])
+                                                                .toString(),
+                                                            style: const TextStyle(
+                                                                color: Colors.white,
+                                                                fontSize: 25)),
+                                                      ),
+                                                    ),
+                                                  ) : ClipRRect(
+                                                    borderRadius: BorderRadius.circular(8),
+                                                    child: Container(
+                                                      decoration: BoxDecoration(
+                                                        border: Border.all(color: const Color(0xffD7993E), width: 2),
+                                                        borderRadius: BorderRadius.circular(8),
+                                                        color: const Color(0xffFABD51),
+                                                      ),
+                                                      child: Shimmer(
+                                                        color: Colors.white,
                                                         child: Padding(
                                                           padding: const EdgeInsets.symmetric(horizontal: 4.0),
                                                           child: Text(
@@ -701,62 +720,41 @@ class _DetailPageState extends State<DetailPage> {
                                                                   .toString(),
                                                               style: const TextStyle(
                                                                   color: Colors.white,
+                                                                  shadows: [Shadow(color: Colors.black, offset: Offset(0, 1.5))],
                                                                   fontSize: 25)),
                                                         ),
                                                       ),
-                                                    ) : ClipRRect(
-                                                      borderRadius: BorderRadius.circular(8),
-                                                      child: Container(
-                                                        decoration: BoxDecoration(
-                                                          border: Border.all(color: const Color(0xffD7993E), width: 2),
-                                                          borderRadius: BorderRadius.circular(8),
-                                                          color: const Color(0xffFABD51),
-                                                        ),
-                                                        child: Shimmer(
-                                                          color: Colors.white,
-                                                          child: Padding(
-                                                            padding: const EdgeInsets.symmetric(horizontal: 4.0),
-                                                            child: Text(
-                                                                (finallist[ind][index]["level"])
-                                                                    .toString(),
-                                                                style: const TextStyle(
-                                                                    color: Colors.white,
-                                                                    shadows: [Shadow(color: Colors.black, offset: Offset(0, 1.5))],
-                                                                    fontSize: 25)),
-                                                          ),
-                                                        ),
-                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                              Padding(
+                                                padding: const EdgeInsets.only(left: 10.0),
+                                                child: Row(
+                                                  children: [
+                                                    Column(
+                                                      mainAxisAlignment: MainAxisAlignment
+                                                          .start,
+                                                      crossAxisAlignment: CrossAxisAlignment
+                                                          .start,
+                                                      children: [
+                                                        ?finallist[ind][index]["maxLevel"] != finallist[ind][index]["level"]? SizedBox(height: 5) : null,
+                                                        ?finallist[ind][index]["maxLevel"] != finallist[ind][index]["level"]? Utils.getTroopCosts(Utils.isSiegeMachine(finallist[ind][index]["name"])? snapshot.data[1]["siege_machines"] : Utils.isBuilderTroop(finallist[ind][index]["name"])? snapshot.data[1]["bhtroops"] : snapshot.data[1]["troops"], Utils.isSuperTroop(finallist[ind][index]["name"])? Utils.mapSuperTroopToTroop(finallist[ind][index]["name"]) : finallist[ind][index]["name"], finallist[ind][index]["level"]) : null,
+                                                        ?finallist[ind][index]["maxLevel"] != finallist[ind][index]["level"]? SizedBox(height: 5) : null,
+                                                        ?finallist[ind][index]["maxLevel"] != finallist[ind][index]["level"]? Utils.getTroopTime(Utils.isSiegeMachine(finallist[ind][index]["name"])? snapshot.data[1]["siege_machines"] : Utils.isBuilderTroop(finallist[ind][index]["name"])? snapshot.data[1]["bhtroops"] : snapshot.data[1]["troops"], Utils.isSuperTroop(finallist[ind][index]["name"])? Utils.mapSuperTroopToTroop(finallist[ind][index]["name"]) : finallist[ind][index]["name"], finallist[ind][index]["level"]) : null
+                                                      ],
                                                     ),
                                                   ],
                                                 ),
-                                                Padding(
-                                                  padding: const EdgeInsets.only(left: 10.0),
-                                                  child: Row(
-                                                    children: [
-                                                      Column(
-                                                        mainAxisAlignment: MainAxisAlignment
-                                                            .start,
-                                                        crossAxisAlignment: CrossAxisAlignment
-                                                            .start,
-                                                        children: [
-                                                          ?finallist[ind][index]["maxLevel"] != finallist[ind][index]["level"]? SizedBox(height: 5) : null,
-                                                          ?finallist[ind][index]["maxLevel"] != finallist[ind][index]["level"]? Utils.getTroopCosts(Utils.isSiegeMachine(finallist[ind][index]["name"])? snapshot.data[1]["siege_machines"] : Utils.isBuilderTroop(finallist[ind][index]["name"])? snapshot.data[1]["bhtroops"] : snapshot.data[1]["troops"], Utils.isSuperTroop(finallist[ind][index]["name"])? Utils.mapSuperTroopToTroop(finallist[ind][index]["name"]) : finallist[ind][index]["name"], finallist[ind][index]["level"]) : null,
-                                                          ?finallist[ind][index]["maxLevel"] != finallist[ind][index]["level"]? SizedBox(height: 5) : null,
-                                                          ?finallist[ind][index]["maxLevel"] != finallist[ind][index]["level"]? Utils.getTroopTime(Utils.isSiegeMachine(finallist[ind][index]["name"])? snapshot.data[1]["siege_machines"] : Utils.isBuilderTroop(finallist[ind][index]["name"])? snapshot.data[1]["bhtroops"] : snapshot.data[1]["troops"], Utils.isSuperTroop(finallist[ind][index]["name"])? Utils.mapSuperTroopToTroop(finallist[ind][index]["name"]) : finallist[ind][index]["name"], finallist[ind][index]["level"]) : null
-                                                        ],
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
+                                              ),
+                                            ],
                                           ),
                                         ),
                                       ),
                                     ),
-                                  );
-                                }
-                              ),
+                                  ),
+                                );
+                              }
                             ),
                           ),
                         ],
@@ -1257,55 +1255,74 @@ class _DetailPageState extends State<DetailPage> {
                               child: Text(titles[ind], style: Theme.of(context).textTheme.displaySmall!.copyWith(color: Theme.of(context).colorScheme.surface),
                               ),
                             ),
-                            Container(
-                              child: Wrap(
-                                  spacing: 5.0,
-                                  runSpacing: 5.0,
-                                  children: List.generate(finallist[ind].length, (index) {
-                                    int shiny = Utils.getNextShiny(finallist[ind][index]);
-                                    int glowy = Utils.getNextGlowy(finallist[ind][index]);
-                                    int starry = Utils.getNextStarry(finallist[ind][index]);
-                                    return Padding(
-                                      padding: const EdgeInsets.all(3.0),
-                                      child: ClipRRect(
-                                        borderRadius: BorderRadius.circular(20),
-                                        child: Container(
-                                          width: 110,
-                                          height: 130,
-                                          decoration: BoxDecoration(
-                                            color: Theme.of(context).colorScheme.surfaceContainer,
-                                            borderRadius: BorderRadius.circular(20),
-                                            border: Border.all(color: Theme.of(context).colorScheme.surface.withValues(alpha: 0.05)),
-                                          ),
-                                          child: GridTile(
-                                            child: Padding(
-                                              padding: const EdgeInsets.all(5.0),
-                                              child: Column(
-                                                crossAxisAlignment: CrossAxisAlignment.start,
-                                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                                children: [
-                                                  Center(
-                                                    child: AutoSizeText(
-                                                        finallist[ind][index]["name"],
-                                                        style: Theme.of(context).textTheme.labelLarge!.copyWith(color: Theme.of(context).colorScheme.surface),
-                                                        maxLines: 1
-                                                    ),
+                            Wrap(
+                                spacing: 5.0,
+                                runSpacing: 5.0,
+                                children: List.generate(finallist[ind].length, (index) {
+                                  int shiny = Utils.getNextShiny(finallist[ind][index]);
+                                  int glowy = Utils.getNextGlowy(finallist[ind][index]);
+                                  int starry = Utils.getNextStarry(finallist[ind][index]);
+                                  return Padding(
+                                    padding: const EdgeInsets.all(3.0),
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(20),
+                                      child: Container(
+                                        width: 110,
+                                        height: 130,
+                                        decoration: BoxDecoration(
+                                          color: Theme.of(context).colorScheme.surfaceContainer,
+                                          borderRadius: BorderRadius.circular(20),
+                                          border: Border.all(color: Theme.of(context).colorScheme.surface.withValues(alpha: 0.05)),
+                                        ),
+                                        child: GridTile(
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(5.0),
+                                            child: Column(
+                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                              children: [
+                                                Center(
+                                                  child: AutoSizeText(
+                                                      finallist[ind][index]["name"],
+                                                      style: Theme.of(context).textTheme.labelLarge!.copyWith(color: Theme.of(context).colorScheme.surface),
+                                                      maxLines: 1
                                                   ),
-                                                  SizedBox(height: 5),
-                                                  Row(
-                                                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                                    children: [
-                                                      Utils.getTroopImage(
-                                                          finallist[ind][index]["name"],
-                                                          finallist[ind][index]["village"]),
-                                                      finallist[ind][index]["level"] != finallist[ind][index]["maxLevel"]? ClipRRect(
-                                                        borderRadius: BorderRadius.circular(8),
-                                                        child: Container(
-                                                          decoration: BoxDecoration(
-                                                            border: Border.all(color: Colors.white10, width: 2),
-                                                            borderRadius: BorderRadius.circular(8),
-                                                            color: Colors.black,
-                                                          ),
+                                                ),
+                                                SizedBox(height: 5),
+                                                Row(
+                                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                                  children: [
+                                                    Utils.getTroopImage(
+                                                        finallist[ind][index]["name"],
+                                                        finallist[ind][index]["village"]),
+                                                    finallist[ind][index]["level"] != finallist[ind][index]["maxLevel"]? ClipRRect(
+                                                      borderRadius: BorderRadius.circular(8),
+                                                      child: Container(
+                                                        decoration: BoxDecoration(
+                                                          border: Border.all(color: Colors.white10, width: 2),
+                                                          borderRadius: BorderRadius.circular(8),
+                                                          color: Colors.black,
+                                                        ),
+                                                        child: Padding(
+                                                          padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                                                          child: Text(
+                                                              (finallist[ind][index]["level"])
+                                                                  .toString(),
+                                                              style: const TextStyle(
+                                                                  color: Colors.white,
+                                                                  fontSize: 25)),
+                                                        ),
+                                                      ),
+                                                    ) : ClipRRect(
+                                                      borderRadius: BorderRadius.circular(8),
+                                                      child: Container(
+                                                        decoration: BoxDecoration(
+                                                          border: Border.all(color: const Color(0xffD7993E), width: 2),
+                                                          borderRadius: BorderRadius.circular(8),
+                                                          color: const Color(0xffFABD51),
+                                                        ),
+                                                        child: Shimmer(
+                                                          color: Colors.white,
                                                           child: Padding(
                                                             padding: const EdgeInsets.symmetric(horizontal: 4.0),
                                                             child: Text(
@@ -1313,114 +1330,93 @@ class _DetailPageState extends State<DetailPage> {
                                                                     .toString(),
                                                                 style: const TextStyle(
                                                                     color: Colors.white,
+                                                                    shadows: [Shadow(color: Colors.black, offset: Offset(0, 1.5))],
                                                                     fontSize: 25)),
                                                           ),
                                                         ),
-                                                      ) : ClipRRect(
-                                                        borderRadius: BorderRadius.circular(8),
-                                                        child: Container(
-                                                          decoration: BoxDecoration(
-                                                            border: Border.all(color: const Color(0xffD7993E), width: 2),
-                                                            borderRadius: BorderRadius.circular(8),
-                                                            color: const Color(0xffFABD51),
-                                                          ),
-                                                          child: Shimmer(
-                                                            color: Colors.white,
-                                                            child: Padding(
-                                                              padding: const EdgeInsets.symmetric(horizontal: 4.0),
-                                                              child: Text(
-                                                                  (finallist[ind][index]["level"])
-                                                                      .toString(),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                                SizedBox(height: 5),
+                                                Wrap(
+                                                  spacing: 2,
+                                                  runSpacing: 5,
+                                                  children: [
+                                                    ?shiny != 0? ClipRRect(
+                                                      borderRadius: BorderRadius.circular(20),
+                                                      child: Container(
+                                                        color: const Color(0xff134365),
+                                                        child: Padding(
+                                                          padding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 5.0),
+                                                          child: Row(
+                                                            mainAxisSize: MainAxisSize.min,
+                                                            children: [
+                                                              Image.asset(shiny_ore, scale: 10),
+                                                              SizedBox(width: 2),
+                                                              Text(shiny.toString(),
                                                                   style: const TextStyle(
                                                                       color: Colors.white,
-                                                                      shadows: [Shadow(color: Colors.black, offset: Offset(0, 1.5))],
-                                                                      fontSize: 25)),
-                                                            ),
+                                                                      fontSize: 10)),
+                                                            ],
                                                           ),
                                                         ),
                                                       ),
-                                                    ],
-                                                  ),
-                                                  SizedBox(height: 5),
-                                                  Wrap(
-                                                    spacing: 2,
-                                                    runSpacing: 5,
-                                                    children: [
-                                                      ?shiny != 0? ClipRRect(
-                                                        borderRadius: BorderRadius.circular(20),
-                                                        child: Container(
-                                                          color: const Color(0xff134365),
-                                                          child: Padding(
-                                                            padding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 5.0),
-                                                            child: Row(
-                                                              mainAxisSize: MainAxisSize.min,
-                                                              children: [
-                                                                Image.asset(shiny_ore, scale: 10),
-                                                                SizedBox(width: 2),
-                                                                Text(shiny.toString(),
-                                                                    style: const TextStyle(
-                                                                        color: Colors.white,
-                                                                        fontSize: 10)),
-                                                              ],
-                                                            ),
+                                                    ) : null,
+                                                    ?glowy != 0? SizedBox(height: 3) : null,
+                                                    ?glowy != 0? ClipRRect(
+                                                      borderRadius: BorderRadius.circular(20),
+                                                      child: Container(
+                                                        color: const Color(0xff65135e),
+                                                        child: Padding(
+                                                          padding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 5.0),
+                                                          child: Row(
+                                                            mainAxisSize: MainAxisSize.min,
+                                                            children: [
+                                                              Image.asset(glowy_ore, scale: 10),
+                                                              SizedBox(width: 2),
+                                                              Text(glowy
+                                                                  .toString(),
+                                                                  style: const TextStyle(
+                                                                      color: Colors.white,
+                                                                      fontSize: 10)),
+                                                            ],
                                                           ),
                                                         ),
-                                                      ) : null,
-                                                      ?glowy != 0? SizedBox(height: 3) : null,
-                                                      ?glowy != 0? ClipRRect(
-                                                        borderRadius: BorderRadius.circular(20),
-                                                        child: Container(
-                                                          color: const Color(0xff65135e),
-                                                          child: Padding(
-                                                            padding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 5.0),
-                                                            child: Row(
-                                                              mainAxisSize: MainAxisSize.min,
-                                                              children: [
-                                                                Image.asset(glowy_ore, scale: 10),
-                                                                SizedBox(width: 2),
-                                                                Text(glowy
-                                                                    .toString(),
-                                                                    style: const TextStyle(
-                                                                        color: Colors.white,
-                                                                        fontSize: 10)),
-                                                              ],
-                                                            ),
+                                                      ),
+                                                    ) : null,
+                                                    ?starry != 0? SizedBox(height: 3) : null,
+                                                    ?starry != 0? ClipRRect(
+                                                      borderRadius: BorderRadius.circular(20),
+                                                      child: Container(
+                                                        color: const Color(0xff9e6b0d),
+                                                        child: Padding(
+                                                          padding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 5.0),
+                                                          child: Row(
+                                                            mainAxisSize: MainAxisSize.min,
+                                                            children: [
+                                                              Image.asset(starry_ore, scale: 10),
+                                                              SizedBox(width: 2),
+                                                              Text(starry.toString(),
+                                                                  style: const TextStyle(
+                                                                      color: Colors.white,
+                                                                      fontSize: 10)),
+                                                            ],
                                                           ),
                                                         ),
-                                                      ) : null,
-                                                      ?starry != 0? SizedBox(height: 3) : null,
-                                                      ?starry != 0? ClipRRect(
-                                                        borderRadius: BorderRadius.circular(20),
-                                                        child: Container(
-                                                          color: const Color(0xff9e6b0d),
-                                                          child: Padding(
-                                                            padding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 5.0),
-                                                            child: Row(
-                                                              mainAxisSize: MainAxisSize.min,
-                                                              children: [
-                                                                Image.asset(starry_ore, scale: 10),
-                                                                SizedBox(width: 2),
-                                                                Text(starry.toString(),
-                                                                    style: const TextStyle(
-                                                                        color: Colors.white,
-                                                                        fontSize: 10)),
-                                                              ],
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ) : null
-                                                    ],
-                                                  ),
-                                                ],
-                                              ),
+                                                      ),
+                                                    ) : null
+                                                  ],
+                                                ),
+                                              ],
                                             ),
                                           ),
                                         ),
                                       ),
-                                    );
-                                  }
-                                )
-                              ),
+                                    ),
+                                  );
+                                }
+                              )
                             ),
                           ],
                         ),

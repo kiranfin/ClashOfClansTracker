@@ -32,7 +32,7 @@ class UserSP {
     return _preferences.getString("usermap")?? json.encode(defmap);
   }
   static bool getDarkTheme() => _preferences.getBool("darktheme") ?? true;
-  static String getAccentColor() => _preferences.getString("accentcolor") ?? "#ff9cf8";
+  static String getAccentColor() => _preferences.getString("accentcolor") ?? "#89e3fa";
 
   static Map<String, dynamic> getDecodedUserMap() {
     String usermap = getUserMap();
