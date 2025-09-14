@@ -165,11 +165,11 @@ class _DetailPageState extends State<DetailPage> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
           gradient: LinearGradient(
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
-              colors: [/*Color(0xFF1C2952)*/Color(0xFF09090B), /*Color(0xFF101E6B)*/Color(0xFF0E1011)]
+              colors: [Theme.of(context).colorScheme.primary, Theme.of(context).colorScheme.secondary]
           )
       ),
       child: Scaffold(
@@ -177,7 +177,7 @@ class _DetailPageState extends State<DetailPage> {
           backgroundColor: Colors.transparent,
           leading: IconButton(onPressed: () {
             Navigator.pop(context);
-          }, icon: Icon(Icons.arrow_back, color: Colors.white)),
+          }, icon: Icon(Icons.arrow_back, color: Theme.of(context).colorScheme.tertiary)),
         ),
         body: SafeArea(
           child: Padding(
@@ -224,7 +224,7 @@ class _DetailPageState extends State<DetailPage> {
                                   .of(context)
                                   .size
                                   .width,
-                              color: Colors.black,
+                              color: Theme.of(context).colorScheme.surfaceContainer,
                               child: GridTile(
                                 child: Padding(
                                   padding: const EdgeInsets.all(5.0),
@@ -237,14 +237,8 @@ class _DetailPageState extends State<DetailPage> {
                                         mainAxisAlignment: MainAxisAlignment.start,
                                         crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
-                                          Text("Townhall ${snapshot.data[0]["townHallLevel"]}", style: const TextStyle(
-                                              color: Colors.white,
-                                              fontFamily: "Inter",
-                                              fontSize: 30)),
-                                          snapshot.data[0]["townHallWeaponLevel"] != null? Text("Level ${snapshot.data[0]["townHallWeaponLevel"]}", style: const TextStyle(
-                                              color: Colors.white,
-                                              fontFamily: "Inter",
-                                              fontSize: 18)) : SizedBox(height: 5),
+                                          Text("Townhall ${snapshot.data[0]["townHallLevel"]}", style: Theme.of(context).textTheme.displaySmall!.copyWith(color: Theme.of(context).colorScheme.surface)),
+                                          ?snapshot.data[0]["townHallWeaponLevel"] != null? Text("Level ${snapshot.data[0]["townHallWeaponLevel"]}", style: Theme.of(context).textTheme.labelLarge!.copyWith(color: Theme.of(context).colorScheme.surface)) : null,
                                         ],
                                       )
                                     ],
@@ -258,7 +252,7 @@ class _DetailPageState extends State<DetailPage> {
                             borderRadius: BorderRadius.circular(20),
                             child: Container(
                               width: MediaQuery.of(context).size.width,
-                              color: Colors.black,
+                              color: Theme.of(context).colorScheme.surfaceContainer,
                               child: GridTile(
                                 child: Padding(
                                   padding: const EdgeInsets.all(5.0),
@@ -269,34 +263,30 @@ class _DetailPageState extends State<DetailPage> {
                                         children: [
                                           Icon(Icons.code, size: 20, color: Colors.deepOrangeAccent),
                                           SizedBox(width: 5),
-                                          Text("Import Json", style: const TextStyle(
-                                              color: Colors.white,
-                                              fontFamily: "Inter",
-                                              fontSize: 20)
+                                          Text("Import Json", style: Theme.of(context).textTheme.titleMedium!.copyWith(color: Theme.of(context).colorScheme.surface),
                                           ),
                                         ],
                                       ),
                                       ElevatedButton.icon(
                                         style: ElevatedButton.styleFrom(
-                                          backgroundColor: Colors.white24,
+                                          backgroundColor: Theme.of(context).colorScheme.tertiary.withValues(alpha: 0.3),
+                                          shadowColor: Colors.transparent,
                                           shape: RoundedRectangleBorder(
-                                              borderRadius: BorderRadius.circular(15),
-                                              side: BorderSide(color: Colors.white24)
+                                            borderRadius: BorderRadius.circular(15),
                                           ),
                                         ),
                                         onPressed: () async {
-                                          String newval = await showDialog(
+                                          String? newval = await showDialog(
                                               context: context,
                                               builder: (BuildContext context) {
                                                 return Presets.getImportJSONDialog(context, "");
                                               }
                                           );
-                                          importJSONString(newval, snapshot.data[2]);
+                                          if(newval != null) importJSONString(newval, snapshot.data[2]);
                                         },
-                                        icon: const Icon(Icons.upload, color: Colors.white),
-                                        label: const Text("Import", style: TextStyle(
-                                            color: Colors.white,
-                                            fontFamily: "Inter",
+                                        icon: Icon(Icons.upload, color: Theme.of(context).colorScheme.surface),
+                                        label: Text("Import", style: TextStyle(
+                                            color: Theme.of(context).colorScheme.surface,
                                             fontSize: 18)),
                                       )
                                     ],
@@ -314,11 +304,10 @@ class _DetailPageState extends State<DetailPage> {
                           padding: const EdgeInsets.all(8.0),
                           child: Container(
                             decoration: BoxDecoration(
-                              border: Border.all(color: Colors.black),
                               gradient: LinearGradient(
                                 begin: Alignment.centerLeft,
                                 end: Alignment.centerRight,
-                                colors: [Colors.black.withValues(alpha: 0.8), Colors.black.withValues(alpha: 0.6)],
+                                colors: [Theme.of(context).colorScheme.surfaceContainer, Theme.of(context).colorScheme.secondaryContainer],
                               ),
                               borderRadius: BorderRadius.circular(30),
                             ),
@@ -329,17 +318,17 @@ class _DetailPageState extends State<DetailPage> {
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Text(titles[ind], style: const TextStyle(
-                                          color: Colors.white,
-                                          fontFamily: "Inter",
-                                          fontSize: 30)
+                                      Padding(
+                                        padding: const EdgeInsets.only(left: 8.0, top: 5.0),
+                                        child: Text(titles[ind], style: Theme.of(context).textTheme.displaySmall!.copyWith(color: Theme.of(context).colorScheme.surface),
+                                        ),
                                       ),
                                       ElevatedButton.icon(
                                         style: ElevatedButton.styleFrom(
-                                          backgroundColor: Colors.white24,
+                                          backgroundColor: Theme.of(context).colorScheme.tertiary.withValues(alpha: 0.3),
+                                          shadowColor: Colors.transparent,
                                           shape: RoundedRectangleBorder(
                                             borderRadius: BorderRadius.circular(15),
-                                            side: BorderSide(color: Colors.white24)
                                           ),
                                         ),
                                         onPressed: () {
@@ -371,9 +360,8 @@ class _DetailPageState extends State<DetailPage> {
                                           }
                                         },
                                         icon: const Icon(Icons.skip_next, color: Colors.orangeAccent),
-                                        label: const Text("Max", style: TextStyle(
-                                            color: Colors.white,
-                                            fontFamily: "Inter",
+                                        label: Text("Max", style: TextStyle(
+                                            color: Theme.of(context).colorScheme.surface,
                                             fontSize: 18)),
                                       ),
                                     ],
@@ -389,13 +377,16 @@ class _DetailPageState extends State<DetailPage> {
                                             child: ClipRRect(
                                               borderRadius: BorderRadius.circular(20),
                                               child: Container(
-                                                color: Colors.black,
+                                                decoration: BoxDecoration(
+                                                  border: Border.all(color: Theme.of(context).colorScheme.surface.withValues(alpha: 0.05)),
+                                                  color: Theme.of(context).colorScheme.surfaceContainer,
+                                                  borderRadius: BorderRadius.circular(20),
+                                                ),
                                                 child: GridTile(
                                                   child: Padding(
                                                     padding: const EdgeInsets.all(5.0),
                                                     child: Row(
-                                                      mainAxisAlignment: MainAxisAlignment
-                                                          .spaceBetween,
+                                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                       children: [
                                                         Flexible(
                                                           flex: 3,
@@ -412,18 +403,12 @@ class _DetailPageState extends State<DetailPage> {
                                                                 children: [
                                                                   AutoSizeText(
                                                                       "Level ${finalmaplist[ind].keys.elementAt(index).substring(5, finalmaplist[ind].keys.elementAt(index).length)}",
-                                                                      style: const TextStyle(
-                                                                          color: Colors.white,
-                                                                          fontFamily: "Inter",
-                                                                          fontSize: 15),
+                                                                      style: Theme.of(context).textTheme.labelLarge!.copyWith(color: Theme.of(context).colorScheme.surface),
                                                                       maxLines: 1
                                                                   ),
                                                                   AutoSizeText(
                                                                       "${Utils.getTownHallWeapon(snapshot.data[0]["townHallLevel"]) != finalmaplist[ind].keys.elementAt(index).substring(0, finalmaplist[ind].keys.elementAt(index).lastIndexOf('-'))? finalmaplist[ind].values.elementAt(index) : snapshot.data[0]["townHallWeaponLevel"]}",
-                                                                      style: const TextStyle(
-                                                                          color: Colors.white,
-                                                                          fontFamily: "Inter",
-                                                                          fontSize: 15),
+                                                                      style: Theme.of(context).textTheme.labelLarge!.copyWith(color: Theme.of(context).colorScheme.onSurface),
                                                                       maxLines: 1
                                                                   )
                                                                 ],
@@ -433,21 +418,17 @@ class _DetailPageState extends State<DetailPage> {
                                                                   children: [
                                                                     AutoSizeText(
                                                                       finalmaplist[ind].keys.elementAt(index).substring(0, finalmaplist[ind].keys.elementAt(index).lastIndexOf('-')),
-                                                                      style: const TextStyle(
-                                                                          color: Colors.white,
-                                                                          fontFamily: "Inter", fontSize: 15),
+                                                                      style: Theme.of(context).textTheme.labelLarge!.copyWith(color: Theme.of(context).colorScheme.surface),
                                                                     ),
                                                                     ClipRRect(
                                                                       borderRadius: BorderRadius.circular(20),
                                                                       child: Container(
-                                                                      color: const Color(0xff542f13),
+                                                                      color: Colors.deepOrangeAccent.withValues(alpha: 0.3),
                                                                         child: Padding(
                                                                           padding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 5.0),
                                                                           child: AutoSizeText(
                                                                             "Lvl ${Utils.getTownHallWeapon(snapshot.data[0]["townHallLevel"]) != finalmaplist[ind].keys.elementAt(index).substring(0, finalmaplist[ind].keys.elementAt(index).lastIndexOf('-'))? finalmaplist[ind].values.elementAt(index) : snapshot.data[0]["townHallWeaponLevel"]}",
-                                                                            style: const TextStyle(
-                                                                            color: Colors.white70,
-                                                                            fontFamily: "Inter", fontSize: 15),
+                                                                            style: Theme.of(context).textTheme.labelLarge!.copyWith(color: Theme.of(context).colorScheme.onSurface),
                                                                           ),
                                                                         ),
                                                                       ),
@@ -462,36 +443,38 @@ class _DetailPageState extends State<DetailPage> {
                                                           children: [
                                                             ?ind == 0? IconButton(
                                                                 style: ButtonStyle(
-                                                                    backgroundColor: WidgetStateProperty.all(Colors.white24),
-                                                                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                                                    backgroundColor: WidgetStateProperty.all(Theme.of(context).colorScheme.tertiary.withValues(alpha: 0.3)),
+                                                                    shape: WidgetStateProperty.all<RoundedRectangleBorder>(
                                                                         RoundedRectangleBorder(
                                                                             borderRadius: BorderRadius.circular(15.0),
-                                                                            side: BorderSide(color: Colors.white24)
+                                                                            side: BorderSide(color: Theme.of(context).colorScheme.tertiary.withValues(alpha: 0.3))
                                                                         )
                                                                     )
                                                                 ),
                                                                 onPressed: () async {
                                                                   Map<String, dynamic> newdata = finalmaplist[ind];
                                                                   if(ind == 0) {
-                                                                    String newval = await showDialog(
-                                                                      context: context,
-                                                                      builder: (BuildContext context) {
-                                                                        return Presets.getEditWallsDialog(context, finalmaplist[ind].values.elementAt(index).toString());
-                                                                      }
+                                                                    String? newval = await showDialog(
+                                                                    context: context,
+                                                                    builder: (BuildContext context) {
+                                                                      return Presets.getEditWallsDialog(context, finalmaplist[ind].values.elementAt(index).toString());
+                                                                    }
                                                                     );
-                                                                    int intval = int.parse(newval);
-                                                                    updateWalls(Utils.editWalls(snapshot.data[1], newdata, finalmaplist[ind].keys.elementAt(index), finalmaplist[ind].values.elementAt(index), intval));
+                                                                    if(newval != null) {
+                                                                      int intval = int.parse(newval);
+                                                                      updateWalls(Utils.editWalls(snapshot.data[1], newdata, finalmaplist[ind].keys.elementAt(index), finalmaplist[ind].values.elementAt(index), intval));
+                                                                    }
                                                                   }
                                                                 },
                                                                 icon: const Icon(Icons.edit, color: Colors.blueAccent)
                                                             ) : null,
                                                             IconButton(
                                                                 style: ButtonStyle(
-                                                                    backgroundColor: WidgetStateProperty.all(Colors.white24),
-                                                                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                                                    backgroundColor: WidgetStateProperty.all(Theme.of(context).colorScheme.tertiary.withValues(alpha: 0.3)),
+                                                                    shape: WidgetStateProperty.all<RoundedRectangleBorder>(
                                                                         RoundedRectangleBorder(
                                                                             borderRadius: BorderRadius.circular(15.0),
-                                                                            side: BorderSide(color: Colors.white24)
+                                                                            side: BorderSide(color: Theme.of(context).colorScheme.tertiary.withValues(alpha: 0.3))
                                                                         )
                                                                     )
                                                                 ),
@@ -520,11 +503,11 @@ class _DetailPageState extends State<DetailPage> {
                                                             ),
                                                             IconButton(
                                                                 style: ButtonStyle(
-                                                                    backgroundColor: WidgetStateProperty.all(Colors.white24),
-                                                                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                                                    backgroundColor: WidgetStateProperty.all(Theme.of(context).colorScheme.tertiary.withValues(alpha: 0.3)),
+                                                                    shape: WidgetStateProperty.all<RoundedRectangleBorder>(
                                                                         RoundedRectangleBorder(
                                                                             borderRadius: BorderRadius.circular(15.0),
-                                                                            side: BorderSide(color: Colors.white24)
+                                                                            side: BorderSide(color: Theme.of(context).colorScheme.tertiary.withValues(alpha: 0.3))
                                                                         )
                                                                     )
                                                                 ),
@@ -560,11 +543,11 @@ class _DetailPageState extends State<DetailPage> {
                                                             ),
                                                             IconButton(
                                                                 style: ButtonStyle(
-                                                                    backgroundColor: WidgetStateProperty.all(Colors.white24),
-                                                                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                                                    backgroundColor: WidgetStateProperty.all(Theme.of(context).colorScheme.tertiary.withValues(alpha: 0.3)),
+                                                                    shape: WidgetStateProperty.all<RoundedRectangleBorder>(
                                                                         RoundedRectangleBorder(
                                                                             borderRadius: BorderRadius.circular(15.0),
-                                                                            side: BorderSide(color: Colors.white24)
+                                                                            side: BorderSide(color: Theme.of(context).colorScheme.tertiary.withValues(alpha: 0.3))
                                                                         )
                                                                     )
                                                                 ),
@@ -618,7 +601,7 @@ class _DetailPageState extends State<DetailPage> {
                 itemCount: 12,
                 itemBuilder: (BuildContext context, int index) {
                   return ListTile(
-                    title: Shimmer(child: Container(width: 50, height: 15, color: Colors.black45)),
+                    title: ClipRRect(borderRadius: BorderRadius.circular(10), child: Shimmer(color: Theme.of(context).colorScheme.surface, child: SizedBox(width: 50, height: 15))),
                   );
                 }
             );
@@ -652,11 +635,10 @@ class _DetailPageState extends State<DetailPage> {
                   padding: const EdgeInsets.all(10.0),
                   child: Container(
                     decoration: BoxDecoration(
-                      border: Border.all(color: Colors.black),
                       gradient: LinearGradient(
                         begin: Alignment.centerLeft,
                         end: Alignment.centerRight,
-                        colors: [Colors.black.withValues(alpha: 0.8), Colors.black.withValues(alpha: 0.6)],
+                          colors: [Theme.of(context).colorScheme.surfaceContainer, Theme.of(context).colorScheme.secondaryContainer]
                       ),
                       borderRadius: BorderRadius.circular(30),
                     ),
@@ -667,58 +649,72 @@ class _DetailPageState extends State<DetailPage> {
                         children: [
                           ind == 0 && normaltroops.isNotEmpty || ind == 1 && siegemachines.isNotEmpty || ind == 2 && supertroops.isNotEmpty || ind == 3 && buildertroops.isNotEmpty? Padding(
                             padding: const EdgeInsets.only(left: 8.0, top: 5.0),
-                            child: Text(titles[ind], style: const TextStyle(
-                                color: Colors.white,
-                                fontFamily: "Inter",
-                                fontSize: 30)
+                            child: Text(titles[ind], style: Theme.of(context).textTheme.displaySmall!.copyWith(color: Theme.of(context).colorScheme.surface)
                             ),
                           ) : SizedBox(width: 5),
-                          Container(
-                            child: Wrap(
-                                spacing: 5.0,
-                                runSpacing: 5.0,
-                                crossAxisAlignment: WrapCrossAlignment.center,
-                                children: List.generate(finallist[ind].length, (index) {
-                                  return Padding(
-                                    padding: const EdgeInsets.all(3.0),
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(20),
-                                      child: Container(
-                                        decoration: BoxDecoration(
-                                          color: const Color(0xff101010),
-                                          borderRadius: BorderRadius.circular(20),
-                                        ),
-                                        width: 110,
-                                        height: 125,
-                                        child: GridTile(
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(5.0),
-                                            child: Column(
-                                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                              children: [
-                                                AutoSizeText(
-                                                    finallist[ind][index]["name"],
-                                                    style: const TextStyle(
+                          Wrap(
+                              spacing: 5.0,
+                              runSpacing: 5.0,
+                              crossAxisAlignment: WrapCrossAlignment.center,
+                              children: List.generate(finallist[ind].length, (index) {
+                                return Padding(
+                                  padding: const EdgeInsets.all(3.0),
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(20),
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        border: Border.all(color: Theme.of(context).colorScheme.surface.withValues(alpha: 0.05)),
+                                        color: Theme.of(context).colorScheme.surfaceContainer,
+                                        borderRadius: BorderRadius.circular(20),
+                                      ),
+                                      width: 110,
+                                      height: 130,
+                                      child: GridTile(
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(5.0),
+                                          child: Column(
+                                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                            children: [
+                                              AutoSizeText(
+                                                  finallist[ind][index]["name"],
+                                                  style: Theme.of(context).textTheme.labelLarge!.copyWith(color: Theme.of(context).colorScheme.surface),
+                                                  maxLines: 1
+                                              ),
+                                              Row(
+                                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                                children: [
+                                                  Utils.getTroopImage(
+                                                      finallist[ind][index]["name"],
+                                                      finallist[ind][index]["village"]),
+                                                  finallist[ind][index]["level"] !=
+                                                      finallist[ind][index]["maxLevel"]? ClipRRect(
+                                                    borderRadius: BorderRadius.circular(8),
+                                                    child: Container(
+                                                      decoration: BoxDecoration(
+                                                        border: Border.all(color: Colors.white10, width: 2),
+                                                        borderRadius: BorderRadius.circular(8),
+                                                        color: Colors.black,
+                                                      ),
+                                                      child: Padding(
+                                                        padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                                                        child: Text(
+                                                            (finallist[ind][index]["level"])
+                                                                .toString(),
+                                                            style: const TextStyle(
+                                                                color: Colors.white,
+                                                                fontSize: 25)),
+                                                      ),
+                                                    ),
+                                                  ) : ClipRRect(
+                                                    borderRadius: BorderRadius.circular(8),
+                                                    child: Container(
+                                                      decoration: BoxDecoration(
+                                                        border: Border.all(color: const Color(0xffD7993E), width: 2),
+                                                        borderRadius: BorderRadius.circular(8),
+                                                        color: const Color(0xffFABD51),
+                                                      ),
+                                                      child: Shimmer(
                                                         color: Colors.white,
-                                                        fontFamily: "Inter",
-                                                        fontSize: 15),
-                                                    maxLines: 1
-                                                ),
-                                                Row(
-                                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                                  children: [
-                                                    Utils.getTroopImage(
-                                                        finallist[ind][index]["name"],
-                                                        finallist[ind][index]["village"]),
-                                                    finallist[ind][index]["level"] !=
-                                                        finallist[ind][index]["maxLevel"]? ClipRRect(
-                                                      borderRadius: BorderRadius.circular(8),
-                                                      child: Container(
-                                                        decoration: BoxDecoration(
-                                                          border: Border.all(color: Colors.white10, width: 2),
-                                                          borderRadius: BorderRadius.circular(8),
-                                                          color: Colors.black,
-                                                        ),
                                                         child: Padding(
                                                           padding: const EdgeInsets.symmetric(horizontal: 4.0),
                                                           child: Text(
@@ -726,64 +722,41 @@ class _DetailPageState extends State<DetailPage> {
                                                                   .toString(),
                                                               style: const TextStyle(
                                                                   color: Colors.white,
-                                                                  fontFamily: "Inter",
+                                                                  shadows: [Shadow(color: Colors.black, offset: Offset(0, 1.5))],
                                                                   fontSize: 25)),
                                                         ),
                                                       ),
-                                                    ) : ClipRRect(
-                                                      borderRadius: BorderRadius.circular(8),
-                                                      child: Container(
-                                                        decoration: BoxDecoration(
-                                                          border: Border.all(color: const Color(0xffD7993E), width: 2),
-                                                          borderRadius: BorderRadius.circular(8),
-                                                          color: const Color(0xffFABD51),
-                                                        ),
-                                                        child: Shimmer(
-                                                          color: Colors.white,
-                                                          child: Padding(
-                                                            padding: const EdgeInsets.symmetric(horizontal: 4.0),
-                                                            child: Text(
-                                                                (finallist[ind][index]["level"])
-                                                                    .toString(),
-                                                                style: const TextStyle(
-                                                                    color: Colors.white,
-                                                                    shadows: [Shadow(color: Colors.black, offset: Offset(0, 1.5))],
-                                                                    fontFamily: "Inter",
-                                                                    fontSize: 25)),
-                                                          ),
-                                                        ),
-                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                              Padding(
+                                                padding: const EdgeInsets.only(left: 10.0),
+                                                child: Row(
+                                                  children: [
+                                                    Column(
+                                                      mainAxisAlignment: MainAxisAlignment
+                                                          .start,
+                                                      crossAxisAlignment: CrossAxisAlignment
+                                                          .start,
+                                                      children: [
+                                                        ?finallist[ind][index]["maxLevel"] != finallist[ind][index]["level"]? SizedBox(height: 5) : null,
+                                                        ?finallist[ind][index]["maxLevel"] != finallist[ind][index]["level"]? Utils.getTroopCosts(Utils.isSiegeMachine(finallist[ind][index]["name"])? snapshot.data[1]["siege_machines"] : Utils.isBuilderTroop(finallist[ind][index]["name"])? snapshot.data[1]["bhtroops"] : snapshot.data[1]["troops"], Utils.isSuperTroop(finallist[ind][index]["name"])? Utils.mapSuperTroopToTroop(finallist[ind][index]["name"]) : finallist[ind][index]["name"], finallist[ind][index]["level"]) : null,
+                                                        ?finallist[ind][index]["maxLevel"] != finallist[ind][index]["level"]? SizedBox(height: 5) : null,
+                                                        ?finallist[ind][index]["maxLevel"] != finallist[ind][index]["level"]? Utils.getTroopTime(Utils.isSiegeMachine(finallist[ind][index]["name"])? snapshot.data[1]["siege_machines"] : Utils.isBuilderTroop(finallist[ind][index]["name"])? snapshot.data[1]["bhtroops"] : snapshot.data[1]["troops"], Utils.isSuperTroop(finallist[ind][index]["name"])? Utils.mapSuperTroopToTroop(finallist[ind][index]["name"]) : finallist[ind][index]["name"], finallist[ind][index]["level"]) : null
+                                                      ],
                                                     ),
                                                   ],
                                                 ),
-                                                Padding(
-                                                  padding: const EdgeInsets.only(left: 10.0),
-                                                  child: Row(
-                                                    children: [
-                                                      Column(
-                                                        mainAxisAlignment: MainAxisAlignment
-                                                            .start,
-                                                        crossAxisAlignment: CrossAxisAlignment
-                                                            .start,
-                                                        children: [
-                                                          ?finallist[ind][index]["maxLevel"] != finallist[ind][index]["level"]? SizedBox(height: 5) : null,
-                                                          ?finallist[ind][index]["maxLevel"] != finallist[ind][index]["level"]? Utils.getTroopCosts(Utils.isSiegeMachine(finallist[ind][index]["name"])? snapshot.data[1]["siege_machines"] : Utils.isBuilderTroop(finallist[ind][index]["name"])? snapshot.data[1]["bhtroops"] : snapshot.data[1]["troops"], Utils.isSuperTroop(finallist[ind][index]["name"])? Utils.mapSuperTroopToTroop(finallist[ind][index]["name"]) : finallist[ind][index]["name"], finallist[ind][index]["level"]) : null,
-                                                          ?finallist[ind][index]["maxLevel"] != finallist[ind][index]["level"]? SizedBox(height: 5) : null,
-                                                          ?finallist[ind][index]["maxLevel"] != finallist[ind][index]["level"]? Utils.getTroopTime(Utils.isSiegeMachine(finallist[ind][index]["name"])? snapshot.data[1]["siege_machines"] : Utils.isBuilderTroop(finallist[ind][index]["name"])? snapshot.data[1]["bhtroops"] : snapshot.data[1]["troops"], Utils.isSuperTroop(finallist[ind][index]["name"])? Utils.mapSuperTroopToTroop(finallist[ind][index]["name"]) : finallist[ind][index]["name"], finallist[ind][index]["level"]) : null
-                                                        ],
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
+                                              ),
+                                            ],
                                           ),
                                         ),
                                       ),
                                     ),
-                                  );
-                                }
-                              ),
+                                  ),
+                                );
+                              }
                             ),
                           ),
                         ],
@@ -799,7 +772,7 @@ class _DetailPageState extends State<DetailPage> {
               itemCount: 12,
               itemBuilder: (BuildContext context, int index) {
                 return ListTile(
-                  title: Shimmer(child: Container(width: 50, height: 15, color: Colors.black45)),
+                  title: ClipRRect(borderRadius: BorderRadius.circular(10), child: Shimmer(color: Theme.of(context).colorScheme.surface, child: SizedBox(width: 50, height: 15))),
                 );
               }
           );
@@ -822,11 +795,10 @@ class _DetailPageState extends State<DetailPage> {
                   padding: const EdgeInsets.all(10.0),
                   child: Container(
                     decoration: BoxDecoration(
-                      border: Border.all(color: Colors.black),
                       gradient: LinearGradient(
                         begin: Alignment.centerLeft,
                         end: Alignment.centerRight,
-                        colors: [Colors.black.withValues(alpha: 0.8), Colors.black.withValues(alpha: 0.6)],
+                          colors: [Theme.of(context).colorScheme.surfaceContainer, Theme.of(context).colorScheme.secondaryContainer]
                       ),
                       borderRadius: BorderRadius.circular(30),
                     ),
@@ -837,10 +809,7 @@ class _DetailPageState extends State<DetailPage> {
                         children: [
                           Padding(
                             padding: const EdgeInsets.only(left: 8.0, top: 5.0),
-                            child: Text("Spells", style: const TextStyle(
-                                color: Colors.white,
-                                fontFamily: "Inter",
-                                fontSize: 30)
+                            child: Text("Spells", style: Theme.of(context).textTheme.displaySmall!.copyWith(color: Theme.of(context).colorScheme.surface)
                             ),
                           ),
                           Wrap(
@@ -854,10 +823,11 @@ class _DetailPageState extends State<DetailPage> {
                                     borderRadius: BorderRadius.circular(20),
                                     child: Container(
                                       width: 110,
-                                      height: 125,
+                                      height: 130,
                                       decoration: BoxDecoration(
-                                        color: const Color(0xff101010),
+                                        color: Theme.of(context).colorScheme.surfaceContainer,
                                         borderRadius: BorderRadius.circular(20),
+                                        border: Border.all(color: Theme.of(context).colorScheme.surface.withValues(alpha: 0.05)),
                                       ),
                                       child: GridTile(
                                         child: Padding(
@@ -867,7 +837,7 @@ class _DetailPageState extends State<DetailPage> {
                                             children: [
                                               AutoSizeText(
                                                   finallist[index]["name"],
-                                                  style: const TextStyle(color: Colors.white, fontFamily: "Inter", fontSize: 15),
+                                                  style: Theme.of(context).textTheme.labelLarge!.copyWith(color: Theme.of(context).colorScheme.surface),
                                                   maxLines: 1
                                               ),
                                               Row(
@@ -889,7 +859,6 @@ class _DetailPageState extends State<DetailPage> {
                                                                 .toString(),
                                                             style: const TextStyle(
                                                                 color: Colors.white,
-                                                                fontFamily: "Inter",
                                                                 fontSize: 25)),
                                                       ),
                                                     ),
@@ -911,7 +880,6 @@ class _DetailPageState extends State<DetailPage> {
                                                               style: const TextStyle(
                                                                   color: Colors.white,
                                                                   shadows: [Shadow(color: Colors.black, offset: Offset(0, 1.5))],
-                                                                  fontFamily: "Inter",
                                                                   fontSize: 25)),
                                                         ),
                                                       ),
@@ -958,7 +926,7 @@ class _DetailPageState extends State<DetailPage> {
                 itemCount: 12,
                 itemBuilder: (BuildContext context, int index) {
                   return ListTile(
-                    title: Shimmer(child: Container(width: 50, height: 15, color: Colors.black45)),
+                    title: ClipRRect(borderRadius: BorderRadius.circular(10), child: Shimmer(color: Theme.of(context).colorScheme.surface, child: SizedBox(width: 50, height: 15))),
                   );
                 }
             );
@@ -970,7 +938,7 @@ class _DetailPageState extends State<DetailPage> {
 
   Widget getHeroesDetail() {
     return FutureBuilder(
-        future: Future.wait([DataProvider.awaitHeroes(userTag), DataProvider.awaitTroops(userTag)]),
+        future: Future.wait([DataProvider.awaitHeroes(userTag), DataProvider.awaitTroops(userTag), DataProvider.awaitMaxTroops()]),
         builder: (context, AsyncSnapshot snapshot) {
           if(snapshot.hasData) {
             List titles = ["Heroes", "Builder Hall Heroes", "Pets"];
@@ -990,11 +958,10 @@ class _DetailPageState extends State<DetailPage> {
                     padding: const EdgeInsets.all(10.0),
                     child: Container(
                       decoration: BoxDecoration(
-                        border: Border.all(color: Colors.black),
                         gradient: LinearGradient(
                           begin: Alignment.centerLeft,
                           end: Alignment.centerRight,
-                          colors: [Colors.black.withValues(alpha: 0.8), Colors.black.withValues(alpha: 0.6)],
+                          colors: [Theme.of(context).colorScheme.surfaceContainer, Theme.of(context).colorScheme.secondaryContainer]
                         ),
                         borderRadius: BorderRadius.circular(30),
                       ),
@@ -1005,10 +972,7 @@ class _DetailPageState extends State<DetailPage> {
                           children: [
                             ind == 0 && heroes.isNotEmpty || ind == 1 && bhheroes.isNotEmpty || ind == 2 && pets.isNotEmpty? Padding(
                               padding: const EdgeInsets.only(left: 8.0, top: 5.0),
-                              child: Text(titles[ind], style: const TextStyle(
-                                  color: Colors.white,
-                                  fontFamily: "Inter",
-                                  fontSize: 30)),
+                              child: Text(titles[ind], style: Theme.of(context).textTheme.displaySmall!.copyWith(color: Theme.of(context).colorScheme.surface)),
                             ) : SizedBox(width: 5),
                                 Wrap(
                                 spacing: 5.0,
@@ -1021,19 +985,21 @@ class _DetailPageState extends State<DetailPage> {
                                       borderRadius: BorderRadius.circular(20),
                                       child: Container(
                                         width: 110,
+                                        height: 130,
                                         decoration: BoxDecoration(
-                                          color: const Color(0xff101010),
+                                          color: Theme.of(context).colorScheme.surfaceContainer,
                                           borderRadius: BorderRadius.circular(20),
+                                          border: Border.all(color: Theme.of(context).colorScheme.surface.withValues(alpha: 0.05)),
                                         ),
                                         child: GridTile(
                                           child: Padding(
                                             padding: const EdgeInsets.all(5.0),
                                             child: Column(
-                                              mainAxisAlignment: MainAxisAlignment.start,
+                                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                               children: [
                                                 AutoSizeText(
                                                     finallist[ind][index]["name"],
-                                                    style: const TextStyle(color: Colors.white, fontFamily: "Inter", fontSize: 15),
+                                                    style: Theme.of(context).textTheme.labelLarge!.copyWith(color: Theme.of(context).colorScheme.surface),
                                                     maxLines: 1
                                                 ),
                                                 Row(
@@ -1055,7 +1021,6 @@ class _DetailPageState extends State<DetailPage> {
                                                                   .toString(),
                                                               style: const TextStyle(
                                                                   color: Colors.white,
-                                                                  fontFamily: "Inter",
                                                                   fontSize: 25)),
                                                         ),
                                                       ),
@@ -1077,7 +1042,6 @@ class _DetailPageState extends State<DetailPage> {
                                                                 style: const TextStyle(
                                                                     color: Colors.white,
                                                                     shadows: [Shadow(color: Colors.black, offset: Offset(0, 1.5))],
-                                                                    fontFamily: "Inter",
                                                                     fontSize: 25)),
                                                           ),
                                                         ),
@@ -1087,46 +1051,16 @@ class _DetailPageState extends State<DetailPage> {
                                                 ),
                                                 Padding(
                                                   padding: const EdgeInsets.only(left: 10.0),
-                                                  child: Column(
-                                                    mainAxisAlignment: MainAxisAlignment.start,
-                                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                                  child: Row(
                                                     children: [
-                                                      SizedBox(height: 5),
-                                                      ClipRRect(
-                                                        borderRadius: BorderRadius.circular(20),
-                                                        child: Container(
-                                                          color: const Color(0xff541513),
-                                                          child: Padding(
-                                                            padding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 5.0),
-                                                            child: Text("Max: ${finallist[ind][index]["maxLevel"]}", style: const TextStyle(color: Colors.white,
-                                                                fontFamily: "Inter",
-                                                                fontSize: 10)
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                      SizedBox(height: 5),
-                                                      Row(
+                                                      Column(
+                                                        mainAxisAlignment: MainAxisAlignment.start,
+                                                        crossAxisAlignment: CrossAxisAlignment.start,
                                                         children: [
-                                                          ClipRRect(
-                                                            borderRadius: BorderRadius.circular(20),
-                                                            child: Container(
-                                                              color: const Color(
-                                                                  0xff132054),
-                                                              child: Padding(
-                                                                padding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 5.0),
-                                                                child: Row(
-                                                                  children: [
-                                                                    Icon(Icons.access_time, color: const Color(0xff216AF3), size: 14),
-                                                                    SizedBox(width: 5),
-                                                                    Text("1d 12h", style: const TextStyle(color: Colors.white,
-                                                                        fontFamily: "Inter",
-                                                                        fontSize: 10)),
-                                                                  ],
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          ),
+                                                          ?finallist[ind][index]["level"] != finallist[ind][index]["maxLevel"]? SizedBox(height: 5) : null,
+                                                          ?finallist[ind][index]["level"] != finallist[ind][index]["maxLevel"]? Utils.getTroopCosts(snapshot.data[2]["pets"], finallist[ind][index]["name"], finallist[ind][index]["level"]) : null,
+                                                          ?finallist[ind][index]["level"] != finallist[ind][index]["maxLevel"]? SizedBox(height: 5) : null,
+                                                          ?finallist[ind][index]["level"] != finallist[ind][index]["maxLevel"]? Utils.getTroopTime(snapshot.data[2]["pets"], finallist[ind][index]["name"], finallist[ind][index]["level"]) : null,
                                                         ],
                                                       ),
                                                     ],
@@ -1143,27 +1077,23 @@ class _DetailPageState extends State<DetailPage> {
                                       child: Container(
                                         width: 170,
                                         decoration: BoxDecoration(
-                                          color: const Color(0xff101010),
+                                          color: Theme.of(context).colorScheme.surfaceContainer,
                                           borderRadius: BorderRadius.circular(20),
+                                          border: Border.all(color: Theme.of(context).colorScheme.surface.withValues(alpha: 0.05)),
                                         ),
                                         child: GridTile(
                                           child: Padding(
                                             padding: const EdgeInsets.all(5.0),
                                             child: Column(
-                                              mainAxisAlignment: MainAxisAlignment
-                                                  .start,
+                                              mainAxisAlignment: MainAxisAlignment.start,
                                               children: [
                                                 AutoSizeText(
                                                     finallist[ind][index]["name"],
-                                                    style: const TextStyle(
-                                                        color: Colors.white,
-                                                        fontFamily: "Inter",
-                                                        fontSize: 20),
+                                                    style: Theme.of(context).textTheme.labelLarge!.copyWith(color: Theme.of(context).colorScheme.surface),
                                                     maxLines: 1
                                                 ),
                                                 Row(
-                                                  mainAxisAlignment: MainAxisAlignment
-                                                      .spaceEvenly,
+                                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                                   children: [
                                                     Utils.getTroopImage(
                                                         finallist[ind][index]["name"],
@@ -1185,7 +1115,6 @@ class _DetailPageState extends State<DetailPage> {
                                                                       .toString(),
                                                                   style: const TextStyle(
                                                                       color: Colors.white,
-                                                                      fontFamily: "Inter",
                                                                       fontSize: 25)),
                                                             ),
                                                           ),
@@ -1207,7 +1136,6 @@ class _DetailPageState extends State<DetailPage> {
                                                                     style: const TextStyle(
                                                                         color: Colors.white,
                                                                         shadows: [Shadow(color: Colors.black, offset: Offset(0, 1.5))],
-                                                                        fontFamily: "Inter",
                                                                         fontSize: 25)),
                                                               ),
                                                             ),
@@ -1243,54 +1171,19 @@ class _DetailPageState extends State<DetailPage> {
                                                 ),
                                                 SizedBox(height: 5),
                                                 Padding(
-                                                  padding: const EdgeInsets.only(
-                                                      left: 15.0, right: 15.0),
+                                                  padding: const EdgeInsets.only(left: 10.0),
                                                   child: Row(
-                                                    mainAxisAlignment: MainAxisAlignment
-                                                        .spaceBetween,
                                                     children: [
                                                       Column(
-                                                        mainAxisAlignment: MainAxisAlignment
-                                                            .start,
-                                                        crossAxisAlignment: CrossAxisAlignment
-                                                            .start,
+                                                        mainAxisAlignment: MainAxisAlignment.start,
+                                                        crossAxisAlignment: CrossAxisAlignment.start,
                                                         children: [
-                                                          SizedBox(height: 5),
-                                                          ClipRRect(
-                                                            borderRadius: BorderRadius.circular(20),
-                                                            child: Container(
-                                                              color: const Color(0xff541513),
-                                                              child: Padding(
-                                                                padding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 5.0),
-                                                                child: Text("Max: ${finallist[ind][index]["maxLevel"]}", style: const TextStyle(color: Colors.white,
-                                                                    fontFamily: "Inter",
-                                                                    fontSize: 10)
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          ),
-                                                          SizedBox(height: 5),
-                                                          ClipRRect(
-                                                            borderRadius: BorderRadius.circular(20),
-                                                            child: Container(
-                                                              color: const Color(
-                                                                  0xff132054),
-                                                              child: Padding(
-                                                                padding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 5.0),
-                                                                child: Row(
-                                                                  children: [
-                                                                    Icon(Icons.access_time, color: const Color(0xff216AF3), size: 14),
-                                                                    SizedBox(width: 5),
-                                                                    Text("1d 12h", style: const TextStyle(color: Colors.white,
-                                                                        fontFamily: "Inter",
-                                                                        fontSize: 10)),
-                                                                  ],
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          ),
+                                                          ?finallist[ind][index]["level"] != finallist[ind][index]["maxLevel"]? SizedBox(height: 5) : null,
+                                                          ?finallist[ind][index]["level"] != finallist[ind][index]["maxLevel"]? Utils.getTroopCosts(Utils.isNormalHero(finallist[ind][index]["name"])? snapshot.data[2]["heroes"] : snapshot.data[2]["bhheroes"], finallist[ind][index]["name"], finallist[ind][index]["level"]) : null,
+                                                          ?finallist[ind][index]["level"] != finallist[ind][index]["maxLevel"]? SizedBox(height: 5) : null,
+                                                          ?finallist[ind][index]["level"] != finallist[ind][index]["maxLevel"]? Utils.getTroopTime(Utils.isNormalHero(finallist[ind][index]["name"])? snapshot.data[2]["heroes"] : snapshot.data[2]["bhheroes"], finallist[ind][index]["name"], finallist[ind][index]["level"]) : null,
                                                         ],
-                                                      )
+                                                      ),
                                                     ],
                                                   ),
                                                 ),
@@ -1317,7 +1210,7 @@ class _DetailPageState extends State<DetailPage> {
                 itemCount: 12,
                 itemBuilder: (BuildContext context, int index) {
                   return ListTile(
-                    title: Shimmer(child: Container(width: 50, height: 15, color: Colors.black45)),
+                    title: ClipRRect(borderRadius: BorderRadius.circular(10), child: Shimmer(color: Theme.of(context).colorScheme.surface, child: SizedBox(width: 50, height: 15))),
                   );
                 }
             );
@@ -1347,11 +1240,10 @@ class _DetailPageState extends State<DetailPage> {
                     padding: const EdgeInsets.all(10.0),
                     child: Container(
                       decoration: BoxDecoration(
-                        border: Border.all(color: Colors.black),
                         gradient: LinearGradient(
                           begin: Alignment.centerLeft,
                           end: Alignment.centerRight,
-                          colors: [Colors.black.withValues(alpha: 0.8), Colors.black.withValues(alpha: 0.6)],
+                            colors: [Theme.of(context).colorScheme.surfaceContainer, Theme.of(context).colorScheme.secondaryContainer]
                         ),
                         borderRadius: BorderRadius.circular(30),
                       ),
@@ -1362,61 +1254,77 @@ class _DetailPageState extends State<DetailPage> {
                           children: [
                             Padding(
                               padding: const EdgeInsets.only(left: 8.0, top: 5.0),
-                              child: Text(titles[ind], style: const TextStyle(
-                                  color: Colors.white,
-                                  fontFamily: "Inter",
-                                  fontSize: 30)
+                              child: Text(titles[ind], style: Theme.of(context).textTheme.displaySmall!.copyWith(color: Theme.of(context).colorScheme.surface),
                               ),
                             ),
-                            Container(
-                              child: Wrap(
-                                  spacing: 5.0,
-                                  runSpacing: 5.0,
-                                  children: List.generate(finallist[ind].length, (index) {
-                                    int shiny = Utils.getNextShiny(finallist[ind][index]);
-                                    int glowy = Utils.getNextGlowy(finallist[ind][index]);
-                                    int starry = Utils.getNextStarry(finallist[ind][index]);
-                                    return Padding(
-                                      padding: const EdgeInsets.all(3.0),
-                                      child: ClipRRect(
-                                        borderRadius: BorderRadius.circular(20),
-                                        child: Container(
-                                          width: 110,
-                                          height: 125,
-                                          decoration: BoxDecoration(
-                                            color: const Color(0xff101010),
-                                            borderRadius: BorderRadius.circular(20),
-                                          ),
-                                          child: GridTile(
-                                            child: Padding(
-                                              padding: const EdgeInsets.all(5.0),
-                                              child: Column(
-                                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                                children: [
-                                                  AutoSizeText(
+                            Wrap(
+                                spacing: 5.0,
+                                runSpacing: 5.0,
+                                children: List.generate(finallist[ind].length, (index) {
+                                  int shiny = Utils.getNextShiny(finallist[ind][index]);
+                                  int glowy = Utils.getNextGlowy(finallist[ind][index]);
+                                  int starry = Utils.getNextStarry(finallist[ind][index]);
+                                  return Padding(
+                                    padding: const EdgeInsets.all(3.0),
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(20),
+                                      child: Container(
+                                        width: 110,
+                                        height: 130,
+                                        decoration: BoxDecoration(
+                                          color: Theme.of(context).colorScheme.surfaceContainer,
+                                          borderRadius: BorderRadius.circular(20),
+                                          border: Border.all(color: Theme.of(context).colorScheme.surface.withValues(alpha: 0.05)),
+                                        ),
+                                        child: GridTile(
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(5.0),
+                                            child: Column(
+                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                              children: [
+                                                Center(
+                                                  child: AutoSizeText(
                                                       finallist[ind][index]["name"],
-                                                      style: const TextStyle(
-                                                          color: Colors.white,
-                                                          fontFamily: "Inter",
-                                                          fontSize: 15),
+                                                      style: Theme.of(context).textTheme.labelLarge!.copyWith(color: Theme.of(context).colorScheme.surface),
                                                       maxLines: 1
                                                   ),
-                                                  SizedBox(height: 5),
-                                                  Row(
-                                                    mainAxisAlignment: MainAxisAlignment
-                                                        .spaceEvenly,
-                                                    children: [
-                                                      Utils.getTroopImage(
-                                                          finallist[ind][index]["name"],
-                                                          finallist[ind][index]["village"]),
-                                                      finallist[ind][index]["level"] != finallist[ind][index]["maxLevel"]? ClipRRect(
-                                                        borderRadius: BorderRadius.circular(8),
-                                                        child: Container(
-                                                          decoration: BoxDecoration(
-                                                            border: Border.all(color: Colors.white10, width: 2),
-                                                            borderRadius: BorderRadius.circular(8),
-                                                            color: Colors.black,
-                                                          ),
+                                                ),
+                                                SizedBox(height: 5),
+                                                Row(
+                                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                                  children: [
+                                                    Utils.getTroopImage(
+                                                        finallist[ind][index]["name"],
+                                                        finallist[ind][index]["village"]),
+                                                    finallist[ind][index]["level"] != finallist[ind][index]["maxLevel"]? ClipRRect(
+                                                      borderRadius: BorderRadius.circular(8),
+                                                      child: Container(
+                                                        decoration: BoxDecoration(
+                                                          border: Border.all(color: Colors.white10, width: 2),
+                                                          borderRadius: BorderRadius.circular(8),
+                                                          color: Colors.black,
+                                                        ),
+                                                        child: Padding(
+                                                          padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                                                          child: Text(
+                                                              (finallist[ind][index]["level"])
+                                                                  .toString(),
+                                                              style: const TextStyle(
+                                                                  color: Colors.white,
+                                                                  fontSize: 25)),
+                                                        ),
+                                                      ),
+                                                    ) : ClipRRect(
+                                                      borderRadius: BorderRadius.circular(8),
+                                                      child: Container(
+                                                        decoration: BoxDecoration(
+                                                          border: Border.all(color: const Color(0xffD7993E), width: 2),
+                                                          borderRadius: BorderRadius.circular(8),
+                                                          color: const Color(0xffFABD51),
+                                                        ),
+                                                        child: Shimmer(
+                                                          color: Colors.white,
                                                           child: Padding(
                                                             padding: const EdgeInsets.symmetric(horizontal: 4.0),
                                                             child: Text(
@@ -1424,123 +1332,93 @@ class _DetailPageState extends State<DetailPage> {
                                                                     .toString(),
                                                                 style: const TextStyle(
                                                                     color: Colors.white,
-                                                                    fontFamily: "Inter",
+                                                                    shadows: [Shadow(color: Colors.black, offset: Offset(0, 1.5))],
                                                                     fontSize: 25)),
                                                           ),
                                                         ),
-                                                      ) : ClipRRect(
-                                                        borderRadius: BorderRadius.circular(8),
-                                                        child: Container(
-                                                          decoration: BoxDecoration(
-                                                            border: Border.all(color: const Color(0xffD7993E), width: 2),
-                                                            borderRadius: BorderRadius.circular(8),
-                                                            color: const Color(0xffFABD51),
-                                                          ),
-                                                          child: Shimmer(
-                                                            color: Colors.white,
-                                                            child: Padding(
-                                                              padding: const EdgeInsets.symmetric(horizontal: 4.0),
-                                                              child: Text(
-                                                                  (finallist[ind][index]["level"])
-                                                                      .toString(),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                                SizedBox(height: 5),
+                                                Wrap(
+                                                  spacing: 2,
+                                                  runSpacing: 5,
+                                                  children: [
+                                                    ?shiny != 0? ClipRRect(
+                                                      borderRadius: BorderRadius.circular(20),
+                                                      child: Container(
+                                                        color: const Color(0xff134365),
+                                                        child: Padding(
+                                                          padding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 5.0),
+                                                          child: Row(
+                                                            mainAxisSize: MainAxisSize.min,
+                                                            children: [
+                                                              Image.asset(shiny_ore, scale: 10),
+                                                              SizedBox(width: 2),
+                                                              Text(shiny.toString(),
                                                                   style: const TextStyle(
                                                                       color: Colors.white,
-                                                                      shadows: [Shadow(color: Colors.black, offset: Offset(0, 1.5))],
-                                                                      fontFamily: "Inter",
-                                                                      fontSize: 25)),
-                                                            ),
+                                                                      fontSize: 10)),
+                                                            ],
                                                           ),
                                                         ),
                                                       ),
-                                                    ],
-                                                  ),
-                                                  SizedBox(height: 5),
-                                                  Wrap(
-                                                    spacing: 2,
-                                                    runSpacing: 5,
-                                                    children: [
-                                                      ?shiny != 0? ClipRRect(
-                                                        borderRadius: BorderRadius.circular(20),
-                                                        child: Container(
-                                                          color: const Color(
-                                                              0xff134365),
-                                                          child: Padding(
-                                                            padding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 5.0),
-                                                            child: Row(
-                                                              mainAxisSize: MainAxisSize.min,
-                                                              children: [
-                                                                Image.asset(
-                                                                    shiny_ore, scale: 10),
-                                                                SizedBox(width: 2),
-                                                                Text(shiny.toString(),
-                                                                    style: const TextStyle(
-                                                                        color: Colors.white,
-                                                                        fontFamily: "Inter",
-                                                                        fontSize: 10)),
-                                                              ],
-                                                            ),
+                                                    ) : null,
+                                                    ?glowy != 0? SizedBox(height: 3) : null,
+                                                    ?glowy != 0? ClipRRect(
+                                                      borderRadius: BorderRadius.circular(20),
+                                                      child: Container(
+                                                        color: const Color(0xff65135e),
+                                                        child: Padding(
+                                                          padding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 5.0),
+                                                          child: Row(
+                                                            mainAxisSize: MainAxisSize.min,
+                                                            children: [
+                                                              Image.asset(glowy_ore, scale: 10),
+                                                              SizedBox(width: 2),
+                                                              Text(glowy
+                                                                  .toString(),
+                                                                  style: const TextStyle(
+                                                                      color: Colors.white,
+                                                                      fontSize: 10)),
+                                                            ],
                                                           ),
                                                         ),
-                                                      ) : null,
-                                                      ?glowy != 0? SizedBox(height: 3) : null,
-                                                      ?glowy != 0? ClipRRect(
-                                                        borderRadius: BorderRadius.circular(20),
-                                                        child: Container(
-                                                          color: const Color(0xff65135e),
-                                                          child: Padding(
-                                                            padding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 5.0),
-                                                            child: Row(
-                                                              mainAxisSize: MainAxisSize.min,
-                                                              children: [
-                                                                Image.asset(
-                                                                    glowy_ore, scale: 10),
-                                                                SizedBox(width: 2),
-                                                                Text(glowy
-                                                                    .toString(),
-                                                                    style: const TextStyle(
-                                                                        color: Colors.white,
-                                                                        fontFamily: "Inter",
-                                                                        fontSize: 10)),
-                                                              ],
-                                                            ),
+                                                      ),
+                                                    ) : null,
+                                                    ?starry != 0? SizedBox(height: 3) : null,
+                                                    ?starry != 0? ClipRRect(
+                                                      borderRadius: BorderRadius.circular(20),
+                                                      child: Container(
+                                                        color: const Color(0xff9e6b0d),
+                                                        child: Padding(
+                                                          padding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 5.0),
+                                                          child: Row(
+                                                            mainAxisSize: MainAxisSize.min,
+                                                            children: [
+                                                              Image.asset(starry_ore, scale: 10),
+                                                              SizedBox(width: 2),
+                                                              Text(starry.toString(),
+                                                                  style: const TextStyle(
+                                                                      color: Colors.white,
+                                                                      fontSize: 10)),
+                                                            ],
                                                           ),
                                                         ),
-                                                      ) : null,
-                                                      ?starry != 0? SizedBox(height: 3) : null,
-                                                      ?starry != 0? ClipRRect(
-                                                        borderRadius: BorderRadius.circular(20),
-                                                        child: Container(
-                                                          color: const Color(0xff9e6b0d),
-                                                          child: Padding(
-                                                            padding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 5.0),
-                                                            child: Row(
-                                                              mainAxisSize: MainAxisSize.min,
-                                                              children: [
-                                                                Image.asset(
-                                                                    starry_ore, scale: 10),
-                                                                SizedBox(width: 2),
-                                                                Text(starry.toString(),
-                                                                    style: const TextStyle(
-                                                                        color: Colors.white,
-                                                                        fontFamily: "Inter",
-                                                                        fontSize: 10)),
-                                                              ],
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ) : null
-                                                    ],
-                                                  ),
-                                                ],
-                                              ),
+                                                      ),
+                                                    ) : null
+                                                  ],
+                                                ),
+                                              ],
                                             ),
                                           ),
                                         ),
                                       ),
-                                    );
-                                  }
-                                )
-                              ),
+                                    ),
+                                  );
+                                }
+                              )
                             ),
                           ],
                         ),
@@ -1555,7 +1433,7 @@ class _DetailPageState extends State<DetailPage> {
                 itemCount: 12,
                 itemBuilder: (BuildContext context, int index) {
                   return ListTile(
-                    title: Shimmer(child: Container(width: 50, height: 15, color: Colors.black45)),
+                    title: ClipRRect(borderRadius: BorderRadius.circular(10), child: Shimmer(color: Theme.of(context).colorScheme.surface, child: SizedBox(width: 50, height: 15))),
                   );
                 }
             );
@@ -1584,11 +1462,10 @@ class _DetailPageState extends State<DetailPage> {
                     padding: const EdgeInsets.all(10.0),
                     child: Container(
                       decoration: BoxDecoration(
-                        border: Border.all(color: Colors.black),
                         gradient: LinearGradient(
                           begin: Alignment.centerLeft,
                           end: Alignment.centerRight,
-                          colors: [Colors.black.withValues(alpha: 0.8), Colors.black.withValues(alpha: 0.6)],
+                            colors: [Theme.of(context).colorScheme.surfaceContainer, Theme.of(context).colorScheme.secondaryContainer]
                         ),
                         borderRadius: BorderRadius.circular(30),
                       ),
@@ -1599,10 +1476,7 @@ class _DetailPageState extends State<DetailPage> {
                           children: [
                             Padding(
                               padding: const EdgeInsets.only(left: 8.0, top: 5.0),
-                              child: Text(titles[ind], style: const TextStyle(
-                                  color: Colors.white,
-                                  fontFamily: "Inter",
-                                  fontSize: 30)
+                              child: Text(titles[ind], style: Theme.of(context).textTheme.displaySmall!.copyWith(color: Theme.of(context).colorScheme.surface),
                               ),
                             ),
                             Container(
@@ -1618,7 +1492,8 @@ class _DetailPageState extends State<DetailPage> {
                                         borderRadius: BorderRadius.circular(20),
                                         child: Container(
                                           decoration: BoxDecoration(
-                                            color: const Color(0xff101010),
+                                            border: Border.all(color: Theme.of(context).colorScheme.surface.withValues(alpha: 0.05)),
+                                            color: Theme.of(context).colorScheme.surfaceContainer,
                                             borderRadius: BorderRadius.circular(20),
                                           ),
                                           child: GridTile(
@@ -1636,10 +1511,7 @@ class _DetailPageState extends State<DetailPage> {
                                                         width: 250,
                                                         child: AutoSizeText(
                                                             finallist[ind][index]["name"],
-                                                            style: const TextStyle(
-                                                                color: Colors.white,
-                                                                fontFamily: "Inter",
-                                                                fontSize: 20),
+                                                            style: Theme.of(context).textTheme.titleMedium!.copyWith(color: Theme.of(context).colorScheme.surface),
                                                             maxLines: 1
                                                         ),
                                                       ),
@@ -1658,9 +1530,8 @@ class _DetailPageState extends State<DetailPage> {
                                                         width: 300,
                                                         child: AutoSizeText(
                                                             finallist[ind][index]["info"],
-                                                            style: const TextStyle(
-                                                                color: Colors.white,
-                                                                fontFamily: "Inter",
+                                                            style: TextStyle(
+                                                                color: Theme.of(context).colorScheme.surface,
                                                                 fontSize: 12),
                                                             maxLines: 3
                                                         ),
@@ -1671,20 +1542,15 @@ class _DetailPageState extends State<DetailPage> {
                                                   Row(
                                                     children: [
                                                       SimpleAnimationProgressBar(
-                                                        ratio: finallist[ind][index]["value"] /
-                                                            finallist[ind][index]["target"],
+                                                        ratio: finallist[ind][index]["value"] / finallist[ind][index]["target"],
                                                         width: 150,
                                                         height: 10,
                                                         direction: Axis.horizontal,
-                                                        backgroundColor: Colors.grey
-                                                            .shade800,
+                                                        backgroundColor: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.1),
                                                         foregroundColor: Colors.purple,
-                                                        duration: const Duration(
-                                                            seconds: 3),
-                                                        curve: Curves
-                                                            .fastLinearToSlowEaseIn,
-                                                        borderRadius: BorderRadius
-                                                            .circular(10),
+                                                        duration: const Duration(seconds: 3),
+                                                        curve: Curves.fastLinearToSlowEaseIn,
+                                                        borderRadius: BorderRadius.circular(10),
                                                         gradientColor: LinearGradient(
                                                             colors: [
                                                               Colors.greenAccent,
@@ -1707,9 +1573,8 @@ class _DetailPageState extends State<DetailPage> {
                                                               finallist[ind][index]["target"]) *
                                                               100).toStringAsFixed(2) +
                                                               "%",
-                                                          style: const TextStyle(
-                                                              color: Colors.white,
-                                                              fontFamily: "Inter",
+                                                          style: TextStyle(
+                                                              color: Theme.of(context).colorScheme.surface,
                                                               fontSize: 12),
                                                           maxLines: 1
                                                       ),
@@ -1717,9 +1582,8 @@ class _DetailPageState extends State<DetailPage> {
                                                   ),
                                                   AutoSizeText(
                                                       "${finallist[ind][index]["value"]}/${finallist[ind][index]["target"]}",
-                                                      style: const TextStyle(
-                                                          color: Colors.white,
-                                                          fontFamily: "Inter",
+                                                      style: TextStyle(
+                                                          color: Theme.of(context).colorScheme.surface,
                                                           fontSize: 12),
                                                       maxLines: 1
                                                   ),
@@ -1746,7 +1610,7 @@ class _DetailPageState extends State<DetailPage> {
                 itemCount: 12,
                 itemBuilder: (BuildContext context, int index) {
                   return ListTile(
-                    title: Shimmer(child: Container(width: 50, height: 15, color: Colors.black45)),
+                    title: ClipRRect(borderRadius: BorderRadius.circular(10), child: Shimmer(color: Theme.of(context).colorScheme.surface, child: SizedBox(width: 50, height: 15))),
                   );
                 }
             );
@@ -1772,11 +1636,10 @@ class _DetailPageState extends State<DetailPage> {
                       padding: const EdgeInsets.all(10.0),
                       child: Container(
                         decoration: BoxDecoration(
-                          border: Border.all(color: Colors.black),
                           gradient: LinearGradient(
-                            begin: Alignment.centerLeft,
-                            end: Alignment.centerRight,
-                            colors: [Colors.black.withValues(alpha: 0.8), Colors.black.withValues(alpha: 0.6)],
+                              begin: Alignment.topLeft,
+                              end: Alignment.bottomRight,
+                              colors: [Theme.of(context).colorScheme.surfaceContainer, Theme.of(context).colorScheme.secondaryContainer]
                           ),
                           borderRadius: BorderRadius.circular(30),
                         ),
@@ -1797,10 +1660,7 @@ class _DetailPageState extends State<DetailPage> {
                                       Row(
                                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                         children: [
-                                          Text(snapshot.data[0]["name"], style: const TextStyle(
-                                              color: Colors.white,
-                                              fontFamily: "Inter",
-                                              fontSize: 30)
+                                          Text(snapshot.data[0]["name"], style: Theme.of(context).textTheme.displaySmall!.copyWith(color: Theme.of(context).colorScheme.surface),
                                           ),
                                         ],
                                       ),
@@ -1809,10 +1669,7 @@ class _DetailPageState extends State<DetailPage> {
                                         children: [
                                           Image.asset(exp),
                                           SizedBox(width: 5),
-                                          Text("Exp: ${snapshot.data[0]["expLevel"]}", style: const TextStyle(
-                                              color: Colors.white,
-                                              fontFamily: "Inter",
-                                              fontSize: 15)
+                                          Text("Exp: ${snapshot.data[0]["expLevel"]}", style: Theme.of(context).textTheme.labelLarge!.copyWith(color: Theme.of(context).colorScheme.surface),
                                           )
                                         ],
                                       ),
@@ -1824,10 +1681,7 @@ class _DetailPageState extends State<DetailPage> {
                                           Image.asset('lib/utils/img/Trophy.png',
                                               fit: BoxFit.cover, scale: 1.5),
                                           SizedBox(width: 7),
-                                          Text("Best: ${snapshot.data[0]["bestTrophies"]}", style: const TextStyle(
-                                              color: Colors.white,
-                                              fontFamily: "Inter",
-                                              fontSize: 15)
+                                          Text("Best: ${snapshot.data[0]["bestTrophies"]}", style: Theme.of(context).textTheme.labelLarge!.copyWith(color: Theme.of(context).colorScheme.surface)
                                           )
                                         ],
                                       ),
@@ -1836,10 +1690,7 @@ class _DetailPageState extends State<DetailPage> {
                                         children: [
                                           DataProvider.awaitBuilderLeagueIcon(snapshot.data[0], 4),
                                           SizedBox(width: 7),
-                                          Text("Best: ${snapshot.data[0]["bestBuilderBaseTrophies"]}", style: const TextStyle(
-                                              color: Colors.white,
-                                              fontFamily: "Inter",
-                                              fontSize: 15)
+                                          Text("Best: ${snapshot.data[0]["bestBuilderBaseTrophies"]}", style: Theme.of(context).textTheme.labelLarge!.copyWith(color: Theme.of(context).colorScheme.surface)
                                           )
                                         ],
                                       ),
@@ -1848,10 +1699,7 @@ class _DetailPageState extends State<DetailPage> {
                                         children: [
                                           Image.asset(star, scale: 1.2),
                                           SizedBox(width: 7),
-                                          Text("War Stars: ${snapshot.data[0]["warStars"]}", style: const TextStyle(
-                                              color: Colors.white,
-                                              fontFamily: "Inter",
-                                              fontSize: 15)
+                                          Text("War Stars: ${snapshot.data[0]["warStars"]}", style: Theme.of(context).textTheme.labelLarge!.copyWith(color: Theme.of(context).colorScheme.surface)
                                           )
                                         ],
                                       ),
@@ -1860,10 +1708,7 @@ class _DetailPageState extends State<DetailPage> {
                                         children: [
                                           Image.asset(capital_gold, scale: 3.5),
                                           SizedBox(width: 7),
-                                          Text("Clan Capital: ${snapshot.data[0]["clanCapitalContributions"]}", style: const TextStyle(
-                                              color: Colors.white,
-                                              fontFamily: "Inter",
-                                              fontSize: 15)
+                                          Text("Clan Capital: ${snapshot.data[0]["clanCapitalContributions"]}", style: Theme.of(context).textTheme.labelLarge!.copyWith(color: Theme.of(context).colorScheme.surface)
                                           )
                                         ],
                                       )
@@ -1871,10 +1716,7 @@ class _DetailPageState extends State<DetailPage> {
                                   ),
                                   Column(
                                     children: [
-                                      Text(snapshot.data[0]["tag"], style: const TextStyle(
-                                          color: Colors.white,
-                                          fontFamily: "Inter",
-                                          fontSize: 15)
+                                      Text(snapshot.data[0]["tag"], style: Theme.of(context).textTheme.labelLarge!.copyWith(color: Theme.of(context).colorScheme.surface)
                                       ),
                                       SizedBox(height: 5),
                                       Row(
@@ -1889,16 +1731,10 @@ class _DetailPageState extends State<DetailPage> {
                                       Row(
                                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                         children: [
-                                          Text(snapshot.data[0]["townHallLevel"].toString(), style: const TextStyle(
-                                              color: Colors.white,
-                                              fontFamily: "Inter",
-                                              fontSize: 15)
+                                          Text(snapshot.data[0]["townHallLevel"].toString(), style: Theme.of(context).textTheme.labelLarge!.copyWith(color: Theme.of(context).colorScheme.surface)
                                           ),
                                           SizedBox(width: 25),
-                                          Text(snapshot.data[0]["builderHallLevel"].toString(), style: const TextStyle(
-                                              color: Colors.white,
-                                              fontFamily: "Inter",
-                                              fontSize: 15)
+                                          Text(snapshot.data[0]["builderHallLevel"].toString(), style: Theme.of(context).textTheme.labelLarge!.copyWith(color: Theme.of(context).colorScheme.surface)
                                           ),
                                         ],
                                       )
@@ -1918,11 +1754,10 @@ class _DetailPageState extends State<DetailPage> {
                       padding: const EdgeInsets.all(10.0),
                       child: Container(
                         decoration: BoxDecoration(
-                          border: Border.all(color: Colors.black),
                           gradient: LinearGradient(
-                            begin: Alignment.centerLeft,
-                            end: Alignment.centerRight,
-                            colors: [Colors.black.withValues(alpha: 0.8), Colors.black.withValues(alpha: 0.6)],
+                              begin: Alignment.topLeft,
+                              end: Alignment.bottomRight,
+                              colors: [Theme.of(context).colorScheme.surfaceContainer, Theme.of(context).colorScheme.secondaryContainer]
                           ),
                           borderRadius: BorderRadius.circular(30),
                         ),
@@ -1931,14 +1766,6 @@ class _DetailPageState extends State<DetailPage> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Padding(
-                                padding: const EdgeInsets.only(left: 8.0, top: 5.0),
-                                child: Text("Clan", style: const TextStyle(
-                                    color: Colors.white,
-                                    fontFamily: "Inter",
-                                    fontSize: 30)
-                                ),
-                              ),
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: Column(
@@ -1952,32 +1779,22 @@ class _DetailPageState extends State<DetailPage> {
                                           Column(
                                             crossAxisAlignment: CrossAxisAlignment.start,
                                             children: [
-                                              Text(snapshot.data[0]["clan"]["name"], style: const TextStyle(
-                                                  color: Colors.white,
-                                                  fontFamily: "Inter",
-                                                  fontSize: 30)
+                                              Text(snapshot.data[0]["clan"]["name"], style: Theme.of(context).textTheme.displaySmall!.copyWith(color: Theme.of(context).colorScheme.surface)
                                               ),
                                               SizedBox(height: 5),
                                               Row(
                                                 children: [
-                                                  Icon(Icons.language, color: Colors.white),
+                                                  Icon(Icons.language, color: Theme.of(context).colorScheme.surface),
                                                   SizedBox(width: 5),
-                                                  Text(snapshot.data[1]["location"]["name"], style: const TextStyle(
-                                                      color: Colors.white54,
-                                                      fontFamily: "Inter",
-                                                      fontSize: 15)
-                                                  ),
+                                                  Text(snapshot.data[1]["location"]["name"], style: Theme.of(context).textTheme.labelLarge!.copyWith(color: Theme.of(context).colorScheme.onSurface)),
                                                 ],
                                               ),
                                               SizedBox(height: 5),
                                               Row(
                                                 children: [
-                                                  Icon(Icons.person, color: Colors.white),
+                                                  Icon(Icons.person, color: Theme.of(context).colorScheme.surface),
                                                   SizedBox(width: 5),
-                                                  Text("Mitglieder: ${snapshot.data[1]["members"]}", style: const TextStyle(
-                                                      color: Colors.white54,
-                                                      fontFamily: "Inter",
-                                                      fontSize: 15)
+                                                  Text("Mitglieder: ${snapshot.data[1]["members"]}", style: Theme.of(context).textTheme.labelLarge!.copyWith(color: Theme.of(context).colorScheme.onSurface)
                                                   ),
                                                 ],
                                               ),
@@ -1985,7 +1802,7 @@ class _DetailPageState extends State<DetailPage> {
                                               Row(
                                                 crossAxisAlignment: CrossAxisAlignment.start,
                                                 children: [
-                                                  Icon(Icons.sell, color: Colors.white),
+                                                  Icon(Icons.sell, color: Theme.of(context).colorScheme.surface),
                                                   SizedBox(width: 5),
                                                   snapshot.data[1]["labels"].length >= 1? Image.network(snapshot.data[1]["labels"][0]["iconUrls"]["small"], scale: 2) : Container(),
                                                   snapshot.data[1]["labels"].length >= 2? Image.network(snapshot.data[1]["labels"][1]["iconUrls"]["small"], scale: 2) : Container(),
@@ -1996,10 +1813,7 @@ class _DetailPageState extends State<DetailPage> {
                                           ),
                                           Column(
                                             children: [
-                                              Text(snapshot.data[0]["clan"]["tag"], style: const TextStyle(
-                                                  color: Colors.white,
-                                                  fontFamily: "Inter",
-                                                  fontSize: 15)
+                                              Text(snapshot.data[0]["clan"]["tag"], style: Theme.of(context).textTheme.labelLarge!.copyWith(color: Theme.of(context).colorScheme.onSurface)
                                               ),
                                               Image.network(snapshot.data[0]["clan"]["badgeUrls"]["medium"], scale: 2),
                                             ],
@@ -2010,13 +1824,12 @@ class _DetailPageState extends State<DetailPage> {
                                       Row(
                                         crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
-                                          Icon(Icons.edit, color: Colors.white),
+                                          Icon(Icons.edit, color: Theme.of(context).colorScheme.surface),
                                           SizedBox(width: 5),
                                           SizedBox(width: 280,
                                               child: Text(
-                                                  textWidthBasis: TextWidthBasis.parent, "${snapshot.data[1]["description"]}", style: const TextStyle(
-                                                  color: Colors.white54,
-                                                  fontFamily: "Inter",
+                                                  textWidthBasis: TextWidthBasis.parent, "${snapshot.data[1]["description"]}", style: TextStyle(
+                                                  color: Theme.of(context).colorScheme.onSurface,
                                                   fontSize: 11)
                                               )
                                           )
@@ -2025,9 +1838,9 @@ class _DetailPageState extends State<DetailPage> {
                                       SizedBox(height: 5),
                                       Row(
                                         children: [
-                                          Icon(Icons.key, color: Colors.white),
+                                          Icon(Icons.key, color: Theme.of(context).colorScheme.surface),
                                           SizedBox(width: 5),
-                                          Utils.getRole(snapshot.data[0]["role"])
+                                          Utils.getRole(snapshot.data[0]["role"], context)
                                         ],
                                       ),
                                       SizedBox(height: 5),
@@ -2036,28 +1849,19 @@ class _DetailPageState extends State<DetailPage> {
                                           Image.asset('lib/utils/img/Trophy.png',
                                               fit: BoxFit.cover, scale: 1.5),
                                           SizedBox(width: 7),
-                                          Text("${snapshot.data[1]["clanPoints"]}", style: const TextStyle(
-                                              color: Colors.white54,
-                                              fontFamily: "Inter",
-                                              fontSize: 15)
+                                          Text("${snapshot.data[1]["clanPoints"]}", style: Theme.of(context).textTheme.labelLarge!.copyWith(color: Theme.of(context).colorScheme.onSurface)
                                           ),
                                           SizedBox(width: 10),
                                           Image.asset('lib/utils/img/BuilderHallTrophy.png',
                                               fit: BoxFit.cover, scale: 11.5),
                                           SizedBox(width: 7),
-                                          Text("${snapshot.data[1]["clanBuilderBasePoints"]}", style: const TextStyle(
-                                              color: Colors.white54,
-                                              fontFamily: "Inter",
-                                              fontSize: 15)
+                                          Text("${snapshot.data[1]["clanBuilderBasePoints"]}", style: Theme.of(context).textTheme.labelLarge!.copyWith(color: Theme.of(context).colorScheme.onSurface)
                                           ),
                                           SizedBox(width: 10),
                                           Image.asset('lib/utils/img/TrophyC.webp',
                                               fit: BoxFit.cover, scale: 1.5),
                                           SizedBox(width: 7),
-                                          Text("${snapshot.data[1]["clanCapitalPoints"]}", style: const TextStyle(
-                                              color: Colors.white54,
-                                              fontFamily: "Inter",
-                                              fontSize: 15)
+                                          Text("${snapshot.data[1]["clanCapitalPoints"]}", style: Theme.of(context).textTheme.labelLarge!.copyWith(color: Theme.of(context).colorScheme.onSurface)
                                           ),
                                         ],
                                       ),
@@ -2069,17 +1873,15 @@ class _DetailPageState extends State<DetailPage> {
                                           Column(
                                             crossAxisAlignment: CrossAxisAlignment.start,
                                             children: [
-                                              Text("Wins: ${snapshot.data[1]["warWins"]} / Ties: ${snapshot.data[1]["warTies"]} / Losses: ${snapshot.data[1]["warLosses"]}", style: const TextStyle(
-                                                  color: Colors.white,
-                                                  fontFamily: "Inter",
+                                              Text("Wins: ${snapshot.data[1]["warWins"]} / Ties: ${snapshot.data[1]["warTies"]} / Losses: ${snapshot.data[1]["warLosses"]}", style: TextStyle(
+                                                  color: Theme.of(context).colorScheme.surface,
                                                   fontSize: 15)
                                               ),
                                               Row(
                                                 children: [
                                                   Icon(Icons.local_fire_department, color: Colors.deepOrange),
-                                                  Text("Streak: ${snapshot.data[1]["warWinStreak"]}", style: const TextStyle(
-                                                      color: Colors.white,
-                                                      fontFamily: "Inter",
+                                                  Text("Streak: ${snapshot.data[1]["warWinStreak"]}", style: TextStyle(
+                                                      color: Theme.of(context).colorScheme.surface,
                                                       fontSize: 15)
                                                   ),
                                                 ],
@@ -2099,7 +1901,7 @@ class _DetailPageState extends State<DetailPage> {
                                     return ClipRRect(
                                         borderRadius: BorderRadius.circular(20),
                                         child: Container(
-                                            color: Colors.black,
+                                            color: Theme.of(context).colorScheme.surfaceContainer,
                                             child: Padding(
                                                 padding: const EdgeInsets.all(8.0),
                                                 child: Row(
@@ -2110,15 +1912,9 @@ class _DetailPageState extends State<DetailPage> {
                                                     Column(
                                                       crossAxisAlignment: CrossAxisAlignment.start,
                                                       children: [
-                                                        Text("${snapshot.data[1]["clanCapital"]["districts"][index]["name"]}", style: const TextStyle(
-                                                            color: Colors.white,
-                                                            fontFamily: "Inter",
-                                                            fontSize: 15)
+                                                        Text("${snapshot.data[1]["clanCapital"]["districts"][index]["name"]}", style: Theme.of(context).textTheme.labelLarge!.copyWith(color: Theme.of(context).colorScheme.surface)
                                                         ),
-                                                        Text("Lvl: ${snapshot.data[1]["clanCapital"]["districts"][index]["districtHallLevel"]}", style: const TextStyle(
-                                                            color: Colors.white54,
-                                                            fontFamily: "Inter",
-                                                            fontSize: 15)
+                                                        Text("Lvl: ${snapshot.data[1]["clanCapital"]["districts"][index]["districtHallLevel"]}", style: Theme.of(context).textTheme.labelLarge!.copyWith(color: Theme.of(context).colorScheme.onSurface)
                                                         ),
                                                       ],
                                                     )
@@ -2141,7 +1937,7 @@ class _DetailPageState extends State<DetailPage> {
                                       child: ClipRRect(
                                           borderRadius: BorderRadius.circular(20),
                                           child: Container(
-                                              color: snapshot.data[1]["memberList"][index]["tag"] == snapshot.data[0]["tag"]? Colors.green.shade800 : Colors.black,
+                                              color: snapshot.data[1]["memberList"][index]["tag"] == snapshot.data[0]["tag"]? Colors.lightGreen.withValues(alpha: 0.7) : Theme.of(context).colorScheme.surfaceContainer,
                                               child: Padding(
                                                   padding: const EdgeInsets.all(8.0),
                                                   child: Row(
@@ -2150,9 +1946,8 @@ class _DetailPageState extends State<DetailPage> {
                                                       Row(
                                                         mainAxisAlignment: MainAxisAlignment.start,
                                                         children: [
-                                                          Text("${snapshot.data[1]["memberList"][index]["clanRank"]}.", style: const TextStyle(
-                                                              color: Colors.white,
-                                                              fontFamily: "Inter",
+                                                          Text("${snapshot.data[1]["memberList"][index]["clanRank"]}.", style: TextStyle(
+                                                              color: Theme.of(context).colorScheme.surface,
                                                               fontSize: 25)
                                                           ),
                                                           SizedBox(width: 5),
@@ -2163,28 +1958,25 @@ class _DetailPageState extends State<DetailPage> {
                                                             children: [
                                                               Row(
                                                                 children: [
-                                                                  Text("${snapshot.data[1]["memberList"][index]["name"]}", style: const TextStyle(
-                                                                      color: Colors.white,
-                                                                      fontFamily: "Inter",
+                                                                  Text("${snapshot.data[1]["memberList"][index]["name"]}", style: TextStyle(
+                                                                      color: Theme.of(context).colorScheme.surface,
                                                                       fontSize: 15)
                                                                   ),
                                                                 ],
                                                               ),
                                                               Row(
                                                                 children: [
-                                                                  Icon(Icons.arrow_upward, size: 20, color: Colors.white),
+                                                                  Icon(Icons.arrow_upward, size: 20, color: Theme.of(context).colorScheme.surface),
                                                                   SizedBox(width: 3),
-                                                                  Text("${snapshot.data[1]["memberList"][index]["donations"]}", style: const TextStyle(
-                                                                      color: Colors.white54,
-                                                                      fontFamily: "Inter",
+                                                                  Text("${snapshot.data[1]["memberList"][index]["donations"]}", style: TextStyle(
+                                                                      color: Theme.of(context).colorScheme.onSurface,
                                                                       fontSize: 15)
                                                                   ),
                                                                   SizedBox(width: 10),
-                                                                  Icon(Icons.arrow_downward, size: 20, color: Colors.white),
+                                                                  Icon(Icons.arrow_downward, size: 20, color: Theme.of(context).colorScheme.surface),
                                                                   SizedBox(width: 3),
-                                                                  Text("${snapshot.data[1]["memberList"][index]["donationsReceived"]}", style: const TextStyle(
-                                                                      color: Colors.white54,
-                                                                      fontFamily: "Inter",
+                                                                  Text("${snapshot.data[1]["memberList"][index]["donationsReceived"]}", style: TextStyle(
+                                                                      color: Theme.of(context).colorScheme.onSurface,
                                                                       fontSize: 15)
                                                                   ),
                                                                 ],
@@ -2198,9 +1990,8 @@ class _DetailPageState extends State<DetailPage> {
                                                           Image.asset('lib/utils/img/Trophy.png',
                                                               fit: BoxFit.cover, scale: 2),
                                                           SizedBox(width: 5),
-                                                          Text("${snapshot.data[1]["memberList"][index]["trophies"]}", style: const TextStyle(
-                                                              color: Colors.white54,
-                                                              fontFamily: "Inter",
+                                                          Text("${snapshot.data[1]["memberList"][index]["trophies"]}", style: TextStyle(
+                                                              color: Theme.of(context).colorScheme.surface,
                                                               fontSize: 15)
                                                           ),
                                                           SizedBox(width: 5),
@@ -2229,7 +2020,7 @@ class _DetailPageState extends State<DetailPage> {
                 itemCount: 12,
                 itemBuilder: (BuildContext context, int index) {
                   return ListTile(
-                    title: Shimmer(child: Container(width: 50, height: 15, color: Colors.black45)),
+                    title: ClipRRect(borderRadius: BorderRadius.circular(10), child: Shimmer(color: Theme.of(context).colorScheme.surface, child: SizedBox(width: 50, height: 15))),
                   );
                 }
             );
@@ -2251,7 +2042,7 @@ class _DetailPageState extends State<DetailPage> {
                     borderRadius: BorderRadius.circular(20),
                     child: Container(
                       width: MediaQuery.of(context).size.width - 2 * 10,
-                      color: Colors.black,
+                      color: Theme.of(context).colorScheme.surfaceContainer,
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Row(
@@ -2261,17 +2052,11 @@ class _DetailPageState extends State<DetailPage> {
                               children: [
                                 DataProvider.awaitClanWarLeagueIcon(snapshot.data[1]["warLeague"]["name"], 1),
                                 SizedBox(width: 5),
-                                Text(snapshot.data[1]["warLeague"]["name"], style: const TextStyle(
-                                    color: Colors.white,
-                                    fontFamily: "Inter",
-                                    fontSize: 30)
+                                Text(snapshot.data[1]["warLeague"]["name"], style: Theme.of(context).textTheme.displaySmall!.copyWith(color: Theme.of(context).colorScheme.surface)
                                 ),
                               ],
                             ),
-                            Text("${snapshot.data[0]["round1"][0]["teamSize"]} vs. ${snapshot.data[0]["round1"][0]["teamSize"]}", style: const TextStyle(
-                                color: Colors.white,
-                                fontFamily: "Inter",
-                                fontSize: 20)
+                            Text("${snapshot.data[0]["round1"][0]["teamSize"]} vs. ${snapshot.data[0]["round1"][0]["teamSize"]}", style: Theme.of(context).textTheme.headlineSmall!.copyWith(color: Theme.of(context).colorScheme.surface)
                             ),
                           ],
                         ),
@@ -2288,31 +2073,21 @@ class _DetailPageState extends State<DetailPage> {
                           child: ClipRRect(
                               borderRadius: BorderRadius.circular(20),
                               child: Container(
-                                  color: Colors.black,
+                                  color: Theme.of(context).colorScheme.surfaceContainer,
                                   child: Padding(
                                       padding: const EdgeInsets.all(8.0),
                                       child: Row(
                                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                         children: [
-                                          Text("${index + 1}. ${ranking[index]["name"]}", style: const TextStyle(
-                                              color: Colors.white,
-                                              fontFamily: "Inter",
-                                              fontSize: 20)
-                                          ),
+                                          Text("${index + 1}. ${ranking[index]["name"]}", style: Theme.of(context).textTheme.titleMedium!.copyWith(color: Theme.of(context).colorScheme.surface)),
                                           Row(
                                             children: [
                                               Image.asset(star, scale: 1.5),
                                               SizedBox(width: 5),
-                                              Text("${ranking[index]["stars"]}", style: const TextStyle(
-                                                  color: Colors.white,
-                                                  fontFamily: "Inter",
-                                                  fontSize: 15)
+                                              Text("${ranking[index]["stars"]}", style: Theme.of(context).textTheme.labelLarge!.copyWith(color: Theme.of(context).colorScheme.surface)
                                               ),
                                               SizedBox(width: 15),
-                                              Text("${ranking[index]["percentage"].toStringAsFixed(0)}%", style: const TextStyle(
-                                                  color: Colors.white,
-                                                  fontFamily: "Inter",
-                                                  fontSize: 15)
+                                              Text("${ranking[index]["percentage"].toStringAsFixed(0)}%", style: Theme.of(context).textTheme.labelLarge!.copyWith(color: Theme.of(context).colorScheme.surface)
                                               ),
                                             ],
                                           ),
@@ -2333,10 +2108,7 @@ class _DetailPageState extends State<DetailPage> {
                         return Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            ?snapshot.data[0]["round${ind + 1}"].length != 0? Text("Round ${ind + 1}", style: const TextStyle(
-                                color: Colors.white,
-                                fontFamily: "Inter",
-                                fontSize: 30)
+                            ?snapshot.data[0]["round${ind + 1}"].length != 0? Text("Round ${ind + 1}", style: Theme.of(context).textTheme.displaySmall!.copyWith(color: Theme.of(context).colorScheme.surface)
                             ) : null,
                             SizedBox(height: 10),
                             for(var element in snapshot.data[0]["round${ind + 1}"]) Padding(
@@ -2344,7 +2116,7 @@ class _DetailPageState extends State<DetailPage> {
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(20),
                                 child: Container(
-                                  color: Colors.black,
+                                  color: Theme.of(context).colorScheme.surfaceContainer,
                                   child: Padding(
                                     padding: const EdgeInsets.all(8.0),
                                     child: Column(
@@ -2353,7 +2125,7 @@ class _DetailPageState extends State<DetailPage> {
                                         Row(
                                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                                           children: [
-                                            Flexible(flex: 5, child: Utils.getFirstClan(element)),
+                                            Flexible(flex: 5, child: Utils.getFirstClan(element, context)),
                                             Flexible(
                                               flex: 2,
                                               child: Image.asset(
@@ -2362,7 +2134,7 @@ class _DetailPageState extends State<DetailPage> {
                                                 scale: 2.5,
                                               ),
                                             ),
-                                            Flexible(flex: 5, child: Utils.getOpponentClan(element)),
+                                            Flexible(flex: 5, child: Utils.getOpponentClan(element, context)),
                                           ]
                                         ),
                                       ],
@@ -2383,7 +2155,7 @@ class _DetailPageState extends State<DetailPage> {
                 itemCount: 12,
                 itemBuilder: (BuildContext context, int index) {
                   return ListTile(
-                    title: Shimmer(child: Container(width: 50, height: 15, color: Colors.black45)),
+                    title: ClipRRect(borderRadius: BorderRadius.circular(10), child: Shimmer(color: Theme.of(context).colorScheme.surface, child: SizedBox(width: 50, height: 15))),
                   );
                 }
             );
@@ -2399,7 +2171,14 @@ class _DetailPageState extends State<DetailPage> {
           ClipRRect(
             borderRadius: BorderRadius.circular(20),
             child: Container(
-              color: Colors.black,
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                    colors: [Theme.of(context).colorScheme.surfaceContainer, Theme.of(context).colorScheme.secondaryContainer]
+                ),
+                borderRadius: BorderRadius.circular(30),
+              ),
               child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Column(
@@ -2407,7 +2186,7 @@ class _DetailPageState extends State<DetailPage> {
                         Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                        Utils.getClanWarStateText(war["state"]),
+                        Utils.getClanWarStateText(war["state"], context),
                         SizedBox(width: 5),
                         ?war["state"] == "preparation" || war["state"] == "inWar"? CountDownText(
                           due: DateTime.parse(war["state"] == "preparation"? war["startTime"] : war["endTime"]),
@@ -2417,20 +2196,20 @@ class _DetailPageState extends State<DetailPage> {
                           hoursTextLong: ":",
                           minutesTextLong: ":",
                           secondsTextLong: "",
-                          style: const TextStyle(color: Colors.white54, fontFamily: "Inter", fontSize: 20),
+                          style: Theme.of(context).textTheme.labelLarge!.copyWith(color: Theme.of(context).colorScheme.onSurface),
                         ) : null,
                       ],
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        Utils.getFirstClan(war),
+                        Utils.getFirstClan(war, context),
                         Image.asset(
                           'lib/utils/img/CWLIcon.png',
                           fit: BoxFit.cover,
                           scale: 2.5,
                         ),
-                        Utils.getOpponentClan(war),
+                        Utils.getOpponentClan(war, context),
                       ],
                     ),
                   ],
@@ -2443,186 +2222,153 @@ class _DetailPageState extends State<DetailPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  for(var member in Utils.sortClanWarMembers(war["clan"]["members"])) Padding(
-                    padding: const EdgeInsets.only(bottom: 8.0),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(20),
-                      child: Container(
-                        width: (MediaQuery.of(context).size.width / 2) - 20,
-                        color: Colors.black,
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Utils.getClanWarStars(member),
-                                      Container(
-                                        height: 70,
-                                        child: DataProvider.awaitTownHallIcon(member["townhallLevel"], 2),
-                                      )
-                                    ],
-                                  ),
-                                  Column(
-                                    children: [
-                                      Text("Attacks",
-                                      style: const TextStyle(
-                                      color: Colors.white,
-                                      fontFamily: "Inter",
-                                      fontSize: 15
-                                      ),
-                                      ),
-                                      for(var attack in member["attacks"]?? []) Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: [
-                                          Row(
-                                          mainAxisAlignment: MainAxisAlignment.start,
+              Flexible(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    for(var member in Utils.sortClanWarMembers(war["clan"]["members"])) Padding(
+                      padding: const EdgeInsets.only(bottom: 8.0),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(20),
+                        child: Container(
+                          color: Theme.of(context).colorScheme.surfaceContainer,
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Utils.getClanWarStars(member, context),
+                                        SizedBox(
+                                          height: 70,
+                                          child: DataProvider.awaitTownHallIcon(member["townhallLevel"], 2),
+                                        )
+                                      ],
+                                    ),
+                                    Column(
+                                      children: [
+                                        Image.asset(swords, scale: 3.5),
+                                        for(var attack in member["attacks"]?? []) Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
                                           children: [
-                                            Text("${war["opponent"]["members"].where((m) => m['tag'] == attack["defenderTag"]).toList()[0]["mapPosition"]}.",
-                                              style: const TextStyle(
-                                                color: Colors.white,
-                                                fontFamily: "Inter",
-                                                fontSize: 15
-                                              ),
-                                            ),
-                                            SizedBox(width: 2),
-                                            for(int i = 0; i < attack["stars"]; i++) Image.asset(whitestar, scale: 6),
-                                            for(int j = 0; j < (3 - attack["stars"]); j++) Image.asset(whitestarempty, scale: 6),
-                                          ],
-                                          ),
-                                          Row(
+                                            Row(
+                                            mainAxisAlignment: MainAxisAlignment.start,
                                             children: [
-                                              SizedBox(width: 15),
-                                              Text("${attack["destructionPercentage"]}%",
-                                                style: const TextStyle(
-                                                  color: Colors.white,
-                                                  fontFamily: "Inter",
-                                                  fontSize: 15
-                                                ),
-                                              )
-                                            ],
-                                          )
-                                        ],
-                                      ),
-                                    ],
-                                  )
-                                ],
-                              ),
-                              AutoSizeText("${member["mapPosition"]}. ${member["name"]}",
-                                style: const TextStyle(
-                                  color: Colors.white,
-                                  fontFamily: "Inter",
-                                  fontSize: 15
-                                ),
-                                maxLines: 1,
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  for(var member in Utils.sortClanWarMembers(war["opponent"]["members"])) Padding(
-                    padding: const EdgeInsets.only(bottom: 8.0),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(20),
-                      child: Container(
-                        width: (MediaQuery.of(context).size.width / 2) - 20,
-                        color: Colors.black,
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Text("Attacks",
-                                      style: const TextStyle(
-                                      color: Colors.white,
-                                      fontFamily: "Inter",
-                                      fontSize: 15
-                                      ),
-                                      ),
-                                      for(var attack in (member["attacks"] ?? [])) Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: [
-                                          Row(
-                                          mainAxisAlignment: MainAxisAlignment.start,
-                                            children: [
-                                              Text("${war["clan"]["members"].where((m) => m['tag'] == attack["defenderTag"]).toList()[0]["mapPosition"]}.",
-                                                style: const TextStyle(
-                                                  color: Colors.white,
-                                                  fontFamily: "Inter",
-                                                  fontSize: 15
-                                                ),
+                                              Text("${war["opponent"]["members"].where((m) => m['tag'] == attack["defenderTag"]).toList()[0]["mapPosition"]}.",
+                                                  style: Theme.of(context).textTheme.labelLarge!.copyWith(color: Theme.of(context).colorScheme.surface)
                                               ),
                                               SizedBox(width: 2),
                                               for(int i = 0; i < attack["stars"]; i++) Image.asset(whitestar, scale: 6),
                                               for(int j = 0; j < (3 - attack["stars"]); j++) Image.asset(whitestarempty, scale: 6),
                                             ],
-                                          ),
-                                          Row(
-                                            children: [
-                                              SizedBox(width: 15),
-                                              Text("${attack["destructionPercentage"]}%",
-                                                style: const TextStyle(
-                                                  color: Colors.white,
-                                                  fontFamily: "Inter",
-                                                  fontSize: 15
-                                                ),
-                                              )
-                                            ],
-                                          )
-                                        ],
-                                      )
-                                    ],
-                                  ),
-                                  Column(
-                                    crossAxisAlignment: CrossAxisAlignment.end,
-                                    children: [
-                                      Utils.getClanWarStars(member),
-                                      Container(
-                                        height: 70,
-                                        child: DataProvider.awaitTownHallIcon(member["townhallLevel"], 2),
-                                      ),
-                                    ],
-                                  )
-                                ],
-                              ),
-                              AutoSizeText("${member["mapPosition"]}. ${member["name"]}",
-                                style: const TextStyle(
-                                  color: Colors.white,
-                                  fontFamily: "Inter",
-                                  fontSize: 15
+                                            ),
+                                            Row(
+                                              children: [
+                                                SizedBox(width: 15),
+                                                Text("${attack["destructionPercentage"]}%",
+                                                    style: Theme.of(context).textTheme.labelLarge!.copyWith(color: Theme.of(context).colorScheme.surface)
+                                                )
+                                              ],
+                                            )
+                                          ],
+                                        ),
+                                      ],
+                                    )
+                                  ],
                                 ),
-                                maxLines: 1,
-                              )
-                            ],
+                                AutoSizeText("${member["mapPosition"]}. ${member["name"]}",
+                                  style: Theme.of(context).textTheme.labelLarge!.copyWith(color: Theme.of(context).colorScheme.surface),
+                                  maxLines: 1,
+                                )
+                              ],
+                            ),
                           ),
                         ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
+              ),
+              SizedBox(width: 5),
+              Flexible(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    for(var member in Utils.sortClanWarMembers(war["opponent"]["members"])) Padding(
+                      padding: const EdgeInsets.only(bottom: 8.0),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(20),
+                        child: Container(
+                          color: Theme.of(context).colorScheme.surfaceContainer,
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Image.asset(swords, scale: 3.5),
+                                        for(var attack in (member["attacks"] ?? [])) Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            Row(
+                                            mainAxisAlignment: MainAxisAlignment.start,
+                                              children: [
+                                                Text("${war["clan"]["members"].where((m) => m['tag'] == attack["defenderTag"]).toList()[0]["mapPosition"]}.",
+                                                  style: Theme.of(context).textTheme.labelLarge!.copyWith(color: Theme.of(context).colorScheme.surface)
+                                                ),
+                                                SizedBox(width: 2),
+                                                for(int i = 0; i < attack["stars"]; i++) Image.asset(whitestar, scale: 6),
+                                                for(int j = 0; j < (3 - attack["stars"]); j++) Image.asset(whitestarempty, scale: 6),
+                                              ],
+                                            ),
+                                            Row(
+                                              children: [
+                                                SizedBox(width: 15),
+                                                Text("${attack["destructionPercentage"]}%",
+                                                  style: Theme.of(context).textTheme.labelLarge!.copyWith(color: Theme.of(context).colorScheme.surface)
+                                                )
+                                              ],
+                                            )
+                                          ],
+                                        )
+                                      ],
+                                    ),
+                                    Column(
+                                      crossAxisAlignment: CrossAxisAlignment.end,
+                                      children: [
+                                        Utils.getClanWarStars(member, context),
+                                        SizedBox(
+                                          height: 70,
+                                          child: DataProvider.awaitTownHallIcon(member["townhallLevel"], 2),
+                                        ),
+                                      ],
+                                    )
+                                  ],
+                                ),
+                                AutoSizeText("${member["mapPosition"]}. ${member["name"]}",
+                                  style: Theme.of(context).textTheme.labelLarge!.copyWith(color: Theme.of(context).colorScheme.surface),
+                                  maxLines: 1,
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ],
           ) : null,
@@ -2639,148 +2385,169 @@ class _DetailPageState extends State<DetailPage> {
             List<dynamic> clanwars = Utils.filterClanWars(snapshot.data[0]["items"]);
             //List<dynamic> clanwarsext = Utils.filterClanWars(snapshot.data[1]["items"]);
             return SingleChildScrollView(
-              child: ListView.builder(
-                  physics: NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  itemCount: clanwars.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    return ClipRRect(
-                        borderRadius: BorderRadius.circular(20),
-                        child: Container(
-                            margin: EdgeInsets.symmetric(vertical: 2),
-                            width: MediaQuery.of(context).size.width - 2 * 20,
-                            color: clanwars[index]["result"] == "win"? const Color(0xff1b3317) : clanwars[index]["result"] == "lose"? const Color(0xff2b0e0e) : const Color(0xff494949),
-                            child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      children: [
-                                        Text("${clanwars[index]["teamSize"]} vs. ${clanwars[index]["teamSize"]}", style: const TextStyle(
-                                            color: Colors.white,
-                                            fontFamily: "Inter",
-                                            fontSize: 15)
-                                        ),
-                                      ],
-                                    ),
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Flexible(
-                                          flex: 5,
-                                          child: Column(
-                                            mainAxisAlignment: MainAxisAlignment.end,
-                                            children: [
-                                              Row(
-                                                mainAxisAlignment: MainAxisAlignment.end,
-                                                children: [
-                                                  AutoSizeText(clanwars[index]["clan"]["name"], style: const TextStyle(
-                                                      color: Colors.white,
-                                                      fontFamily: "Inter",
-                                                      fontSize: 12),
-                                                    maxLines: 1,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                child: Container(
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Theme.of(context).colorScheme.primary),
+                    gradient: LinearGradient(
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                      colors: [Theme.of(context).colorScheme.surfaceContainer, Theme.of(context).colorScheme.secondaryContainer],
+                    ),
+                    borderRadius: BorderRadius.circular(30),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text("Clan War Log",
+                          style: Theme.of(context).textTheme.headlineLarge!.copyWith(color: Theme.of(context).colorScheme.surface),
+                        ),
+                        SizedBox(height: 5),
+                        ListView.builder(
+                          physics: NeverScrollableScrollPhysics(),
+                          shrinkWrap: true,
+                          itemCount: clanwars.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            return ClipRRect(
+                                borderRadius: BorderRadius.circular(20),
+                                child: Container(
+                                    margin: EdgeInsets.symmetric(vertical: 2),
+                                    color: clanwars[index]["result"] == "win"? Colors.lightGreen.withValues(alpha: 0.7) : clanwars[index]["result"] == "lose"? Colors.redAccent.withValues(alpha: 0.7) : Theme.of(context).colorScheme.surface.withValues(alpha: Theme.of(context).brightness == Brightness.light? 0.2 : 0.6),
+                                    child: Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            Row(
+                                              mainAxisAlignment: MainAxisAlignment.center,
+                                              children: [
+                                                Text("${clanwars[index]["teamSize"]} vs. ${clanwars[index]["teamSize"]}", style: TextStyle(
+                                                    color: Theme.of(context).colorScheme.surface,
+                                                    fontSize: 15)
+                                                ),
+                                              ],
+                                            ),
+                                            Row(
+                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                              children: [
+                                                Flexible(
+                                                  flex: 5,
+                                                  child: Column(
+                                                    mainAxisAlignment: MainAxisAlignment.end,
+                                                    children: [
+                                                      Row(
+                                                        mainAxisAlignment: MainAxisAlignment.end,
+                                                        children: [
+                                                          SizedBox(
+                                                            width: 80,
+                                                            child: AutoSizeText(clanwars[index]["clan"]["name"], style: Theme.of(context).textTheme.titleSmall!.copyWith(color: Theme.of(context).colorScheme.surface),
+                                                            ),
+                                                          ),
+                                                          SizedBox(width: 5),
+                                                          Image.network(clanwars[index]["clan"]["badgeUrls"]["small"], scale: 2),
+                                                        ],
+                                                      ),
+                                                      Row(
+                                                        mainAxisAlignment: MainAxisAlignment.end,
+                                                        children: [
+                                                          Text("${clanwars[index]["clan"]["stars"]}", style: TextStyle(
+                                                              color: Theme.of(context).colorScheme.surface,
+                                                              fontSize: 15)
+                                                          ),
+                                                          SizedBox(width: 2),
+                                                          Image.asset(whitestar, scale: 6),
+                                                        ],
+                                                      )
+                                                    ],
                                                   ),
-                                                  SizedBox(width: 5),
-                                                  Image.network(clanwars[index]["clan"]["badgeUrls"]["small"], scale: 2),
-                                                ],
-                                              ),
-                                              Row(
-                                                mainAxisAlignment: MainAxisAlignment.end,
-                                                children: [
-                                                  Text("${clanwars[index]["clan"]["stars"]}", style: const TextStyle(
-                                                      color: Colors.white,
-                                                      fontFamily: "Inter",
-                                                      fontSize: 15)
+                                                ),
+                                                Flexible(
+                                                  flex: 2,
+                                                  child: Image.asset(
+                                                    'lib/utils/img/CWLIcon.png',
+                                                    fit: BoxFit.cover,
+                                                    scale: 4,
                                                   ),
-                                                  SizedBox(width: 2),
-                                                  Image.asset(whitestar, scale: 6),
-                                                ],
-                                              )
-                                            ],
-                                          ),
-                                        ),
-                                        Flexible(
-                                          flex: 2,
-                                          child: Image.asset(
-                                            'lib/utils/img/CWLIcon.png',
-                                            fit: BoxFit.cover,
-                                            scale: 4,
-                                          ),
-                                        ),
-                                        Flexible(
-                                          flex: 5,
-                                          child: Column(
-                                            mainAxisAlignment: MainAxisAlignment.start,
-                                            children: [
-                                              Row(
-                                                children: [
-                                                  Image.network(clanwars[index]["opponent"]["badgeUrls"]["small"], scale: 2),
-                                                  SizedBox(width: 5),
-                                                  AutoSizeText(clanwars[index]["opponent"]["name"], style: const TextStyle(
-                                                      color: Colors.white,
-                                                      fontFamily: "Inter",
-                                                      fontSize: 12),
-                                                    maxLines: 1,
+                                                ),
+                                                Flexible(
+                                                  flex: 5,
+                                                  child: Column(
+                                                    mainAxisAlignment: MainAxisAlignment.start,
+                                                    children: [
+                                                      Row(
+                                                        children: [
+                                                          Image.network(clanwars[index]["opponent"]["badgeUrls"]["small"], scale: 2),
+                                                          SizedBox(width: 5),
+                                                          SizedBox(
+                                                            width: 80,
+                                                            child: AutoSizeText(clanwars[index]["opponent"]["name"], style: Theme.of(context).textTheme.titleSmall!.copyWith(color: Theme.of(context).colorScheme.surface),
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                      Row(
+                                                        children: [
+                                                          Image.asset(whitestar, scale: 6),
+                                                          SizedBox(width: 2),
+                                                          Text("${clanwars[index]["opponent"]["stars"]}", style: TextStyle(
+                                                              color: Theme.of(context).colorScheme.surface,
+                                                              fontSize: 15)
+                                                          ),
+                                                        ],
+                                                      )
+                                                    ],
                                                   ),
-                                                ],
-                                              ),
-                                              Row(
-                                                children: [
-                                                  Image.asset(whitestar, scale: 6),
-                                                  SizedBox(width: 2),
-                                                  Text("${clanwars[index]["opponent"]["stars"]}", style: const TextStyle(
-                                                      color: Colors.white,
-                                                      fontFamily: "Inter",
-                                                      fontSize: 15)
+                                                )
+                                              ],
+                                            ),
+                                            /*?(index < 10 && clanwarsext[index]["clan"]["members"] != null)? Row(
+                                              mainAxisAlignment: MainAxisAlignment.center,
+                                              children: [
+                                                TextButton(
+                                                  style: ButtonStyle(
+                                                      backgroundColor: MaterialStateProperty.all(
+                                                          Colors.black),
+                                                      shape: MaterialStateProperty.all<
+                                                          RoundedRectangleBorder>(
+                                                          RoundedRectangleBorder(
+                                                            borderRadius: BorderRadius.circular(
+                                                                30.0),
+                                                          )
+                                                      )
                                                   ),
-                                                ],
-                                              )
-                                            ],
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                    /*?(index < 10 && clanwarsext[index]["clan"]["members"] != null)? Row(
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      children: [
-                                        TextButton(
-                                          style: ButtonStyle(
-                                              backgroundColor: MaterialStateProperty.all(
-                                                  Colors.black),
-                                              shape: MaterialStateProperty.all<
-                                                  RoundedRectangleBorder>(
-                                                  RoundedRectangleBorder(
-                                                    borderRadius: BorderRadius.circular(
-                                                        30.0),
+                                                  onPressed: (){
+                                                    Navigator.pushNamed(context, "/detail", arguments: ArgumentClass("clanwar", clanwarsext[index]));
+                                                  },
+                                                  child: Text("Details", style: const TextStyle(
+                                                    color: Colors.white,
+
+                                                    fontSize: 15)
                                                   )
-                                              )
-                                          ),
-                                          onPressed: (){
-                                            Navigator.pushNamed(context, "/detail", arguments: ArgumentClass("clanwar", clanwarsext[index]));
-                                          },
-                                          child: Text("Details", style: const TextStyle(
-                                            color: Colors.white,
-                                            fontFamily: "Inter",
-                                            fontSize: 15)
-                                          )
+                                                )
+                                              ],
+                                            ) : null,*/
+                                          ],
                                         )
-                                      ],
-                                    ) : null,*/
-                                  ],
+                                    )
                                 )
-                            )
-                        )
-                    );
-                  }),
+                            );
+                          }
+                        ),
+                      ]
+                    ),
+                  ),
+                ),
+              ),
             );
           } else {
             return ListView.builder(
                 itemCount: 12,
                 itemBuilder: (BuildContext context, int index) {
                   return ListTile(
-                    title: Shimmer(child: Container(width: 50, height: 15, color: Colors.black45)),
+                    title: ClipRRect(borderRadius: BorderRadius.circular(10), child: Shimmer(color: Theme.of(context).colorScheme.surface, child: SizedBox(width: 50, height: 15))),
                   );
                 }
             );
