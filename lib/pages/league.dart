@@ -417,8 +417,8 @@ class _LeaguePageState extends State<LeaguePage> {
                             ),
                           ),
                         ) : null,
-                        ?snapshot.data[5]["items"].isNotEmpty? SizedBox(height: 20) : null,
-                        ?snapshot.data[5]["items"].isNotEmpty? ClipRRect(
+                        ?snapshot.data[5]["items"] != null && snapshot.data[5]["items"].isNotEmpty? SizedBox(height: 20) : null,
+                        ?snapshot.data[5]["items"] != null && snapshot.data[5]["items"].isNotEmpty? ClipRRect(
                           borderRadius: BorderRadius.circular(30),
                           child: Container(
                               decoration: BoxDecoration(
