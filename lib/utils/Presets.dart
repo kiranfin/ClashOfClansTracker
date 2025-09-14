@@ -9,113 +9,91 @@ import 'UserSP.dart' hide ThemeType;
 
 Widget getEditWallsDialog(BuildContext context, String inital) {
   String newval = inital;
-  return Dialog(
-      backgroundColor: const Color(0xFF252525),
-      child: SingleChildScrollView(
-        child: Container(
-          padding: const EdgeInsets.all(10),
-          width: MediaQuery.of(context).size.width - 2 * 40,
-          child: Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Text("Edit Walls", style: const TextStyle(
-                      color: Colors.white,
-                      fontFamily: "Inter",
-                      fontSize: 20)),
-                ],
-              ),
-              SizedBox(height: 20),
-              TextFormField(
-                inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'^[1-9][0-9]*'))],
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  filled: true,
-                  fillColor: Colors.grey[200],
-                ),
-                onChanged: (value) {
-                  newval = value;
-                },
-                initialValue: inital,
-              ),
-              SizedBox(height: 20),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  TextButton(
-                      onPressed: () {
-                        Navigator.pop(context, newval);
-                      },
-                      child: Text("Ok", style: const TextStyle(
-                          color: Colors.white,
-                          fontFamily: "Inter",
-                          fontSize: 15))
-                  ),
-                ],
-              )
-            ],
-          ),
-        ),
-      ),
-  );
-}
-
-Widget getImportJSONDialog(BuildContext context, String inital) {
-  String newval = inital;
-  return Dialog(
-    backgroundColor: const Color(0xFF252525),
-    child: SingleChildScrollView(
+  return AlertDialog(
+    title: Text("Edit Walls", style: Theme.of(context).textTheme.headlineSmall!.copyWith(color: Theme.of(context).colorScheme.surface)),
+    content: SingleChildScrollView(
       child: Container(
         padding: const EdgeInsets.all(10),
         width: MediaQuery.of(context).size.width - 2 * 40,
         child: Column(
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Text("Import Json", style: const TextStyle(
-                    color: Colors.white,
-                    fontFamily: "Inter",
-                    fontSize: 20)),
-              ],
-            ),
             SizedBox(height: 20),
             TextFormField(
+              cursorColor: Theme.of(context).colorScheme.surface,
+              inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'^[1-9][0-9]*'))],
               decoration: InputDecoration(
-                contentPadding: const EdgeInsets.symmetric(vertical: 25.0),
+                contentPadding: const EdgeInsets.symmetric(vertical: 25.0, horizontal: 10),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
                 ),
                 filled: true,
-                fillColor: Colors.grey[200],
+                fillColor: Theme.of(context).colorScheme.surfaceContainer,
               ),
               onChanged: (value) {
                 newval = value;
               },
               initialValue: inital,
             ),
-            SizedBox(height: 20),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                TextButton(
-                    onPressed: () {
-                      Navigator.pop(context, newval);
-                    },
-                    child: Text("Ok", style: const TextStyle(
-                        color: Colors.white,
-                        fontFamily: "Inter",
-                        fontSize: 15))
-                ),
-              ],
-            )
           ],
         ),
       ),
     ),
+    actions: [
+      SizedBox(
+        width: double.infinity,
+        child: FilledButton(
+          style: FilledButton.styleFrom(
+            backgroundColor: Theme.of(context).colorScheme.tertiary.withValues(alpha: 0.3),
+          ),
+          onPressed: () => Navigator.pop(context, newval),
+          child: Text('Done', style: Theme.of(context).textTheme.labelLarge!.copyWith(color: Theme.of(context).colorScheme.surface)),
+        ),
+      ),
+    ],
+  );
+}
+
+Widget getImportJSONDialog(BuildContext context, String inital) {
+  String newval = inital;
+  return AlertDialog(
+    title: Text("Import Json", style: Theme.of(context).textTheme.headlineSmall!.copyWith(color: Theme.of(context).colorScheme.surface)),
+    content: SingleChildScrollView(
+      child: Container(
+        padding: const EdgeInsets.all(10),
+        width: MediaQuery.of(context).size.width - 2 * 40,
+        child: Column(
+          children: [
+            TextFormField(
+              cursorColor: Theme.of(context).colorScheme.surface,
+              decoration: InputDecoration(
+                contentPadding: const EdgeInsets.symmetric(vertical: 25.0, horizontal: 10),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                filled: true,
+                fillColor: Theme.of(context).colorScheme.surfaceContainer,
+              ),
+              onChanged: (value) {
+                newval = value;
+              },
+              initialValue: inital,
+            ),
+          ],
+        ),
+      ),
+    ),
+    actions: [
+      SizedBox(
+        width: double.infinity,
+        child: FilledButton(
+          style: FilledButton.styleFrom(
+            backgroundColor: Theme.of(context).colorScheme.tertiary.withValues(alpha: 0.3),
+          ),
+          onPressed: () => Navigator.pop(context, newval),
+          child: Text('Done', style: Theme.of(context).textTheme.labelLarge!.copyWith(color: Theme.of(context).colorScheme.surface)),
+        ),
+      ),
+    ],
   );
 }
 
