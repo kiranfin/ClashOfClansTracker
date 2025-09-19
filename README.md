@@ -3,9 +3,8 @@
 A modern and intuitive application to **track your Clash of Clans
 village progress** & monitor clan stats.
 
-## 📖 Description
+## 📖 Features
 
-The **Clash of Clans Tracker App** helps players:
 - View **player and clan statistics** in real-time.
 - Track your **upgrades** and **achievements**.
 - Get **detailed insights** on troops, defenses, and heroes.
@@ -27,7 +26,7 @@ Change your Accent Color
 ## 📚 Sources
 
 -   **Images & Game Information**: [Clash of Clans Fandom
-    Wiki](https://clashofclans.fandom.com)\
+    Wiki](https://clashofclans.fandom.com)
 -   **Official API Documentation**: [Supercell Developer
     Portal](https://developer.clashofclans.com/)
 
