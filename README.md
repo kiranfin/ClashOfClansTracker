@@ -12,16 +12,18 @@ village progress** & monitor clan stats.
 ## 🚀 How to Use
 
 1. Enter your in-game player tag
+![tempFileForShare_20250919-153622](https://github.com/user-attachments/assets/cbb07f40-c75c-4fc9-becb-00abe8ab127f)
 
 2. Import your building data
-
-3. Select Import
+![tempFileForShare_20250919-153852](https://github.com/user-attachments/assets/e8480e3e-5d9c-44de-a9fa-e81d70467c7e)
 
 4. Copy village data from Clash of Clans
+![tempFileForShare_20250919-154011](https://github.com/user-attachments/assets/6743edaa-ad0b-4c5c-860f-0e88b1098124)
 
 ## ✏️ Customization
 
 Change your Accent Color
+![tempFileForShare_20250919-153753](https://github.com/user-attachments/assets/2587fea7-8a6d-46b1-af2d-997920db8116)
 
 ## 📚 Sources
 
