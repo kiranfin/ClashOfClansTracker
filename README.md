@@ -22,7 +22,7 @@ village progress** & monitor clan stats.
 
 ## ✏️ Customization
 
-Change your Accent Color
+Change your Accent Color\
 <img src="https://github.com/user-attachments/assets/2587fea7-8a6d-46b1-af2d-997920db8116" width="324" height="145"/>
 
 ## 📚 Sources
