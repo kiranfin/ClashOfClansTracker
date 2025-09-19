@@ -3,6 +3,8 @@
 A modern and intuitive application to **track your Clash of Clans
 village progress** & monitor clan stats.
 
+⚠️ WARNING: Still in development
+
 ## 📖 Features
 
 - View **player and clan statistics** in real-time.
