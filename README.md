@@ -12,9 +12,9 @@ village progress** & monitor clan stats.
 ## 🚀 How to Use
 
 1. Enter your in-game player tag
-![tempFileForShare_20250919-153622](https://github.com/user-attachments/assets/cbb07f40-c75c-4fc9-becb-00abe8ab127f)
+<img src="[https://your-image-url.type](https://github.com/user-attachments/assets/cbb07f40-c75c-4fc9-becb-00abe8ab127f)" width="324" height="236">
 
-2. Import your building data
+3. Import your building data
 ![tempFileForShare_20250919-153852](https://github.com/user-attachments/assets/e8480e3e-5d9c-44de-a9fa-e81d70467c7e)
 
 4. Copy village data from Clash of Clans
