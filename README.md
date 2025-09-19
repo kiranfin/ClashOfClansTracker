@@ -15,9 +15,10 @@ village progress** & monitor clan stats.
 <img src="https://github.com/user-attachments/assets/2e8f6b52-9f11-4de4-98b7-04643dd879d4" width="324" height="236"/>
 
 ### Import your building data
+a) Select Import\
 <img src="https://github.com/user-attachments/assets/e8480e3e-5d9c-44de-a9fa-e81d70467c7e" width="324" height="471"/>
 
-### Copy village data from Clash of Clans
+b) Copy village data from Clash of Clans\
 <img src="https://github.com/user-attachments/assets/6743edaa-ad0b-4c5c-860f-0e88b1098124" width="324" height="274"/>
 
 ## ✏️ Customization
