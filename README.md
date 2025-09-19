@@ -1,16 +1,47 @@
-# clashofclanstracker
+# ⚔️ Clash of Clans Tracker App
 
-Clash of clans tracker to track your progress
+A modern and intuitive application to **track your Clash of Clans
+village progress** & monitor clan stats.
 
-## Getting Started
+------------------------------------------------------------------------
 
-This project is a starting point for a Flutter application.
+## 📖 Description
 
-A few resources to get you started if this is your first Flutter project:
+The **Clash of Clans Tracker App** helps players:
+- View **player and clan statistics** in real-time.
+- Track your **upgrades** and **achievements**.
+- Get **detailed insights** on troops, defenses, and heroes.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+------------------------------------------------------------------------
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## 🚀 How to Use
+
+1. Enter your in-game player tag
+
+2. Import your building data
+
+3. Select Import
+
+4. Copy village data from Clash of Clans
+------------------------------------------------------------------------
+
+## ✏️ Customization
+
+Change your Accent Color
+
+------------------------------------------------------------------------
+
+## 📚 Sources
+
+-   **Images & Game Information**: [Clash of Clans Fandom
+    Wiki](https://clashofclans.fandom.com)\
+-   **Official API Documentation**: [Supercell Developer
+    Portal](https://developer.clashofclans.com/)
+
+------------------------------------------------------------------------
+
+### 📜 License
+
+This project is licensed under the **MIT License**.\
+*This project is not affiliated with, endorsed, or sponsored by
+Supercell.*
