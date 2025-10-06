@@ -66,7 +66,7 @@ class _LeaguePageState extends State<LeaguePage> {
                                     children: [
                                       DataProvider.awaitLeagueIcon(snapshot.data[0]),
                                       SizedBox(width: 5),
-                                      AutoSizeText(snapshot.data[0]["league"] != null? snapshot.data[0]["league"]["name"] : "Unranked",
+                                      AutoSizeText(snapshot.data[0]["leagueTier"] != null? snapshot.data[0]["leagueTier"]["name"] : "Unranked",
                                         style: Theme.of(context).textTheme.headlineLarge!.copyWith(color: Theme.of(context).colorScheme.surface),
                                         maxLines: 1,
                                       ),

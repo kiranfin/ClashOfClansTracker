@@ -1,8 +1,6 @@
 import 'dart:convert';
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:clashofclanstracker/utils/img/ShortAsset.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import '../utils/UserSP.dart';
 import '../utils/Utils.dart' as Utils;
@@ -191,18 +189,14 @@ Image awaitBuilderHallIcon(int level, double scale) {
 }
 
 Image awaitLeagueIcon(Map<String, dynamic> userdata) {
-  //final data = awaitPlayerData(tag);
-  //final userdata = await data;
-  if(userdata["league"] != null) {
-    return Image.network(userdata["league"]["iconUrls"]["small"], scale: 1.5);
+  if(userdata["leagueTier"] != null) {
+    return Image.network(userdata["leagueTier"]["iconUrls"]["small"], scale: 2.5);
   } else{
     return Image.asset(unranked, scale: 2.5);
   }
 }
 
 Image awaitBuilderLeagueIcon(Map<String, dynamic> userdata, double scale) {
-  //final data = awaitPlayerData(tag);
-  //final userdata = await data;
   final league = userdata["builderBaseLeague"]["name"];
   if (league == "Wood League V") return Image.asset(wood, scale: scale);
   if (league == "Wood League IV") return Image.asset(wood, scale: scale);
